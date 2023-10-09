@@ -8,24 +8,30 @@
     "net7.0": []
   },
   "packageFolders": {
-    "C:\\Users\\Developer\\.nuget\\packages\\": {}
+    "C:\\Users\\Bekmurod\\.nuget\\packages\\": {},
+    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Developer\\RiderProjects\\Tahseen\\src\\Tahseen.Service\\Tahseen.Service.csproj",
+      "projectUniqueName": "N:\\Tahseen\\src\\Tahseen.Service\\Tahseen.Service.csproj",
       "projectName": "Tahseen.Service",
-      "projectPath": "C:\\Users\\Developer\\RiderProjects\\Tahseen\\src\\Tahseen.Service\\Tahseen.Service.csproj",
-      "packagesPath": "C:\\Users\\Developer\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Developer\\RiderProjects\\Tahseen\\src\\Tahseen.Service\\obj\\",
+      "projectPath": "N:\\Tahseen\\src\\Tahseen.Service\\Tahseen.Service.csproj",
+      "packagesPath": "C:\\Users\\Bekmurod\\.nuget\\packages\\",
+      "outputPath": "N:\\Tahseen\\src\\Tahseen.Service\\obj\\",
       "projectStyle": "PackageReference",
+      "fallbackFolders": [
+        "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+      ],
       "configFilePaths": [
-        "C:\\Users\\Developer\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        "C:\\Users\\Bekmurod\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
         "net7.0"
       ],
       "sources": {
+        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -59,7 +65,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.400\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.401\\RuntimeIdentifierGraph.json"
       }
     }
   }
