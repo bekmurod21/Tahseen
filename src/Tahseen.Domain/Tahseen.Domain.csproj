@@ -8,14 +8,20 @@
 
   <ItemGroup>
     <Folder Include="Entities\Authentication\" />
-    <Folder Include="Entities\Book\" />
     <Folder Include="Entities\Library\" />
-    <Folder Include="Entities\Librarian\" />
     <Folder Include="Entities\Feedback\" />
     <Folder Include="Entities\Events\" />
     <Folder Include="Entities\Rewards\" />
     <Folder Include="Entities\SchoolAndEducation\" />
     <Folder Include="Entities\User\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EditorConfigFiles Remove="N:\Tahseen\src\Tahseen.Domain\Enums\.editorconfig" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="N:\Tahseen\src\Tahseen.Domain\Enums\.editorconfig" />
   </ItemGroup>
 
 </Project>
