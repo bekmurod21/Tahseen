@@ -8,23 +8,19 @@
     "net7.0": []
   },
   "packageFolders": {
-    "C:\\Users\\Bekmurod\\.nuget\\packages\\": {},
-    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
+    "C:\\Users\\VICTUS\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "N:\\Tahseen\\src\\Tahseen.Service\\Tahseen.Service.csproj",
+      "projectUniqueName": "E:\\Kutubxona\\Tahseen\\src\\Tahseen.Service\\Tahseen.Service.csproj",
       "projectName": "Tahseen.Service",
-      "projectPath": "N:\\Tahseen\\src\\Tahseen.Service\\Tahseen.Service.csproj",
-      "packagesPath": "C:\\Users\\Bekmurod\\.nuget\\packages\\",
-      "outputPath": "N:\\Tahseen\\src\\Tahseen.Service\\obj\\",
+      "projectPath": "E:\\Kutubxona\\Tahseen\\src\\Tahseen.Service\\Tahseen.Service.csproj",
+      "packagesPath": "C:\\Users\\VICTUS\\.nuget\\packages\\",
+      "outputPath": "E:\\Kutubxona\\Tahseen\\src\\Tahseen.Service\\obj\\",
       "projectStyle": "PackageReference",
-      "fallbackFolders": [
-        "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
-      ],
       "configFilePaths": [
-        "C:\\Users\\Bekmurod\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\VICTUS\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [

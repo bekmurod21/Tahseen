@@ -469,23 +469,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Bekmurod\\.nuget\\packages\\": {},
-    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
+    "C:\\Users\\VICTUS\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "N:\\Tahseen\\src\\Tahseen.Api\\Tahseen.Api.csproj",
+      "projectUniqueName": "E:\\Kutubxona\\Tahseen\\src\\Tahseen.Api\\Tahseen.Api.csproj",
       "projectName": "Tahseen.Api",
-      "projectPath": "N:\\Tahseen\\src\\Tahseen.Api\\Tahseen.Api.csproj",
-      "packagesPath": "C:\\Users\\Bekmurod\\.nuget\\packages\\",
-      "outputPath": "N:\\Tahseen\\src\\Tahseen.Api\\obj\\",
+      "projectPath": "E:\\Kutubxona\\Tahseen\\src\\Tahseen.Api\\Tahseen.Api.csproj",
+      "packagesPath": "C:\\Users\\VICTUS\\.nuget\\packages\\",
+      "outputPath": "E:\\Kutubxona\\Tahseen\\src\\Tahseen.Api\\obj\\",
       "projectStyle": "PackageReference",
-      "fallbackFolders": [
-        "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
-      ],
       "configFilePaths": [
-        "C:\\Users\\Bekmurod\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\VICTUS\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
