@@ -1,6 +1,7 @@
 {
   "format": 1,
   "restore": {
+<<<<<<< HEAD
     "E:\\Kutubxona\\Tahseen\\src\\Tahseen.Domain\\Tahseen.Domain.csproj": {}
   },
   "projects": {
@@ -16,12 +17,27 @@
         "configFilePaths": [
           "C:\\Users\\VICTUS\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+=======
+    "C:\\Users\\user\\Desktop\\Tahseen\\src\\Tahseen.Domain\\Tahseen.Domain.csproj": {}
+  },
+  "projects": {
+    "C:\\Users\\user\\Desktop\\Tahseen\\src\\Tahseen.Domain\\Tahseen.Domain.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\user\\Desktop\\Tahseen\\src\\Tahseen.Domain\\Tahseen.Domain.csproj",
+        "projectName": "Tahseen.Domain",
+        "projectPath": "C:\\Users\\user\\Desktop\\Tahseen\\src\\Tahseen.Domain\\Tahseen.Domain.csproj",
+        "packagesPath": "C:\\Users\\user\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\user\\Desktop\\Tahseen\\src\\Tahseen.Domain\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\user\\AppData\\Roaming\\NuGet\\NuGet.Config"
+>>>>>>> 1c9613d1baefcb4682c9ffa7e8e5c938d1426c39
         ],
         "originalTargetFrameworks": [
           "net7.0"
         ],
         "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -55,7 +71,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.401\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.203\\RuntimeIdentifierGraph.json"
         }
       }
     }
