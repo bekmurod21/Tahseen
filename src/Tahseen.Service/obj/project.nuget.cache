@@ -1,8 +1,14 @@
 {
   "version": 2,
+<<<<<<< HEAD
+  "dgSpecHash": "UKhbsRzNambApGZ2AJvGs/JOD6r3VPewo3ZoXz39bP4HkQObhKxgB9xcWimRUxLE4ayeOO0TmHvSlUY3z4C69w==",
+  "success": true,
+  "projectFilePath": "E:\\Kutubxona\\Tahseen\\src\\Tahseen.Service\\Tahseen.Service.csproj",
+=======
   "dgSpecHash": "l9S2vsV4t24sxdpIULPLBbaei0ZSfFIidnmdT11fWNpmGmVjnB9y8QyIpDgYT0eOuQhFHfhx9+IWHibKLH/SGw==",
   "success": true,
   "projectFilePath": "C:\\Users\\user\\Desktop\\Tahseen\\src\\Tahseen.Service\\Tahseen.Service.csproj",
+>>>>>>> 1c9613d1baefcb4682c9ffa7e8e5c938d1426c39
   "expectedPackageFiles": [],
   "logs": []
 }

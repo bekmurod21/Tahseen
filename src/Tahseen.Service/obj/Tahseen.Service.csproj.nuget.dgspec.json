@@ -1,6 +1,23 @@
 {
   "format": 1,
   "restore": {
+<<<<<<< HEAD
+    "E:\\Kutubxona\\Tahseen\\src\\Tahseen.Service\\Tahseen.Service.csproj": {}
+  },
+  "projects": {
+    "E:\\Kutubxona\\Tahseen\\src\\Tahseen.Service\\Tahseen.Service.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "E:\\Kutubxona\\Tahseen\\src\\Tahseen.Service\\Tahseen.Service.csproj",
+        "projectName": "Tahseen.Service",
+        "projectPath": "E:\\Kutubxona\\Tahseen\\src\\Tahseen.Service\\Tahseen.Service.csproj",
+        "packagesPath": "C:\\Users\\VICTUS\\.nuget\\packages\\",
+        "outputPath": "E:\\Kutubxona\\Tahseen\\src\\Tahseen.Service\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\VICTUS\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+=======
     "C:\\Users\\user\\Desktop\\Tahseen\\src\\Tahseen.Service\\Tahseen.Service.csproj": {}
   },
   "projects": {
@@ -15,6 +32,7 @@
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\user\\AppData\\Roaming\\NuGet\\NuGet.Config"
+>>>>>>> 1c9613d1baefcb4682c9ffa7e8e5c938d1426c39
         ],
         "originalTargetFrameworks": [
           "net7.0"
