@@ -7,13 +7,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Folder Include="Entities\Authentication" />
     <Folder Include="Entities\Book\" />
-    <Folder Include="Entities\Library\" />
     <Folder Include="Entities\Librarian\" />
     <Folder Include="Entities\Feedback\" />
-    <Folder Include="Entities\Events\" />
-    <Folder Include="Entities\Rewards\" />
-    <Folder Include="Entities\SchoolAndEducation\" />
   </ItemGroup>
 
 </Project>
