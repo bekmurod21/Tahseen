@@ -7,6 +7,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+
+    <Folder Include="Entities\Authentication" />
+    <Folder Include="Entities\Book\" />
+    <Folder Include="Entities\Librarian\" />
+    <Folder Include="Entities\Feedback\" />
     <Compile Remove="Entities\Authentication\**" />
     <Compile Remove="Entities\Events\**" />
     <Compile Remove="Entities\Library\**" />
