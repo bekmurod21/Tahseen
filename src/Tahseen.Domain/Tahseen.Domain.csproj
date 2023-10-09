@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net7.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="Entities\Authentication\" />
+    <Folder Include="Entities\Book\" />
+    <Folder Include="Entities\Library\" />
+    <Folder Include="Entities\Librarian\" />
+    <Folder Include="Entities\Feedback\" />
+    <Folder Include="Entities\Events\" />
+    <Folder Include="Entities\Rewards\" />
+    <Folder Include="Entities\SchoolAndEducation\" />
+    <Folder Include="Entities\User\" />
+  </ItemGroup>
+
+</Project>
