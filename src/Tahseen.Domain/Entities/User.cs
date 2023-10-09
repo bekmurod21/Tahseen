@@ -1,6 +1,7 @@
 using Tahseen.Domain.Commons;
 using Tahseen.Domain.Enums;
 
+
 namespace Tahseen.Domain.Entities;
 
 public class User:Auditable
