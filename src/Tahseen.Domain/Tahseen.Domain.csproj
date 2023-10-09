@@ -7,23 +7,22 @@
   </PropertyGroup>
 
   <ItemGroup>
-
-    <Folder Include="Entities\Authentication" />
-    <Folder Include="Entities\Book\" />
-    <Folder Include="Entities\Librarian\" />
     <Folder Include="Entities\Feedback\" />
     <Compile Remove="Entities\Authentication\**" />
-    <Compile Remove="Entities\Events\**" />
+    <Compile Remove="Entities\Book\**" />
+    <Compile Remove="Entities\Librarian\**" />
     <Compile Remove="Entities\Library\**" />
     <Compile Remove="Entities\SchoolAndEducation\**" />
     <Compile Remove="Entities\User\**" />
     <EmbeddedResource Remove="Entities\Authentication\**" />
-    <EmbeddedResource Remove="Entities\Events\**" />
+    <EmbeddedResource Remove="Entities\Book\**" />
+    <EmbeddedResource Remove="Entities\Librarian\**" />
     <EmbeddedResource Remove="Entities\Library\**" />
     <EmbeddedResource Remove="Entities\SchoolAndEducation\**" />
     <EmbeddedResource Remove="Entities\User\**" />
     <None Remove="Entities\Authentication\**" />
-    <None Remove="Entities\Events\**" />
+    <None Remove="Entities\Book\**" />
+    <None Remove="Entities\Librarian\**" />
     <None Remove="Entities\Library\**" />
     <None Remove="Entities\SchoolAndEducation\**" />
     <None Remove="Entities\User\**" />
