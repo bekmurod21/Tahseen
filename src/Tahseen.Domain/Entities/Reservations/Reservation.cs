@@ -1,11 +1,13 @@
-﻿using Tahseen.Domain.Enums;
+﻿using Tahseen.Domain.Entities.Books;
+using Tahseen.Domain.Enums;
 
 namespace Tahseen.Domain.Entities.Reservations;
 
 public class Reservation
 {
     public long UserId { get; set; }
+    public User User { get; set; }
     public long BookId { get; set; }
-    public DateTime ReservationDate { get; set; }
+    public Book Book { get; set; }
     public ReservationStatus ReservationStatus { get; set; }
 }

@@ -2,6 +2,6 @@ namespace Tahseen.Domain.Enums;
 
 public enum ThemePreference
 {
-    Dark,
-    Light
+    Dark = 0,
+    Light = 1
 }

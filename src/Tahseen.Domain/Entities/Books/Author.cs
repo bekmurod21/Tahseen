@@ -1,7 +1,7 @@
 ﻿using Tahseen.Domain.Commons;
 using Tahseen.Domain.Enums;
 
-namespace Tahseen.Domain.Entities.Book;
+namespace Tahseen.Domain.Entities.Books;
 
 public class Author:Auditable
 {

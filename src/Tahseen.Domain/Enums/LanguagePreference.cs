@@ -2,7 +2,7 @@ namespace Tahseen.Domain.Enums;
 
 public enum LanguagePreference
 {
-    Uzbek,
-    English,
-    Russian
+    Uzbek = 0,
+    English = 1,
+    Russian = 2,
 }

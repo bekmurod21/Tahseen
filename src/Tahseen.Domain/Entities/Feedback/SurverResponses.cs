@@ -5,6 +5,8 @@ namespace Tahseen.Domain.Entities.Feedback;
 public class SurverResponses:Auditable
 {
     public long UserId { get; set; }
-    public string Responses { get; set; }
+    public User User { get; set; }
+    public long SurveyId { get; set; }
+    public Surveys Surveys { get; set; }
     public DateTime SubmissionDate { get; set; }
 }

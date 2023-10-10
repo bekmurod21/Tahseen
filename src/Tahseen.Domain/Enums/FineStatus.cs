@@ -2,6 +2,6 @@ namespace Tahseen.Domain.Enums;
 
 public enum FineStatus
 {
-    Pending,
-    Paid
+    Pending = 0,
+    Paid = 1,
 }

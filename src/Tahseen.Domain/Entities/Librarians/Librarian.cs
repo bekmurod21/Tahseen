@@ -1,19 +1,23 @@
 ﻿using System.Data;
 using System;
 using Tahseen.Domain.Commons;
+using Tahseen.Domain.Entities.Library;
+using Tahseen.Domain.Enums;
 
-namespace Tahseen.Domain.Entities.Librarian;
+namespace Tahseen.Domain.Entities.Librarians;
 
 public class Librarian:Auditable
 {
-    public long LibraryCode { get; set; }
     public string FirstName { get; set; }
     public string LastName { get; set; }
     public string Email { get; set; }
     public string UserName { get; set; }
     public string Password { get; set; }
     public string DateOfBirth { get; set; }
-    //public Url Photo { get; set; }
-   // public Role Roles { get; set; }
+    public long LibraryCode { get; set; }
+    public string Photo { get; set; }
+    public long LibraryBranchId { get; set; }
+    public LibraryBranch LibraryBranch { get; set; }
+    public Roles Roles { get; set; }
 
 }

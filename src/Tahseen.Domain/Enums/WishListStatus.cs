@@ -2,7 +2,7 @@ namespace Tahseen.Domain.Enums;
 
 public enum WishListStatus
 {
-    Available,
-    Borrowed,
-    Reserved
+    Available = 0,
+    Borrowed = 1,
+    Reserved = 2
 }

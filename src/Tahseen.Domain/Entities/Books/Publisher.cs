@@ -1,6 +1,6 @@
 ﻿using Tahseen.Domain.Commons;
 
-namespace Tahseen.Domain.Entities.Book;
+namespace Tahseen.Domain.Entities.Books;
 
 public class Publisher:Auditable
 {

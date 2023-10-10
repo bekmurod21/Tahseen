@@ -1,43 +1,26 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <TargetFramework>net7.0</TargetFramework>
-    <ImplicitUsings>enable</ImplicitUsings>
-    <Nullable>enable</Nullable>
-  </PropertyGroup>
+	<PropertyGroup>
+		<TargetFramework>net7.0</TargetFramework>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>enable</Nullable>
+	</PropertyGroup>
 
-  <ItemGroup>
-    <Folder Include="Entities\Feedback\" />
-    <Compile Remove="Entities\Authentication\**" />
-    <Compile Remove="Entities\Book\**" />
-    <Compile Remove="Entities\Librarian\**" />
-    <Compile Remove="Entities\Library\**" />
-    <Compile Remove="Entities\SchoolAndEducation\**" />
-    <Compile Remove="Entities\User\**" />
-    <EmbeddedResource Remove="Entities\Authentication\**" />
-    <EmbeddedResource Remove="Entities\Book\**" />
-    <EmbeddedResource Remove="Entities\Librarian\**" />
-    <EmbeddedResource Remove="Entities\Library\**" />
-    <EmbeddedResource Remove="Entities\SchoolAndEducation\**" />
-    <EmbeddedResource Remove="Entities\User\**" />
-    <None Remove="Entities\Authentication\**" />
-    <None Remove="Entities\Book\**" />
-    <None Remove="Entities\Librarian\**" />
-    <None Remove="Entities\Library\**" />
-    <None Remove="Entities\SchoolAndEducation\**" />
-    <None Remove="Entities\User\**" />
-  </ItemGroup>
+	<ItemGroup>
+		<Folder Include="Entities\Feedback\" />
+		<Folder Include="Entities\User\" />
+		<Compile Remove="Entities\Authentication\**" />
+		<Compile Remove="Entities\Librarian\**" />
+		<Compile Remove="Entities\Library\**" />
+		<Compile Remove="Entities\SchoolAndEducation\**" />
+		<EmbeddedResource Remove="Entities\Authentication\**" />
+		<EmbeddedResource Remove="Entities\Librarian\**" />
+		<EmbeddedResource Remove="Entities\Library\**" />
+		<EmbeddedResource Remove="Entities\SchoolAndEducation\**" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Entities\Feedback\" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <EditorConfigFiles Remove="N:\Tahseen\src\Tahseen.Domain\Enums\.editorconfig" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Include="N:\Tahseen\src\Tahseen.Domain\Enums\.editorconfig" />
-  </ItemGroup>
+	<ItemGroup>
+		<EditorConfigFiles Remove="N:\Tahseen\src\Tahseen.Domain\Enums\.editorconfig" />
+	</ItemGroup>
 
 </Project>

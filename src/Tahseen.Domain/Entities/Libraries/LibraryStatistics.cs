@@ -1,11 +1,13 @@
 ﻿using Tahseen.Domain.Commons;
+using Tahseen.Domain.Entities.Books;
+using Tahseen.Domain.Entities.Events;
 
 namespace Tahseen.Domain.Entities.Library;
 
-public class LibraryStatistics:Auditable
+public class LibraryStatistics : Auditable
 {
-    public long TotalUsers { get; set;}
-    public long TotalBooks { get; set; }
-    public long TotalBorrows { get; set; }
-    public long TotalEvents { get; set; }
+    public ICollection<User> TotalUsers { get; set;}
+    public ICollection<Book> TotalBooks { get; set; }
+    public ICollection<BookBorrowsHistory> TotalBorrows { get; set; }
+    public ICollection<Event> TotalEvents { get; set; }
 }

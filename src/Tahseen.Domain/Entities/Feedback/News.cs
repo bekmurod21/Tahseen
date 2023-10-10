@@ -6,6 +6,6 @@ public class News:Auditable
 {
     public string Title { get; set; }
     public string Content { get; set; }
-    public string Auther { get; set; }
+    public string Author { get; set; }
     public DateTime PublicationDate { get; set; }
 }

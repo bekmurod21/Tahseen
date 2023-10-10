@@ -2,8 +2,8 @@
 
 public enum BookFormat:byte
 {
-    HardCover,
-    Paperback,
-    EBook,
-    AudioBook
+    HardCover = 0,
+    Paperback = 1,
+    EBook = 2,
+    AudioBook = 3,
 }

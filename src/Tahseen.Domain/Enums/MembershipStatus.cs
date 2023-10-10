@@ -2,9 +2,9 @@ namespace Tahseen.Domain.Enums;
 
 public enum MembershipStatus
 {
-    Regular,
-    Premium,
-    Suspended,
-    Expired,
-    InActive
+    Regular = 0,
+    Premium = 1,
+    Suspended = 2,
+    Expired = 3,
+    InActive = 4,
 }

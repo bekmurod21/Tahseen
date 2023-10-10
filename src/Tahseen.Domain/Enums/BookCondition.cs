@@ -2,8 +2,8 @@
 
 public enum BookCondition:byte
 {
-    New,
-    Good,
-    Satisfactory,
-    Poor
+    New = 0,
+    Good = 1,
+    Satisfactory = 2,
+    Poor = 3,
 }   

@@ -2,7 +2,7 @@
 
 public enum ReservationStatus:byte
 {
-    Pending,
-    Fulfilled,
-    Canceled
+    Pending = 0,
+    Fulfilled = 0,
+    Canceled = 0
 }

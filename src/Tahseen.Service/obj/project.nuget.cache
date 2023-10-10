@@ -1,14 +1,15 @@
 {
   "version": 2,
-<<<<<<< HEAD
-  "dgSpecHash": "UKhbsRzNambApGZ2AJvGs/JOD6r3VPewo3ZoXz39bP4HkQObhKxgB9xcWimRUxLE4ayeOO0TmHvSlUY3z4C69w==",
+  "dgSpecHash": "66x0VLmaWsUvvYTXaoI+bdsck1q40ePD4PWAlB54KPWjOh5KyzH+B73AA8xPYvhNF0r6Ur1abNbsbjfzXKX1gg==",
   "success": true,
-  "projectFilePath": "E:\\Kutubxona\\Tahseen\\src\\Tahseen.Service\\Tahseen.Service.csproj",
-=======
-  "dgSpecHash": "l9S2vsV4t24sxdpIULPLBbaei0ZSfFIidnmdT11fWNpmGmVjnB9y8QyIpDgYT0eOuQhFHfhx9+IWHibKLH/SGw==",
-  "success": true,
-  "projectFilePath": "C:\\Users\\user\\Desktop\\Tahseen\\src\\Tahseen.Service\\Tahseen.Service.csproj",
->>>>>>> 1c9613d1baefcb4682c9ffa7e8e5c938d1426c39
+  "projectFilePath": "D:\\Tahseen\\Tahseen\\src\\Tahseen.Service\\Tahseen.Service.csproj",
   "expectedPackageFiles": [],
-  "logs": []
+  "logs": [
+    {
+      "code": "Undefined",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Problem reading the cache file D:\\Tahseen\\Tahseen\\src\\Tahseen.Service\\obj\\project.nuget.cache : Invalid property identifier character: <. Path 'version', line 3, position 0."
+    }
+  ]
 }

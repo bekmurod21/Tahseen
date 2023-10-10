@@ -6,6 +6,7 @@ namespace Tahseen.Domain.Entities;
 public class UserActivity:Auditable
 {
     public long UserId { get; set; }
+    public User User { get; set; }
     public ActivityType ActivityType { get; set; }
     public DateTime ActivityTypeDate { get; set; }
 }
