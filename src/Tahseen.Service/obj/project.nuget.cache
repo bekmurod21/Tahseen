@@ -1,15 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "66x0VLmaWsUvvYTXaoI+bdsck1q40ePD4PWAlB54KPWjOh5KyzH+B73AA8xPYvhNF0r6Ur1abNbsbjfzXKX1gg==",
+  "dgSpecHash": "oHEji6UgRUHSREFQ0gVfoeKBS9YFgGj336swzbBqWiJx3BB7gu0KDXTmbw5tLxETus2BJqiuAuFR342vpP9xgA==",
   "success": true,
   "projectFilePath": "D:\\Tahseen\\Tahseen\\src\\Tahseen.Service\\Tahseen.Service.csproj",
   "expectedPackageFiles": [],
-  "logs": [
-    {
-      "code": "Undefined",
-      "level": "Warning",
-      "warningLevel": 1,
-      "message": "Problem reading the cache file D:\\Tahseen\\Tahseen\\src\\Tahseen.Service\\obj\\project.nuget.cache : Invalid property identifier character: <. Path 'version', line 3, position 0."
-    }
-  ]
+  "logs": []
 }

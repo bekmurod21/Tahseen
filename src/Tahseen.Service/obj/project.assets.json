@@ -1,11 +1,30 @@
 {
   "version": 3,
   "targets": {
-    "net7.0": {}
+    "net7.0": {
+      "Tahseen.Domain/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v7.0",
+        "compile": {
+          "bin/placeholder/Tahseen.Domain.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Tahseen.Domain.dll": {}
+        }
+      }
+    }
   },
-  "libraries": {},
+  "libraries": {
+    "Tahseen.Domain/1.0.0": {
+      "type": "project",
+      "path": "../Tahseen.Domain/Tahseen.Domain.csproj",
+      "msbuildProject": "../Tahseen.Domain/Tahseen.Domain.csproj"
+    }
+  },
   "projectFileDependencyGroups": {
-    "net7.0": []
+    "net7.0": [
+      "Tahseen.Domain >= 1.0.0"
+    ]
   },
   "packageFolders": {
     "C:\\Users\\Azizbek\\.nuget\\packages\\": {}
@@ -33,7 +52,11 @@
       "frameworks": {
         "net7.0": {
           "targetAlias": "net7.0",
-          "projectReferences": {}
+          "projectReferences": {
+            "D:\\Tahseen\\Tahseen\\src\\Tahseen.Domain\\Tahseen.Domain.csproj": {
+              "projectPath": "D:\\Tahseen\\Tahseen\\src\\Tahseen.Domain\\Tahseen.Domain.csproj"
+            }
+          }
         }
       },
       "warningProperties": {
@@ -64,13 +87,5 @@
         "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.306\\RuntimeIdentifierGraph.json"
       }
     }
-  },
-  "logs": [
-    {
-      "code": "Undefined",
-      "level": "Warning",
-      "warningLevel": 1,
-      "message": "Problem reading the cache file D:\\Tahseen\\Tahseen\\src\\Tahseen.Service\\obj\\project.nuget.cache : Invalid property identifier character: <. Path 'version', line 3, position 0."
-    }
-  ]
+  }
 }

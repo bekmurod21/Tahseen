@@ -1,4 +1,4 @@
-﻿using Tahseen.Domain.Enums.Events;
+﻿using Tahseen.Domain.Enums;
 
 namespace Tahseen.Domain.Entities.Events
 {
