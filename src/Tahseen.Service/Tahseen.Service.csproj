@@ -13,6 +13,12 @@
   <ItemGroup>
     <ProjectReference Include="..\Tahseen.Data\Tahseen.Data.csproj" />
     <ProjectReference Include="..\Tahseen.Domain\Tahseen.Domain.csproj" />
+
+
+
+
+
+
   </ItemGroup>
 
 
