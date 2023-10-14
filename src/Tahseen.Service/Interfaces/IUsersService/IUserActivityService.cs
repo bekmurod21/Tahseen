@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Tahseen.Service.DTOs.Users.UserMessages
+namespace Tahseen.Service.Interfaces.IUsersService
 {
-    internal class UserMessagesForCreationDto
+    internal class IUserActivityService
     {
     }
 }

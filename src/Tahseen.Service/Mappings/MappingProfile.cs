@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Tahseen.Domain.Entities;
 using Tahseen.Domain.Entities.Books;
 using Tahseen.Domain.Entities.Feedback;
 using Tahseen.Domain.Entities.SchoolAndEducations;
@@ -10,6 +11,7 @@ using Tahseen.Service.DTOs.Feedbacks.News;
 using Tahseen.Service.DTOs.Feedbacks.SurveyResponses;
 using Tahseen.Service.DTOs.Feedbacks.Surveys;
 using Tahseen.Service.DTOs.SchoolAndEducations;
+using Tahseen.Service.DTOs.Users.User;
 
 namespace Tahseen.Service.Mappings;
 
@@ -19,7 +21,7 @@ public class MappingProfile:Profile
     {
         CreateMap<BookReviews, BookReviewForCreationDto>().ReverseMap();
         CreateMap<BookReviews,BookReviewForResultDto>().ReverseMap();
-        CreateMap<BookReviewForUpdateDto,BookReviews>().ReverseMap();
+        CreateMap<BookReviews, BookReviewForUpdateDto>().ReverseMap();
 
         CreateMap<CompletedBooks, CompletedBookForCreationDto>().ReverseMap();
         CreateMap<CompletedBooks,CompletedBookForResultDto>().ReverseMap();
@@ -35,7 +37,7 @@ public class MappingProfile:Profile
         
         CreateMap<News,NewsForCreationDto>().ReverseMap();
         CreateMap<News,NewsForResultDto>().ReverseMap();
-        CreateMap<NewsForUpdateDto,News>().ReverseMap();
+        CreateMap<News, NewsForUpdateDto>().ReverseMap();
         
         CreateMap<Surveys,SurveyForCreationDto>().ReverseMap();
         CreateMap<Surveys,SurveyForResultDto>().ReverseMap();
@@ -56,5 +58,12 @@ public class MappingProfile:Profile
         CreateMap<SchoolBook,SchoolBookForCreationDto>().ReverseMap();
         CreateMap<SchoolBook,SchoolBookForResultDto>().ReverseMap();
         CreateMap<SchoolBook,SchoolBookForUpdateDto>().ReverseMap();
+
+        CreateMap<User, UserForCreationDto>().ReverseMap();
+        CreateMap<User, UserForResultDto>().ReverseMap();
+        CreateMap<User, UserForUpdateDto>().ReverseMap();
+
+
+
     }
 }

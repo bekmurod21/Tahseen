@@ -4,6 +4,7 @@ using Tahseen.Service.Exceptions;
 using Tahseen.Domain.Entities.Books;
 using Tahseen.Service.Interfaces.IBookServices;
 using Tahseen.Service.DTOs.Books.CompletedBooks;
+using Microsoft.EntityFrameworkCore;
 
 namespace Tahseen.Service.Services.Books;
 
@@ -26,7 +27,7 @@ public class CompletedBookService : ICompletedBookService
 
     public async Task<CompletedBookForResultDto> ModifyAsync(long id, CompletedBookForUpdateDto dto)
     {
-        var completedBook = await this.repository.SelectByIdAsync(id);
+        var completedBook = await this.repository.SelectAll().FirstOrDefaultAsync(e => e.Id == id);
         if (completedBook == null || completedBook.IsDeleted)
             throw new TahseenException(404, "CompletedBook not found");
 
@@ -41,7 +42,6 @@ public class CompletedBookService : ICompletedBookService
     public IQueryable<CompletedBookForResultDto> RetrieveAll()
     {
         var bookCompleted = this.repository.SelectAll().Where(t=>!t.IsDeleted);
-
         return this.mapper.Map<IQueryable<CompletedBookForResultDto>>(bookCompleted);
     }
 
