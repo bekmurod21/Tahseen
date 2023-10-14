@@ -6,7 +6,7 @@ namespace Tahseen.Service.DTOs.Reservitions;
 
 public class ReservationForCreationDto
 {
-    public User User { get; set; }
-    public Book Book { get; set; }
+    public long UserId {get; set;}
+    public long BookId {get; set;}
     public ReservationStatus ReservationStatus { get; set; } 
 }
