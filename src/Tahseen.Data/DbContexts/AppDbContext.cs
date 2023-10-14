@@ -6,6 +6,9 @@ namespace Tahseen.Data.DbContexts;
 
 public class AppDbContext : DbContext
 {
+    public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
+    { }
+
     public DbSet<Book> Books { get; set; }
     public DbSet<BookReviews> BookReviews { get; set; }
     public DbSet<CompletedBooks> CompletedBooks { get; set; }
