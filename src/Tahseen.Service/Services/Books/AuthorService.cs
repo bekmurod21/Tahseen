@@ -31,6 +31,7 @@ public class AuthorService
         {
             var mappedAuthor = _mapper.Map<Author>(dto);
             var result = await _repository.UpdateAsync(mappedAuthor);
+            result.UpdatedAt = DateTime.UtcNow;
             return _mapper.Map<AuthorForResultDto>(result);
         }
         throw new Exception("Author not found");

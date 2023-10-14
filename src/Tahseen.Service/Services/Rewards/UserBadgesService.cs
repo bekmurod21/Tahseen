@@ -30,6 +30,7 @@ public class UserBadgesService
         if (userBadges is not null && !userBadges.IsDeleted)
         {
             var mappedUserBadges = _mapper.Map<UserBadges>(dto);
+            mappedUserBadges.UpdatedAt = DateTime.UtcNow;
             var result = await _repository.UpdateAsync(mappedUserBadges);
             return _mapper.Map<UserBadgesForResultDto>(result);
         }

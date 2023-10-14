@@ -32,6 +32,7 @@ public class CompletedBookService : ICompletedBookService
             throw new TahseenException(404, "CompletedBook not found");
 
         var mapped = this.mapper.Map(dto, completedBook);
+        mapped.UpdatedAt = DateTime.UtcNow;
         var result = this.repository.UpdateAsync(mapped);
         return this.mapper.Map<CompletedBookForResultDto>(result);
     }

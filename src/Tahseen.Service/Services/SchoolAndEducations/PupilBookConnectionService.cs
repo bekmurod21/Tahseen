@@ -32,6 +32,7 @@ public class PupilBookConnectionService:IPupilBookConnectionService
             throw new TahseenException(404, "PupilBookConnection is not found");
         }
         var updated = _mapper.Map(dto,mapped);
+        updated.UpdatedAt = DateTime.UtcNow;
         var result = _repository.UpdateAsync(updated);
         return _mapper.Map<PupilBookConnectionForResultDto>(result);
     }

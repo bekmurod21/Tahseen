@@ -33,6 +33,7 @@ public class SchoolBookService:ISchoolBookService
         }
 
         var mapped = _mapper.Map(dto, book);
+        mapped.UpdatedAt = DateTime.UtcNow;
         var result = _repository.UpdateAsync(mapped);
         return _mapper.Map<SchoolBookForResultDto>(result);
     }

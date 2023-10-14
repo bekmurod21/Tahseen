@@ -32,6 +32,7 @@ public class NewsService:INewsService
             throw new TahseenException(404, "News doesn't found");
         }
         var mapped = _mapper.Map(dto, news);
+        mapped.UpdatedAt = DateTime.UtcNow;
         var result = await _repository.UpdateAsync(mapped);
         return _mapper.Map<NewsForResultDto>(result);
     }

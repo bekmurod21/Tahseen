@@ -39,8 +39,8 @@ public class PublisherService : IPublisherService
         var publisher = await this.repository.SelectByIdAsync(id);
         if (publisher == null || publisher.IsDeleted)
             throw new TahseenException(404, "Publisher doesn't found");
-
         var publisherMapped = mapper.Map(dto, publisher);
+        publisherMapped.UpdatedAt = DateTime.UtcNow;
         var result = await this.repository.UpdateAsync(publisherMapped);
 
         return mapper.Map<PublisherForResultDto>(result);

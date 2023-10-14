@@ -32,6 +32,7 @@ public class BadgeService
         if (badge is not null && !badge.IsDeleted)
         {
             var mappedBadge = _mapper.Map<Badge>(dto);
+            mappedBadge.UpdatedAt = DateTime.UtcNow;
             var result = await _repository.UpdateAsync(mappedBadge);
             return _mapper.Map<BadgeForResultDto>(result);
         }

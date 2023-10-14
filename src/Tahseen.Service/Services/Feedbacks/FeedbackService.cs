@@ -31,7 +31,7 @@ public class FeedbackService:IFeedbackService
             throw new TahseenException(404, "Feedback doesn't found");
 
         var mapped = _mapper.Map(dto, bookReview);
-
+        mapped.UpdatedAt = DateTime.UtcNow;
         var result = await _repository.UpdateAsync(mapped);
         return _mapper.Map<FeedbackForResultDto>(result);
     }

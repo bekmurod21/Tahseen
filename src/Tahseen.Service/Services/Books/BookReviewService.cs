@@ -40,7 +40,7 @@ public class BookReviewService : IBookReviewService
             throw new TahseenException(404, "bookReviev doesn't found");
 
         var mapped = this.mapper.Map(dto, bookReview);
-
+        mapped.UpdatedAt = DateTime.UtcNow;
         var result = await this.repository.UpdateAsync(mapped);
         return this.mapper.Map<BookReviewForResultDto>(result);
     }

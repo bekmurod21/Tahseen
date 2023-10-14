@@ -32,6 +32,7 @@ public class ReservationService
         if (reservation is not null && !reservation.IsDeleted)
         {
             var mappedReservation = _mapper.Map<Reservation>(dto);
+            mappedReservation.UpdatedAt = DateTime.UtcNow;
             var result = await _repository.UpdateAsync(mappedReservation);
             return _mapper.Map<ReservationForResultDto>(result);
         }

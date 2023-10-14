@@ -30,6 +30,7 @@ public class BookService:IBookService
         if (book is not null && !book.IsDeleted)
         {
             var mappedBook = _mapper.Map<Book>(dto);
+            mappedBook.UpdatedAt = DateTime.UtcNow;
             var result = await _repository.UpdateAsync(mappedBook);
             return _mapper.Map<BookForResultDto>(result);
         }

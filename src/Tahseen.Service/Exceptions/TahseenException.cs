@@ -5,7 +5,7 @@
         int statusCode;
         public TahseenException(int code, string message) : base(message) 
         {
-            statusCode = code;
+            this.statusCode = code;
         }
     }
 }

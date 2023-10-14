@@ -31,6 +31,7 @@ public class GenreService : IGenreService
         if (genre is not null && !genre.IsDeleted)
         {
             var mappedGenre = _mapper.Map<Genre>(dto);
+            mappedGenre.UpdatedAt = DateTime.UtcNow;
             var result = await _repository.UpdateAsync(mappedGenre);
             return _mapper.Map<GenreForResultDto>(result);
         }

@@ -33,6 +33,7 @@ public class PupilService:IPupilService
         }
 
         var updated = _mapper.Map(dto, searched);
+        updated.UpdatedAt = DateTime.UtcNow;
         var result = _repository.UpdateAsync(updated);
         return _mapper.Map<PupilForResultDto>(result);
     }

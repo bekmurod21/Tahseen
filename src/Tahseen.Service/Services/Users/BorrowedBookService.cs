@@ -31,6 +31,7 @@ namespace Tahseen.Service.Services.Users
             if (data is not null && data.IsDeleted == false)
             {
                 var MappedData = this._mapper.Map(dto, data);
+                MappedData.UpdatedAt = DateTime.UtcNow;
                 var result = await _userRepository.UpdateAsync(MappedData);
                 return this._mapper.Map<BorrowedBookForResultDto>(result);
             }

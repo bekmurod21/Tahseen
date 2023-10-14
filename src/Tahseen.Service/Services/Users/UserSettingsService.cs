@@ -30,6 +30,7 @@ namespace Tahseen.Service.Services.Users
             if(Data != null && Data.IsDeleted == false)
             {
                 var MappedData = this._mapper.Map(dto, Data);
+                MappedData.UpdatedAt = DateTime.UtcNow;
                 var result = await this._repository.UpdateAsync(MappedData);
                 return this._mapper.Map<UserSettingsForResultDto>(result);
             }

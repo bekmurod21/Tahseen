@@ -33,6 +33,7 @@ public class SurveyService:ISurveyService
         }
 
         var modified = _mapper.Map(dto, survey);
+        modified.UpdatedAt = DateTime.UtcNow;
         var result = _repository.UpdateAsync(modified);
         return _mapper.Map<SurveyForResultDto>(result);
     }

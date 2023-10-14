@@ -64,3 +64,16 @@ D:\Tahseen Backend\Tahseen\src\Tahseen.Api\obj\Debug\net7.0\refint\Tahseen.Api.d
 D:\Tahseen Backend\Tahseen\src\Tahseen.Api\obj\Debug\net7.0\Tahseen.Api.pdb
 D:\Tahseen Backend\Tahseen\src\Tahseen.Api\obj\Debug\net7.0\Tahseen.Api.genruntimeconfig.cache
 D:\Tahseen Backend\Tahseen\src\Tahseen.Api\obj\Debug\net7.0\ref\Tahseen.Api.dll
+D:\Tahseen Backend\Tahseen\src\Tahseen.Api\bin\Debug\net7.0\Microsoft.EntityFrameworkCore.dll
+D:\Tahseen Backend\Tahseen\src\Tahseen.Api\bin\Debug\net7.0\Microsoft.EntityFrameworkCore.Abstractions.dll
+D:\Tahseen Backend\Tahseen\src\Tahseen.Api\bin\Debug\net7.0\Microsoft.EntityFrameworkCore.Relational.dll
+D:\Tahseen Backend\Tahseen\src\Tahseen.Api\bin\Debug\net7.0\Npgsql.dll
+D:\Tahseen Backend\Tahseen\src\Tahseen.Api\bin\Debug\net7.0\Npgsql.EntityFrameworkCore.PostgreSQL.dll
+D:\Tahseen Backend\Tahseen\src\Tahseen.Api\bin\Debug\net7.0\Tahseen.Data.dll
+D:\Tahseen Backend\Tahseen\src\Tahseen.Api\bin\Debug\net7.0\Tahseen.Domain.dll
+D:\Tahseen Backend\Tahseen\src\Tahseen.Api\bin\Debug\net7.0\Tahseen.Data.pdb
+D:\Tahseen Backend\Tahseen\src\Tahseen.Api\bin\Debug\net7.0\Tahseen.Domain.pdb
+D:\Tahseen Backend\Tahseen\src\Tahseen.Api\bin\Debug\net7.0\AutoMapper.dll
+D:\Tahseen Backend\Tahseen\src\Tahseen.Api\bin\Debug\net7.0\AutoMapper.Extensions.Microsoft.DependencyInjection.dll
+D:\Tahseen Backend\Tahseen\src\Tahseen.Api\bin\Debug\net7.0\Tahseen.Service.dll
+D:\Tahseen Backend\Tahseen\src\Tahseen.Api\bin\Debug\net7.0\Tahseen.Service.pdb

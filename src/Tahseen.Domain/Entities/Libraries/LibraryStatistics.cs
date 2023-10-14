@@ -8,6 +8,6 @@ public class LibraryStatistics : Auditable
 {
     public ICollection<User> TotalUsers { get; set;}
     public ICollection<Book> TotalBooks { get; set; }
-    public ICollection<BookBorrowsHistory> TotalBorrows { get; set; }
+    public ICollection<BorrowedBook> TotalBorrows { get; set; }
     public ICollection<Event> TotalEvents { get; set; }
 }

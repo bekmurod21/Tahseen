@@ -9,9 +9,9 @@ namespace Tahseen.Data.Repositories
     {
         AppDbContext dbContext;
         DbSet<TEntity> dbSet;
-        public Repository()
+        public Repository(AppDbContext dbContext)
         {
-            dbContext = new AppDbContext(); 
+            this.dbContext = dbContext; 
             this.dbSet = dbContext.Set<TEntity>();  
         }
         public async Task<TEntity> CreateAsync(TEntity entity)
