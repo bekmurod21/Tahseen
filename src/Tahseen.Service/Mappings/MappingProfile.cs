@@ -2,6 +2,7 @@
 using Tahseen.Domain.Entities;
 using Tahseen.Domain.Entities.Books;
 using Tahseen.Domain.Entities.Feedback;
+using Tahseen.Domain.Entities.SchoolAndEducations;
 using Tahseen.Service.DTOs.Books.BookReviews;
 using Tahseen.Service.DTOs.Books.CompletedBooks;
 using Tahseen.Service.DTOs.Books.Publishers;
@@ -9,6 +10,7 @@ using Tahseen.Service.DTOs.Feedbacks.Feedback;
 using Tahseen.Service.DTOs.Feedbacks.News;
 using Tahseen.Service.DTOs.Feedbacks.SurveyResponses;
 using Tahseen.Service.DTOs.Feedbacks.Surveys;
+using Tahseen.Service.DTOs.SchoolAndEducations;
 using Tahseen.Service.DTOs.Users.User;
 
 namespace Tahseen.Service.Mappings;
@@ -44,6 +46,18 @@ public class MappingProfile:Profile
         CreateMap<SurveyResponses,SurveyResponseForCreationDto>().ReverseMap();
         CreateMap<SurveyResponses,SurveyResponseForResultDto>().ReverseMap();
         CreateMap<SurveyResponses,SurveyResponseForUpdateDto>().ReverseMap();
+        
+        CreateMap<PupilBookConnection,PupilBookConnectionForCreationDto>().ReverseMap();
+        CreateMap<PupilBookConnection,PupilBookConnectionForResultDto>().ReverseMap();
+        CreateMap<PupilBookConnection,PupilBookConnectionForUpdateDto>().ReverseMap();
+        
+        CreateMap<Pupil,PupilForCreationDto>().ReverseMap();
+        CreateMap<Pupil,PupilForResultDto>().ReverseMap();
+        CreateMap<Pupil,PupilForUpdateDto>().ReverseMap();
+        
+        CreateMap<SchoolBook,SchoolBookForCreationDto>().ReverseMap();
+        CreateMap<SchoolBook,SchoolBookForResultDto>().ReverseMap();
+        CreateMap<SchoolBook,SchoolBookForUpdateDto>().ReverseMap();
 
         CreateMap<User, UserForCreationDto>().ReverseMap();
         CreateMap<User, UserForResultDto>().ReverseMap();
