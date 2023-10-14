@@ -1,9 +1,10 @@
-﻿using Tahseen.Domain.Entities.Books;
+﻿using Tahseen.Domain.Commons;
+using Tahseen.Domain.Entities.Books;
 using Tahseen.Domain.Enums;
 
 namespace Tahseen.Domain.Entities.Reservations;
 
-public class Reservation
+public class Reservation:Auditable
 {
     public long UserId { get; set; }
     public User User { get; set; }
