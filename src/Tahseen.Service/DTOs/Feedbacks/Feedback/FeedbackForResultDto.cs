@@ -6,6 +6,7 @@ namespace Tahseen.Service.DTOs.Feedbacks.Feedback;
 
 public class FeedbackForResultDto
 {
+    public long Id { get; set; }
     public long  UserId { get; set; }
     public UserForCreationDto User { get; set; }
     public long  BookId { get; set; }

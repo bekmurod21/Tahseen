@@ -3,10 +3,11 @@ using Tahseen.Data.IRepositories;
 using Tahseen.Domain.Entities.Books;
 using Tahseen.Service.DTOs.Books.Author;
 using Tahseen.Service.DTOs.Books.Genre;
+using Tahseen.Service.Interfaces.IBookServices;
 
 namespace Tahseen.Service.Services.Books;
 
-public class GenreService
+public class GenreService : IGenreService
 {
     private readonly IMapper _mapper;
     private readonly IRepository<Genre> _repository;
@@ -39,6 +40,12 @@ public class GenreService
     public async Task<bool> RemoveAsync(long id)
     {
         return await _repository.DeleteAsync(id);
+    }
+
+    public ICollection<GenreForResultDto> RetrieveAll()
+    {
+        var result = _repository.SelectAll().Where(e => e.IsDeleted != true);
+        return _mapper.Map<ICollection<GenreForResultDto>>(result);
     }
 
     public async ValueTask<GenreForResultDto> RetrieveByIdAsync(long id)

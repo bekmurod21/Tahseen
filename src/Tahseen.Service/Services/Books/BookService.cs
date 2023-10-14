@@ -20,7 +20,7 @@ public class BookService:IBookService
     public async Task<BookForResultDto> AddAsync(BookForCreationDto dto)
     {
         var book = _mapper.Map<Book>(dto);
-        var result= await _repository.CreateAsync(book);
+        var result = await _repository.CreateAsync(book);
         return _mapper.Map<BookForResultDto>(result);
     }
 
