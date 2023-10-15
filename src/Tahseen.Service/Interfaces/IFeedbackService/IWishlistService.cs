@@ -6,7 +6,7 @@ public interface IWishlistService
 {
     Task<WishlistForResultDto> AddAsync(WishlistForCreationDto dto);
     Task<WishlistForResultDto> ModifyAsync(WishlistForUpdateDto dto);
-    Task<bool> RemoveAsync(long Id);
-    ValueTask<WishlistForResultDto> RetrieveById(long Id);
+    Task<bool> RemoveAsync(long id);
+    ValueTask<WishlistForResultDto> RetrieveById(long id);
     IQueryable<WishlistForResultDto> RetrieveAll();
 }

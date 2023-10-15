@@ -6,7 +6,7 @@ public interface ILibraryBranchService
 {
     Task<LibraryBranchForResultDto> AddAsync(LibraryBranchForCreationDto dto);
     Task<LibraryBranchForResultDto> ModifyAsync(LibraryBranchForUpdateDto dto);
-    Task<bool> RemoveAsync(long Id);
-    ValueTask<LibraryBranchForResultDto> RetrieveByIdAsync(long Id);
+    Task<bool> RemoveAsync(long id);
+    ValueTask<LibraryBranchForResultDto> RetrieveByIdAsync(long id);
     IQueryable<LibraryBranchForResultDto> RetrieveAll();
 }
