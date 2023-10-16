@@ -1,6 +1,6 @@
-﻿using Tahseen.Service.DTOs.Feedbacks.Wishlists;
+﻿using Tahseen.Service.DTOs.Users.Wishlists;
 
-namespace Tahseen.Service.Interfaces.IFeedbackService;
+namespace Tahseen.Service.Interfaces.IUsersService;
 
 public interface IWishlistService
 {

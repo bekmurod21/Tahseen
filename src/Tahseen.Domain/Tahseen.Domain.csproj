@@ -7,7 +7,6 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<Folder Include="Entities\Users\" />
 		<Compile Remove="Entities\Authentication\**" />
 		<Compile Remove="Entities\Librarian\**" />
 		<Compile Remove="Entities\Library\**" />

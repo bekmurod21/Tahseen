@@ -3,10 +3,11 @@ using Tahseen.Data.IRepositories;
 using Tahseen.Domain.Entities.Rewards;
 using Tahseen.Service.DTOs.Rewards.Badge;
 using Tahseen.Service.DTOs.Rewards.UserBadges;
+using Tahseen.Service.Interfaces.IRewardsService;
 
 namespace Tahseen.Service.Services.Rewards;
 
-public class UserBadgesService
+public class UserBadgesService : IUserBadgesService
 {
     private readonly IMapper _mapper;
     private readonly IRepository<UserBadges> _repository;
@@ -42,7 +43,13 @@ public class UserBadgesService
         return await _repository.DeleteAsync(id);
     }
 
-    public async ValueTask<UserBadgesForResultDto> RetrieveByIdAsync(long id)
+    public ICollection<UserBadgesForResultDto> RetrieveAll()
+    {
+        var AllData = this._repository.SelectAll().Where(t => t.IsDeleted == false);
+        return _mapper.Map<ICollection<UserBadgesForResultDto>>(AllData);
+    }
+
+    public async Task<UserBadgesForResultDto> RetrieveByIdAsync(long id)
     {
         var userBadges = await _repository.SelectByIdAsync(id);
         if (userBadges is not null && !userBadges.IsDeleted)
@@ -50,4 +57,6 @@ public class UserBadgesService
         
         throw new Exception("UserBadges not found");
     }
+
+   
 }

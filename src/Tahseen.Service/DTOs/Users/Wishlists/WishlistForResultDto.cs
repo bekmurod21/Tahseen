@@ -1,7 +1,7 @@
 ﻿using Tahseen.Domain.Enums;
 using Tahseen.Service.DTOs.Users.User;
 
-namespace Tahseen.Service.DTOs.Feedbacks.Wishlists;
+namespace Tahseen.Service.DTOs.Users.Wishlists;
 
 public class WishlistForResultDto
 {

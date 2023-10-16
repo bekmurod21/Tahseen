@@ -14,10 +14,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Controllers\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\Tahseen.Data\Tahseen.Data.csproj" />
     <ProjectReference Include="..\Tahseen.Service\Tahseen.Service.csproj" />
   </ItemGroup>

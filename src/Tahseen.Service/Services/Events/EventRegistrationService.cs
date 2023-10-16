@@ -3,10 +3,11 @@ using Tahseen.Data.IRepositories;
 using Tahseen.Domain.Entities.Events;
 using Tahseen.Service.DTOs.Events.EventRegistration;
 using Tahseen.Service.DTOs.Events.Events;
+using Tahseen.Service.Interfaces.IEventsServices;
 
 namespace Tahseen.Service.Services.Events;
 
-public class EventRegistrationService
+public class EventRegistrationService : IEventRegistrationService
 {
     private readonly IMapper _mapper;
     private readonly IRepository<EventRegistration> _repository;
@@ -42,7 +43,13 @@ public class EventRegistrationService
         return await _repository.DeleteAsync(id);
     }
 
-    public async ValueTask<EventRegistrationForResultDto> RetrieveByIdAsync(long id)
+    public ICollection<EventRegistrationForResultDto> RetrieveAll()
+    {
+        var AllData = this._repository.SelectAll().Where(e => e.IsDeleted == false);
+        return this._mapper.Map<ICollection<EventRegistrationForResultDto>>(AllData);
+    }
+
+    public async Task<EventRegistrationForResultDto> RetrieveByIdAsync(long id)
     {
         var eventRegistration = await _repository.SelectByIdAsync(id);
         if (eventRegistration is not null && !eventRegistration.IsDeleted)

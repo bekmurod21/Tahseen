@@ -5,7 +5,7 @@ using Tahseen.Service.DTOs.Feedbacks.UserMessages;
 using Tahseen.Service.Exceptions;
 using Tahseen.Service.Interfaces.IFeedbackService;
 
-namespace Tahseen.Service.Services.FeedbackService;
+namespace Tahseen.Service.Services.Feedbacks;
 
 public class UserMessageService : IUserMessageService
 {
@@ -20,37 +20,37 @@ public class UserMessageService : IUserMessageService
 
     public async Task<UserMessageForResultDto> AddAsync(UserMessageForCreationDto dto)
     {
-        var mapped = this.mapper.Map<UserMessage>(dto);
-        var result = await this.repository.CreateAsync(mapped);
+        var mapped = mapper.Map<UserMessage>(dto);
+        var result = await repository.CreateAsync(mapped);
         return mapper.Map<UserMessageForResultDto>(result);
     }
 
     public async Task<UserMessageForResultDto> ModifyAsync(UserMessageForUpdateDto dto)
     {
-        var getUserMessage = await this.repository.SelectByIdAsync(dto.Id);
+        var getUserMessage = await repository.SelectByIdAsync(dto.Id);
         if (getUserMessage == null && getUserMessage.IsDeleted)
             throw new TahseenException(404, "UserMessage doesn't found");
 
-        var mappedUserMessage = this.mapper.Map(dto, getUserMessage);
-        var result = await this.repository.UpdateAsync(mappedUserMessage);
+        var mappedUserMessage = mapper.Map(dto, getUserMessage);
+        var result = await repository.UpdateAsync(mappedUserMessage);
 
-        return this.mapper.Map<UserMessageForResultDto>(result);
+        return mapper.Map<UserMessageForResultDto>(result);
     }
 
-    public async Task<bool> RemoveAsync(long id) => await this.repository.DeleteAsync(id);
+    public async Task<bool> RemoveAsync(long id) => await repository.DeleteAsync(id);
 
     IQueryable<UserMessageForResultDto> IUserMessageService.RetrieveAll()
     {
-        var results = this.repository.SelectAll().Where(t=>!t.IsDeleted);
-        return this.mapper.Map<IQueryable<UserMessageForResultDto>>(results);
+        var results = repository.SelectAll().Where(t => !t.IsDeleted);
+        return mapper.Map<IQueryable<UserMessageForResultDto>>(results);
     }
 
     public async ValueTask<UserMessageForResultDto> RetrieveByIdAsync(long id)
     {
-        var result = await this.repository.SelectByIdAsync(id);
+        var result = await repository.SelectByIdAsync(id);
         if (result is null && result.IsDeleted)
             throw new TahseenException(404, "UserMessage doesn't found");
-        
+
         return mapper.Map<UserMessageForResultDto>(result);
     }
 }

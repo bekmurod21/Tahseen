@@ -5,10 +5,12 @@ using Tahseen.Domain.Entities.Rewards;
 using Tahseen.Service.DTOs.Books.Author;
 using Tahseen.Service.DTOs.Reservations;
 using Tahseen.Service.DTOs.Rewards.Badge;
+using Tahseen.Service.DTOs.Users.User;
+using Tahseen.Service.Interfaces.IRewardsService;
 
 namespace Tahseen.Service.Services.Rewards;
 
-public class BadgeService
+public class BadgeService : IBadgeService
 {
     private readonly IMapper _mapper;
     private readonly IRepository<Badge> _repository;
@@ -44,7 +46,13 @@ public class BadgeService
         return await _repository.DeleteAsync(id);
     }
 
-    public async ValueTask<BadgeForResultDto> RetrieveByIdAsync(long id)
+    public ICollection<BadgeForResultDto> RetrieveAll()
+    {
+        var AllData = this._repository.SelectAll().Where(t => t.IsDeleted == false);
+        return _mapper.Map<ICollection<BadgeForResultDto>>(AllData);
+    }
+
+    public async Task<BadgeForResultDto> RetrieveByIdAsync(long id)
     {
         var badge = await _repository.SelectByIdAsync(id);
         if (badge is not null && !badge.IsDeleted)

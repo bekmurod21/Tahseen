@@ -4,10 +4,12 @@ using Tahseen.Domain.Entities.Events;
 using Tahseen.Domain.Entities.Notifications;
 using Tahseen.Service.DTOs.Events.Events;
 using Tahseen.Service.DTOs.Notifications;
+using Tahseen.Service.DTOs.Users.User;
+using Tahseen.Service.Interfaces.INotificationServices;
 
 namespace Tahseen.Service.Services.Notifications;
 
-public class NotificationService
+public class NotificationService : INotificationService
 {
     private readonly IMapper _mapper;
     private readonly IRepository<Notification> _repository;
@@ -43,7 +45,13 @@ public class NotificationService
         return await _repository.DeleteAsync(id);
     }
 
-    public async ValueTask<NotificationForResultDto> RetrieveByIdAsync(long id)
+    public ICollection<NotificationForResultDto> RetrieveAll()
+    {
+        var AllData = this._repository.SelectAll().Where(t => t.IsDeleted == false);
+        return _mapper.Map<ICollection<NotificationForResultDto>>(AllData);
+    }
+
+    public async Task<NotificationForResultDto> RetrieveByIdAsync(long id)
     {
         var notification = await _repository.SelectByIdAsync(id);
         if (notification is not null && !notification.IsDeleted)

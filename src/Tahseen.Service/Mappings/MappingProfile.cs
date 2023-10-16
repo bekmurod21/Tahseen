@@ -102,7 +102,6 @@ public class MappingProfile:Profile
         CreateMap<Fine, FineServiceForResultDto>().ReverseMap();
 
         CreateMap<Registration, RegistrationForCreationDto>().ReverseMap();
-        CreateMap<Registration, RegistrationForUpdateDto>().ReverseMap();
         CreateMap<Registration, RegistrationForResultDto>().ReverseMap();
 
         CreateMap<UserProgressTracking, UserProgressTrackingForCreationDto>().ReverseMap();

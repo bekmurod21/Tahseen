@@ -4,11 +4,12 @@ using Tahseen.Domain.Entities.Books;
 using Tahseen.Domain.Entities.Reservations;
 using Tahseen.Service.DTOs.Books.Author;
 using Tahseen.Service.DTOs.Reservations;
-using Tahseen.Service.DTOs.Reservitions;
+using Tahseen.Service.DTOs.Users.User;
+using Tahseen.Service.Interfaces.IReservationsServices;
 
 namespace Tahseen.Service.Services.Reservations;
 
-public class ReservationService
+public class ReservationService : IReservationsService
 {
     private readonly IMapper _mapper;
     private readonly IRepository<Reservation> _repository;
@@ -44,7 +45,13 @@ public class ReservationService
         return await _repository.DeleteAsync(id);
     }
 
-    public async ValueTask<ReservationForResultDto> RetrieveByIdAsync(long id)
+    public ICollection<ReservationForResultDto> RetrieveAll()
+    {
+        var AllData = this._repository.SelectAll().Where(t => t.IsDeleted == false);
+        return _mapper.Map<ICollection<ReservationForResultDto>>(AllData);
+    }
+
+    public async Task<ReservationForResultDto> RetrieveByIdAsync(long id)
     {
         var reservation = await _repository.SelectByIdAsync(id);
         if (reservation is not null && !reservation.IsDeleted)
@@ -52,4 +59,6 @@ public class ReservationService
         
         throw new Exception("Reservation  not found");
     }
+
+ 
 }

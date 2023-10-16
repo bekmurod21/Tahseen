@@ -21,7 +21,7 @@ namespace Tahseen.Service.Services.Users
         public async Task<UserForResultDto> AddAsync(UserForCreationDto dto)
         {
             var result = _userRepository.SelectAll().FirstOrDefault(e=> e.EmailAddress == dto.EmailAddress && e.Password == e.Password);
-            if (result != null)
+            if (result != null && result.IsDeleted == false)
             {
                 throw new TahseenException(400, "User is exist");
             }

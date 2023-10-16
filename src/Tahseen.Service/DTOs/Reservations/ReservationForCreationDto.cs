@@ -1,8 +1,7 @@
 using Tahseen.Domain.Entities;
-using Tahseen.Domain.Entities.Books;
 using Tahseen.Domain.Enums;
 
-namespace Tahseen.Service.DTOs.Reservitions;
+namespace Tahseen.Service.DTOs.Reservations;
 
 public class ReservationForCreationDto
 {

@@ -3,14 +3,12 @@ using Tahseen.Data.IRepositories;
 using Tahseen.Data.Repositories;
 using Tahseen.Domain.Entities;
 using Tahseen.Domain.Entities.Books;
-using Tahseen.Domain.Entities.Feedback;
-using Tahseen.Domain.Entities.Feedbacks;
-using Tahseen.Service.DTOs.Feedbacks.Wishlists;
+using Tahseen.Domain.Entities.Users;
+using Tahseen.Service.DTOs.Users.Wishlists;
 using Tahseen.Service.Exceptions;
-using Tahseen.Service.Interfaces.IFeedbackService;
 using Tahseen.Service.Interfaces.IUsersService;
 
-namespace Tahseen.Service.Services.FeedbackService;
+namespace Tahseen.Service.Services.Users;
 
 public class WishlistService : IWishlistService
 {
@@ -30,11 +28,11 @@ public class WishlistService : IWishlistService
 
     public async Task<WishlistForResultDto> AddAsync(WishlistForCreationDto dto)
     {
-        var book = await this.bookRepository.SelectByIdAsync(dto.BookId);
+        var book = await bookRepository.SelectByIdAsync(dto.BookId);
         if (book == null || book.IsDeleted)
             throw new TahseenException(404, "Book not found");
         //shu joyini korib chiqamiz
-        var cart = await this.userCartRepository.SelectByIdAsync(dto.UserId);
+        var cart = await userCartRepository.SelectByIdAsync(dto.UserId);
 
         var wishlist = new WishList
         {
@@ -49,7 +47,7 @@ public class WishlistService : IWishlistService
 
     public async Task<WishlistForResultDto> ModifyAsync(WishlistForUpdateDto dto)
     {
-        var wishlist = await this.repository.SelectByIdAsync(dto.Id);
+        var wishlist = await repository.SelectByIdAsync(dto.Id);
         if (wishlist == null || wishlist.IsDeleted)
             throw new TahseenException(404, "wishlist not found");
 
@@ -57,27 +55,27 @@ public class WishlistService : IWishlistService
         wishlist.Status = dto.Status;
         wishlist.UpdatedAt = DateTime.UtcNow;
 
-        return mapper.Map<WishlistForResultDto>(await this.repository.UpdateAsync(wishlist));
+        return mapper.Map<WishlistForResultDto>(await repository.UpdateAsync(wishlist));
     }
 
     public async Task<bool> RemoveAsync(long id)
     {
-        var wishlist = await this.repository.SelectByIdAsync(id);
+        var wishlist = await repository.SelectByIdAsync(id);
         if (wishlist == null || wishlist.IsDeleted)
             throw new TahseenException(404, "Wishlist not found");
 
-        return await this.repository.DeleteAsync(wishlist.Id);
+        return await repository.DeleteAsync(wishlist.Id);
     }
 
     public IQueryable<WishlistForResultDto> RetrieveAll()
     {
-        var wishlists = this.repository.SelectAll().Where(w => !w.IsDeleted);
-        return this.mapper.Map<IQueryable<WishlistForResultDto>>(wishlists);
+        var wishlists = repository.SelectAll().Where(w => !w.IsDeleted);
+        return mapper.Map<IQueryable<WishlistForResultDto>>(wishlists);
     }
 
     public async ValueTask<WishlistForResultDto> RetrieveById(long id)
     {
-        var wishlist = await this.repository.SelectByIdAsync(id);
+        var wishlist = await repository.SelectByIdAsync(id);
         if (wishlist is null || wishlist.IsDeleted)
             throw new TahseenException(404, "Wishlist not found");
 

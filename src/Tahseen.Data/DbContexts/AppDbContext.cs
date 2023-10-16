@@ -4,6 +4,7 @@ using Tahseen.Domain.Entities.Books;
 using Tahseen.Domain.Entities.Events;
 using Tahseen.Domain.Entities.Feedback;
 using Tahseen.Domain.Entities.Librarians;
+using Tahseen.Domain.Entities.Users;
 
 namespace Tahseen.Data.DbContexts;
 

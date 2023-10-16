@@ -1,13 +1,12 @@
 using AutoMapper;
 using Tahseen.Data.IRepositories;
-using Tahseen.Domain.Entities.Books;
 using Tahseen.Domain.Entities.Events;
-using Tahseen.Service.DTOs.Books.Author;
 using Tahseen.Service.DTOs.Events.Events;
+using Tahseen.Service.Interfaces.IEventsServices;
 
 namespace Tahseen.Service.Services.Events;
 
-public class EventService
+public class EventService : IEventsService
 {
     private readonly IMapper _mapper;
     private readonly IRepository<Event> _repository;
@@ -43,7 +42,13 @@ public class EventService
         return await _repository.DeleteAsync(id);
     }
 
-    public async ValueTask<EventForResultDto> RetrieveByIdAsync(long id)
+    public ICollection<EventForResultDto> RetrieveAll()
+    {
+        var AllData = this._repository.SelectAll().Where(e => e.IsDeleted == false);
+        return this._mapper.Map<ICollection<EventForResultDto>>(AllData);
+    }
+
+    public async Task<EventForResultDto> RetrieveByIdAsync(long id)
     {
         var @event = await _repository.SelectByIdAsync(id);
         if (@event is not null && !@event.IsDeleted)
@@ -51,4 +56,6 @@ public class EventService
         
         throw new Exception("Event  not found");
     }
+
+
 }
