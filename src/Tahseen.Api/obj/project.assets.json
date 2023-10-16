@@ -417,6 +417,7 @@
         "type": "project",
         "framework": ".NETCoreApp,Version=v7.0",
         "dependencies": {
+          "AutoMapper": "12.0.1",
           "Npgsql.EntityFrameworkCore.PostgreSQL": "7.0.11",
           "Tahseen.Domain": "1.0.0"
         },
@@ -430,6 +431,9 @@
       "Tahseen.Domain/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v7.0",
+        "dependencies": {
+          "AutoMapper": "12.0.1"
+        },
         "compile": {
           "bin/placeholder/Tahseen.Domain.dll": {}
         },
@@ -1315,6 +1319,7 @@
   },
   "projectFileDependencyGroups": {
     "net7.0": [
+      "AutoMapper >= 12.0.1",
       "AutoMapper.Extensions.Microsoft.DependencyInjection >= 12.0.1",
       "Microsoft.AspNetCore.OpenApi >= 7.0.9",
       "Npgsql.EntityFrameworkCore.PostgreSQL >= 7.0.11",
@@ -1324,38 +1329,35 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Azizbek\\.nuget\\packages\\": {}
+    "C:\\Users\\Developer\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Tahseen Backend\\Tahseen\\src\\Tahseen.Api\\Tahseen.Api.csproj",
+      "projectUniqueName": "C:\\Users\\Developer\\RiderProjects\\Tahseen\\src\\Tahseen.Api\\Tahseen.Api.csproj",
       "projectName": "Tahseen.Api",
-      "projectPath": "D:\\Tahseen Backend\\Tahseen\\src\\Tahseen.Api\\Tahseen.Api.csproj",
-      "packagesPath": "C:\\Users\\Azizbek\\.nuget\\packages\\",
-      "outputPath": "D:\\Tahseen Backend\\Tahseen\\src\\Tahseen.Api\\obj\\",
+      "projectPath": "C:\\Users\\Developer\\RiderProjects\\Tahseen\\src\\Tahseen.Api\\Tahseen.Api.csproj",
+      "packagesPath": "C:\\Users\\Developer\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Developer\\RiderProjects\\Tahseen\\src\\Tahseen.Api\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\Azizbek\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        "C:\\Users\\Developer\\AppData\\Roaming\\NuGet\\NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net7.0"
       ],
       "sources": {
-        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-        "C:\\Program Files\\dotnet\\sdk\\7.0.306\\Sdks\\Microsoft.NET.Sdk.Web\\library-packs": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
         "net7.0": {
           "targetAlias": "net7.0",
           "projectReferences": {
-            "D:\\Tahseen Backend\\Tahseen\\src\\Tahseen.Data\\Tahseen.Data.csproj": {
-              "projectPath": "D:\\Tahseen Backend\\Tahseen\\src\\Tahseen.Data\\Tahseen.Data.csproj"
+            "C:\\Users\\Developer\\RiderProjects\\Tahseen\\src\\Tahseen.Data\\Tahseen.Data.csproj": {
+              "projectPath": "C:\\Users\\Developer\\RiderProjects\\Tahseen\\src\\Tahseen.Data\\Tahseen.Data.csproj"
             },
-            "D:\\Tahseen Backend\\Tahseen\\src\\Tahseen.Service\\Tahseen.Service.csproj": {
-              "projectPath": "D:\\Tahseen Backend\\Tahseen\\src\\Tahseen.Service\\Tahseen.Service.csproj"
+            "C:\\Users\\Developer\\RiderProjects\\Tahseen\\src\\Tahseen.Service\\Tahseen.Service.csproj": {
+              "projectPath": "C:\\Users\\Developer\\RiderProjects\\Tahseen\\src\\Tahseen.Service\\Tahseen.Service.csproj"
             }
           }
         }
@@ -1370,6 +1372,10 @@
       "net7.0": {
         "targetAlias": "net7.0",
         "dependencies": {
+          "AutoMapper": {
+            "target": "Package",
+            "version": "[12.0.1, )"
+          },
           "AutoMapper.Extensions.Microsoft.DependencyInjection": {
             "target": "Package",
             "version": "[12.0.1, )"
@@ -1406,7 +1412,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.306\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.400\\RuntimeIdentifierGraph.json"
       }
     }
   }

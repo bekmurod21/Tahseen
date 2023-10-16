@@ -1,5 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Tahseen.Domain.Entities;
 using Tahseen.Domain.Entities.Books;
 using Tahseen.Domain.Entities.Events;
 using Tahseen.Domain.Entities.Feedback;
@@ -12,10 +11,7 @@ public class AppDbContext : DbContext
 {
     public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
     { }
-
-
-
-
+    
     //Folder Name: Books
     public DbSet<Author> Authors { get; set; }
     public DbSet<Book> Books { get; set; }
@@ -39,8 +35,6 @@ public class AppDbContext : DbContext
 
     //Folder Name: Librarians  
     public DbSet<Librarian> Librarian { get; set; }
-
-
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
         optionsBuilder.UseNpgsql("Host=localhost;Database=ProductOrderDb;Username=postgres;Password=0808080808");
