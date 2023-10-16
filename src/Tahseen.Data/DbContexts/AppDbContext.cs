@@ -37,7 +37,7 @@ public class AppDbContext : DbContext
     public DbSet<UserRatings> UserRatings { get; set; }
     public DbSet<WishList> WishLists { get; set; }
 
-    //Folder Name: Librarians 
+    //Folder Name: Librarians  
     public DbSet<Librarian> Librarian { get; set; }
 
 
