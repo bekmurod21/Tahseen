@@ -8,6 +8,7 @@
     ".NETCoreApp,Version=v7.0": {
       "Tahseen.Api/1.0.0": {
         "dependencies": {
+          "AutoMapper": "12.0.1",
           "AutoMapper.Extensions.Microsoft.DependencyInjection": "12.0.1",
           "Microsoft.AspNetCore.OpenApi": "7.0.9",
           "Npgsql.EntityFrameworkCore.PostgreSQL": "7.0.11",
@@ -205,6 +206,7 @@
       },
       "Tahseen.Data/1.0.0": {
         "dependencies": {
+          "AutoMapper": "12.0.1",
           "Npgsql.EntityFrameworkCore.PostgreSQL": "7.0.11",
           "Tahseen.Domain": "1.0.0"
         },
@@ -213,6 +215,9 @@
         }
       },
       "Tahseen.Domain/1.0.0": {
+        "dependencies": {
+          "AutoMapper": "12.0.1"
+        },
         "runtime": {
           "Tahseen.Domain.dll": {}
         }

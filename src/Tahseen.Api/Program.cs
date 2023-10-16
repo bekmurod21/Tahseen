@@ -24,6 +24,7 @@ builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
 builder.Services.AddAutoMapper(typeof(MappingProfile));
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IUserCartService, UserCartService>();
+builder.Services.AddScoped<IWishlistService, WishlistService>();
 
 // MiddleWares
 var app = builder.Build();
