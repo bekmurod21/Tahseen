@@ -5,7 +5,7 @@ using Tahseen.Domain.Entities.Feedback;
 using Tahseen.Service.DTOs.Feedbacks.UserRatings;
 using Tahseen.Service.Interfaces.IFeedbackService;
 
-namespace Tahseen.Service.Services.Feedbacks;
+namespace Tahseen.Service.Services.Users;
 
 public class UserRatingService : IUserRatingService
 {
