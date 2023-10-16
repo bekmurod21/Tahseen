@@ -1,5 +1,4 @@
-﻿//using Tahseen.Domain.Configurations;
-using Tahseen.Service.DTOs.Books.CompletedBooks;
+﻿using Tahseen.Service.DTOs.Books.CompletedBooks;
 
 namespace Tahseen.Service.Interfaces.IBookServices;
 
