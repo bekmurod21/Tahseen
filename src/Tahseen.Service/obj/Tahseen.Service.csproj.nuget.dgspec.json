@@ -1,35 +1,33 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Tahseen Backend\\Tahseen\\src\\Tahseen.Service\\Tahseen.Service.csproj": {}
+    "C:\\Users\\Developer\\RiderProjects\\Tahseen\\src\\Tahseen.Service\\Tahseen.Service.csproj": {}
   },
   "projects": {
-    "D:\\Tahseen Backend\\Tahseen\\src\\Tahseen.Data\\Tahseen.Data.csproj": {
+    "C:\\Users\\Developer\\RiderProjects\\Tahseen\\src\\Tahseen.Data\\Tahseen.Data.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Tahseen Backend\\Tahseen\\src\\Tahseen.Data\\Tahseen.Data.csproj",
+        "projectUniqueName": "C:\\Users\\Developer\\RiderProjects\\Tahseen\\src\\Tahseen.Data\\Tahseen.Data.csproj",
         "projectName": "Tahseen.Data",
-        "projectPath": "D:\\Tahseen Backend\\Tahseen\\src\\Tahseen.Data\\Tahseen.Data.csproj",
-        "packagesPath": "C:\\Users\\Azizbek\\.nuget\\packages\\",
-        "outputPath": "D:\\Tahseen Backend\\Tahseen\\src\\Tahseen.Data\\obj\\",
+        "projectPath": "C:\\Users\\Developer\\RiderProjects\\Tahseen\\src\\Tahseen.Data\\Tahseen.Data.csproj",
+        "packagesPath": "C:\\Users\\Developer\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Developer\\RiderProjects\\Tahseen\\src\\Tahseen.Data\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\Azizbek\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+          "C:\\Users\\Developer\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net7.0"
         ],
         "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "net7.0": {
             "targetAlias": "net7.0",
             "projectReferences": {
-              "D:\\Tahseen Backend\\Tahseen\\src\\Tahseen.Domain\\Tahseen.Domain.csproj": {
-                "projectPath": "D:\\Tahseen Backend\\Tahseen\\src\\Tahseen.Domain\\Tahseen.Domain.csproj"
+              "C:\\Users\\Developer\\RiderProjects\\Tahseen\\src\\Tahseen.Domain\\Tahseen.Domain.csproj": {
+                "projectPath": "C:\\Users\\Developer\\RiderProjects\\Tahseen\\src\\Tahseen.Domain\\Tahseen.Domain.csproj"
               }
             }
           }
@@ -44,6 +42,10 @@
         "net7.0": {
           "targetAlias": "net7.0",
           "dependencies": {
+            "AutoMapper": {
+              "target": "Package",
+              "version": "[12.0.1, )"
+            },
             "Microsoft.EntityFrameworkCore.Design": {
               "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
               "suppressParent": "All",
@@ -71,28 +73,26 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.306\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.400\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "D:\\Tahseen Backend\\Tahseen\\src\\Tahseen.Domain\\Tahseen.Domain.csproj": {
+    "C:\\Users\\Developer\\RiderProjects\\Tahseen\\src\\Tahseen.Domain\\Tahseen.Domain.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Tahseen Backend\\Tahseen\\src\\Tahseen.Domain\\Tahseen.Domain.csproj",
+        "projectUniqueName": "C:\\Users\\Developer\\RiderProjects\\Tahseen\\src\\Tahseen.Domain\\Tahseen.Domain.csproj",
         "projectName": "Tahseen.Domain",
-        "projectPath": "D:\\Tahseen Backend\\Tahseen\\src\\Tahseen.Domain\\Tahseen.Domain.csproj",
-        "packagesPath": "C:\\Users\\Azizbek\\.nuget\\packages\\",
-        "outputPath": "D:\\Tahseen Backend\\Tahseen\\src\\Tahseen.Domain\\obj\\",
+        "projectPath": "C:\\Users\\Developer\\RiderProjects\\Tahseen\\src\\Tahseen.Domain\\Tahseen.Domain.csproj",
+        "packagesPath": "C:\\Users\\Developer\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Developer\\RiderProjects\\Tahseen\\src\\Tahseen.Domain\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\Azizbek\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+          "C:\\Users\\Developer\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net7.0"
         ],
         "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -110,6 +110,12 @@
       "frameworks": {
         "net7.0": {
           "targetAlias": "net7.0",
+          "dependencies": {
+            "AutoMapper": {
+              "target": "Package",
+              "version": "[12.0.1, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",
@@ -126,39 +132,37 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.306\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.400\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "D:\\Tahseen Backend\\Tahseen\\src\\Tahseen.Service\\Tahseen.Service.csproj": {
+    "C:\\Users\\Developer\\RiderProjects\\Tahseen\\src\\Tahseen.Service\\Tahseen.Service.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Tahseen Backend\\Tahseen\\src\\Tahseen.Service\\Tahseen.Service.csproj",
+        "projectUniqueName": "C:\\Users\\Developer\\RiderProjects\\Tahseen\\src\\Tahseen.Service\\Tahseen.Service.csproj",
         "projectName": "Tahseen.Service",
-        "projectPath": "D:\\Tahseen Backend\\Tahseen\\src\\Tahseen.Service\\Tahseen.Service.csproj",
-        "packagesPath": "C:\\Users\\Azizbek\\.nuget\\packages\\",
-        "outputPath": "D:\\Tahseen Backend\\Tahseen\\src\\Tahseen.Service\\obj\\",
+        "projectPath": "C:\\Users\\Developer\\RiderProjects\\Tahseen\\src\\Tahseen.Service\\Tahseen.Service.csproj",
+        "packagesPath": "C:\\Users\\Developer\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Developer\\RiderProjects\\Tahseen\\src\\Tahseen.Service\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\Azizbek\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+          "C:\\Users\\Developer\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net7.0"
         ],
         "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "net7.0": {
             "targetAlias": "net7.0",
             "projectReferences": {
-              "D:\\Tahseen Backend\\Tahseen\\src\\Tahseen.Data\\Tahseen.Data.csproj": {
-                "projectPath": "D:\\Tahseen Backend\\Tahseen\\src\\Tahseen.Data\\Tahseen.Data.csproj"
+              "C:\\Users\\Developer\\RiderProjects\\Tahseen\\src\\Tahseen.Data\\Tahseen.Data.csproj": {
+                "projectPath": "C:\\Users\\Developer\\RiderProjects\\Tahseen\\src\\Tahseen.Data\\Tahseen.Data.csproj"
               },
-              "D:\\Tahseen Backend\\Tahseen\\src\\Tahseen.Domain\\Tahseen.Domain.csproj": {
-                "projectPath": "D:\\Tahseen Backend\\Tahseen\\src\\Tahseen.Domain\\Tahseen.Domain.csproj"
+              "C:\\Users\\Developer\\RiderProjects\\Tahseen\\src\\Tahseen.Domain\\Tahseen.Domain.csproj": {
+                "projectPath": "C:\\Users\\Developer\\RiderProjects\\Tahseen\\src\\Tahseen.Domain\\Tahseen.Domain.csproj"
               }
             }
           }
@@ -198,7 +202,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.306\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.400\\RuntimeIdentifierGraph.json"
         }
       }
     }

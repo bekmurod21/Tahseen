@@ -77,3 +77,13 @@ D:\Tahseen Backend\Tahseen\src\Tahseen.Api\bin\Debug\net7.0\AutoMapper.dll
 D:\Tahseen Backend\Tahseen\src\Tahseen.Api\bin\Debug\net7.0\AutoMapper.Extensions.Microsoft.DependencyInjection.dll
 D:\Tahseen Backend\Tahseen\src\Tahseen.Api\bin\Debug\net7.0\Tahseen.Service.dll
 D:\Tahseen Backend\Tahseen\src\Tahseen.Api\bin\Debug\net7.0\Tahseen.Service.pdb
+C:\Users\Developer\RiderProjects\Tahseen\src\Tahseen.Api\obj\Debug\net7.0\Tahseen.Api.csproj.AssemblyReference.cache
+C:\Users\Developer\RiderProjects\Tahseen\src\Tahseen.Api\obj\Debug\net7.0\Tahseen.Api.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Developer\RiderProjects\Tahseen\src\Tahseen.Api\obj\Debug\net7.0\Tahseen.Api.AssemblyInfoInputs.cache
+C:\Users\Developer\RiderProjects\Tahseen\src\Tahseen.Api\obj\Debug\net7.0\Tahseen.Api.AssemblyInfo.cs
+C:\Users\Developer\RiderProjects\Tahseen\src\Tahseen.Api\obj\Debug\net7.0\Tahseen.Api.csproj.CoreCompileInputs.cache
+C:\Users\Developer\RiderProjects\Tahseen\src\Tahseen.Api\obj\Debug\net7.0\Tahseen.Api.MvcApplicationPartsAssemblyInfo.cs
+C:\Users\Developer\RiderProjects\Tahseen\src\Tahseen.Api\obj\Debug\net7.0\Tahseen.Api.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\Developer\RiderProjects\Tahseen\src\Tahseen.Api\obj\Debug\net7.0\Tahseen.Api.dll
+C:\Users\Developer\RiderProjects\Tahseen\src\Tahseen.Api\obj\Debug\net7.0\refint\Tahseen.Api.dll
+C:\Users\Developer\RiderProjects\Tahseen\src\Tahseen.Api\obj\Debug\net7.0\Tahseen.Api.pdb
