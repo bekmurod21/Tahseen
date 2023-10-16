@@ -5,5 +5,6 @@ public class WishlistForCreationDto
 {
     public long UserId { get; set; }
     public long BookId { get; set; }
+    public long CartId { get; set; }
     public WishListStatus Status { get; set; }
 }
