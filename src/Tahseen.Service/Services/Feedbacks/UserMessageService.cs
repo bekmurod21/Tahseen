@@ -25,7 +25,7 @@ public class UserMessageService : IUserMessageService
         return mapper.Map<UserMessageForResultDto>(result);
     }
 
-    public async Task<UserMessageForResultDto> ModifyAsync(UserMessageForUpdateDto dto)
+    public async Task<UserMessageForResultDto> ModifyAsync(long id,UserMessageForUpdateDto dto)
     {
         var getUserMessage = await repository.SelectByIdAsync(dto.Id);
         if (getUserMessage == null && getUserMessage.IsDeleted)
