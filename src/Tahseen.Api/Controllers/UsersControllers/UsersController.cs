@@ -10,6 +10,7 @@ namespace Tahseen.Api.Controllers.UsersControllers
     public class UsersController : ControllerBase
     {
         private readonly IUserService _userService;
+
         public UsersController(IUserService UserService)
         {
             _userService = UserService;

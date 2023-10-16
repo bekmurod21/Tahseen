@@ -25,9 +25,9 @@ public class LibrarianService : ILibrarianService
         return this.mapper.Map<LibrarianForResultDto>(result);
     }
 
-    public async Task<LibrarianForResultDto> ModifyAsync(LibrarianForUpdateDto dto)
+    public async Task<LibrarianForResultDto> ModifyAsync(long id, LibrarianForUpdateDto dto)
     {
-        var librarian = await this.repository.SelectByIdAsync(dto.Id);
+        var librarian = await this.repository.SelectByIdAsync(id);
         if (librarian == null || librarian.IsDeleted)
             throw new TahseenException(404, "Librarina not found");
 
@@ -53,7 +53,7 @@ public class LibrarianService : ILibrarianService
         return this.mapper.Map<IQueryable<LibrarianForResultDto>>(librarians);
     }
 
-    public async ValueTask<LibrarianForResultDto> RetrieveById(long id)
+    public async ValueTask<LibrarianForResultDto> RetrieveByIdAsync(long id)
     {
         var librarian = await this.repository.SelectByIdAsync(id);
         if (librarian is null || librarian.IsDeleted)

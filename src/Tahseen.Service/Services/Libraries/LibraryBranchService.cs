@@ -25,9 +25,9 @@ public class LibraryBranchService : ILibraryBranchService
         return this.mapper.Map<LibraryBranchForResultDto>(result);
     }
 
-    async Task<LibraryBranchForResultDto> ILibraryBranchService.ModifyAsync(LibraryBranchForUpdateDto dto)
+    async Task<LibraryBranchForResultDto> ILibraryBranchService.ModifyAsync(long id, LibraryBranchForUpdateDto dto)
     {
-        var libraryBranch = await this.repository.SelectByIdAsync(dto.Id);
+        var libraryBranch = await this.repository.SelectByIdAsync(id);
         if (libraryBranch == null || libraryBranch.IsDeleted)
             throw new TahseenException(404, "LibraryBranch not found");
 
