@@ -24,9 +24,15 @@ public class BookService:IBookService
         return _mapper.Map<BookForResultDto>(result);
     }
 
-    public async Task<BookForResultDto> ModifyAsync(long id, BookForUpdateDto dto)
+    public IQueryable<BookForResultDto> GetAll()
     {
-        var book = await _repository.SelectByIdAsync(id);
+        var results = this._repository.SelectAll().Where(b => !b.IsDeleted);
+        return this._mapper.Map<IQueryable<BookForResultDto>>(results);
+    }
+
+    public async Task<BookForResultDto> ModifyAsync(BookForUpdateDto dto)
+    {
+        var book = await _repository.SelectByIdAsync(dto.Id);
         if (book is not null && !book.IsDeleted)
         {
             var mappedBook = _mapper.Map<Book>(dto);

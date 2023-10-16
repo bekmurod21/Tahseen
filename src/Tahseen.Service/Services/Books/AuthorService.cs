@@ -24,9 +24,9 @@ public class AuthorService
         return _mapper.Map<AuthorForResultDto>(result);
     }
 
-    public async Task<AuthorForResultDto> ModifyAsync(long id, AuthorForUpdateDto dto)
+    public async Task<AuthorForResultDto> ModifyAsync(AuthorForUpdateDto dto)
     {
-        var author = await _repository.SelectByIdAsync(id);
+        var author = await _repository.SelectByIdAsync(dto.Id);
         if (author is not null && !author.IsDeleted)
         {
             var mappedAuthor = _mapper.Map<Author>(dto);

@@ -34,9 +34,9 @@ public class PublisherService : IPublisherService
         return mapper.Map<PublisherForResultDto>(publisher);
     }
 
-    public async Task<PublisherForResultDto> ModifyAsync(long id, PublisherForUpdateDto dto)
+    public async Task<PublisherForResultDto> ModifyAsync(PublisherForUpdateDto dto)
     {
-        var publisher = await this.repository.SelectByIdAsync(id);
+        var publisher = await this.repository.SelectByIdAsync(dto.Id);
         if (publisher == null || publisher.IsDeleted)
             throw new TahseenException(404, "Publisher doesn't found");
         var publisherMapped = mapper.Map(dto, publisher);

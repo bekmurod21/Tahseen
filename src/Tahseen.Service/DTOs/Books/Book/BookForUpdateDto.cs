@@ -6,6 +6,7 @@ namespace Tahseen.Service.DTOs.Books.Book;
 
 public class BookForUpdateDto
 {
+    public long Id { get; set; }
     public string Title { get; set; }
     public Domain.Entities.Books.Author Author { get; set; }
     public Domain.Entities.Books.Genre Genre { get; set; }

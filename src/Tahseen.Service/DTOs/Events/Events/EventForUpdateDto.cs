@@ -4,6 +4,7 @@ namespace Tahseen.Service.DTOs.Events.Events;
 
 public class EventForUpdateDto
 {
+    public long Id { get; set; }
     public string Title { get; set; }
     public string Description { get; set; } 
     public string Location { get; set; }    

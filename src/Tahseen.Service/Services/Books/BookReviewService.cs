@@ -33,9 +33,9 @@ public class BookReviewService : IBookReviewService
         return this.mapper.Map<BookReviewForResultDto>(bookReview);
     }
 
-    public async Task<BookReviewForResultDto> ModifyAsync(long id, BookReviewForUpdateDto dto)
+    public async Task<BookReviewForResultDto> ModifyAsync(BookReviewForUpdateDto dto)
     {
-        var bookReview = await this.repository.SelectByIdAsync (id);
+        var bookReview = await this.repository.SelectByIdAsync (dto.Id);
         if (bookReview == null || bookReview.IsDeleted)
             throw new TahseenException(404, "bookReviev doesn't found");
 

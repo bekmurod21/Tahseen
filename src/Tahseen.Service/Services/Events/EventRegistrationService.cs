@@ -25,9 +25,9 @@ public class EventRegistrationService : IEventRegistrationService
         return _mapper.Map<EventRegistrationForResultDto>(result);
     }
 
-    public async Task<EventRegistrationForResultDto> ModifyAsync(long id, EventRegistrationForUpdateDto dto)
+    public async Task<EventRegistrationForResultDto> ModifyAsync(EventRegistrationForUpdateDto dto)
     {
-        var eventRegistration = await _repository.SelectByIdAsync(id);
+        var eventRegistration = await _repository.SelectByIdAsync(dto.Id);
         if (eventRegistration is not null && !eventRegistration.IsDeleted)
         {
             var mappedEventRegistration = _mapper.Map<EventRegistration>(dto);

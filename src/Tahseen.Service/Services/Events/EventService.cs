@@ -24,9 +24,9 @@ public class EventService : IEventsService
         return _mapper.Map<EventForResultDto>(result);
     }
 
-    public async Task<EventForResultDto> ModifyAsync(long id, EventForUpdateDto dto)
+    public async Task<EventForResultDto> ModifyAsync(EventForUpdateDto dto)
     {
-        var @event = await _repository.SelectByIdAsync(id);
+        var @event = await _repository.SelectByIdAsync(dto.Id);
         if (@event is not null && !@event.IsDeleted)
         {
             var mappedEvent = _mapper.Map<Event>(dto);

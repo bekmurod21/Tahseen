@@ -5,7 +5,7 @@ namespace Tahseen.Service.Interfaces.IEventsServices
     public interface IEventRegistrationService
     {
         public Task<EventRegistrationForResultDto> AddAsync(EventRegistrationForCreationDto dto);
-        public Task<EventRegistrationForResultDto> ModifyAsync(long Id, EventRegistrationForUpdateDto dto);
+        public Task<EventRegistrationForResultDto> ModifyAsync(EventRegistrationForUpdateDto dto);
         public Task<bool> RemoveAsync(long Id);
         public Task<EventRegistrationForResultDto> RetrieveByIdAsync(long Id);
         public ICollection<EventRegistrationForResultDto> RetrieveAll();

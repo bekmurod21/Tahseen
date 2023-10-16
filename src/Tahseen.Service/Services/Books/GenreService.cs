@@ -25,9 +25,9 @@ public class GenreService : IGenreService
         return _mapper.Map<GenreForResultDto>(result);
     }
 
-    public async Task<GenreForResultDto> ModifyAsync(long id, GenreForUpdateDto dto)
+    public async Task<GenreForResultDto> ModifyAsync(GenreForUpdateDto dto)
     {
-        var genre = await _repository.SelectByIdAsync(id);
+        var genre = await _repository.SelectByIdAsync(dto.Id);
         if (genre is not null && !genre.IsDeleted)
         {
             var mappedGenre = _mapper.Map<Genre>(dto);
