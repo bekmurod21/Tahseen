@@ -6,10 +6,13 @@ namespace Tahseen.Api.Middlewares
     public class ExceptionHandlerMiddleWare
     {
         private readonly RequestDelegate _next;
+        private readonly ILogger<ExceptionHandlerMiddleWare> _logger;
 
-        public ExceptionHandlerMiddleWare(RequestDelegate next)
+
+        public ExceptionHandlerMiddleWare(RequestDelegate next, ILogger<ExceptionHandlerMiddleWare> logger)
         {
             this._next = next;
+            _logger = logger;
         }
 
         public async Task Invoke(HttpContext context)
@@ -29,6 +32,8 @@ namespace Tahseen.Api.Middlewares
             }
             catch (Exception ex)
             {
+                _logger.LogError($"{ex.Message} \n\n\n");
+                
                 context.Response.StatusCode = 500;
                 await context.Response.WriteAsJsonAsync(new Response
                 {
