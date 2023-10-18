@@ -9,4 +9,7 @@ public class Author:Auditable
     public string LastName { get; set;}
     public string Biography { get; set; }
     public Nationality Nationality { get; set; }
+
+    public long BookId { get; set; }
+    public Book Book { get; set; }
 }

@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using Tahseen.Data.IRepositories;
-using Tahseen.Domain.Entities.Feedback;
+using Tahseen.Domain.Entities.Feedbacks;
 using Tahseen.Service.DTOs.Feedbacks.UserMessages;
 using Tahseen.Service.Exceptions;
 using Tahseen.Service.Interfaces.IFeedbackService;

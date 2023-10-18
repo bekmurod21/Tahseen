@@ -1,4 +1,5 @@
-﻿namespace Tahseen.Domain.Commons
+﻿using Tahseen.Domain.Entities.Feedbacks;
+namespace Tahseen.Domain.Commons
 {
     public abstract class Auditable
     {
@@ -6,5 +7,6 @@
         public bool IsDeleted { get; set; }
         public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
         public DateTime? UpdatedAt { get; set;}
+    public ICollection<Feedback> Feedbacks { get; set; }
     }
 }

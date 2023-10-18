@@ -8,7 +8,9 @@ public class Reservation:Auditable
 {
     public long UserId { get; set; }
     public User User { get; set; }
+
     public long BookId { get; set; }
     public Book Book { get; set; }
+
     public ReservationStatus ReservationStatus { get; set; }
 }

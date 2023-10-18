@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using Tahseen.Data.IRepositories;
 using Tahseen.Service.Exceptions;
-using Tahseen.Domain.Entities.Feedback;
+using Tahseen.Domain.Entities.Feedbacks;
 using Tahseen.Service.DTOs.Feedbacks.UserRatings;
 using Tahseen.Service.Interfaces.IFeedbackService;
 
@@ -56,9 +56,9 @@ public class UserRatingService : IUserRatingService
 
     public async ValueTask<UserRatingForResultDto> RetrieveByUserId(long userId)
     {
-        var result = repository.SelectAll().Where(t => t.UserId == userId && !t.IsDeleted);
-        if (result == null)
-            throw new TahseenException(404, "UserRating not found");
+        var result = repository.SelectAll().Where(t => t.UserId == userId && !t.IsDeleted) ?? throw new TahseenException(404, "UserRating not found");
+        //if (result is null)
+        //    throw new TahseenException(404, "UserRating not found");
         return mapper.Map<UserRatingForResultDto>(result);
     }
 }
