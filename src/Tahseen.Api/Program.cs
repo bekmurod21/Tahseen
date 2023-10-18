@@ -27,6 +27,7 @@ builder.Services.AddScoped<IUserCartService, UserCartService>();
 builder.Services.AddScoped<IWishlistService, WishlistService>();
 
 // MiddleWares
+
 var app = builder.Build();
 
 if (app.Environment.IsDevelopment())
@@ -34,6 +35,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+app.UseMiddleware<LoggerMiddleware>();
 app.UseMiddleware<ExceptionHandlerMiddleWare>();
 app.UseHttpsRedirection();
 app.UseAuthorization();
