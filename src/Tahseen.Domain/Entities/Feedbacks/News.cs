@@ -1,8 +1,8 @@
 using Tahseen.Domain.Commons;
 
-namespace Tahseen.Domain.Entities.Feedback;
+namespace Tahseen.Domain.Entities.Feedbacks;
 
-public class News:Auditable
+public class News : Auditable
 {
     public string Title { get; set; }
     public string Content { get; set; }

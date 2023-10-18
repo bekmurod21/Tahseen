@@ -3,10 +3,11 @@ using Tahseen.Data.IRepositories;
 using Tahseen.Domain.Entities.Books;
 using Tahseen.Service.DTOs.Books.Author;
 using Tahseen.Service.DTOs.Books.Book;
+using Tahseen.Service.Interfaces.IBookServices;
 
 namespace Tahseen.Service.Services.Books;
 
-public class AuthorService
+public class AuthorService : IAuthorService
 {
     private readonly IMapper _mapper;
     private readonly IRepository<Author> _repository;
@@ -40,6 +41,12 @@ public class AuthorService
     public async Task<bool> RemoveAsync(long id)
     {
         return await _repository.DeleteAsync(id);
+    }
+
+    public IQueryable<AuthorForResultDto> RetrieveAll()
+    {
+        var results = this._repository.SelectAll().Where(a=>!a.IsDeleted);
+        return _mapper.Map<IQueryable<AuthorForResultDto>>(results);
     }
 
     public async ValueTask<AuthorForResultDto> RetrieveByIdAsync(long id)

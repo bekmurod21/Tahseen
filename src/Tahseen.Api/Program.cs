@@ -1,11 +1,7 @@
-using Microsoft.EntityFrameworkCore;
+using Tahseen.Api.Extensions;
 using Tahseen.Api.Middlewares;
 using Tahseen.Data.DbContexts;
-using Tahseen.Data.IRepositories;
-using Tahseen.Data.Repositories;
-using Tahseen.Service.Interfaces.IUsersService;
-using Tahseen.Service.Mappings;
-using Tahseen.Service.Services.Users;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -19,13 +15,7 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<AppDbContext>(option 
     => option.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection"))
     );
-
-builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
-builder.Services.AddAutoMapper(typeof(MappingProfile));
-builder.Services.AddScoped<IUserService, UserService>();
-builder.Services.AddScoped<IUserCartService, UserCartService>();
-builder.Services.AddScoped<IWishlistService, WishlistService>();
-
+builder.Services.AddCustomService();
 // MiddleWares
 var app = builder.Build();
 

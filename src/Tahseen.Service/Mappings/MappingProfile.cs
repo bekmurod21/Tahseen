@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using Tahseen.Domain.Entities;
 using Tahseen.Domain.Entities.Books;
-using Tahseen.Domain.Entities.Feedback;
+using Tahseen.Domain.Entities.Feedbacks;
 using Tahseen.Domain.Entities.SchoolAndEducations;
 using Tahseen.Service.DTOs.Books.Author;
 using Tahseen.Service.DTOs.Books.Book;
