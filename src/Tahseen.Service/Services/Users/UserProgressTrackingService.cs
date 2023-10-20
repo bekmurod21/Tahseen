@@ -21,8 +21,8 @@ namespace Tahseen.Service.Services.Users
 
         public async Task<UserProgressTrackingForResultDto> Modify(long Id, UserProgressTrackingForUpdateDto dto)
         {
-            var Data = await this._repository.SelectAll().FirstOrDefaultAsync(e => e.Id == Id);
-            if(Data != null && Data.IsDeleted == false)
+            var Data = await _repository.SelectAll().Where(e => e.Id == Id && e.IsDeleted == false).FirstOrDefaultAsync();
+            if (Data != null )
             {
                 var MappedData = this._mapper.Map(dto, Data);
                 MappedData.UpdatedAt = DateTime.UtcNow;

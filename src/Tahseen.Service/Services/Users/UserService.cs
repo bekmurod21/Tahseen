@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using Tahseen.Data.IRepositories;
+using Tahseen.Data.Repositories;
 using Tahseen.Domain.Entities;
 using Tahseen.Service.DTOs.Feedbacks.UserRatings;
 using Tahseen.Service.DTOs.Users.BorrowedBookCart;
@@ -41,8 +42,8 @@ namespace Tahseen.Service.Services.Users
         }
         public async Task<UserForResultDto> AddAsync(UserForCreationDto dto)
         {
-            var result = _userRepository.SelectAll().FirstOrDefault(e=> e.EmailAddress == dto.EmailAddress && e.Password == e.Password);
-            if (result != null && result.IsDeleted == false)
+            var result = await _userRepository.SelectAll().Where(e => e.EmailAddress == dto.EmailAddress && e.Password == e.Password && e.IsDeleted == false).FirstOrDefaultAsync();
+            if (result != null)
             {
                 throw new TahseenException(400, "User is exist");
             }
@@ -88,8 +89,8 @@ namespace Tahseen.Service.Services.Users
 
         public async Task<UserForResultDto> ModifyAsync(long Id, UserForUpdateDto dto)
         {
-            var data = await _userRepository.SelectAll().FirstOrDefaultAsync(e => e.Id == Id);
-            if(data is not null && data.IsDeleted == false)
+            var data = await _userRepository.SelectAll().Where(e => e.Id == Id && e.IsDeleted == false).FirstOrDefaultAsync();
+            if (data is not null)
             {
                 var MappedData = this._mapper.Map(dto, data);
                 MappedData.UpdatedAt = DateTime.UtcNow;

@@ -1,4 +1,5 @@
 using AutoMapper;
+using Microsoft.EntityFrameworkCore;
 using Tahseen.Data.IRepositories;
 using Tahseen.Domain.Entities.SchoolAndEducations;
 using Tahseen.Service.DTOs.SchoolAndEducations;
@@ -19,6 +20,11 @@ public class PupilBookConnectionService:IPupilBookConnectionService
     }
     public async Task<PupilBookConnectionForResultDto> AddAsync(PupilBookConnectionForCreationDto dto)
     {
+        var Check = this._repository.SelectAll().Where(p => p.PupilId == dto.PupilId && p.SchoolBookId == dto.SchoolBookId && p.LibraryBranchId == dto.PupilId && p.IsDeleted == false);
+        if(Check != null)
+        {
+            throw new TahseenException(409, "This pupil has this book");
+        }
         var mapped = _mapper.Map<PupilBookConnection>(dto);
         var result = _repository.CreateAsync(mapped);
         return _mapper.Map<PupilBookConnectionForResultDto>(result);
@@ -26,8 +32,8 @@ public class PupilBookConnectionService:IPupilBookConnectionService
 
     public async Task<PupilBookConnectionForResultDto> ModifyAsync(long id, PupilBookConnectionForUpdateDto dto)
     {
-        var mapped = await _repository.SelectByIdAsync(id);
-        if (mapped is null || mapped.IsDeleted)
+        var mapped = await _repository.SelectAll().Where(e => e.Id == id && e.IsDeleted == false).FirstOrDefaultAsync();
+        if (mapped is null)
         {
             throw new TahseenException(404, "PupilBookConnection is not found");
         }

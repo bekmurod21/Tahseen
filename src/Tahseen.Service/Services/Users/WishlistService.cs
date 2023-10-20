@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.EntityFrameworkCore;
 using Tahseen.Data.IRepositories;
 using Tahseen.Data.Repositories;
 using Tahseen.Domain.Entities;
@@ -28,15 +29,18 @@ public class WishlistService : IWishlistService
 
     public async Task<WishlistForResultDto> AddAsync(WishlistForCreationDto dto)
     {
-        var book = await bookRepository.SelectByIdAsync(dto.BookId);
+        var book = await bookRepository.SelectAll().Where(b => b.Id == dto.BookId).FirstOrDefaultAsync();
         if (book == null || book.IsDeleted)
             throw new TahseenException(404, "Book not found");
         //shu joyini korib chiqamiz
-        var cart = await userCartRepository.SelectByIdAsync(dto.UserId);
-
+        var cart = await userCartRepository.SelectAll().Where(u => u.UserId == dto.UserId && u.IsDeleted == false).FirstOrDefaultAsync();
+        if(cart == null)
+        {
+            throw new TahseenException(404, "cart is not found");
+        }
         var wishlist = new WishList
         {
-            Id = cart.Id,
+            UserCartId = cart.Id,
             BookId = dto.BookId,
             Status = dto.Status
         };
@@ -48,10 +52,15 @@ public class WishlistService : IWishlistService
 
     public async Task<WishlistForResultDto> ModifyAsync(long id, WishlistForUpdateDto dto)
     {
-        var wishlist = await repository.SelectByIdAsync(id);
-        if (wishlist == null || wishlist.IsDeleted)
+        var wishlist = await this.repository.SelectAll().Where(e => e.Id == id && e.IsDeleted == false).FirstOrDefaultAsync();
+        if (wishlist == null)
             throw new TahseenException(404, "wishlist not found");
-
+        var cart = await userCartRepository.SelectAll().Where(u => u.UserId == dto.UserId && u.IsDeleted == false).FirstOrDefaultAsync();
+        if (cart == null)
+        {
+            throw new TahseenException(404, "cart is not found");
+        }
+        wishlist.UserCartId = cart.Id;
         wishlist.BookId = dto.BookId;
         wishlist.Status = dto.Status;
         wishlist.UpdatedAt = DateTime.UtcNow;
