@@ -1,4 +1,5 @@
 using AutoMapper;
+using Microsoft.EntityFrameworkCore;
 using Tahseen.Data.IRepositories;
 using Tahseen.Domain.Entities.SchoolAndEducations;
 using Tahseen.Service.DTOs.SchoolAndEducations;
@@ -19,6 +20,11 @@ public class PupilService:IPupilService
     }
     public async Task<PupilForResultDto> AddAsync(PupilForCreationDto dto)
     {
+        var Check = this._repository.SelectAll().Where(p => p.FirstName == dto.FirstName && p.LastName == dto.LastName && p.LibraryBranchId == dto.LibraryBranchId && p.Grade == dto.Grade && p.IsDeleted == false);
+        if(Check != null)
+        {
+            throw new TahseenException(409, "This pupil is exist");
+        }
         var mapped = _mapper.Map<Pupil> (dto);
         var result = await _repository.CreateAsync(mapped);
         return _mapper.Map<PupilForResultDto>(result);
@@ -26,8 +32,8 @@ public class PupilService:IPupilService
 
     public async Task<PupilForResultDto> ModifyAsync(long id, PupilForUpdateDto dto)
     {
-        var searched =await _repository.SelectByIdAsync(id);
-        if (searched is null || searched.IsDeleted)
+        var searched = await _repository.SelectAll().Where(e => e.Id == id && e.IsDeleted == false).FirstOrDefaultAsync();
+        if (searched is null)
         {
             throw new TahseenException(404,"Pupil not found");
         }

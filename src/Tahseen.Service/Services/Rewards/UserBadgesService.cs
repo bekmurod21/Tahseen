@@ -1,8 +1,10 @@
 using AutoMapper;
+using Microsoft.EntityFrameworkCore;
 using Tahseen.Data.IRepositories;
 using Tahseen.Domain.Entities.Rewards;
 using Tahseen.Service.DTOs.Rewards.Badge;
 using Tahseen.Service.DTOs.Rewards.UserBadges;
+using Tahseen.Service.Exceptions;
 using Tahseen.Service.Interfaces.IRewardsService;
 
 namespace Tahseen.Service.Services.Rewards;
@@ -20,6 +22,11 @@ public class UserBadgesService : IUserBadgesService
 
     public async Task<UserBadgesForResultDto> AddAsync(UserBadgesForCreationDto dto)
     {
+        var Check = this._repository.SelectAll().Where(u => u.BadgeId == dto.BadgeId && u.UserId == dto.BadgeId && u.IsDeleted == false).FirstOrDefaultAsync();
+        if (Check != null)
+        {
+            throw new TahseenException(409, "This Badge is exist");
+        }
         var userBadges = _mapper.Map<UserBadges>(dto);
         var result= await _repository.CreateAsync(userBadges);
         return _mapper.Map<UserBadgesForResultDto>(result);
@@ -27,8 +34,8 @@ public class UserBadgesService : IUserBadgesService
 
     public async Task<UserBadgesForResultDto> ModifyAsync(long id, UserBadgesForUpdateDto dto)
     {
-        var userBadges = await _repository.SelectByIdAsync(id);
-        if (userBadges is not null && !userBadges.IsDeleted)
+        var userBadges = await _repository.SelectAll().Where(e => e.Id == id && e.IsDeleted == false).FirstOrDefaultAsync();
+        if (userBadges is not null)
         {
             var mappedUserBadges = _mapper.Map<UserBadges>(dto);
             mappedUserBadges.UpdatedAt = DateTime.UtcNow;

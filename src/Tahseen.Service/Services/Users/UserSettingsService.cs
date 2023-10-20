@@ -19,7 +19,7 @@ namespace Tahseen.Service.Services.Users
         }
         public async Task<UserSettingsForResultDto> AddAsync(UserSettingsForCreationDto dto)
         {
-            var Checking = await this._repository.SelectAll().Where(u => u.UserId == dto.UserId).FirstOrDefaultAsync();
+            var Checking = await this._repository.SelectAll().Where(u => u.UserId == dto.UserId && u.IsDeleted == false).FirstOrDefaultAsync();
             if (Checking == null)
             {
                 throw new TahseenException(404, "NotFound");
@@ -31,8 +31,8 @@ namespace Tahseen.Service.Services.Users
 
         public async Task<UserSettingsForResultDto> ModifyAsync(long Id, UserSettingsForUpdateDto dto)
         {
-            var Data = await this._repository.SelectAll().FirstOrDefaultAsync(e => e.Id == Id);
-            if(Data != null && Data.IsDeleted == false)
+            var Data = await this._repository.SelectAll().Where(e => e.Id == Id && e.IsDeleted == false).FirstOrDefaultAsync();
+            if(Data != null)
             {
                 var MappedData = this._mapper.Map(dto, Data);
                 MappedData.UpdatedAt = DateTime.UtcNow;

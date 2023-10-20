@@ -136,16 +136,6 @@ public class AppDbContext : DbContext
             .HasForeignKey(e => e.EventId)
             .OnDelete(DeleteBehavior.NoAction);
 
-        modelBuilder.Entity<Feedback>()
-            .HasOne(f => f.Book)
-            .WithMany()
-            .HasForeignKey(f => f.BookId)
-            .OnDelete(DeleteBehavior.NoAction);
-        modelBuilder.Entity<Feedback>()
-            .HasOne(f => f.User)
-            .WithMany(u => u.Feedbacks)
-            .HasForeignKey(f => f.UserId)
-            .OnDelete(DeleteBehavior.NoAction);
 
         modelBuilder.Entity<SurveyResponses>()
             .HasOne(s => s.User)
@@ -193,9 +183,7 @@ public class AppDbContext : DbContext
             .HasForeignKey(u => u.BadgeId)
             .OnDelete(DeleteBehavior.NoAction);
 
-        modelBuilder.Entity<Pupil>()
-            .HasMany(p => p.LibraryBranches)
-            .WithMany(l => l.Pupils);
+
 
         
     }

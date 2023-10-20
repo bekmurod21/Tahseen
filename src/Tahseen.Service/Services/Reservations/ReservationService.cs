@@ -1,10 +1,12 @@
 using AutoMapper;
+using Microsoft.EntityFrameworkCore;
 using Tahseen.Data.IRepositories;
 using Tahseen.Domain.Entities.Books;
 using Tahseen.Domain.Entities.Reservations;
 using Tahseen.Service.DTOs.Books.Author;
 using Tahseen.Service.DTOs.Reservations;
 using Tahseen.Service.DTOs.Users.User;
+using Tahseen.Service.Exceptions;
 using Tahseen.Service.Interfaces.IReservationsServices;
 
 namespace Tahseen.Service.Services.Reservations;
@@ -22,6 +24,11 @@ public class ReservationService : IReservationsService
 
     public async Task<ReservationForResultDto> AddAsync(ReservationForCreationDto dto)
     {
+        var Check = this._repository.SelectAll().Where(r => r.BookId == dto.BookId && r.UserId == r.UserId && r.IsDeleted == false).FirstOrDefaultAsync();
+        if (Check != null)
+        {
+            throw new TahseenException(409, "This reservation is exist");
+        }
         var reservation = _mapper.Map<Reservation>(dto);
         var result= await _repository.CreateAsync(reservation);
         return _mapper.Map<ReservationForResultDto>(result);
@@ -29,8 +36,8 @@ public class ReservationService : IReservationsService
 
     public async Task<ReservationForResultDto> ModifyAsync(long id, ReservationForUpdateDto dto)
     {
-        var reservation = await _repository.SelectByIdAsync(id);
-        if (reservation is not null && !reservation.IsDeleted)
+        var reservation = await _repository.SelectAll().Where(r => r.Id == id && r.IsDeleted == false).FirstOrDefaultAsync();
+        if (reservation is not null)
         {
             var mappedReservation = _mapper.Map<Reservation>(dto);
             mappedReservation.UpdatedAt = DateTime.UtcNow;

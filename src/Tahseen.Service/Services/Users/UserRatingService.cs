@@ -4,6 +4,8 @@ using Tahseen.Service.Exceptions;
 using Tahseen.Service.DTOs.Feedbacks.UserRatings;
 using Tahseen.Service.Interfaces.IFeedbackService;
 using Tahseen.Domain.Entities.Feedbacks;
+using Microsoft.EntityFrameworkCore;
+using Tahseen.Data.Repositories;
 
 namespace Tahseen.Service.Services.Users;
 
@@ -19,15 +21,20 @@ public class UserRatingService : IUserRatingService
     }
     public async Task<UserRatingForResultDto> AddAsync(UserRatingForCreationDto dto)
     {
+        var Check = this.repository.SelectAll().Where(u => u.UserId == dto.UserId && u.IsDeleted == false).FirstOrDefaultAsync();
+        if(Check != null)
+        {
+            throw new TahseenException(409, "This User Rating is exist");
+        }
         var mappedUserRating = mapper.Map<UserRatings>(dto);
         var userRating = await repository.CreateAsync(mappedUserRating);
         return mapper.Map<UserRatingForResultDto>(userRating);
     }
     // o'zgartiriladi
-    public async Task<UserRatingForResultDto> ModifyAsync(UserRatingForUpdateDto dto)
+    public async Task<UserRatingForResultDto> ModifyAsync(long Id, UserRatingForUpdateDto dto)
     {
-        var userRating = await repository.SelectByIdAsync(dto.Id);
-        if (userRating == null && userRating.IsDeleted)
+        var userRating = await repository.SelectAll().Where(e => e.Id == Id && e.IsDeleted == false).FirstOrDefaultAsync(); 
+        if (userRating == null)
             throw new TahseenException(404, "UserRating not found");
 
         var mappedUserRating = mapper.Map(dto, userRating);
@@ -35,6 +42,8 @@ public class UserRatingService : IUserRatingService
 
         return mapper.Map<UserRatingForResultDto>(result);
     }
+
+  
 
     public async Task<bool> RemoveAsync(long Id) => await repository.DeleteAsync(Id);
 

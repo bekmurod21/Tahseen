@@ -20,8 +20,8 @@ namespace Tahseen.Service.Services.Users
         }
         public async Task<RegistrationForResultDto> AddAsync(RegistrationForCreationDto dto)
         {
-            var result = await this._regisRepo.SelectAll().FirstOrDefaultAsync(e => e.PhoneNumber == dto.PhoneNumber && e.Password == dto.Password);
-            if(result == null && result.IsDeleted == false)
+            var result = await this._regisRepo.SelectAll().Where(e => e.PhoneNumber == dto.PhoneNumber && e.Password == dto.Password && e.IsDeleted == false).FirstOrDefaultAsync();
+            if(result == null)
             {
                 var Data = this._mapper.Map<Registration>(dto);
                 var CreatedData = await _regisRepo.CreateAsync(Data);
