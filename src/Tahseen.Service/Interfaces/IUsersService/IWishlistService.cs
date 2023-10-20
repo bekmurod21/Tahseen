@@ -4,9 +4,9 @@ namespace Tahseen.Service.Interfaces.IUsersService;
 
 public interface IWishlistService
 {
-    Task<WishlistForResultDto> AddAsync(WishlistForCreationDto dto);
-    Task<WishlistForResultDto> ModifyAsync(WishlistForUpdateDto dto);
-    Task<bool> RemoveAsync(long id);
-    ValueTask<WishlistForResultDto> RetrieveById(long id);
-    IQueryable<WishlistForResultDto> RetrieveAll();
+    public Task<WishlistForResultDto> AddAsync(WishlistForCreationDto dto);
+    public Task<WishlistForResultDto> ModifyAsync(long id, WishlistForUpdateDto dto);
+    public Task<bool> RemoveAsync(long id);
+    public Task<WishlistForResultDto> RetrieveByIdAsync(long id);
+    public Task<IQueryable<WishlistForResultDto>> RetrieveAllAsync();
 }

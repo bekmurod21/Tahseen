@@ -26,7 +26,7 @@ namespace Tahseen.Api.Controllers.UsersControllers
             {
                 StatusCode = 200,
                 Message = "Success",
-                Data = _userService.RetrieveAll()
+                Data = _userService.RetrieveAllAsync()
             };
             return Ok(response);
         }

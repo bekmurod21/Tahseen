@@ -67,6 +67,22 @@ namespace Tahseen.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "BorrowedBookCarts",
+                columns: table => new
+                {
+                    Id = table.Column<long>(type: "bigint", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    UserId = table.Column<long>(type: "bigint", nullable: false),
+                    IsDeleted = table.Column<bool>(type: "boolean", nullable: false),
+                    CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    UpdatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_BorrowedBookCarts", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Genres",
                 columns: table => new
                 {
@@ -211,23 +227,7 @@ namespace Tahseen.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "UserCarts",
-                columns: table => new
-                {
-                    Id = table.Column<long>(type: "bigint", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    UserId = table.Column<long>(type: "bigint", nullable: false),
-                    IsDeleted = table.Column<bool>(type: "boolean", nullable: false),
-                    CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
-                    UpdatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_UserCarts", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Librarian",
+                name: "Librarians",
                 columns: table => new
                 {
                     Id = table.Column<long>(type: "bigint", nullable: false)
@@ -247,9 +247,9 @@ namespace Tahseen.Data.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Librarian", x => x.Id);
+                    table.PrimaryKey("PK_Librarians", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Librarian_LibraryBranches_LibraryBranchId",
+                        name: "FK_Librarians_LibraryBranches_LibraryBranchId",
                         column: x => x.LibraryBranchId,
                         principalTable: "LibraryBranches",
                         principalColumn: "Id");
@@ -456,28 +456,6 @@ namespace Tahseen.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "BorrowedBookCart",
-                columns: table => new
-                {
-                    Id = table.Column<long>(type: "bigint", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    UserId = table.Column<long>(type: "bigint", nullable: false),
-                    IsDeleted = table.Column<bool>(type: "boolean", nullable: false),
-                    CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
-                    UpdatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_BorrowedBookCart", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_BorrowedBookCart_Users_UserId",
-                        column: x => x.UserId,
-                        principalTable: "Users",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "EventsRegistration",
                 columns: table => new
                 {
@@ -587,6 +565,28 @@ namespace Tahseen.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "UserCarts",
+                columns: table => new
+                {
+                    Id = table.Column<long>(type: "bigint", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    UserId = table.Column<long>(type: "bigint", nullable: false),
+                    IsDeleted = table.Column<bool>(type: "boolean", nullable: false),
+                    CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    UpdatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_UserCarts", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_UserCarts_Users_UserId",
+                        column: x => x.UserId,
+                        principalTable: "Users",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "UserMessages",
                 columns: table => new
                 {
@@ -682,6 +682,51 @@ namespace Tahseen.Data.Migrations
                         column: x => x.UserId,
                         principalTable: "Users",
                         principalColumn: "Id");
+                });
+
+            migrationBuilder.CreateTable(
+                name: "BorrowedBooks",
+                columns: table => new
+                {
+                    Id = table.Column<long>(type: "bigint", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    UserId = table.Column<long>(type: "bigint", nullable: false),
+                    BookId = table.Column<long>(type: "bigint", nullable: false),
+                    BorrowedBookCartId = table.Column<long>(type: "bigint", nullable: false),
+                    ReturnDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    Status = table.Column<int>(type: "integer", nullable: false),
+                    FineAmount = table.Column<decimal>(type: "numeric", nullable: false),
+                    LibraryStatisticsId = table.Column<long>(type: "bigint", nullable: true),
+                    IsDeleted = table.Column<bool>(type: "boolean", nullable: false),
+                    CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    UpdatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_BorrowedBooks", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_BorrowedBooks_Books_BookId",
+                        column: x => x.BookId,
+                        principalTable: "Books",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_BorrowedBooks_BorrowedBookCarts_BorrowedBookCartId",
+                        column: x => x.BorrowedBookCartId,
+                        principalTable: "BorrowedBookCarts",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_BorrowedBooks_LibraryStatistics_LibraryStatisticsId",
+                        column: x => x.LibraryStatisticsId,
+                        principalTable: "LibraryStatistics",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_BorrowedBooks_Users_UserId",
+                        column: x => x.UserId,
+                        principalTable: "Users",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -804,7 +849,7 @@ namespace Tahseen.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "WishList",
+                name: "WishLists",
                 columns: table => new
                 {
                     Id = table.Column<long>(type: "bigint", nullable: false)
@@ -818,62 +863,17 @@ namespace Tahseen.Data.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_WishList", x => x.Id);
+                    table.PrimaryKey("PK_WishLists", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_WishList_Books_BookId",
+                        name: "FK_WishLists_Books_BookId",
                         column: x => x.BookId,
                         principalTable: "Books",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_WishList_UserCarts_UserCartId",
+                        name: "FK_WishLists_UserCarts_UserCartId",
                         column: x => x.UserCartId,
                         principalTable: "UserCarts",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "BorrowedBooks",
-                columns: table => new
-                {
-                    Id = table.Column<long>(type: "bigint", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    UserId = table.Column<long>(type: "bigint", nullable: false),
-                    BookId = table.Column<long>(type: "bigint", nullable: false),
-                    BorrowedBookCartId = table.Column<long>(type: "bigint", nullable: false),
-                    ReturnDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
-                    Status = table.Column<int>(type: "integer", nullable: false),
-                    FineAmount = table.Column<decimal>(type: "numeric", nullable: false),
-                    LibraryStatisticsId = table.Column<long>(type: "bigint", nullable: true),
-                    IsDeleted = table.Column<bool>(type: "boolean", nullable: false),
-                    CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
-                    UpdatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_BorrowedBooks", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_BorrowedBooks_Books_BookId",
-                        column: x => x.BookId,
-                        principalTable: "Books",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_BorrowedBooks_BorrowedBookCart_BorrowedBookCartId",
-                        column: x => x.BorrowedBookCartId,
-                        principalTable: "BorrowedBookCart",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_BorrowedBooks_LibraryStatistics_LibraryStatisticsId",
-                        column: x => x.LibraryStatisticsId,
-                        principalTable: "LibraryStatistics",
-                        principalColumn: "Id");
-                    table.ForeignKey(
-                        name: "FK_BorrowedBooks_Users_UserId",
-                        column: x => x.UserId,
-                        principalTable: "Users",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -960,9 +960,9 @@ namespace Tahseen.Data.Migrations
                         principalTable: "Books",
                         principalColumn: "Id");
                     table.ForeignKey(
-                        name: "FK_Feedbacks_BorrowedBookCart_BorrowedBookCartId",
+                        name: "FK_Feedbacks_BorrowedBookCarts_BorrowedBookCartId",
                         column: x => x.BorrowedBookCartId,
-                        principalTable: "BorrowedBookCart",
+                        principalTable: "BorrowedBookCarts",
                         principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_Feedbacks_BorrowedBooks_BorrowedBookId",
@@ -1000,9 +1000,9 @@ namespace Tahseen.Data.Migrations
                         principalTable: "Genres",
                         principalColumn: "Id");
                     table.ForeignKey(
-                        name: "FK_Feedbacks_Librarian_LibrarianId",
+                        name: "FK_Feedbacks_Librarians_LibrarianId",
                         column: x => x.LibrarianId,
-                        principalTable: "Librarian",
+                        principalTable: "Librarians",
                         principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_Feedbacks_LibraryBranches_LibraryBranchId",
@@ -1100,9 +1100,9 @@ namespace Tahseen.Data.Migrations
                         principalTable: "Users",
                         principalColumn: "Id");
                     table.ForeignKey(
-                        name: "FK_Feedbacks_WishList_WishListId",
+                        name: "FK_Feedbacks_WishLists_WishListId",
                         column: x => x.WishListId,
-                        principalTable: "WishList",
+                        principalTable: "WishLists",
                         principalColumn: "Id");
                 });
 
@@ -1142,11 +1142,6 @@ namespace Tahseen.Data.Migrations
                 name: "IX_Books_PublisherId",
                 table: "Books",
                 column: "PublisherId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_BorrowedBookCart_UserId",
-                table: "BorrowedBookCart",
-                column: "UserId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_BorrowedBooks_BookId",
@@ -1379,8 +1374,8 @@ namespace Tahseen.Data.Migrations
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Librarian_LibraryBranchId",
-                table: "Librarian",
+                name: "IX_Librarians_LibraryBranchId",
+                table: "Librarians",
                 column: "LibraryBranchId");
 
             migrationBuilder.CreateIndex(
@@ -1444,6 +1439,11 @@ namespace Tahseen.Data.Migrations
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_UserCarts_UserId",
+                table: "UserCarts",
+                column: "UserId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_UserMessages_UserId",
                 table: "UserMessages",
                 column: "UserId");
@@ -1474,13 +1474,13 @@ namespace Tahseen.Data.Migrations
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_WishList_BookId",
-                table: "WishList",
+                name: "IX_WishLists_BookId",
+                table: "WishLists",
                 column: "BookId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_WishList_UserCartId",
-                table: "WishList",
+                name: "IX_WishLists_UserCartId",
+                table: "WishLists",
                 column: "UserCartId");
         }
 
@@ -1512,7 +1512,7 @@ namespace Tahseen.Data.Migrations
                 name: "Fines");
 
             migrationBuilder.DropTable(
-                name: "Librarian");
+                name: "Librarians");
 
             migrationBuilder.DropTable(
                 name: "News");
@@ -1548,10 +1548,10 @@ namespace Tahseen.Data.Migrations
                 name: "UserSettings");
 
             migrationBuilder.DropTable(
-                name: "WishList");
+                name: "WishLists");
 
             migrationBuilder.DropTable(
-                name: "BorrowedBookCart");
+                name: "BorrowedBookCarts");
 
             migrationBuilder.DropTable(
                 name: "Events");
@@ -1575,9 +1575,6 @@ namespace Tahseen.Data.Migrations
                 name: "UserCarts");
 
             migrationBuilder.DropTable(
-                name: "Users");
-
-            migrationBuilder.DropTable(
                 name: "Authors");
 
             migrationBuilder.DropTable(
@@ -1588,6 +1585,9 @@ namespace Tahseen.Data.Migrations
 
             migrationBuilder.DropTable(
                 name: "Publishers");
+
+            migrationBuilder.DropTable(
+                name: "Users");
 
             migrationBuilder.DropTable(
                 name: "LibraryStatistics");

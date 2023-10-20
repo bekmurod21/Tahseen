@@ -47,7 +47,7 @@ public class LibraryBranchService : ILibraryBranchService
         return await this.repository.DeleteAsync(libraryBranch.Id);
     }
 
-    public IQueryable<LibraryBranchForResultDto> RetrieveAll()
+    public async Task<IQueryable<LibraryBranchForResultDto>> RetrieveAllAsync()
     {
         var results = this.repository.SelectAll().Where(l => !l.IsDeleted);
         return mapper.Map<IQueryable<LibraryBranchForResultDto>>(results);

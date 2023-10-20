@@ -24,13 +24,13 @@ public class User:Auditable
     public decimal FineAmount { get; set; }
     public string UserImage { get; set; }
 
-    public ICollection<Reservation> Reservations { get; set; }
-    public ICollection<BookReviews> BookReviews { get; set; }
-    public ICollection<BorrowedBook> BorrowedBooks { get; set; }
-    public ICollection<CompletedBooks> CompletedBooks { get; set; }
-    public ICollection<EventRegistration> EventRegistrations { get; set; }
-    public ICollection<SurveyResponses> SurveyResponses { get; set; }
-    public ICollection<UserMessage> UserMessages { get; set; }
-    public ICollection<UserRatings> UserRatings { get; set; }
-    public ICollection<Notification> Notifications { get; set; }
+    public IQueryable<Reservation> Reservations { get; set; }
+    public IQueryable<BookReviews> BookReviews { get; set; }
+    public IQueryable<BorrowedBook> BorrowedBooks { get; set; }
+    public IQueryable<CompletedBooks> CompletedBooks { get; set; }
+    public IQueryable<EventRegistration> EventRegistrations { get; set; }
+    public IQueryable<SurveyResponses> SurveyResponses { get; set; }
+    public IQueryable<UserMessage> UserMessages { get; set; }
+    public IQueryable<UserRatings> UserRatings { get; set; }
+    public IQueryable<Notification> Notifications { get; set; }
 }

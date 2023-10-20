@@ -70,7 +70,7 @@ public class ReservationController:ControllerBase
               {
                   StatusCode = 200,
                   Message = "Success",
-                  Data = _reservationService.RetrieveAll()
+                  Data = _reservationService.RetrieveAllAsync()
               };
               return Ok(response);
           }

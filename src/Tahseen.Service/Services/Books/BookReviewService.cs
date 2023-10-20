@@ -24,7 +24,7 @@ public class BookReviewService : IBookReviewService
         return this.mapper.Map<BookReviewForResultDto>(result);    
     }
 
-    public async ValueTask<BookReviewForResultDto> RetrieveByIdAsync(long id)
+    public async Task<BookReviewForResultDto> RetrieveByIdAsync(long id)
     {
         var bookReview = await this.repository.SelectByIdAsync(id);
         if (bookReview == null || bookReview.IsDeleted)
@@ -48,7 +48,7 @@ public class BookReviewService : IBookReviewService
     public async Task<bool> RemoveAsync(long id)
     => await this.repository.DeleteAsync(id);
 
-    public IQueryable<BookReviewForResultDto> RetrieveAll()
+    public async Task<IQueryable<BookReviewForResultDto>> RetrieveAllAsync()
     {
         var booksReview =  this.repository.SelectAll().Where(t=>!t.IsDeleted);
         

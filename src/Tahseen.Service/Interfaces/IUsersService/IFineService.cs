@@ -7,7 +7,7 @@ namespace Tahseen.Service.Interfaces.IUsersService
         public Task<FineForResultDto> AddAsync(FineForCreationDto dto);
         public Task<FineForResultDto> ModifyAsync(long Id, FineForUpdateDto dto);
         public Task<bool> RemoveAsync(long Id);
-        public Task<ICollection<FineForResultDto>> RetrieveAllAsync();
+        public Task<IQueryable<FineForResultDto>> RetrieveAllAsync();
         public Task<FineForResultDto> RetrieveByIdAsync(long Id);
     }
 }

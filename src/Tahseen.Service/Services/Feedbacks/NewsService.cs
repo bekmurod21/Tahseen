@@ -40,7 +40,7 @@ public class NewsService:INewsService
     public async Task<bool> RemoveAsync(long id)
         => await _repository.DeleteAsync(id);
 
-    public async ValueTask<NewsForResultDto?> RetrieveByIdAsync(long id)
+    public async Task<NewsForResultDto?> RetrieveByIdAsync(long id)
     {
         var news = await _repository.SelectByIdAsync(id);
         if (news is null || news.IsDeleted)
@@ -50,7 +50,7 @@ public class NewsService:INewsService
         return _mapper.Map<NewsForResultDto>(news);
     }
 
-    public IQueryable<NewsForResultDto> RetrieveAll()
+    public async Task<IQueryable<NewsForResultDto>> RetrieveAllAsync()
     {
         var news = _repository.SelectAll().Where(x => !x.IsDeleted);
         return _mapper.Map<IQueryable<NewsForResultDto>>(news);

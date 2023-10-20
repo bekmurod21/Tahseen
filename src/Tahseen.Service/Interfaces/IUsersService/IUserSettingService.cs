@@ -9,6 +9,6 @@ namespace Tahseen.Service.Interfaces.IUsersService
         public Task<UserSettingsForResultDto> ModifyAsync(long Id, UserSettingsForUpdateDto dto);
         public Task<bool> RemoveAsync(long Id);
         public Task<UserSettingsForResultDto> RetrieveByIdAsync(long Id);
-        public ICollection<UserSettingsForResultDto> RetrieveAll();
+        public Task<IQueryable<UserSettingsForResultDto>> RetrieveAllAsync();
     }
 }

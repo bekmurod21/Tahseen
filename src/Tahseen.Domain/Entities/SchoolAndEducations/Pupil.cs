@@ -10,7 +10,7 @@ public class Pupil:Auditable
     public string LastName { get; set; }
     public string Grade { get; set; }
     public DateTime DateOfBirth { get; set; }
-    public ICollection<PupilBookConnection> SubjectBooksBorrow { get; set; }
+    public IQueryable<PupilBookConnection> SubjectBooksBorrow { get; set; }
     public string Image { get; set; }
     public List<LibraryBranch> LibraryBranches { get; set; }
 }

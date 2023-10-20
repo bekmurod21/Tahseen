@@ -6,7 +6,7 @@ using Tahseen.Domain.Entities.Books;
 
 namespace Tahseen.Service.Services.Books;
 
-public class BookService:IBookService
+public class BookService : IBookService
 {
     private readonly IMapper _mapper;
     private readonly IRepository<Book> _repository;
@@ -22,6 +22,12 @@ public class BookService:IBookService
         var book = _mapper.Map<Book>(dto);
         var result = await _repository.CreateAsync(book);
         return _mapper.Map<BookForResultDto>(result);
+    }
+
+    public async Task<IQueryable<BookForResultDto>> RetrieveAllAsync()
+    {
+        var ALlData = this._repository.SelectAll().Where(e => e.IsDeleted == false);
+        return this._mapper.Map<IQueryable<BookForResultDto>>(ALlData);
     }
 
     public async Task<BookForResultDto> ModifyAsync(long id, BookForUpdateDto dto)
@@ -42,7 +48,7 @@ public class BookService:IBookService
         return await _repository.DeleteAsync(id);
     }
 
-    public async ValueTask<BookForResultDto> RetrieveByIdAsync(long id)
+    public async Task<BookForResultDto> RetrieveByIdAsync(long id)
     {
         var book = await _repository.SelectByIdAsync(id);
         if (book is not null && !book.IsDeleted)

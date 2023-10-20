@@ -25,7 +25,7 @@ public class PupilsControllers : ControllerBase
         {
             StatusCode = 200,
             Message = "Success",
-            Data = _pupilService.RetrieveAll()
+            Data = _pupilService.RetrieveAllAsync()
         };
         return Ok(response);
     }

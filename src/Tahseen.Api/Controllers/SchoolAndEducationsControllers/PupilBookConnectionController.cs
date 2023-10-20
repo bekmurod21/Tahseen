@@ -24,7 +24,7 @@ public class PupilBookConnectionController : ControllerBase
         {
             StatusCode = 200,
             Message = "Success",
-            Data = _pupilBookConnectionService.RetrieveAll()
+            Data = _pupilBookConnectionService.RetrieveAllAsync()
         };
         return Ok(response);
     }

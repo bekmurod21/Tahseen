@@ -23,7 +23,7 @@ namespace Tahseen.Data.Repositories
 
         public async Task<bool> DeleteAsync(long Id)
         {
-            var result = await dbSet.FirstOrDefaultAsync(e => e.Id == Id && !e.IsDeleted);
+            var result = await dbSet.Where(e => e.Id == Id && !e.IsDeleted).FirstOrDefaultAsync();
             result.IsDeleted = true;
             await dbContext.SaveChangesAsync();
             return true;
@@ -33,7 +33,7 @@ namespace Tahseen.Data.Repositories
          => this.dbSet;
         public async Task<TEntity> SelectByIdAsync(long Id)
         {
-            var result = await this.dbSet.FirstOrDefaultAsync(e => e.Id == Id);
+            var result = await this.dbSet.Where(e => e.Id == Id).FirstOrDefaultAsync();
             return result;
         }
 

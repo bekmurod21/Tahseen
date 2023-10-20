@@ -47,13 +47,13 @@ public class LibrarianService : ILibrarianService
         return await this.repository.DeleteAsync(librarian.Id);
     }
 
-    public IQueryable<LibrarianForResultDto> RetrieveAll()
+    public async Task<IQueryable<LibrarianForResultDto>> RetrieveAllAsync()
     {
         var librarians = this.repository.SelectAll().Where(l => !l.IsDeleted);
         return this.mapper.Map<IQueryable<LibrarianForResultDto>>(librarians);
     }
 
-    public async ValueTask<LibrarianForResultDto> RetrieveByIdAsync(long id)
+    public async Task<LibrarianForResultDto> RetrieveByIdAsync(long id)
     {
         var librarian = await this.repository.SelectByIdAsync(id);
         if (librarian is null || librarian.IsDeleted)

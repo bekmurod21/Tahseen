@@ -48,27 +48,6 @@ namespace Tahseen.Service.Services.Users
             }
             var data = this._mapper.Map<User>(dto);
             var CreatedData = await this._userRepository.CreateAsync(data);
-            
-            var FineCreation = new FineForCreationDto()
-            {
-                UserId = CreatedData.Id,
-                Amount = 0,
-                BookId = 0,
-                Reason = null,
-                Status = 0,
-                
-            };
-            await this._fineService.AddAsync(FineCreation);
-
-            var UserProgressTrackingCreation = new UserProgressTrackingForCreationDto()
-            {
-                BookId = 0,
-                CurrentPage = 0,
-                TotalPages = 0,
-                UserId = CreatedData.Id,
-            };
-
-            await this._userProgressTrackingService.AddAsync(UserProgressTrackingCreation);
 
             var UserSettingCreation = new UserSettingsForCreationDto()
             {
@@ -76,11 +55,12 @@ namespace Tahseen.Service.Services.Users
                 NotificationPreference = Domain.Enums.NotificationStatus.Read,
                 ThemePreference = Domain.Enums.ThemePreference.Light,
                 UserId = CreatedData.Id,
+                
 
             };
 
             await this._userSettingService.AddAsync(UserSettingCreation);
-
+            
             var UserRatingForCreation = new UserRatingForCreationDto()
             {
                 BooksCompleted = 0,
@@ -90,20 +70,17 @@ namespace Tahseen.Service.Services.Users
 
             await _userRatingService.AddAsync(UserRatingForCreation);
 
+
             var UserCartCreation = new UserCartForCreationDto()
             {
                 UserId = CreatedData.Id,
+                
 
             };
-
             await this._userCartService.AddAsync(UserCartCreation);
 
-            var BorrowBookCartCreation = new BorrowedBookCartForCreationDto()
-            {
-                UserId = CreatedData.Id,
-            };
-
-            await this._borrowBookCartService.AddAsync(BorrowBookCartCreation);
+            var borrowBookCartCreationDto = new BorrowedBookCartForCreationDto { UserId = CreatedData.Id };
+            await _borrowBookCartService.AddAsync(borrowBookCartCreationDto);
 
             return _mapper.Map<UserForResultDto>(CreatedData);
 
@@ -127,10 +104,10 @@ namespace Tahseen.Service.Services.Users
             return await _userRepository.DeleteAsync(Id);
         }
 
-        public ICollection<UserForResultDto> RetrieveAll()
+        public async Task<IQueryable<UserForResultDto>> RetrieveAllAsync()
         {
             var AllData = _userRepository.SelectAll().Where(t => t.IsDeleted == false);
-            return _mapper.Map<ICollection<UserForResultDto>>(AllData);
+            return _mapper.Map<IQueryable<UserForResultDto>>(AllData);
         }
 
         public async Task<UserForResultDto> RetrieveByIdAsync(long Id)

@@ -41,7 +41,7 @@ public class PupilService:IPupilService
     public async Task<bool> RemoveAsync(long id)
         => await _repository.DeleteAsync(id);
 
-    public async ValueTask<PupilForResultDto> RetrieveByIdAsync(long id)
+    public async Task<PupilForResultDto> RetrieveByIdAsync(long id)
     {
         var searched =await _repository.SelectByIdAsync(id);
         if (searched is null || searched.IsDeleted)
@@ -52,7 +52,7 @@ public class PupilService:IPupilService
         return _mapper.Map<PupilForResultDto>(searched);
     }
 
-    public IQueryable<PupilForResultDto> RetrieveAll()
+    public async Task<IQueryable<PupilForResultDto>> RetrieveAllAsync()
     {
         var pupils = _repository.SelectAll().Where(x => !x.IsDeleted);
         return _mapper.Map<IQueryable<PupilForResultDto>>(pupils);

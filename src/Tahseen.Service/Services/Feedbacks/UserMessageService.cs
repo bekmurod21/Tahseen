@@ -39,13 +39,13 @@ public class UserMessageService : IUserMessageService
 
     public async Task<bool> RemoveAsync(long id) => await repository.DeleteAsync(id);
 
-    IQueryable<UserMessageForResultDto> IUserMessageService.RetrieveAll()
+    public async Task<IQueryable<UserMessageForResultDto>> RetrieveAllAsync()
     {
         var results = repository.SelectAll().Where(t => !t.IsDeleted);
         return mapper.Map<IQueryable<UserMessageForResultDto>>(results);
     }
 
-    public async ValueTask<UserMessageForResultDto> RetrieveByIdAsync(long id)
+    public async Task<UserMessageForResultDto> RetrieveByIdAsync(long id)
     {
         var result = await repository.SelectByIdAsync(id);
         if (result is null && result.IsDeleted)

@@ -4,9 +4,9 @@ namespace Tahseen.Service.Interfaces.IBookServices;
 
 public interface IAuthorService
 {
-    Task<AuthorForResultDto> AddAsync(AuthorForCreationDto dto);
-    Task<AuthorForResultDto> ModifyAsync(long id, AuthorForUpdateDto dto);
-    Task<bool> RemoveAsync(long id);
-    ValueTask<AuthorForResultDto> RetrieveByIdAsync(long id);
-    IQueryable<AuthorForResultDto> RetrieveAll();
+    public Task<AuthorForResultDto> AddAsync(AuthorForCreationDto dto);
+    public Task<AuthorForResultDto> ModifyAsync(long id, AuthorForUpdateDto dto);
+    public Task<bool> RemoveAsync(long id);
+    public Task<AuthorForResultDto> RetrieveByIdAsync(long id);
+    public Task<IQueryable<AuthorForResultDto>> RetrieveAllAsync();
 }

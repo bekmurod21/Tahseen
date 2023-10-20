@@ -8,6 +8,6 @@ namespace Tahseen.Service.Interfaces.INotificationServices
         public Task<NotificationForResultDto> ModifyAsync(long Id, NotificationForUpdateDto dto);
         public Task<bool> RemoveAsync(long Id);
         public Task<NotificationForResultDto> RetrieveByIdAsync(long Id);
-        public ICollection<NotificationForResultDto> RetrieveAll();
+        public Task<IQueryable<NotificationForResultDto>> RetrieveAllAsync();
     }
 }

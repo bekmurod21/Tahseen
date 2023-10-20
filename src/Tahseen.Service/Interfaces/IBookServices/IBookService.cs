@@ -5,8 +5,10 @@ namespace Tahseen.Service.Interfaces.IBookServices;
 
 public interface IBookService
 {
-    Task<BookForResultDto> AddAsync(BookForCreationDto dto);
-    Task<BookForResultDto> ModifyAsync(long id, BookForUpdateDto dto);
-    Task<bool> RemoveAsync(long id);
-    ValueTask<BookForResultDto> RetrieveByIdAsync(long id);
+    public Task<BookForResultDto> AddAsync(BookForCreationDto dto);
+    public Task<BookForResultDto> ModifyAsync(long id, BookForUpdateDto dto);
+    public Task<bool> RemoveAsync(long id);
+    public Task<BookForResultDto> RetrieveByIdAsync(long id);
+    public Task<IQueryable<BookForResultDto>> RetrieveAllAsync();
+
 }

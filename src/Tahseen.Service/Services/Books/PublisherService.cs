@@ -25,7 +25,7 @@ public class PublisherService : IPublisherService
         return mapper.Map<PublisherForResultDto>(result);
     }
 
-    public async ValueTask<PublisherForResultDto> RetrieveByIdAsync(long id)
+    public async Task<PublisherForResultDto> RetrieveByIdAsync(long id)
     {
         var publisher = await this.repository.SelectByIdAsync(id);
         if (publisher == null || publisher.IsDeleted)
@@ -49,7 +49,7 @@ public class PublisherService : IPublisherService
     public Task<bool> RemoveAsync(long id)
     => this.repository.DeleteAsync(id);
 
-    public IQueryable<PublisherForResultDto> RetrieveAll()
+    public async Task<IQueryable<PublisherForResultDto>> RetrieveAllAsync()
     {
         var results = this.repository.SelectAll().Where(t => !t.IsDeleted);
         return mapper.Map<IQueryable<PublisherForResultDto>>(results);

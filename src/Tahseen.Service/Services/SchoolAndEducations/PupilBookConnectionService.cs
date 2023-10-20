@@ -40,7 +40,7 @@ public class PupilBookConnectionService:IPupilBookConnectionService
     public async Task<bool> RemoveAsync(long id)
         =>await _repository.DeleteAsync(id);
 
-    public async ValueTask<PupilBookConnectionForResultDto> RetrieveByIdAsync(long id)
+    public async Task<PupilBookConnectionForResultDto> RetrieveByIdAsync(long id)
     {
         var mapped = await _repository.SelectByIdAsync(id);
         if (mapped is null || mapped.IsDeleted)
@@ -51,7 +51,7 @@ public class PupilBookConnectionService:IPupilBookConnectionService
         return _mapper.Map<PupilBookConnectionForResultDto>(mapped);
     }
 
-    public IQueryable<PupilBookConnectionForResultDto> RetrieveAll()
+    public async Task<IQueryable<PupilBookConnectionForResultDto>> RetrieveAllAsync()
     {
         var mapped = _repository.SelectAll().Where(x => !x.IsDeleted);
         return _mapper.Map<IQueryable<PupilBookConnectionForResultDto>>(mapped);

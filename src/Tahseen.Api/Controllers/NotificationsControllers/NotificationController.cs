@@ -70,7 +70,7 @@ public class NotificationController:ControllerBase
               {
                   StatusCode = 200,
                   Message = "Success",
-                  Data = _notificationService.RetrieveAll()
+                  Data = _notificationService.RetrieveAllAsync()
               };
               return Ok(response);
           }

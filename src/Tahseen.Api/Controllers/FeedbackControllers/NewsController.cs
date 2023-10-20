@@ -23,7 +23,7 @@ public class NewsController : ControllerBase
         {
             StatusCode = 200,
             Message = "Success",
-            Data = _newsService.RetrieveAll()
+            Data = _newsService.RetrieveAllAsync()
         };
         return Ok(response);
     }

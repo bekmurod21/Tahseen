@@ -17,7 +17,7 @@ namespace Tahseen.Api.Controllers.EventsControllers
         }
 
         [HttpPost]
-        public async ValueTask<IActionResult> PostAsync(EventRegistrationForCreationDto dto) =>
+        public async Task<IActionResult> PostAsync(EventRegistrationForCreationDto dto) =>
             Ok(new Response
             {
                 StatusCode = 200,
@@ -26,7 +26,7 @@ namespace Tahseen.Api.Controllers.EventsControllers
             });
 
         [HttpPut]
-        public async ValueTask<IActionResult> PutAsync(long id,EventRegistrationForUpdateDto dto) =>
+        public async Task<IActionResult> PutAsync(long id,EventRegistrationForUpdateDto dto) =>
             Ok(new Response
             {
                 StatusCode = 200,
@@ -35,7 +35,7 @@ namespace Tahseen.Api.Controllers.EventsControllers
             });
 
         [HttpDelete("id")]
-        public async ValueTask<IActionResult> DeleteAsync(long id) =>
+        public async Task<IActionResult> DeleteAsync(long id) =>
             Ok(new Response
             {
                 StatusCode = 200,
@@ -44,7 +44,7 @@ namespace Tahseen.Api.Controllers.EventsControllers
             });
 
         [HttpGet("id")]
-        public async ValueTask<IActionResult> GetByIdAsync(long id) =>
+        public async Task<IActionResult> GetByIdAsync(long id) =>
             Ok(new Response
             {
                 StatusCode = 200,
@@ -53,12 +53,12 @@ namespace Tahseen.Api.Controllers.EventsControllers
             });
 
         [HttpGet]
-        public async ValueTask<IActionResult> GetAllAsync() =>
+        public async Task<IActionResult> GetAllAsync() =>
             Ok(new Response
             {
                 StatusCode = 200,
                 Message = "Success",
-                Data = this.service.RetrieveAll()
+                Data = this.service.RetrieveAllAsync()
             });
     }
 }

@@ -45,10 +45,10 @@ public class NotificationService : INotificationService
         return await _repository.DeleteAsync(id);
     }
 
-    public ICollection<NotificationForResultDto> RetrieveAll()
+    public async Task<IQueryable<NotificationForResultDto>> RetrieveAllAsync()
     {
         var AllData = this._repository.SelectAll().Where(t => t.IsDeleted == false);
-        return _mapper.Map<ICollection<NotificationForResultDto>>(AllData);
+        return _mapper.Map<IQueryable<NotificationForResultDto>>(AllData);
     }
 
     public async Task<NotificationForResultDto> RetrieveByIdAsync(long id)

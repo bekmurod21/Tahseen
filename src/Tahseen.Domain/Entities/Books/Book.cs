@@ -35,7 +35,7 @@ public class Book : Auditable
     public BookReviews BookReviews { get; set; } 
 
     [JsonIgnore]
-    public ICollection<Reservation> Reservations { get; set; }
+    public IQueryable<Reservation> Reservations { get; set; }
 
-    public ICollection<CompletedBooks> CompletedBooks { get; set;}
+    public IQueryable<CompletedBooks> CompletedBooks { get; set;}
 }

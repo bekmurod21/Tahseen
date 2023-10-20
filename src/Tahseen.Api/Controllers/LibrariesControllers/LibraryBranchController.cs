@@ -72,7 +72,7 @@ public class LibraryBranchController : ControllerBase
         {
             StatusCode = 200,
             Message = "Success",
-            Data = _libraryBranchService.RetrieveAll()
+            Data = await this._libraryBranchService.RetrieveAllAsync()        
         };
         return Ok(response);
     }

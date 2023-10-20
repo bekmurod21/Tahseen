@@ -21,7 +21,7 @@ namespace Tahseen.Service.Services.Users
         }
         public async Task<BorrowedBookForResultDto> AddAsync(BorrowedBookForCreationDto dto)
         {
-            var UserBorrowedBookCart = this._bookCartService.RetrieveAll().FirstOrDefault(e => e.UserId == dto.UserId);
+            var UserBorrowedBookCart = (await this._bookCartService.RetrieveAllAsync()).Where(e => e.UserId == dto.UserId).FirstOrDefaultAsync();
             var data = this._mapper.Map<BorrowedBook>(dto);
             data.BorrowedBookCartId = UserBorrowedBookCart.Id;
             var result = await this.BorrowedBook.CreateAsync(data);
@@ -46,10 +46,10 @@ namespace Tahseen.Service.Services.Users
             return await this.BorrowedBook.DeleteAsync(Id);
         }
 
-        public ICollection<BorrowedBookForResultDto> RetrieveAll()
+        public async Task<IQueryable<BorrowedBookForResultDto>> RetrieveAllAsync()
         {
             var result = this.BorrowedBook.SelectAll().Where(t => t.IsDeleted == false);
-            return this._mapper.Map<ICollection<BorrowedBookForResultDto>>(result);
+            return this._mapper.Map<IQueryable<BorrowedBookForResultDto>>(result);
         }
 
         public async Task<BorrowedBookForResultDto> RetrieveByIdAsync(long Id)

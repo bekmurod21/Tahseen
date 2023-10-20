@@ -7,6 +7,6 @@ namespace Tahseen.Service.Interfaces.IUsersService
         public Task<RegistrationForResultDto> AddAsync(RegistrationForCreationDto dto);
         public Task<bool> RemoveAsync(long Id);
         public Task<RegistrationForResultDto> RetrieveByIdAsync(long Id);
-        public ICollection<RegistrationForResultDto> RetrieveAll();
+        public Task<IQueryable<RegistrationForResultDto>> RetrieveAllAsync();
     }
 }

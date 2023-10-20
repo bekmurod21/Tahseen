@@ -19,6 +19,11 @@ namespace Tahseen.Service.Services.Users
         }
         public async Task<UserSettingsForResultDto> AddAsync(UserSettingsForCreationDto dto)
         {
+            var Checking = await this._repository.SelectAll().Where(u => u.UserId == dto.UserId).FirstOrDefaultAsync();
+            if (Checking == null)
+            {
+                throw new TahseenException(404, "NotFound");
+            }
             var Data = this._mapper.Map<UserSettings>(dto);
             var result = await this._repository.CreateAsync(Data);
             return this._mapper.Map<UserSettingsForResultDto>(result);
@@ -42,10 +47,10 @@ namespace Tahseen.Service.Services.Users
             return await this._repository.DeleteAsync(Id);
         }
 
-        public ICollection<UserSettingsForResultDto> RetrieveAll()
+        public async Task<IQueryable<UserSettingsForResultDto>> RetrieveAllAsync()
         {
             var AllData = this._repository.SelectAll();
-            return this._mapper.Map<ICollection<UserSettingsForResultDto>>(AllData);    
+            return this._mapper.Map<IQueryable<UserSettingsForResultDto>>(AllData);    
         }
 
         public async Task<UserSettingsForResultDto> RetrieveByIdAsync(long Id)

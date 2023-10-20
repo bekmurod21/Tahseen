@@ -43,10 +43,10 @@ namespace Tahseen.Service.Services.Users
             return await this._fineRepository.DeleteAsync(Id);
         }
 
-        public async Task<ICollection<FineForResultDto>> RetrieveAllAsync()
+        public async Task<IQueryable<FineForResultDto>> RetrieveAllAsync()
         {
             var AllData = this._fineRepository.SelectAll();
-            return this._mapper.Map<ICollection<FineForResultDto>>(AllData);
+            return this._mapper.Map<IQueryable<FineForResultDto>>(AllData);
         }
 
         public async Task<FineForResultDto> RetrieveByIdAsync(long Id)

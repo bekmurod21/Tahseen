@@ -4,9 +4,9 @@ namespace Tahseen.Service.Interfaces.ILibrariansService;
 
 public interface ILibrarianService
 {
-    Task<LibrarianForResultDto> AddAsync(LibrarianForCreationDto dto);
-    Task<LibrarianForResultDto> ModifyAsync(long id, LibrarianForUpdateDto dto);
-    Task<bool> RemoveAsync(long id);
-    ValueTask<LibrarianForResultDto> RetrieveByIdAsync(long id);
-    IQueryable<LibrarianForResultDto> RetrieveAll();
+    public Task<LibrarianForResultDto> AddAsync(LibrarianForCreationDto dto);
+    public Task<LibrarianForResultDto> ModifyAsync(long id, LibrarianForUpdateDto dto);
+    public Task<bool> RemoveAsync(long id);
+    public Task<LibrarianForResultDto> RetrieveByIdAsync(long id);
+    public Task<IQueryable<LibrarianForResultDto>> RetrieveAllAsync();
 }

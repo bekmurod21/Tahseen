@@ -4,9 +4,9 @@ namespace Tahseen.Service.Interfaces.IFeedbackService;
 
 public interface ISurveyService
 {
-    Task<SurveyForResultDto> AddAsync(SurveyForCreationDto dto);
-    Task<SurveyForResultDto> ModifyAsync(long id, SurveyForUpdateDto dto);
-    Task<bool> RemoveAsync(long id);
-    ValueTask<SurveyForResultDto?> RetrieveByIdAsync(long id);
-    IQueryable<SurveyForResultDto> RetrieveAll();
+    public Task<SurveyForResultDto> AddAsync(SurveyForCreationDto dto);
+    public Task<SurveyForResultDto> ModifyAsync(long id, SurveyForUpdateDto dto);
+    public Task<bool> RemoveAsync(long id);
+    public Task<SurveyForResultDto?> RetrieveByIdAsync(long id);
+    public Task<IQueryable<SurveyForResultDto>> RetrieveAllAsync();
 }

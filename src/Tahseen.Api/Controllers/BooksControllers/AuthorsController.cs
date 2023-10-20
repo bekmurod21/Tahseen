@@ -40,7 +40,7 @@ namespace Tahseen.Api.Controllers.BooksControllers
                 Data = await this.service.RemoveAsync(id)
             });
         [HttpGet("id")]
-        public async ValueTask<IActionResult> GetByIdAsync(long id) =>
+        public async Task<IActionResult> GetByIdAsync(long id) =>
             Ok(new Response
             {
                 StatusCode = 200,
@@ -48,12 +48,12 @@ namespace Tahseen.Api.Controllers.BooksControllers
                 Data = await this.service.RetrieveByIdAsync(id)
             });
         [HttpGet]
-        public async ValueTask<IActionResult> GetAll() =>
+        public async Task<IActionResult> GetAll() =>
             Ok(new Response
             {
                 StatusCode = 200,
                 Message = "Success",
-                Data = this.service.RetrieveAll()
+                Data = this.service.RetrieveAllAsync()
             });
     }
 }

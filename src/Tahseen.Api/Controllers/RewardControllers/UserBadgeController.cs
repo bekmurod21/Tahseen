@@ -23,7 +23,7 @@ public class UserBadgeController : ControllerBase
         {
             StatusCode = 200,
             Message = "Success",
-            Data = _userBadgesService.RetrieveAll()
+            Data = _userBadgesService.RetrieveAllAsync()
         };
         return Ok(response);
     }

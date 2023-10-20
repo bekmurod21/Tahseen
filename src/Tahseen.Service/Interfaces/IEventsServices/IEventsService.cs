@@ -9,6 +9,6 @@ namespace Tahseen.Service.Interfaces.IEventsServices
         public Task<EventForResultDto> ModifyAsync(long Id, EventForUpdateDto dto);
         public Task<bool> RemoveAsync(long Id);
         public Task<EventForResultDto> RetrieveByIdAsync(long Id);
-        public ICollection<EventForResultDto> RetrieveAll();
+        public Task<IQueryable<EventForResultDto>> RetrieveAllAsync();
     }
 }

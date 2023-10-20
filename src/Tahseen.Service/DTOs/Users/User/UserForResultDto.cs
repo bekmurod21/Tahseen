@@ -13,7 +13,7 @@ namespace Tahseen.Service.DTOs.Users.User
         public string Address { get; set; }
         public MembershipStatus MembershipStatus { get; set; }
         public DateTime DateOfBirth { get; set; }
-        //public ICollection<BorrowedBookForResultDto> BorrowedBooks { get; set; }
+        //public IQueryable<BorrowedBookForResultDto> BorrowedBooks { get; set; }
         public decimal FineAmount { get; set; }
         public string UserImage { get; set; }
     }

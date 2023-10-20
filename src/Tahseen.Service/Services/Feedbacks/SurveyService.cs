@@ -41,7 +41,7 @@ public class SurveyService:ISurveyService
     public async Task<bool> RemoveAsync(long id)
         => await _repository.DeleteAsync(id);
 
-    public async ValueTask<SurveyForResultDto?> RetrieveByIdAsync(long id)
+    public async Task<SurveyForResultDto?> RetrieveByIdAsync(long id)
     {
         var survey = await _repository.SelectByIdAsync(id);
         if (survey is null || survey.IsDeleted)
@@ -52,7 +52,7 @@ public class SurveyService:ISurveyService
         return _mapper.Map<SurveyForResultDto>(survey);
     }
 
-    public IQueryable<SurveyForResultDto> RetrieveAll()
+    public async Task<IQueryable<SurveyForResultDto>> RetrieveAllAsync()
     {
         var surveys = _repository.SelectAll().Where(x => !x.IsDeleted);
         return _mapper.Map<IQueryable<SurveyForResultDto>>(surveys);

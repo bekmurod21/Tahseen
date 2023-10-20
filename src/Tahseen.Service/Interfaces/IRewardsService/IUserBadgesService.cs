@@ -8,6 +8,6 @@ namespace Tahseen.Service.Interfaces.IRewardsService
         public Task<UserBadgesForResultDto> ModifyAsync(long Id, UserBadgesForUpdateDto dto);
         public Task<bool> RemoveAsync(long Id);
         public Task<UserBadgesForResultDto> RetrieveByIdAsync(long Id);
-        public ICollection<UserBadgesForResultDto> RetrieveAll();
+        public Task<IQueryable<UserBadgesForResultDto>> RetrieveAllAsync();
     }
 }

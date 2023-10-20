@@ -17,7 +17,7 @@ namespace Tahseen.Api.Controllers.BooksControllers
         }
 
         [HttpPost]
-        public async ValueTask<IActionResult> PostAsync(PublisherForCreationDto dto) =>
+        public async Task<IActionResult> PostAsync(PublisherForCreationDto dto) =>
             Ok(new Response
             {
                 StatusCode = 200,
@@ -26,7 +26,7 @@ namespace Tahseen.Api.Controllers.BooksControllers
             });
 
         [HttpPut]
-        public async ValueTask<IActionResult> PutAsync(long id,PublisherForUpdateDto dto) =>
+        public async Task<IActionResult> PutAsync(long id,PublisherForUpdateDto dto) =>
             Ok(new Response
             {
                 StatusCode = 200,
@@ -35,7 +35,7 @@ namespace Tahseen.Api.Controllers.BooksControllers
             });
 
         [HttpDelete("id")]
-        public async ValueTask<IActionResult> DeleteAsync(long id) =>
+        public async Task<IActionResult> DeleteAsync(long id) =>
             Ok(new Response
             {
                 StatusCode = 200,
@@ -44,7 +44,7 @@ namespace Tahseen.Api.Controllers.BooksControllers
             });
 
         [HttpGet("id")]
-        public async ValueTask<IActionResult> GetByIdAsync(long id) =>
+        public async Task<IActionResult> GetByIdAsync(long id) =>
             Ok(new Response
             {
                 StatusCode = 200,
@@ -53,12 +53,12 @@ namespace Tahseen.Api.Controllers.BooksControllers
             });
 
         [HttpGet]
-        public async ValueTask<IActionResult> GetAllAsync() =>
+        public async Task<IActionResult> GetAllAsync() =>
             Ok(new Response
             {
                 StatusCode = 200,
                 Message = "Success",
-                Data =  this.service.RetrieveAll()
+                Data =  this.service.RetrieveAllAsync()
             });
     }
 }

@@ -39,13 +39,13 @@ public class UserRatingService : IUserRatingService
     public async Task<bool> RemoveAsync(long Id) => await repository.DeleteAsync(Id);
 
 
-    public IQueryable<UserRatingForResultDto> RetrieveAllAsync()
+    public async Task<IQueryable<UserRatingForResultDto>> RetrieveAllAsync()
     {
         var results = repository.SelectAll().Where(t => !t.IsDeleted);
         return mapper.Map<IQueryable<UserRatingForResultDto>>(results);
     }
 
-    public async ValueTask<UserRatingForResultDto> RetrieveByIdAsync(long id)
+    public async Task<UserRatingForResultDto> RetrieveByIdAsync(long id)
     {
         var result = await repository.SelectByIdAsync(id);
         if (result == null && result.IsDeleted)
@@ -54,7 +54,7 @@ public class UserRatingService : IUserRatingService
         return mapper.Map<UserRatingForResultDto>(result);
     }
 
-    public async ValueTask<UserRatingForResultDto> RetrieveByUserId(long userId)
+    public async Task<UserRatingForResultDto> RetrieveByUserId(long userId)
     {
         var result = repository.SelectAll().Where(t => t.UserId == userId && !t.IsDeleted);
         if (result == null)

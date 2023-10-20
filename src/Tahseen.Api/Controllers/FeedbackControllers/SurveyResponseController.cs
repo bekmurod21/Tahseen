@@ -23,7 +23,7 @@ public class SurveyResponseController : ControllerBase
         {
             StatusCode = 200,
             Message = "Success",
-            Data = _surveyResponseService.RetrieveAll()
+            Data = _surveyResponseService.RetrieveAllAsync()
         };
         return Ok(response);
     }

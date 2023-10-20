@@ -39,7 +39,7 @@ public class FeedbackService:IFeedbackService
     public async Task<bool> RemoveAsync(long id)
         => await _repository.DeleteAsync(id);
 
-    public async ValueTask<FeedbackForResultDto?> RetrieveByIdAsync(long id)
+    public async Task<FeedbackForResultDto?> RetrieveByIdAsync(long id)
     {
         var bookReview = await _repository.SelectByIdAsync(id);
         if (bookReview == null || bookReview.IsDeleted)
@@ -48,7 +48,7 @@ public class FeedbackService:IFeedbackService
         return _mapper.Map<FeedbackForResultDto>(bookReview);
     }
 
-    public IQueryable<FeedbackForResultDto> RetrieveAll()
+    public async Task<IQueryable<FeedbackForResultDto>> RetrieveAllAsync()
     {
         var booksReview =  _repository.SelectAll().Where(x=>!x.IsDeleted);
         

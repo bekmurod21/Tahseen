@@ -72,7 +72,7 @@ public class LibrarianController:ControllerBase
         {
             StatusCode = 200,
             Message = "Success",
-            Data = _librarianService.RetrieveAll()
+            Data = _librarianService.RetrieveAllAsync()
         };
         return Ok(response);
     }

@@ -35,10 +35,10 @@ namespace Tahseen.Service.Services.Users
             return await this._repository.DeleteAsync(Id);
         }
 
-        public ICollection<UserCartForResultDto> RetrieveAll()
+        public async Task<IQueryable<UserCartForResultDto>> RetrieveAllAsync()
         {
             var AllData = this._repository.SelectAll().Where(t => t.IsDeleted == false);
-            return this._mapper.Map<ICollection<UserCartForResultDto>>(AllData);
+            return this._mapper.Map<IQueryable<UserCartForResultDto>>(AllData);
             
         }
 

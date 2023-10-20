@@ -41,7 +41,7 @@ public static class ServiceExtension
         services.AddScoped<IUserService, UserService>();
         services.AddScoped<IBorrowedBookService, BorrowedBookService>();
         services.AddScoped<IBorrowBookCartService, BorrowBookCartService>();
- 
+
 
         //Folder Name: IBookService
         services.AddScoped<IBookService, BookService>();

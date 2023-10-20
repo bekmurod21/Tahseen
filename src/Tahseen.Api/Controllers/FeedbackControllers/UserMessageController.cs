@@ -23,7 +23,7 @@ public class UserMessageController : ControllerBase
         {
             StatusCode = 200,
             Message = "Success",
-            Data = _userMessageService.RetrieveAll()
+            Data = _userMessageService.RetrieveAllAsync()
         };
         return Ok(response);
     }

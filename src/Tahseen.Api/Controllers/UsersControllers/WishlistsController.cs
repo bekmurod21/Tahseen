@@ -22,12 +22,12 @@ namespace Tahseen.Api.Controllers.UsersControllers
             {
                 StatusCode = 200,
                 Message = "Successful",
-                Data = this._wishlistService.RetrieveAll()
+                Data = this._wishlistService.RetrieveAllAsync()
             });
 
 
         [HttpGet("{id}")]
-        public async ValueTask<IActionResult> Get(long id)
+        public async Task<IActionResult> Get(long id)
             => Ok(new Response
             {
                 StatusCode = 200,
@@ -56,12 +56,12 @@ namespace Tahseen.Api.Controllers.UsersControllers
             });
 
         [HttpPut]
-        public async Task<IActionResult> PutAsync(WishlistForUpdateDto dto)
+        public async Task<IActionResult> PutAsync(long id, WishlistForUpdateDto dto)
             => Ok(new Response
             {
                 StatusCode = 200,
                 Message = "Successful",
-                Data = await this._wishlistService.ModifyAsync(dto)
+                Data = await this._wishlistService.ModifyAsync(id,dto)
             });
     }
 }

@@ -6,8 +6,8 @@ namespace Tahseen.Domain.Entities.Library;
 
 public class LibraryStatistics : Auditable
 {
-    public ICollection<User> TotalUsers { get; set;}
-    public ICollection<Book> TotalBooks { get; set; }
-    public ICollection<BorrowedBook> TotalBorrows { get; set; }
-    public ICollection<Event> TotalEvents { get; set; }
+    public IQueryable<User> TotalUsers { get; set;}
+    public IQueryable<Book> TotalBooks { get; set; }
+    public IQueryable<BorrowedBook> TotalBorrows { get; set; }
+    public IQueryable<Event> TotalEvents { get; set; }
 }

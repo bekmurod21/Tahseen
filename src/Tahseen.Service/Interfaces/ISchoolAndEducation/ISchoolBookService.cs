@@ -4,9 +4,9 @@ namespace Tahseen.Service.Interfaces.ISchoolAndEducation;
 
 public interface ISchoolBookService
 {
-    Task<SchoolBookForResultDto> AddAsync(SchoolBookForCreationDto dto);
-    Task<SchoolBookForResultDto> ModifyAsync(long id, SchoolBookForUpdateDto dto);
-    Task<bool> RemoveAsync(long id);
-    ValueTask<SchoolBookForResultDto> RetrieveByIdAsync(long id);
-    IQueryable<SchoolBookForResultDto> RetrieveAll();
+    public Task<SchoolBookForResultDto> AddAsync(SchoolBookForCreationDto dto);
+    public Task<SchoolBookForResultDto> ModifyAsync(long id, SchoolBookForUpdateDto dto);
+    public Task<bool> RemoveAsync(long id);
+    public Task<SchoolBookForResultDto> RetrieveByIdAsync(long id);
+    public Task<IQueryable<SchoolBookForResultDto>> RetrieveAllAsync();
 }

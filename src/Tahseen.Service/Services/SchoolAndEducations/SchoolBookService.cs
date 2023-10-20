@@ -41,7 +41,7 @@ public class SchoolBookService:ISchoolBookService
     public async Task<bool> RemoveAsync(long id)
         => await _repository.DeleteAsync(id);
 
-    public async ValueTask<SchoolBookForResultDto> RetrieveByIdAsync(long id)
+    public async Task<SchoolBookForResultDto> RetrieveByIdAsync(long id)
     {
         var book =await _repository.SelectByIdAsync(id);
         if (book is null ||book.IsDeleted)
@@ -51,7 +51,7 @@ public class SchoolBookService:ISchoolBookService
         return _mapper.Map<SchoolBookForResultDto>(book);
     }
 
-    public IQueryable<SchoolBookForResultDto> RetrieveAll()
+    public async Task<IQueryable<SchoolBookForResultDto>> RetrieveAllAsync()
     {
         var books = _repository.SelectAll().Where(x => !x.IsDeleted);
         return _mapper.Map<IQueryable<SchoolBookForResultDto>>(books);

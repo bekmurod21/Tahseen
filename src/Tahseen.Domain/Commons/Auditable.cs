@@ -7,6 +7,6 @@ namespace Tahseen.Domain.Commons
         public bool IsDeleted { get; set; }
         public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
         public DateTime? UpdatedAt { get; set;}
-    public ICollection<Feedback> Feedbacks { get; set; }
+    public IQueryable<Feedback> Feedbacks { get; set; }
     }
 }

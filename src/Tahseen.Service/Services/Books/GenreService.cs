@@ -43,13 +43,13 @@ public class GenreService : IGenreService
         return await _repository.DeleteAsync(id);
     }
 
-    public ICollection<GenreForResultDto> RetrieveAll()
+    public async Task<IQueryable<GenreForResultDto>> RetrieveAllAsync()
     {
         var result = _repository.SelectAll().Where(e => e.IsDeleted != true);
-        return _mapper.Map<ICollection<GenreForResultDto>>(result);
+        return _mapper.Map<IQueryable<GenreForResultDto>>(result);
     }
 
-    public async ValueTask<GenreForResultDto> RetrieveByIdAsync(long id)
+    public async Task<GenreForResultDto> RetrieveByIdAsync(long id)
     {
         var genre = await _repository.SelectByIdAsync(id);
         if (genre is not null && !genre.IsDeleted)

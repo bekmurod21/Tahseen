@@ -16,7 +16,7 @@ public class BookReviewsController : ControllerBase
         this.service = service;
     }
     [HttpPost]
-    public async ValueTask<IActionResult> PostAsync(BookReviewForCreationDto dto) =>
+    public async Task<IActionResult> PostAsync(BookReviewForCreationDto dto) =>
         Ok(new Response
         {
             StatusCode = 200,
@@ -25,7 +25,7 @@ public class BookReviewsController : ControllerBase
         });
 
     [HttpPut]
-    public async ValueTask<IActionResult> PutAsync(long id,BookReviewForUpdateDto dto) =>
+    public async Task<IActionResult> PutAsync(long id,BookReviewForUpdateDto dto) =>
         Ok(new Response
         {
             StatusCode = 200,
@@ -34,7 +34,7 @@ public class BookReviewsController : ControllerBase
         });
 
     [HttpDelete("id")]
-    public async ValueTask<IActionResult> DeleteAsync(long id) =>
+    public async Task<IActionResult> DeleteAsync(long id) =>
         Ok(new Response
         {
             StatusCode = 200,
@@ -43,7 +43,7 @@ public class BookReviewsController : ControllerBase
         });
 
     [HttpGet("id")]
-    public async ValueTask<IActionResult> GetByIdAsync(long id) =>
+    public async Task<IActionResult> GetByIdAsync(long id) =>
         Ok(new Response
         {
             StatusCode = 200,
@@ -52,11 +52,11 @@ public class BookReviewsController : ControllerBase
         });
 
     [HttpGet]
-    public async ValueTask<IActionResult> GetAllAsync() =>
+    public async Task<IActionResult> GetAllAsync() =>
         Ok(new Response
         {
             StatusCode = 200,
             Message = "Success",
-            Data = this.service.RetrieveAll()
+            Data = this.service.RetrieveAllAsync()
         });
 }

@@ -5,9 +5,9 @@ namespace Tahseen.Service.Interfaces.IFeedbackService;
 
 public interface IFeedbackService
 {
-    Task<FeedbackForResultDto> AddAsync(FeedbackForCreationDto dto);
-    Task<FeedbackForResultDto> ModifyAsync(long id, FeedbackForUpdateDto dto);
-    Task<bool> RemoveAsync(long id);
-    ValueTask<FeedbackForResultDto?> RetrieveByIdAsync(long id);
-    IQueryable<FeedbackForResultDto> RetrieveAll();
+    public Task<FeedbackForResultDto> AddAsync(FeedbackForCreationDto dto);
+    public Task<FeedbackForResultDto> ModifyAsync(long id, FeedbackForUpdateDto dto);
+    public Task<bool> RemoveAsync(long id);
+    public Task<FeedbackForResultDto?> RetrieveByIdAsync(long id);
+    public Task<IQueryable<FeedbackForResultDto>> RetrieveAllAsync();
 }

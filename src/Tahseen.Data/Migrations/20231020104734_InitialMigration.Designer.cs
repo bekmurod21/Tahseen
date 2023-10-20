@@ -12,7 +12,7 @@ using Tahseen.Data.DbContexts;
 namespace Tahseen.Data.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20231020050824_InitialMigration")]
+    [Migration("20231020104734_InitialMigration")]
     partial class InitialMigration
     {
         /// <inheritdoc />
@@ -914,7 +914,7 @@ namespace Tahseen.Data.Migrations
 
                     b.HasIndex("LibraryBranchId");
 
-                    b.ToTable("Librarian");
+                    b.ToTable("Librarians");
                 });
 
             modelBuilder.Entity("Tahseen.Domain.Entities.Library.LibraryBranch", b =>
@@ -1401,9 +1401,7 @@ namespace Tahseen.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("UserId");
-
-                    b.ToTable("BorrowedBookCart");
+                    b.ToTable("BorrowedBookCarts");
                 });
 
             modelBuilder.Entity("Tahseen.Domain.Entities.Users.UserCart", b =>
@@ -1427,6 +1425,8 @@ namespace Tahseen.Data.Migrations
                         .HasColumnType("bigint");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("UserCarts");
                 });
@@ -1463,7 +1463,7 @@ namespace Tahseen.Data.Migrations
 
                     b.HasIndex("UserCartId");
 
-                    b.ToTable("WishList");
+                    b.ToTable("WishLists");
                 });
 
             modelBuilder.Entity("LibraryBranchPupil", b =>
@@ -1959,7 +1959,7 @@ namespace Tahseen.Data.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("Tahseen.Domain.Entities.Users.BorrowedBookCart", b =>
+            modelBuilder.Entity("Tahseen.Domain.Entities.Users.UserCart", b =>
                 {
                     b.HasOne("Tahseen.Domain.Entities.User", "User")
                         .WithMany()

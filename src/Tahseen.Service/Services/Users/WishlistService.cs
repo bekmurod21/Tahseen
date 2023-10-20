@@ -46,9 +46,9 @@ public class WishlistService : IWishlistService
         return mapper.Map<WishlistForResultDto>(insertedWishlist);
     }
 
-    public async Task<WishlistForResultDto> ModifyAsync(WishlistForUpdateDto dto)
+    public async Task<WishlistForResultDto> ModifyAsync(long id, WishlistForUpdateDto dto)
     {
-        var wishlist = await repository.SelectByIdAsync(dto.Id);
+        var wishlist = await repository.SelectByIdAsync(id);
         if (wishlist == null || wishlist.IsDeleted)
             throw new TahseenException(404, "wishlist not found");
 
@@ -68,13 +68,13 @@ public class WishlistService : IWishlistService
         return await repository.DeleteAsync(wishlist.Id);
     }
 
-    public IQueryable<WishlistForResultDto> RetrieveAll()
+    public async Task<IQueryable<WishlistForResultDto>> RetrieveAllAsync()
     {
         var wishlists = repository.SelectAll().Where(w => !w.IsDeleted);
         return mapper.Map<IQueryable<WishlistForResultDto>>(wishlists);
     }
 
-    public async ValueTask<WishlistForResultDto> RetrieveById(long id)
+    public async Task<WishlistForResultDto> RetrieveByIdAsync(long id)
     {
         var wishlist = await repository.SelectByIdAsync(id);
         if (wishlist is null || wishlist.IsDeleted)

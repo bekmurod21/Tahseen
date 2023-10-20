@@ -5,9 +5,9 @@ namespace Tahseen.Service.Interfaces.ISchoolAndEducation;
 
 public interface IPupilBookConnectionService
 {
-    Task<PupilBookConnectionForResultDto> AddAsync(PupilBookConnectionForCreationDto dto);
-    Task<PupilBookConnectionForResultDto> ModifyAsync(long id, PupilBookConnectionForUpdateDto dto);
-    Task<bool> RemoveAsync(long id);
-    ValueTask<PupilBookConnectionForResultDto> RetrieveByIdAsync(long id);
-    IQueryable<PupilBookConnectionForResultDto> RetrieveAll();
+    public Task<PupilBookConnectionForResultDto> AddAsync(PupilBookConnectionForCreationDto dto);
+    public Task<PupilBookConnectionForResultDto> ModifyAsync(long id, PupilBookConnectionForUpdateDto dto);
+    public Task<bool> RemoveAsync(long id);
+    public Task<PupilBookConnectionForResultDto> RetrieveByIdAsync(long id);
+    public Task<IQueryable<PupilBookConnectionForResultDto>> RetrieveAllAsync();
 }

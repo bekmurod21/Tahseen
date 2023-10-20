@@ -45,10 +45,10 @@ public class ReservationService : IReservationsService
         return await _repository.DeleteAsync(id);
     }
 
-    public ICollection<ReservationForResultDto> RetrieveAll()
+    public async Task<IQueryable<ReservationForResultDto>> RetrieveAllAsync()
     {
         var AllData = this._repository.SelectAll().Where(t => t.IsDeleted == false);
-        return _mapper.Map<ICollection<ReservationForResultDto>>(AllData);
+        return _mapper.Map<IQueryable<ReservationForResultDto>>(AllData);
     }
 
     public async Task<ReservationForResultDto> RetrieveByIdAsync(long id)

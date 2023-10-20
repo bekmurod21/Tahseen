@@ -43,10 +43,10 @@ public class UserBadgesService : IUserBadgesService
         return await _repository.DeleteAsync(id);
     }
 
-    public ICollection<UserBadgesForResultDto> RetrieveAll()
+    public async Task<IQueryable<UserBadgesForResultDto>> RetrieveAllAsync()
     {
         var AllData = this._repository.SelectAll().Where(t => t.IsDeleted == false);
-        return _mapper.Map<ICollection<UserBadgesForResultDto>>(AllData);
+        return _mapper.Map<IQueryable<UserBadgesForResultDto>>(AllData);
     }
 
     public async Task<UserBadgesForResultDto> RetrieveByIdAsync(long id)

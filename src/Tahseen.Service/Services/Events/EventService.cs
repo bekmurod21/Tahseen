@@ -42,10 +42,10 @@ public class EventService : IEventsService
         return await _repository.DeleteAsync(id);
     }
 
-    public ICollection<EventForResultDto> RetrieveAll()
+    public async Task<IQueryable<EventForResultDto>> RetrieveAllAsync()
     {
         var AllData = this._repository.SelectAll().Where(e => e.IsDeleted == false);
-        return this._mapper.Map<ICollection<EventForResultDto>>(AllData);
+        return this._mapper.Map<IQueryable<EventForResultDto>>(AllData);
     }
 
     public async Task<EventForResultDto> RetrieveByIdAsync(long id)

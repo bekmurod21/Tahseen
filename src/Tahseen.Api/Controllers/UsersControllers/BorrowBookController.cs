@@ -23,7 +23,7 @@ namespace Tahseen.Api.Controllers.UsersControllers
             {
                 StatusCode = 200,
                 Message = "Success",
-                Data = _borrowedBookService.RetrieveAll()
+                Data = _borrowedBookService.RetrieveAllAsync()
             };
             return Ok(response);
         }

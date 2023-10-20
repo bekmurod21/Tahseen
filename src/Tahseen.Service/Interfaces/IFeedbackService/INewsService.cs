@@ -5,9 +5,9 @@ namespace Tahseen.Service.Interfaces.IFeedbackService;
 
 public interface INewsService
 {
-    Task<NewsForResultDto> AddAsync(NewsForCreationDto dto);
-    Task<NewsForResultDto> ModifyAsync(long id, NewsForUpdateDto dto);
-    Task<bool> RemoveAsync(long id);
-    ValueTask<NewsForResultDto?> RetrieveByIdAsync(long id);
-    IQueryable<NewsForResultDto> RetrieveAll();
+    public Task<NewsForResultDto> AddAsync(NewsForCreationDto dto);
+    public Task<NewsForResultDto> ModifyAsync(long id, NewsForUpdateDto dto);
+    public Task<bool> RemoveAsync(long id);
+    public Task<NewsForResultDto?> RetrieveByIdAsync(long id);
+    public Task<IQueryable<NewsForResultDto>> RetrieveAllAsync();
 }

@@ -10,5 +10,5 @@ public class Surveys:Auditable
     public string Question { get; set; }
     public DateTime EndDate { get; set; }
     public SurveyStatus Status { get; set; }
-    public ICollection<SurveyResponses> SurveyResponses { get; set;}
+    public IQueryable<SurveyResponses> SurveyResponses { get; set;}
 }
