@@ -5,9 +5,7 @@ using Tahseen.Service.Interfaces.IBookServices;
 
 namespace Tahseen.Api.Controllers.BooksControllers;
 
-[Route("api/[controller]")]
-[ApiController]
-public class BookReviewsController : ControllerBase
+public class BookReviewsController : BaseController
 {
     private readonly IBookReviewService service;
 
@@ -16,7 +14,7 @@ public class BookReviewsController : ControllerBase
         this.service = service;
     }
     [HttpPost]
-    public async Task<IActionResult> PostAsync(BookReviewForCreationDto dto) =>
+    public async Task<IActionResult> PostAsync([FromBody] BookReviewForCreationDto dto) =>
         Ok(new Response
         {
             StatusCode = 200,
@@ -24,8 +22,8 @@ public class BookReviewsController : ControllerBase
             Data = await this.service.AddAsync(dto)
         });
 
-    [HttpPut]
-    public async Task<IActionResult> PutAsync(long id,BookReviewForUpdateDto dto) =>
+    [HttpPut("id")]
+    public async Task<IActionResult> PutAsync([FromRoute(Name = "id")] long id, [FromBody] BookReviewForUpdateDto dto) =>
         Ok(new Response
         {
             StatusCode = 200,
@@ -34,7 +32,7 @@ public class BookReviewsController : ControllerBase
         });
 
     [HttpDelete("id")]
-    public async Task<IActionResult> DeleteAsync(long id) =>
+    public async Task<IActionResult> DeleteAsync([FromRoute(Name = "id")] long id) =>
         Ok(new Response
         {
             StatusCode = 200,
@@ -43,7 +41,7 @@ public class BookReviewsController : ControllerBase
         });
 
     [HttpGet("id")]
-    public async Task<IActionResult> GetByIdAsync(long id) =>
+    public async Task<IActionResult> GetByIdAsync([FromRoute(Name = "id")] long id) =>
         Ok(new Response
         {
             StatusCode = 200,

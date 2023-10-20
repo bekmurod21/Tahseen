@@ -5,9 +5,7 @@ using Tahseen.Service.Interfaces.IBookServices;
 
 namespace Tahseen.Api.Controllers.BooksControllers
 {
-    [Route("api/[controller]")]
-    [ApiController]
-    public class AuthorsController : ControllerBase
+    public class AuthorsController : BaseController
     {
         private readonly IAuthorService service;
 
