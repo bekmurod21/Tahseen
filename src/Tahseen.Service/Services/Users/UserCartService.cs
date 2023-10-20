@@ -19,8 +19,8 @@ namespace Tahseen.Service.Services.Users
         }
         public async Task<UserCartForResultDto> AddAsync(UserCartForCreationDto dto)
         {
-            var result = _repository.SelectAll().FirstOrDefault(e => e.UserId == dto.UserId && e.IsDeleted );
-            if (result != null && result.IsDeleted == true)
+            var result = _repository.SelectAll().FirstOrDefault(e => e.UserId == dto.UserId);
+            if (result != null && result.IsDeleted == false)
             {
                 throw new TahseenException(400, "User is exist");
             }
@@ -29,19 +29,6 @@ namespace Tahseen.Service.Services.Users
             return _mapper.Map<UserCartForResultDto>(CreatedData);
         }
 
-        public async Task<UserCartForResultDto> ModifyAsync(long Id, UserCartForUpdateDto dto)
-        {
-            var data = await _repository.SelectAll().FirstOrDefaultAsync(e => e.Id == Id);
-
-            if(data != null && data.IsDeleted == false)
-            {
-                var MappedData = this._mapper.Map(dto, data);
-                MappedData.UpdatedAt = DateTime.UtcNow;
-                var result = await this._repository.UpdateAsync(MappedData);
-                return this._mapper.Map<UserCartForResultDto>(result); 
-            }
-            throw new TahseenException(404, "Not Found");
-        }
 
         public async Task<bool> RemoveAsync(long Id)
         {

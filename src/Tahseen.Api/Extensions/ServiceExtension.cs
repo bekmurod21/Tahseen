@@ -32,14 +32,16 @@ public static class ServiceExtension
         services.AddAutoMapper(typeof(MappingProfile));
 
         //Folder Name: IUSerService
-        services.AddScoped<IUserService, UserService>();
         services.AddScoped<IFineService, FineService>();
         services.AddScoped<IUserCartService, UserCartService>();
         services.AddScoped<IWishlistService, WishlistService>();
         services.AddScoped<IRegistrationService,RegistrationService>();
-        services.AddScoped<IBorrowedBookService,BorrowedBookService>();
         services.AddScoped<IUserSettingService, UserSettingsService>();
         services.AddScoped<IUserProgressTrackingService,UserProgressTrackingService>();
+        services.AddScoped<IUserService, UserService>();
+        services.AddScoped<IBorrowedBookService, BorrowedBookService>();
+        services.AddScoped<IBorrowBookCartService, BorrowBookCartService>();
+ 
 
         //Folder Name: IBookService
         services.AddScoped<IBookService, BookService>();

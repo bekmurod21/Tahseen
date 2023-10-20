@@ -40,6 +40,7 @@ public class WishlistService : IWishlistService
             BookId = dto.BookId,
             Status = dto.Status
         };
+
         var insertedWishlist = await repository.CreateAsync(wishlist);
 
         return mapper.Map<WishlistForResultDto>(insertedWishlist);

@@ -2,7 +2,7 @@
 
 namespace Tahseen.Service.DTOs.Users.Fine
 {
-    public class FineServiceForResultDto
+    public class FineForResultDto
     {
         public long Id { get; set; }
         public long UserId { get; set; }

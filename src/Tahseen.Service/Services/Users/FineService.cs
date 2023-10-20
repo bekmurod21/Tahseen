@@ -18,14 +18,14 @@ namespace Tahseen.Service.Services.Users
             this._mapper = mapper;
             this._fineRepository = fineRepository;
         }
-        public async Task<FineServiceForResultDto> AddAsync(FineServiceForCreationDto dto)
+        public async Task<FineForResultDto> AddAsync(FineForCreationDto dto)
         {
             var MappedData = this._mapper.Map<Fine>(dto);
             var result = await this._fineRepository.CreateAsync(MappedData);
-            return this._mapper.Map<FineServiceForResultDto>(result);
+            return this._mapper.Map<FineForResultDto>(result);
         }
 
-        public async Task<FineServiceForResultDto> ModifyAsync(long Id, FineServiceForUpdateDto dto)
+        public async Task<FineForResultDto> ModifyAsync(long Id, FineForUpdateDto dto)
         {
             var data = await this._fineRepository.SelectAll().FirstOrDefaultAsync(e => e.Id == Id);
             if (data != null && data.IsDeleted == false)
@@ -33,7 +33,7 @@ namespace Tahseen.Service.Services.Users
                 var MappedData = this._mapper.Map(dto, data);
                 MappedData.UpdatedAt = DateTime.UtcNow;
                 var result = await this._fineRepository.UpdateAsync(MappedData);
-                return this._mapper.Map<FineServiceForResultDto>(result);
+                return this._mapper.Map<FineForResultDto>(result);
             }
             throw new TahseenException(404, "Fine is not found");
         }
@@ -43,16 +43,16 @@ namespace Tahseen.Service.Services.Users
             return await this._fineRepository.DeleteAsync(Id);
         }
 
-        public ICollection<FineServiceForResultDto> RetrieveAllAsync()
+        public async Task<ICollection<FineForResultDto>> RetrieveAllAsync()
         {
             var AllData = this._fineRepository.SelectAll();
-            return this._mapper.Map<ICollection<FineServiceForResultDto>>(AllData);
+            return this._mapper.Map<ICollection<FineForResultDto>>(AllData);
         }
 
-        public async Task<FineServiceForResultDto> RetrieveById(long Id)
+        public async Task<FineForResultDto> RetrieveByIdAsync(long Id)
         {
             var data = await this._fineRepository.SelectByIdAsync(Id);
-            return this._mapper.Map<FineServiceForResultDto>(data);
+            return this._mapper.Map<FineForResultDto>(data);
         }
     }
 }

@@ -7,15 +7,17 @@ namespace Tahseen.Service.DTOs.Books.Book;
 public class BookForUpdateDto
 {
     public string Title { get; set; }
-    public Domain.Entities.Books.Author Author { get; set; }
-    public Domain.Entities.Books.Genre Genre { get; set; }
     public Language Language { get; set; }
     public long TotalCopies { get; set; }
     public long AvailableCopies { get; set; }
+    public decimal Rating { get; set; }
+    public long Reviews { get; set; }
     public BookFormat BookFormat { get; set; }
     public string ShelfLocation { get; set; }
     public BookCondition Condition { get; set; }
     public string BookImage { get; set; }
-    public LibraryBranch LibraryBranch { get; set; }
-    public Publisher Publisher { get; set; }
+    public long AuthorId { get; set; }
+    public long GenreId { get; set; }
+    public long LibraryId { get; set; }
+    public long PublisherId { get; set; }
 }

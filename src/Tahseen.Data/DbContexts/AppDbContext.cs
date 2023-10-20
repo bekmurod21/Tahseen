@@ -23,8 +23,8 @@ public class AppDbContext : DbContext
     public DbSet<Book> Books { get; set; }
     public DbSet<BookReviews> BookReviews { get; set; }
     public DbSet<CompletedBooks> CompletedBooks { get; set; }
-    public DbSet<Publisher> Publishers { get; set; }
     public DbSet<Genre> Genres { get; set; }
+    public DbSet<Publisher> Publishers { get; set; }
 
     //Folder Name: Events
     public DbSet<Event> Events { get; set; }
@@ -37,10 +37,9 @@ public class AppDbContext : DbContext
     public DbSet<Surveys> Surveys { get; set; }
     public DbSet<UserMessage> UserMessages { get; set; }
     public DbSet<UserRatings> UserRatings { get; set; }
-    public DbSet<WishList> WishLists { get; set; }
 
     //Folder Name: Librarians  
-    public DbSet<Librarian> Librarian { get; set; }
+    public DbSet<Librarian> Librarians { get; set; }
 
     //Folder Name: Libraries
     public DbSet<LibraryBranch> LibraryBranches { get; set; }
@@ -66,13 +65,14 @@ public class AppDbContext : DbContext
 
     //Folder Name: Users
     public DbSet<BorrowedBook> BorrowedBooks { get; set; }
+    public DbSet<BorrowedBookCart> BorrowedBookCarts { get; set; }
     public DbSet<Fine> Fines { get; set; }
     public DbSet<Registration> Registrations { get; set; }
     public DbSet<User> Users { get; set; }
     public DbSet<UserCart> UserCarts { get; set; }
     public DbSet<UserProgressTracking> UserProgressTracking { get; set; }
     public DbSet<UserSettings> UserSettings { get; set; }
-    public DbSet<WishList> Wishlist { get; set; }
+    public DbSet<WishList> WishLists { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

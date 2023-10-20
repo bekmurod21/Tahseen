@@ -17,7 +17,7 @@ public class LibraryBranchService : ILibraryBranchService
         this.repository = repository;
     }
 
-    async Task<LibraryBranchForResultDto> ILibraryBranchService.AddAsync(LibraryBranchForCreationDto dto)
+    public async Task<LibraryBranchForResultDto> AddAsync(LibraryBranchForCreationDto dto)
     {
         var mappedLibraryBranch = this.mapper.Map<LibraryBranch>(dto);
         var result = await this.repository.CreateAsync(mappedLibraryBranch);
@@ -25,7 +25,7 @@ public class LibraryBranchService : ILibraryBranchService
         return this.mapper.Map<LibraryBranchForResultDto>(result);
     }
 
-    async Task<LibraryBranchForResultDto> ILibraryBranchService.ModifyAsync(long id, LibraryBranchForUpdateDto dto)
+    public async Task<LibraryBranchForResultDto> ModifyAsync(long id, LibraryBranchForUpdateDto dto)
     {
         var libraryBranch = await this.repository.SelectByIdAsync(id);
         if (libraryBranch == null || libraryBranch.IsDeleted)
@@ -38,7 +38,7 @@ public class LibraryBranchService : ILibraryBranchService
         return this.mapper.Map<LibraryBranchForResultDto>(result);
     }
 
-    async Task<bool> ILibraryBranchService.RemoveAsync(long id)
+    public async Task<bool> RemoveAsync(long id)
     {
         var libraryBranch = await this.repository.SelectByIdAsync(id);
         if (libraryBranch == null || libraryBranch.IsDeleted)
@@ -47,13 +47,13 @@ public class LibraryBranchService : ILibraryBranchService
         return await this.repository.DeleteAsync(libraryBranch.Id);
     }
 
-    IQueryable<LibraryBranchForResultDto> ILibraryBranchService.RetrieveAll()
+    public IQueryable<LibraryBranchForResultDto> RetrieveAll()
     {
         var results = this.repository.SelectAll().Where(l => !l.IsDeleted);
         return mapper.Map<IQueryable<LibraryBranchForResultDto>>(results);
     }
 
-    async ValueTask<LibraryBranchForResultDto> ILibraryBranchService.RetrieveByIdAsync(long id)
+    public async Task<LibraryBranchForResultDto> RetrieveByIdAsync(long id)
     {
         var libraryBranch = await this.repository.SelectByIdAsync(id);
         if (libraryBranch == null || libraryBranch.IsDeleted)

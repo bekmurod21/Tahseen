@@ -1,10 +1,10 @@
-﻿using Tahseen.Domain.Entities.Books;
-using Tahseen.Domain.Enums;
+﻿using Tahseen.Domain.Enums;
 
 namespace Tahseen.Service.DTOs.Users.Fine
 {
-    public class FineServiceForCreationDto
+    public class FineForUpdateDto
     {
+        public long Id { get; set; }
         public long UserId { get; set; }
         public long BookId { get; set; }
         public decimal Amount { get; set; }

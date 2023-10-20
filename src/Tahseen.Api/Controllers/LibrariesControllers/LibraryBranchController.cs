@@ -8,20 +8,20 @@ namespace Tahseen.Api.Controllers.LibrariesControllers;
 
 [ApiController]
 [Route("api[controller]")]
-public class LibraryBranchController:ControllerBase
+public class LibraryBranchController : ControllerBase
 {
     private readonly ILibraryBranchService _libraryBranchService;
     
-    public LibraryBranchController(LibraryBranchService libraryBranchService)
+    public LibraryBranchController(ILibraryBranchService libraryBranchService)
     {
-        _libraryBranchService =libraryBranchService;
+        _libraryBranchService = libraryBranchService;
     }
     
     [HttpPost]
     public async Task<IActionResult> PostAsync(LibraryBranchForCreationDto data)
     {
         var response = new Response()
-        {
+        {   
             StatusCode = 200,
             Message = "Success",
             Data = await _libraryBranchService.AddAsync(data)

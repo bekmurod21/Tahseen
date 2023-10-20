@@ -12,8 +12,8 @@ using Tahseen.Data.DbContexts;
 namespace Tahseen.Data.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20231017174425_Init")]
-    partial class Init
+    [Migration("20231020050824_InitialMigration")]
+    partial class InitialMigration
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -324,6 +324,9 @@ namespace Tahseen.Data.Migrations
                     b.Property<long>("BookId")
                         .HasColumnType("bigint");
 
+                    b.Property<long>("BorrowedBookCartId")
+                        .HasColumnType("bigint");
+
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("timestamp with time zone");
 
@@ -351,6 +354,8 @@ namespace Tahseen.Data.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("BookId");
+
+                    b.HasIndex("BorrowedBookCartId");
 
                     b.HasIndex("LibraryStatisticsId");
 
@@ -465,7 +470,13 @@ namespace Tahseen.Data.Migrations
                     b.Property<long>("BookId")
                         .HasColumnType("bigint");
 
+                    b.Property<long?>("BookId1")
+                        .HasColumnType("bigint");
+
                     b.Property<long?>("BookReviewsId")
+                        .HasColumnType("bigint");
+
+                    b.Property<long?>("BorrowedBookCartId")
                         .HasColumnType("bigint");
 
                     b.Property<long?>("BorrowedBookId")
@@ -580,7 +591,11 @@ namespace Tahseen.Data.Migrations
 
                     b.HasIndex("BookId");
 
+                    b.HasIndex("BookId1");
+
                     b.HasIndex("BookReviewsId");
+
+                    b.HasIndex("BorrowedBookCartId");
 
                     b.HasIndex("BorrowedBookId");
 
@@ -1364,6 +1379,33 @@ namespace Tahseen.Data.Migrations
                     b.ToTable("UserSettings");
                 });
 
+            modelBuilder.Entity("Tahseen.Domain.Entities.Users.BorrowedBookCart", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("boolean");
+
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<long>("UserId")
+                        .HasColumnType("bigint");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("BorrowedBookCart");
+                });
+
             modelBuilder.Entity("Tahseen.Domain.Entities.Users.UserCart", b =>
                 {
                     b.Property<long>("Id")
@@ -1522,6 +1564,12 @@ namespace Tahseen.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("Tahseen.Domain.Entities.Users.BorrowedBookCart", "BorrowedBookCart")
+                        .WithMany("BorrowedBook")
+                        .HasForeignKey("BorrowedBookCartId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("Tahseen.Domain.Entities.Library.LibraryStatistics", null)
                         .WithMany("TotalBorrows")
                         .HasForeignKey("LibraryStatisticsId");
@@ -1533,6 +1581,8 @@ namespace Tahseen.Data.Migrations
                         .IsRequired();
 
                     b.Navigation("Book");
+
+                    b.Navigation("BorrowedBookCart");
 
                     b.Navigation("User");
                 });
@@ -1578,14 +1628,22 @@ namespace Tahseen.Data.Migrations
                         .HasForeignKey("BadgeId");
 
                     b.HasOne("Tahseen.Domain.Entities.Books.Book", "Book")
-                        .WithMany("Feedbacks")
+                        .WithMany()
                         .HasForeignKey("BookId")
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
+                    b.HasOne("Tahseen.Domain.Entities.Books.Book", null)
+                        .WithMany("Feedbacks")
+                        .HasForeignKey("BookId1");
+
                     b.HasOne("Tahseen.Domain.Entities.Books.BookReviews", null)
                         .WithMany("Feedbacks")
                         .HasForeignKey("BookReviewsId");
+
+                    b.HasOne("Tahseen.Domain.Entities.Users.BorrowedBookCart", null)
+                        .WithMany("Feedbacks")
+                        .HasForeignKey("BorrowedBookCartId");
 
                     b.HasOne("Tahseen.Domain.Entities.BorrowedBook", null)
                         .WithMany("Feedbacks")
@@ -1901,6 +1959,17 @@ namespace Tahseen.Data.Migrations
                     b.Navigation("User");
                 });
 
+            modelBuilder.Entity("Tahseen.Domain.Entities.Users.BorrowedBookCart", b =>
+                {
+                    b.HasOne("Tahseen.Domain.Entities.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("Tahseen.Domain.Entities.Users.WishList", b =>
                 {
                     b.HasOne("Tahseen.Domain.Entities.Books.Book", "Book")
@@ -2118,6 +2187,13 @@ namespace Tahseen.Data.Migrations
 
             modelBuilder.Entity("Tahseen.Domain.Entities.UserSettings", b =>
                 {
+                    b.Navigation("Feedbacks");
+                });
+
+            modelBuilder.Entity("Tahseen.Domain.Entities.Users.BorrowedBookCart", b =>
+                {
+                    b.Navigation("BorrowedBook");
+
                     b.Navigation("Feedbacks");
                 });
 
