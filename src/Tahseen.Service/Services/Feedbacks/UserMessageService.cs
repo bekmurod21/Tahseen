@@ -1,5 +1,7 @@
 ﻿using AutoMapper;
+using Microsoft.EntityFrameworkCore;
 using Tahseen.Data.IRepositories;
+using Tahseen.Domain.Entities.Feedback;
 using Tahseen.Domain.Entities.Feedbacks;
 using Tahseen.Service.DTOs.Feedbacks.UserMessages;
 using Tahseen.Service.Exceptions;
@@ -27,8 +29,8 @@ public class UserMessageService : IUserMessageService
 
     public async Task<UserMessageForResultDto> ModifyAsync(long id,UserMessageForUpdateDto dto)
     {
-        var getUserMessage = await repository.SelectByIdAsync(dto.Id);
-        if (getUserMessage == null && getUserMessage.IsDeleted)
+        var getUserMessage = await repository.SelectAll().Where(a => a.Id == id && a.IsDeleted == false).FirstOrDefaultAsync();
+        if (getUserMessage == null)
             throw new TahseenException(404, "UserMessage doesn't found");
 
         var mappedUserMessage = mapper.Map(dto, getUserMessage);

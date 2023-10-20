@@ -1,7 +1,9 @@
 using AutoMapper;
+using Microsoft.EntityFrameworkCore;
 using Tahseen.Data.IRepositories;
 using Tahseen.Domain.Entities.Events;
 using Tahseen.Service.DTOs.Events.Events;
+using Tahseen.Service.Exceptions;
 using Tahseen.Service.Interfaces.IEventsServices;
 
 namespace Tahseen.Service.Services.Events;
@@ -19,6 +21,11 @@ public class EventService : IEventsService
 
     public async Task<EventForResultDto> AddAsync(EventForCreationDto dto)
     {
+        var Check = await this._repository.SelectAll().Where(a => a.Title == dto.Title && a.Location == dto.Location && a.IsDeleted == false).FirstOrDefaultAsync();
+        if (Check != null)
+        {
+            throw new TahseenException(409, "This Event is exist");
+        }
         var @event = _mapper.Map<Event>(dto);
         var result= await _repository.CreateAsync(@event);
         return _mapper.Map<EventForResultDto>(result);
@@ -26,8 +33,8 @@ public class EventService : IEventsService
 
     public async Task<EventForResultDto> ModifyAsync(long id, EventForUpdateDto dto)
     {
-        var @event = await _repository.SelectByIdAsync(id);
-        if (@event is not null && !@event.IsDeleted)
+        var @event = await _repository.SelectAll().Where(a => a.Id == id && a.IsDeleted == false).FirstOrDefaultAsync();
+        if (@event is not null)
         {
             var mappedEvent = _mapper.Map<Event>(dto);
             var result = await _repository.UpdateAsync(mappedEvent);

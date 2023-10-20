@@ -5,11 +5,12 @@ using Tahseen.Domain.Entities.Books;
 using Tahseen.Domain.Entities.Events;
 using Tahseen.Domain.Entities.Library;
 using Tahseen.Domain.Entities.Rewards;
-using Tahseen.Domain.Entities.Feedbacks;
 using Tahseen.Domain.Entities.Librarians;
 using Tahseen.Domain.Entities.Reservations;
 using Tahseen.Domain.Entities.Notifications;
 using Tahseen.Domain.Entities.SchoolAndEducations;
+using Tahseen.Domain.Entities.Feedback;
+using Tahseen.Domain.Entities.Feedbacks;
 
 namespace Tahseen.Data.DbContexts;
 
@@ -78,85 +79,86 @@ public class AppDbContext : DbContext
     {
         modelBuilder.Entity<Reservation>()
             .HasOne(r => r.Book)
-            .WithMany(b => b.Reservations)
+            .WithMany()
             .HasForeignKey(r => r.BookId)
             .OnDelete(DeleteBehavior.NoAction);
         modelBuilder.Entity<Reservation>()
             .HasOne(r => r.User)
-            .WithMany(u => u.Reservations)
+            .WithMany()
             .HasForeignKey(r => r.UserId)
             .OnDelete(DeleteBehavior.NoAction);
 
         modelBuilder.Entity<Book>()
             .HasOne(b => b.Author)
-            .WithOne(a => a.Book)
+            .WithOne()
             .HasForeignKey<Book>(b => b.AuthorId)
             .OnDelete(DeleteBehavior.NoAction);
         modelBuilder.Entity<Book>()
             .HasOne(b => b.Genre)
-            .WithMany(g => g.Books)
-            .HasForeignKey(b => b.GenreId)
+            .WithMany()
+            .HasForeignKey(b=>b.GenreId)
             .OnDelete(DeleteBehavior.NoAction);
         modelBuilder.Entity<Book>()
             .HasOne(b => b.Publisher)
-            .WithMany(p => p.Books)
+            .WithMany()
             .HasForeignKey(b => b.PublisherId)
             .OnDelete(DeleteBehavior.NoAction);
 
         modelBuilder.Entity<BookReviews>()
             .HasOne(b => b.Book)
-            .WithOne(book => book.BookReviews)
+            .WithOne()
             .HasForeignKey<BookReviews>(b => b.BookId)
             .OnDelete(DeleteBehavior.NoAction);
         modelBuilder.Entity<BookReviews>()
             .HasOne(b => b.User)
-            .WithMany(u => u.BookReviews)
+            .WithMany()
             .HasForeignKey(b => b.UserId)
             .OnDelete(DeleteBehavior.NoAction);
 
         modelBuilder.Entity<CompletedBooks>()
             .HasOne(c => c.Book)
-            .WithMany(b => b.CompletedBooks)
+            .WithMany()
             .HasForeignKey(c => c.BookId)
             .OnDelete(DeleteBehavior.NoAction);
         modelBuilder.Entity<CompletedBooks>()
             .HasOne(c => c.User)
-            .WithMany(u => u.CompletedBooks)
+            .WithMany()
             .HasForeignKey(c => c.UserId)
             .OnDelete(DeleteBehavior.NoAction);
 
         modelBuilder.Entity<EventRegistration>()
             .HasOne(e => e.User)
-            .WithMany(u => u.EventRegistrations)
+            .WithMany()
             .HasForeignKey(e => e.UserId)
             .OnDelete(DeleteBehavior.NoAction);
         modelBuilder.Entity<EventRegistration>()
             .HasOne(e => e.Event)
-            .WithMany(e => e.EventRegistration)
+            .WithMany()
             .HasForeignKey(e => e.EventId)
             .OnDelete(DeleteBehavior.NoAction);
 
 
+
         modelBuilder.Entity<SurveyResponses>()
             .HasOne(s => s.User)
-            .WithMany(u => u.SurveyResponses)
+            .WithMany()
             .HasForeignKey(s => s.UserId)
             .OnDelete(DeleteBehavior.NoAction);
         modelBuilder.Entity<SurveyResponses>()
             .HasOne(s => s.Surveys)
-            .WithMany(survey => survey.SurveyResponses)
+            .WithMany()
             .HasForeignKey(s => s.SurveyId)
             .OnDelete(DeleteBehavior.NoAction);
 
         modelBuilder.Entity<UserMessage>()
             .HasOne(u => u.User)
-            .WithMany(u=>u.UserMessages)
+            .WithMany()
             .HasForeignKey(u => u.UserId)
             .OnDelete(DeleteBehavior.NoAction);
 
         modelBuilder.Entity<UserRatings>()
             .HasOne(u => u.User)
-            .WithMany(u => u.UserRatings)
+            .WithMany()
             .HasForeignKey(u => u.UserId)
             .OnDelete(DeleteBehavior.NoAction);
 
@@ -168,7 +170,7 @@ public class AppDbContext : DbContext
 
         modelBuilder.Entity<Notification>()
             .HasOne(n => n.User)
-            .WithMany(u => u.Notifications)
+            .WithMany()
             .HasForeignKey(n => n.UserId)
             .OnDelete(DeleteBehavior.NoAction);
 
@@ -182,8 +184,6 @@ public class AppDbContext : DbContext
             .WithMany()
             .HasForeignKey(u => u.BadgeId)
             .OnDelete(DeleteBehavior.NoAction);
-
-
 
         
     }

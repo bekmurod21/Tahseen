@@ -4,6 +4,7 @@ using Tahseen.Service.Exceptions;
 using Tahseen.Domain.Entities.Books;
 using Tahseen.Service.DTOs.Books.BookReviews;
 using Tahseen.Service.Interfaces.IBookServices;
+using Microsoft.EntityFrameworkCore;
 
 namespace Tahseen.Service.Services.Books;
 
@@ -35,8 +36,8 @@ public class BookReviewService : IBookReviewService
 
     public async Task<BookReviewForResultDto> ModifyAsync(long id, BookReviewForUpdateDto dto)
     {
-        var bookReview = await this.repository.SelectByIdAsync (id);
-        if (bookReview == null || bookReview.IsDeleted)
+        var bookReview = await this.repository.SelectAll().Where(a => a.Id == id && a.IsDeleted == false).FirstOrDefaultAsync();
+        if (bookReview == null)
             throw new TahseenException(404, "bookReviev doesn't found");
 
         var mapped = this.mapper.Map(dto, bookReview);

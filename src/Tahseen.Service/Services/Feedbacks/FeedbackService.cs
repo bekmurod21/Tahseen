@@ -1,5 +1,7 @@
 using AutoMapper;
+using Microsoft.EntityFrameworkCore;
 using Tahseen.Data.IRepositories;
+using Tahseen.Domain.Entities.Feedback;
 using Tahseen.Domain.Entities.Feedbacks;
 using Tahseen.Service.DTOs.Feedbacks.Feedback;
 using Tahseen.Service.Exceptions;
@@ -26,8 +28,8 @@ public class FeedbackService:IFeedbackService
 
     public async Task<FeedbackForResultDto> ModifyAsync(long id, FeedbackForUpdateDto dto)
     {
-        var bookReview = await _repository.SelectByIdAsync (id);
-        if (bookReview == null || bookReview.IsDeleted)
+        var bookReview = await _repository.SelectAll().Where(a => a.Id == id && a.IsDeleted == false).FirstOrDefaultAsync();
+        if (bookReview == null)
             throw new TahseenException(404, "Feedback doesn't found");
 
         var mapped = _mapper.Map(dto, bookReview);

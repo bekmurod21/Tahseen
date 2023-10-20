@@ -1,5 +1,7 @@
 using AutoMapper;
+using Microsoft.EntityFrameworkCore;
 using Tahseen.Data.IRepositories;
+using Tahseen.Domain.Entities.Feedback;
 using Tahseen.Domain.Entities.Feedbacks;
 using Tahseen.Service.DTOs.Feedbacks.SurveyResponses;
 using Tahseen.Service.Exceptions;
@@ -26,8 +28,8 @@ public class SurveyResponseService:ISurveyResponseService
 
     public async Task<SurveyResponseForResultDto> ModifyAsync(long id, SurveyResponseForUpdateDto dto)
     {
-        var surveyResponse = await _repository.SelectByIdAsync(id);
-        if (surveyResponse is null || surveyResponse.IsDeleted)
+        var surveyResponse = await _repository.SelectAll().Where(a => a.Id == id && a.IsDeleted == false).FirstOrDefaultAsync();
+        if (surveyResponse is null)
         {
             throw new TahseenException(404, "SurveyResponse doesn't found");
         }

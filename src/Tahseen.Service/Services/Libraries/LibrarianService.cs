@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.EntityFrameworkCore;
 using Tahseen.Data.IRepositories;
 using Tahseen.Domain.Entities.Librarians;
 using Tahseen.Service.DTOs.Librarians;
@@ -20,6 +21,11 @@ public class LibrarianService : ILibrarianService
 
     public async Task<LibrarianForResultDto> AddAsync(LibrarianForCreationDto dto)
     {
+        var Check = await this.repository.SelectAll().Where(a => a.FirstName == dto.FirstName && a.LastName == dto.LastName && a.IsDeleted == false).FirstOrDefaultAsync();
+        if (Check != null)
+        {
+            throw new TahseenException(409, "This Librarian is exist");
+        }
         var mappedLibrarian = mapper.Map<Librarian>(dto);
         var result = await this.repository.CreateAsync(mappedLibrarian);
         return this.mapper.Map<LibrarianForResultDto>(result);
@@ -27,9 +33,9 @@ public class LibrarianService : ILibrarianService
 
     public async Task<LibrarianForResultDto> ModifyAsync(long id, LibrarianForUpdateDto dto)
     {
-        var librarian = await this.repository.SelectByIdAsync(id);
-        if (librarian == null || librarian.IsDeleted)
-            throw new TahseenException(404, "Librarina not found");
+        var librarian = await this.repository.SelectAll().Where(a => a.Id == id && a.IsDeleted == false).FirstOrDefaultAsync();
+        if (librarian == null)
+            throw new TahseenException(404, "Librarian not found");
 
         var mapped = this.mapper.Map(dto, librarian);
         mapped.UpdatedAt = DateTime.UtcNow;
@@ -40,8 +46,8 @@ public class LibrarianService : ILibrarianService
 
     public async Task<bool> RemoveAsync(long id)
     {
-        var librarian = await this.repository.SelectByIdAsync(id);
-        if (librarian == null || librarian.IsDeleted)
+        var librarian = await this.repository.SelectAll().Where(a => a.Id == id && a.IsDeleted == false).FirstOrDefaultAsync();
+        if (librarian == null)
             throw new TahseenException(404, "Lirarian not found");
 
         return await this.repository.DeleteAsync(librarian.Id);

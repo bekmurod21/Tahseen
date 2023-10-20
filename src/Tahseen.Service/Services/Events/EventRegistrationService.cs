@@ -1,8 +1,10 @@
 using AutoMapper;
+using Microsoft.EntityFrameworkCore;
 using Tahseen.Data.IRepositories;
 using Tahseen.Domain.Entities.Events;
 using Tahseen.Service.DTOs.Events.EventRegistration;
 using Tahseen.Service.DTOs.Events.Events;
+using Tahseen.Service.Exceptions;
 using Tahseen.Service.Interfaces.IEventsServices;
 
 namespace Tahseen.Service.Services.Events;
@@ -20,6 +22,11 @@ public class EventRegistrationService : IEventRegistrationService
 
     public async Task<EventRegistrationForResultDto> AddAsync(EventRegistrationForCreationDto dto)
     {
+        var Check = await this._repository.SelectAll().Where(a => a.UserId == dto.UserId && a.IsDeleted == false).FirstOrDefaultAsync();
+        if (Check != null)
+        {
+            throw new TahseenException(409, "This EventRegistration is exist");
+        }
         var eventRegistration = _mapper.Map<EventRegistration>(dto);
         var result= await _repository.CreateAsync(eventRegistration);
         return _mapper.Map<EventRegistrationForResultDto>(result);
@@ -27,8 +34,8 @@ public class EventRegistrationService : IEventRegistrationService
 
     public async Task<EventRegistrationForResultDto> ModifyAsync(long id, EventRegistrationForUpdateDto dto)
     {
-        var eventRegistration = await _repository.SelectByIdAsync(id);
-        if (eventRegistration is not null && !eventRegistration.IsDeleted)
+        var eventRegistration = await _repository.SelectAll().Where(a => a.Id == id && a.IsDeleted == false).FirstOrDefaultAsync();
+        if (eventRegistration is not null)
         {
             var mappedEventRegistration = _mapper.Map<EventRegistration>(dto);
             var result = await _repository.UpdateAsync(mappedEventRegistration);
