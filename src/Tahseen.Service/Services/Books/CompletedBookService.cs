@@ -27,8 +27,8 @@ public class CompletedBookService : ICompletedBookService
 
     public async Task<CompletedBookForResultDto> ModifyAsync(long id, CompletedBookForUpdateDto dto)
     {
-        var completedBook = await this.repository.SelectAll().FirstOrDefaultAsync(e => e.Id == id);
-        if (completedBook == null || completedBook.IsDeleted)
+        var completedBook = await this.repository.SelectAll().Where(a => a.Id == id && a.IsDeleted == false).FirstOrDefaultAsync();
+        if (completedBook == null)
             throw new TahseenException(404, "CompletedBook not found");
 
         var mapped = this.mapper.Map(dto, completedBook);

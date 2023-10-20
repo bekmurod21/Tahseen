@@ -4,6 +4,7 @@ using Tahseen.Service.Exceptions;
 using Tahseen.Domain.Entities.Books;
 using Tahseen.Service.DTOs.Books.Publishers;
 using Tahseen.Service.Interfaces.IBookServices;
+using Microsoft.EntityFrameworkCore;
 
 namespace Tahseen.Service.Services.Books;
 
@@ -19,6 +20,11 @@ public class PublisherService : IPublisherService
 
     public async Task<PublisherForResultDto> AddAsync(PublisherForCreationDto dto)
     {
+        var Check = await this.repository.SelectAll().Where(a => a.Name == dto.Name && a.IsDeleted == false).FirstOrDefaultAsync();
+        if (Check != null)
+        {
+            throw new TahseenException(409, "This Publisher is exist");
+        }
         var mapped = mapper.Map<Publisher>(dto);
         var result = await this.repository.CreateAsync(mapped);
 
@@ -36,8 +42,8 @@ public class PublisherService : IPublisherService
 
     public async Task<PublisherForResultDto> ModifyAsync(long id, PublisherForUpdateDto dto)
     {
-        var publisher = await this.repository.SelectByIdAsync(id);
-        if (publisher == null || publisher.IsDeleted)
+        var publisher = await this.repository.SelectAll().Where(a => a.Id == id && a.IsDeleted == false).FirstOrDefaultAsync();
+        if (publisher == null)
             throw new TahseenException(404, "Publisher doesn't found");
         var publisherMapped = mapper.Map(dto, publisher);
         publisherMapped.UpdatedAt = DateTime.UtcNow;

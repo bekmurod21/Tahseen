@@ -1,4 +1,5 @@
 using AutoMapper;
+using Microsoft.EntityFrameworkCore;
 using Tahseen.Data.IRepositories;
 using Tahseen.Domain.Entities.Events;
 using Tahseen.Domain.Entities.Notifications;
@@ -29,8 +30,8 @@ public class NotificationService : INotificationService
 
     public async Task<NotificationForResultDto> ModifyAsync(long id, NotificationForUpdateDto dto)
     {
-        var notification = await _repository.SelectByIdAsync(id);
-        if (notification is not null && !notification.IsDeleted)
+        var notification = await _repository.SelectAll().Where(a => a.Id == id && a.IsDeleted == false).FirstOrDefaultAsync();
+        if (notification is not null)
         {
             var mappedNotification = _mapper.Map<Notification>(dto);
             var result = await _repository.UpdateAsync(mappedNotification);

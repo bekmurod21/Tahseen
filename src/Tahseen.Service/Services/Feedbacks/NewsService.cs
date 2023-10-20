@@ -1,4 +1,5 @@
 using AutoMapper;
+using Microsoft.EntityFrameworkCore;
 using Tahseen.Data.IRepositories;
 using Tahseen.Domain.Entities.Feedbacks;
 using Tahseen.Service.DTOs.Feedbacks.News;
@@ -26,8 +27,8 @@ public class NewsService:INewsService
 
     public async Task<NewsForResultDto> ModifyAsync(long id, NewsForUpdateDto dto)
     {
-        var news = await _repository.SelectByIdAsync(id);
-        if (news is null || news.IsDeleted)
+        var news = await _repository.SelectAll().Where(a => a.Id == id && a.IsDeleted == false).FirstOrDefaultAsync();
+        if (news is null)
         {
             throw new TahseenException(404, "News doesn't found");
         }

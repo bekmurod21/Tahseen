@@ -3,6 +3,7 @@ using Tahseen.Service.Interfaces.IBookServices;
 using AutoMapper;
 using Tahseen.Data.IRepositories;
 using Tahseen.Domain.Entities.Books;
+using Microsoft.EntityFrameworkCore;
 
 namespace Tahseen.Service.Services.Books;
 
@@ -32,8 +33,8 @@ public class BookService : IBookService
 
     public async Task<BookForResultDto> ModifyAsync(long id, BookForUpdateDto dto)
     {
-        var book = await _repository.SelectByIdAsync(id);
-        if (book is not null && !book.IsDeleted)
+        var book = await _repository.SelectAll().Where(a => a.Id == id && a.IsDeleted == false).FirstOrDefaultAsync();
+        if (book is not null)
         {
             var mappedBook = _mapper.Map<Book>(dto);
             mappedBook.UpdatedAt = DateTime.UtcNow;

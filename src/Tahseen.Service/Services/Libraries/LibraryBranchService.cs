@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.EntityFrameworkCore;
 using Tahseen.Data.IRepositories;
 using Tahseen.Domain.Entities.Library;
 using Tahseen.Service.DTOs.Libraries.LibraryBranch;
@@ -19,6 +20,11 @@ public class LibraryBranchService : ILibraryBranchService
 
     public async Task<LibraryBranchForResultDto> AddAsync(LibraryBranchForCreationDto dto)
     {
+        var Check = await this.repository.SelectAll().Where(a => a.Name == dto.Name && a.Address == dto.Address && a.IsDeleted == false).FirstOrDefaultAsync();
+        if (Check != null)
+        {
+            throw new TahseenException(409, "This LibraryBranch is exist");
+        }
         var mappedLibraryBranch = this.mapper.Map<LibraryBranch>(dto);
         var result = await this.repository.CreateAsync(mappedLibraryBranch);
         
@@ -27,8 +33,8 @@ public class LibraryBranchService : ILibraryBranchService
 
     public async Task<LibraryBranchForResultDto> ModifyAsync(long id, LibraryBranchForUpdateDto dto)
     {
-        var libraryBranch = await this.repository.SelectByIdAsync(id);
-        if (libraryBranch == null || libraryBranch.IsDeleted)
+        var libraryBranch = await this.repository.SelectAll().Where(a => a.Id == id && a.IsDeleted == false).FirstOrDefaultAsync();
+        if (libraryBranch == null)
             throw new TahseenException(404, "LibraryBranch not found");
 
         var mappedLibraryBranch = mapper.Map(dto,libraryBranch);
@@ -40,8 +46,8 @@ public class LibraryBranchService : ILibraryBranchService
 
     public async Task<bool> RemoveAsync(long id)
     {
-        var libraryBranch = await this.repository.SelectByIdAsync(id);
-        if (libraryBranch == null || libraryBranch.IsDeleted)
+        var libraryBranch = await this.repository.SelectAll().Where(a => a.Id == id && a.IsDeleted == false).FirstOrDefaultAsync();
+        if (libraryBranch == null)
             throw new TahseenException(404, "LibraryBranch not found");
 
         return await this.repository.DeleteAsync(libraryBranch.Id);
