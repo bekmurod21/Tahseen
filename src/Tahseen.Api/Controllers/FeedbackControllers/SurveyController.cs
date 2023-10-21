@@ -5,9 +5,7 @@ using Tahseen.Service.Interfaces.IFeedbackService;
 
 namespace Tahseen.Api.Controllers.FeedbackControllers;
 
-[ApiController]
-[Route("api[controller]")]
-public class SurveyController : ControllerBase
+public class SurveyController : BaseController
 {
     private readonly ISurveyService _surveyService;
 
@@ -52,7 +50,7 @@ public class SurveyController : ControllerBase
         return Ok(response);
     }
 
-    [HttpDelete]
+    [HttpDelete("{id}")]
     public async Task<IActionResult> DeleteAsync(long Id)
     {
         var response = new Response()
@@ -64,7 +62,7 @@ public class SurveyController : ControllerBase
         return Ok(response);
     }
 
-    [HttpPut]
+    [HttpPut("{id}")]
     public async Task<IActionResult> PutAsync(long Id, SurveyForUpdateDto dto)
     {
         var response = new Response()

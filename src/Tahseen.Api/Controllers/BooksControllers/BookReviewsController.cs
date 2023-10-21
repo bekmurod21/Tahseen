@@ -22,7 +22,7 @@ public class BookReviewsController : BaseController
             Data = await this.service.AddAsync(dto)
         });
 
-    [HttpPut("id")]
+    [HttpPut("{id}")]
     public async Task<IActionResult> PutAsync([FromRoute(Name = "id")] long id, [FromBody] BookReviewForUpdateDto dto) =>
         Ok(new Response
         {
@@ -31,7 +31,7 @@ public class BookReviewsController : BaseController
             Data = await this.service.ModifyAsync(id, dto)
         });
 
-    [HttpDelete("id")]
+    [HttpDelete("{id}")]
     public async Task<IActionResult> DeleteAsync([FromRoute(Name = "id")] long id) =>
         Ok(new Response
         {
@@ -40,7 +40,7 @@ public class BookReviewsController : BaseController
             Data = await this.service.RemoveAsync(id)
         });
 
-    [HttpGet("id")]
+    [HttpGet("{id}")]
     public async Task<IActionResult> GetByIdAsync([FromRoute(Name = "id")] long id) =>
         Ok(new Response
         {

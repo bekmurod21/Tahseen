@@ -7,7 +7,7 @@ namespace Tahseen.Api.Controllers.NotificationsControllers;
 
 [ApiController]
 [Route("api[controller]")]
-public class NotificationController:ControllerBase
+public class NotificationController:BaseController
 {
     private readonly INotificationService _notificationService;
     public NotificationController(INotificationService notificationService)
@@ -39,7 +39,7 @@ public class NotificationController:ControllerBase
               return Ok(response);
           }
           
-          [HttpDelete]
+          [HttpDelete("{id}")]
           public async Task<IActionResult> DeleteAsync(long Id)
           {
               var response = new Response()
@@ -51,7 +51,7 @@ public class NotificationController:ControllerBase
               return Ok(response);
           }
   
-          [HttpPut]
+          [HttpPut("{id}")]
           public async Task<IActionResult> PutAsync(long Id, NotificationForUpdateDto data)
           {
               var response = new Response()

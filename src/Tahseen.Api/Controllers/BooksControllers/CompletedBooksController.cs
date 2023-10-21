@@ -5,9 +5,7 @@ using Tahseen.Service.DTOs.Books.CompletedBooks;
 
 namespace Tahseen.Api.Controllers.BooksControllers
 {
-    [Route("api/[controller]")]
-    [ApiController]
-    public class CompletedBooksController : ControllerBase
+    public class CompletedBooksController : BaseController
     {
         private readonly ICompletedBookService service;
 
@@ -25,7 +23,7 @@ namespace Tahseen.Api.Controllers.BooksControllers
                 Data = await this.service.AddAsync(dto)
             });
 
-        [HttpPut]
+        [HttpPut("{id}")]
         public async Task<IActionResult> PutAsync(long id,CompletedBookForUpdateDto dto) =>
             Ok(new Response
             {
@@ -34,7 +32,7 @@ namespace Tahseen.Api.Controllers.BooksControllers
                 Data = await this.service.ModifyAsync(id, dto)
             });
 
-        [HttpDelete("id")]
+        [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteAsync(long id)
             => Ok(new Response
             {
@@ -43,7 +41,7 @@ namespace Tahseen.Api.Controllers.BooksControllers
                 Data = await this.service.RemoveAsync(id)
             });
 
-        [HttpGet("id")]
+        [HttpGet("{id}")]
         public async Task<IActionResult> GetByIdAsync(long id)
             => Ok(new Response
             {

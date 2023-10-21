@@ -6,9 +6,7 @@ using Tahseen.Service.Services.Libraries;
 
 namespace Tahseen.Api.Controllers.LibrariesControllers;
 
-[ApiController]
-[Route("api[controller]")]
-public class LibraryBranchController : ControllerBase
+public class LibraryBranchController : BaseController
 {
     private readonly ILibraryBranchService _libraryBranchService;
     
@@ -41,7 +39,7 @@ public class LibraryBranchController : ControllerBase
         return Ok(response);
     }
           
-    [HttpDelete]
+    [HttpDelete("{id}")]
     public async Task<IActionResult> DeleteAsync(long Id)
     {
         var response = new Response()
@@ -53,7 +51,7 @@ public class LibraryBranchController : ControllerBase
         return Ok(response);
     }
   
-    [HttpPut]
+    [HttpPut("{id}")]
     public async Task<IActionResult> PutAsync(long Id, LibraryBranchForUpdateDto data)
     {
         var response = new Response()
