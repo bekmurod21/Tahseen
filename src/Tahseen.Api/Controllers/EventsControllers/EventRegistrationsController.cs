@@ -5,9 +5,7 @@ using Tahseen.Service.DTOs.Events.EventRegistration;
 
 namespace Tahseen.Api.Controllers.EventsControllers
 {
-    [Route("api/[controller]")]
-    [ApiController]
-    public class EventRegistrationsController : ControllerBase
+    public class EventRegistrationsController : BaseController
     {
         private readonly IEventRegistrationService service;
 
@@ -25,7 +23,7 @@ namespace Tahseen.Api.Controllers.EventsControllers
                 Data = await this.service.AddAsync(dto)
             });
 
-        [HttpPut]
+        [HttpPut("{id}")]
         public async Task<IActionResult> PutAsync(long id,EventRegistrationForUpdateDto dto) =>
             Ok(new Response
             {
@@ -34,7 +32,7 @@ namespace Tahseen.Api.Controllers.EventsControllers
                 Data = await this.service.ModifyAsync(id, dto)
             });
 
-        [HttpDelete("id")]
+        [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteAsync(long id) =>
             Ok(new Response
             {
@@ -43,7 +41,7 @@ namespace Tahseen.Api.Controllers.EventsControllers
                 Data = await this.service.RemoveAsync(id)
             });
 
-        [HttpGet("id")]
+        [HttpGet("{id}")]
         public async Task<IActionResult> GetByIdAsync(long id) =>
             Ok(new Response
             {

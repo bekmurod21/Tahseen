@@ -21,7 +21,7 @@ namespace Tahseen.Api.Controllers.BooksControllers
                 Message = "Success",
                 Data = await this.service.AddAsync(dto)
             });
-        [HttpPut]
+        [HttpPut("{id}")]
         public async Task<IActionResult> PutAsync(long id,AuthorForUpdateDto dto) =>
             Ok(new Response
             {
@@ -29,7 +29,7 @@ namespace Tahseen.Api.Controllers.BooksControllers
                 Message = "Success",
                 Data = await this.service.ModifyAsync(id,dto)
             });
-        [HttpDelete("id")]
+        [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteAsync(long id) =>
             Ok(new Response
             {
@@ -37,7 +37,7 @@ namespace Tahseen.Api.Controllers.BooksControllers
                 Message = "Success",
                 Data = await this.service.RemoveAsync(id)
             });
-        [HttpGet("id")]
+        [HttpGet("{id}")]
         public async Task<IActionResult> GetByIdAsync(long id) =>
             Ok(new Response
             {

@@ -6,7 +6,7 @@ using Tahseen.Service.DTOs.Feedbacks.SurveyResponses;
 using Tahseen.Service.Exceptions;
 using Tahseen.Service.Interfaces.IFeedbackService;
 
-namespace Tahseen.Service.Services.Feedbacks;
+ namespace Tahseen.Service.Services.Feedbacks;
 
 public class SurveyResponseService:ISurveyResponseService
 {
@@ -24,10 +24,10 @@ public class SurveyResponseService:ISurveyResponseService
         var result = await _repository.CreateAsync(added);
         return _mapper.Map<SurveyResponseForResultDto>(result); 
     }
-
     public async Task<SurveyResponseForResultDto> ModifyAsync(long id, SurveyResponseForUpdateDto dto)
     {
-        var surveyResponse = await _repository.SelectAll().Where(a => a.Id == id && a.IsDeleted == false).FirstOrDefaultAsync();
+        var surveyResponse = await _repository.SelectAll()
+            .Where(a => a.Id == id && a.IsDeleted == false).FirstOrDefaultAsync();
         if (surveyResponse is null)
         {
             throw new TahseenException(404, "SurveyResponse doesn't found");
@@ -38,7 +38,6 @@ public class SurveyResponseService:ISurveyResponseService
         var result = await _repository.UpdateAsync(modified);
         return _mapper.Map<SurveyResponseForResultDto>(result);
     }
-
     public async Task<bool> RemoveAsync(long id)
         => await _repository.DeleteAsync(id);
 

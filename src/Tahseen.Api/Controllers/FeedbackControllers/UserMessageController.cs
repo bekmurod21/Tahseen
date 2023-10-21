@@ -5,9 +5,7 @@ using Tahseen.Service.Interfaces.IFeedbackService;
 
 namespace Tahseen.Api.Controllers.FeedbackControllers;
 
-[ApiController]
-[Route("api[controller]")]
-public class UserMessageController : ControllerBase
+public class UserMessageController : BaseController
 {
     private readonly IUserMessageService _userMessageService;
 
@@ -52,7 +50,7 @@ public class UserMessageController : ControllerBase
         return Ok(response);
     }
 
-    [HttpDelete]
+    [HttpDelete("{id}")]
     public async Task<IActionResult> DeleteAsync(long Id)
     {
         var response = new Response()
@@ -64,7 +62,7 @@ public class UserMessageController : ControllerBase
         return Ok(response);
     }
 
-    [HttpPut]
+    [HttpPut("{id}")]
     public async Task<IActionResult> PutAsync(long Id, UserMessageForUpdateDto dto)
     {
         var response = new Response()

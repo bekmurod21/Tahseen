@@ -5,9 +5,7 @@ using Tahseen.Service.Interfaces.IFeedbackService;
 
 namespace Tahseen.Api.Controllers.FeedbackControllers;
 
-[ApiController]
-[Route("api[controller]")]
-public class NewsController : ControllerBase
+public class NewsController : BaseController
 {
     private readonly INewsService _newsService;
 
@@ -52,7 +50,7 @@ public class NewsController : ControllerBase
         return Ok(response);
     }
 
-    [HttpDelete]
+    [HttpDelete("{id}")]
     public async Task<IActionResult> DeleteAsync(long Id)
     {
         var response = new Response()
@@ -64,7 +62,7 @@ public class NewsController : ControllerBase
         return Ok(response);
     }
 
-    [HttpPut]
+    [HttpPut("{id}")]
     public async Task<IActionResult> PutAsync(long Id, NewsForUpdateDto dto)
     {
         var response = new Response()

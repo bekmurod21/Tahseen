@@ -4,10 +4,7 @@ using Tahseen.Service.DTOs.Feedbacks.Feedback;
 using Tahseen.Service.Interfaces.IFeedbackService;
 
 namespace Tahseen.Api.Controllers.FeedbackControllers;
-
-[ApiController]
-[Route("api[controller]")]
-public class FeedbackController : ControllerBase
+public class FeedbackController : BaseController
 {
     private readonly IFeedbackService _feedbackService;
 
@@ -52,7 +49,7 @@ public class FeedbackController : ControllerBase
         return Ok(response);
     }
 
-    [HttpDelete]
+    [HttpDelete("{id}")]
     public async Task<IActionResult> DeleteAsync(long Id)
     {
         var response = new Response()
@@ -64,7 +61,7 @@ public class FeedbackController : ControllerBase
         return Ok(response);
     }
 
-    [HttpPut]
+    [HttpPut("{id}")]
     public async Task<IActionResult> PutAsync(long Id, FeedbackForUpdateDto dto)
     {
         var response = new Response()

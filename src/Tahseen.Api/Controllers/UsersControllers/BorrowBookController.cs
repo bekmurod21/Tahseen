@@ -5,9 +5,7 @@ using Tahseen.Service.Interfaces.IUsersService;
 
 namespace Tahseen.Api.Controllers.UsersControllers
 {
-    [ApiController]
-    [Route("api[controller]")]
-    public class BorrowBookController : ControllerBase
+    public class BorrowBookController : BaseController
     {
         private readonly IBorrowedBookService _borrowedBookService;
 
@@ -53,7 +51,7 @@ namespace Tahseen.Api.Controllers.UsersControllers
             return Ok(response);
         }
 
-        [HttpDelete]
+        [HttpDelete("{id}")]
 
         public async Task<IActionResult> DeleteAsync(long Id)
         {
@@ -66,7 +64,7 @@ namespace Tahseen.Api.Controllers.UsersControllers
             return Ok(response);
         }
 
-        [HttpPut]
+        [HttpPut("{id}")]
 
         public async Task<IActionResult> PutAsync(long Id, BorrowedBookForUpdateDto dto)
         {

@@ -6,10 +6,7 @@ using Tahseen.Service.Services.SchoolAndEducations;
 
 namespace Tahseen.Api.Controllers.SchoolAndEducationsControllers;
 
-
-[ApiController]
-[Route("api/[controller]/[action]")]
-public class PupilsControllers : ControllerBase
+public class PupilsControllers : BaseController
 {
     private readonly IPupilService _pupilService;
 
@@ -57,7 +54,7 @@ public class PupilsControllers : ControllerBase
     }
 
 
-    [HttpDelete]
+    [HttpDelete("{id}")]
     public async Task<IActionResult> DeleteAsync(long id)
     {
         var response = new Response()
@@ -69,7 +66,7 @@ public class PupilsControllers : ControllerBase
         return Ok(response);
     }
 
-    [HttpPut]
+    [HttpPut("{id}")]
     public async Task<IActionResult> PutAsync(long id, PupilForUpdateDto dto)
     {
         var response = new Response()

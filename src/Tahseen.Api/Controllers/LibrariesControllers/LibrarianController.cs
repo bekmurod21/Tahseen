@@ -4,10 +4,7 @@ using Tahseen.Service.DTOs.Librarians;
 using Tahseen.Service.Interfaces.ILibrariansService;
 
 namespace Tahseen.Api.Controllers.LibrariesControllers;
-
-[ApiController]
-[Route("api[controller]")]
-public class LibrarianController:ControllerBase
+public class LibrarianController:BaseController
 {
     
     private readonly ILibrarianService _librarianService;
@@ -41,7 +38,7 @@ public class LibrarianController:ControllerBase
         return Ok(response);
     }
           
-    [HttpDelete]
+    [HttpDelete("{id}")]
     public async Task<IActionResult> DeleteAsync(long Id)
     {
         var response = new Response()
@@ -53,7 +50,7 @@ public class LibrarianController:ControllerBase
         return Ok(response);
     }
   
-    [HttpPut]
+    [HttpPut("{id}")]
     public async Task<IActionResult> PutAsync(long Id, LibrarianForUpdateDto data)
     {
         var response = new Response()

@@ -37,6 +37,7 @@ public class NotificationController : BaseController
           }
           
           [HttpDelete("{id}")]
+
           public async Task<IActionResult> DeleteAsync([FromRoute(Name = "id")] long Id)
           {
               var response = new Response()

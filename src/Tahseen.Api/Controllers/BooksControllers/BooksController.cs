@@ -5,9 +5,7 @@ using Tahseen.Service.Interfaces.IBookServices;
 
 namespace Tahseen.Api.Controllers.BooksControllers
 {
-    [Route("api/[controller]")]
-    [ApiController]
-    public class BooksController : ControllerBase
+    public class BooksController : BaseController
     {
         private readonly IBookService service;
 
@@ -25,7 +23,7 @@ namespace Tahseen.Api.Controllers.BooksControllers
                 Data = await this.service.AddAsync(dto)
             });
 
-        [HttpPut]
+        [HttpPut("{id}")]
         public async Task<IActionResult> PutAsync(long id,BookForUpdateDto dto) =>
             Ok(new Response
             {
@@ -34,7 +32,7 @@ namespace Tahseen.Api.Controllers.BooksControllers
                 Data = await this.service.ModifyAsync(id, dto)
             });
 
-        [HttpDelete("id")]
+        [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteAsync(long id) =>
             Ok(new Response
             {
@@ -50,7 +48,7 @@ namespace Tahseen.Api.Controllers.BooksControllers
             Data = await this.service.RetrieveAllAsync()
         });
 
-        [HttpGet("id")]
+        [HttpGet("{id}")]
         public async Task<IActionResult> GetByIdAsync(long id) =>
             Ok(new Response
             {

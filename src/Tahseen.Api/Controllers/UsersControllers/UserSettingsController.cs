@@ -5,9 +5,7 @@ using Tahseen.Service.Interfaces.IUsersService;
 
 namespace Tahseen.Api.Controllers.UsersControllers
 {
-    [ApiController]
-    [Route("api[controller]")]
-    public class UserSettingsController : ControllerBase
+    public class UserSettingsController : BaseController
     {
         private IUserSettingService _userSettingService { get; set; }
 
