@@ -2,12 +2,9 @@ using Microsoft.AspNetCore.Mvc;
 using Tahseen.Api.Models;
 using Tahseen.Service.DTOs.Notifications;
 using Tahseen.Service.Interfaces.INotificationServices;
-
 namespace Tahseen.Api.Controllers.NotificationsControllers;
 
-[ApiController]
-[Route("api[controller]")]
-public class NotificationController:ControllerBase
+public class NotificationController : BaseController
 {
     private readonly INotificationService _notificationService;
     public NotificationController(INotificationService notificationService)
@@ -16,7 +13,7 @@ public class NotificationController:ControllerBase
     }
     
           [HttpPost]
-          public async Task<IActionResult> PostAsync(NotificationForCreationDto data)
+          public async Task<IActionResult> PostAsync([FromBody] NotificationForCreationDto data)
           {
               var response = new Response()
               {
@@ -28,7 +25,7 @@ public class NotificationController:ControllerBase
           }
           
           [HttpGet("{id}")]
-          public async Task<IActionResult> GetAsync(long Id)
+          public async Task<IActionResult> GetAsync([FromRoute(Name = "id")]long Id)
           {
               var response = new Response()
               {
@@ -39,8 +36,8 @@ public class NotificationController:ControllerBase
               return Ok(response);
           }
           
-          [HttpDelete]
-          public async Task<IActionResult> DeleteAsync(long Id)
+          [HttpDelete("{id}")]
+          public async Task<IActionResult> DeleteAsync([FromRoute(Name = "id")] long Id)
           {
               var response = new Response()
               {
@@ -51,8 +48,8 @@ public class NotificationController:ControllerBase
               return Ok(response);
           }
   
-          [HttpPut]
-          public async Task<IActionResult> PutAsync(long Id, NotificationForUpdateDto data)
+          [HttpPut("{id")]
+          public async Task<IActionResult> PutAsync([FromRoute(Name = "id")] long Id, [FromBody] NotificationForUpdateDto data)
           {
               var response = new Response()
               {
