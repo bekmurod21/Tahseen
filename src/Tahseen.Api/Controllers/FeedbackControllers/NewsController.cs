@@ -27,7 +27,7 @@ public class NewsController : BaseController
     }
 
     [HttpGet("{id}")]
-    public async Task<IActionResult> GetAsync(long Id)
+    public async Task<IActionResult> GetAsync([FromRoute]long Id)
     {
         var response = new Response()
         {
@@ -39,7 +39,7 @@ public class NewsController : BaseController
     }
 
     [HttpPost]
-    public async Task<IActionResult> PostAsync(NewsForCreationDto dto)
+    public async Task<IActionResult> PostAsync([FromBody]NewsForCreationDto dto)
     {
         var response = new Response()
         {
@@ -51,7 +51,7 @@ public class NewsController : BaseController
     }
 
     [HttpDelete("{id}")]
-    public async Task<IActionResult> DeleteAsync(long Id)
+    public async Task<IActionResult> DeleteAsync([FromRoute]long Id)
     {
         var response = new Response()
         {
@@ -63,7 +63,8 @@ public class NewsController : BaseController
     }
 
     [HttpPut("{id}")]
-    public async Task<IActionResult> PutAsync(long Id, NewsForUpdateDto dto)
+    public async Task<IActionResult> PutAsync([FromRoute]long Id, 
+        [FromBody]NewsForUpdateDto dto)
     {
         var response = new Response()
         {

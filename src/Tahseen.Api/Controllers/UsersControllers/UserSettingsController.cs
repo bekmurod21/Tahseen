@@ -15,7 +15,7 @@ namespace Tahseen.Api.Controllers.UsersControllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> PostAsync(UserSettingsForCreationDto dto)
+        public async Task<IActionResult> PostAsync([FromBody]UserSettingsForCreationDto dto)
             => Ok(new Response()
             {
                 Message = "Success",
@@ -33,7 +33,7 @@ namespace Tahseen.Api.Controllers.UsersControllers
             });
 
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetByIdAsync(long id)
+        public async Task<IActionResult> GetByIdAsync([FromRoute]long id)
             => Ok(new Response()
             {
                 StatusCode = 200,

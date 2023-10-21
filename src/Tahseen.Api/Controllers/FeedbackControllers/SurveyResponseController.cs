@@ -27,7 +27,7 @@ public class SurveyResponseController : BaseController
     }
 
     [HttpGet("{id}")]
-    public async Task<IActionResult> GetAsync(long Id)
+    public async Task<IActionResult> GetAsync([FromRoute]long Id)
     {
         var response = new Response()
         {
@@ -39,7 +39,7 @@ public class SurveyResponseController : BaseController
     }
 
     [HttpPost]
-    public async Task<IActionResult> PostAsync(SurveyResponseForCreationDto dto)
+    public async Task<IActionResult> PostAsync([FromBody]SurveyResponseForCreationDto dto)
     {
         var response = new Response()
         {
@@ -51,7 +51,7 @@ public class SurveyResponseController : BaseController
     }
 
     [HttpDelete("{id}")]
-    public async Task<IActionResult> DeleteAsync(long Id)
+    public async Task<IActionResult> DeleteAsync([FromRoute]long Id)
     {
         var response = new Response()
         {
@@ -63,7 +63,7 @@ public class SurveyResponseController : BaseController
     }
 
     [HttpPut("{id}")]
-    public async Task<IActionResult> PutAsync(long Id, SurveyResponseForUpdateDto dto)
+    public async Task<IActionResult> PutAsync([FromRoute]long Id, [FromBody]SurveyResponseForUpdateDto dto)
     {
         var response = new Response()
         {

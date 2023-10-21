@@ -26,7 +26,7 @@ public class FeedbackController : BaseController
     }
 
     [HttpGet("{id}")]
-    public async Task<IActionResult> GetAsync(long Id)
+    public async Task<IActionResult> GetAsync([FromRoute]long Id)
     {
         var response = new Response()
         {
@@ -38,7 +38,7 @@ public class FeedbackController : BaseController
     }
 
     [HttpPost]
-    public async Task<IActionResult> PostAsync(FeedbackForCreationDto dto)
+    public async Task<IActionResult> PostAsync([FromBody]FeedbackForCreationDto dto)
     {
         var response = new Response()
         {
@@ -50,7 +50,7 @@ public class FeedbackController : BaseController
     }
 
     [HttpDelete("{id}")]
-    public async Task<IActionResult> DeleteAsync(long Id)
+    public async Task<IActionResult> DeleteAsync([FromRoute]long Id)
     {
         var response = new Response()
         {
@@ -62,7 +62,7 @@ public class FeedbackController : BaseController
     }
 
     [HttpPut("{id}")]
-    public async Task<IActionResult> PutAsync(long Id, FeedbackForUpdateDto dto)
+    public async Task<IActionResult> PutAsync([FromRoute]long Id, [FromBody]FeedbackForUpdateDto dto)
     {
         var response = new Response()
         {

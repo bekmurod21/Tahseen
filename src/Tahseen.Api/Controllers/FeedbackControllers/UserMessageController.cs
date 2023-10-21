@@ -27,7 +27,7 @@ public class UserMessageController : BaseController
     }
 
     [HttpGet("{id}")]
-    public async Task<IActionResult> GetAsync(long Id)
+    public async Task<IActionResult> GetAsync([FromRoute]long Id)
     {
         var response = new Response()
         {
@@ -39,7 +39,7 @@ public class UserMessageController : BaseController
     }
 
     [HttpPost]
-    public async Task<IActionResult> PostAsync(UserMessageForCreationDto dto)
+    public async Task<IActionResult> PostAsync([FromBody]UserMessageForCreationDto dto)
     {
         var response = new Response()
         {
@@ -51,7 +51,7 @@ public class UserMessageController : BaseController
     }
 
     [HttpDelete("{id}")]
-    public async Task<IActionResult> DeleteAsync(long Id)
+    public async Task<IActionResult> DeleteAsync([FromRoute]long Id)
     {
         var response = new Response()
         {
@@ -63,7 +63,7 @@ public class UserMessageController : BaseController
     }
 
     [HttpPut("{id}")]
-    public async Task<IActionResult> PutAsync(long Id, UserMessageForUpdateDto dto)
+    public async Task<IActionResult> PutAsync([FromRoute]long Id, [FromBody]UserMessageForUpdateDto dto)
     {
         var response = new Response()
         {

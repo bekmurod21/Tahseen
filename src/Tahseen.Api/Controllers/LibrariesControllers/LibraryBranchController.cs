@@ -16,7 +16,7 @@ public class LibraryBranchController : BaseController
     }
     
     [HttpPost]
-    public async Task<IActionResult> PostAsync(LibraryBranchForCreationDto data)
+    public async Task<IActionResult> PostAsync([FromBody]LibraryBranchForCreationDto data)
     {
         var response = new Response()
         {   
@@ -28,7 +28,7 @@ public class LibraryBranchController : BaseController
     }
     
     [HttpGet("{id}")]
-    public async Task<IActionResult> GetAsync(long Id)
+    public async Task<IActionResult> GetAsync([FromRoute]long Id)
     {
         var response = new Response()
         {
@@ -40,7 +40,7 @@ public class LibraryBranchController : BaseController
     }
           
     [HttpDelete("{id}")]
-    public async Task<IActionResult> DeleteAsync(long Id)
+    public async Task<IActionResult> DeleteAsync([FromRoute]long Id)
     {
         var response = new Response()
         {
@@ -52,7 +52,7 @@ public class LibraryBranchController : BaseController
     }
   
     [HttpPut("{id}")]
-    public async Task<IActionResult> PutAsync(long Id, LibraryBranchForUpdateDto data)
+    public async Task<IActionResult> PutAsync([FromRoute]long Id, [FromBody]LibraryBranchForUpdateDto data)
     {
         var response = new Response()
         {

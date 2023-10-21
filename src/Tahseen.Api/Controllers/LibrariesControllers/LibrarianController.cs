@@ -15,7 +15,7 @@ public class LibrarianController:BaseController
     }
     
     [HttpPost]
-    public async Task<IActionResult> PostAsync(LibrarianForCreationDto data)
+    public async Task<IActionResult> PostAsync([FromBody]LibrarianForCreationDto data)
     {
         var response = new Response()
         {
@@ -27,7 +27,7 @@ public class LibrarianController:BaseController
     }
     
     [HttpGet("{id}")]
-    public async Task<IActionResult> GetAsync(long Id)
+    public async Task<IActionResult> GetAsync([FromRoute]long Id)
     {
         var response = new Response()
         {
@@ -39,7 +39,7 @@ public class LibrarianController:BaseController
     }
           
     [HttpDelete("{id}")]
-    public async Task<IActionResult> DeleteAsync(long Id)
+    public async Task<IActionResult> DeleteAsync([FromRoute]long Id)
     {
         var response = new Response()
         {
@@ -51,7 +51,7 @@ public class LibrarianController:BaseController
     }
   
     [HttpPut("{id}")]
-    public async Task<IActionResult> PutAsync(long Id, LibrarianForUpdateDto data)
+    public async Task<IActionResult> PutAsync([FromRoute]long Id, [FromBody]LibrarianForUpdateDto data)
     {
         var response = new Response()
         {
