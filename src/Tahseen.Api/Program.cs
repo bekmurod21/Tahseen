@@ -17,6 +17,7 @@ builder.Services.AddDbContext<AppDbContext>(option
     );
 builder.Services.AddCustomService();
 // MiddleWares
+
 var app = builder.Build();
 
 if (app.Environment.IsDevelopment())
@@ -24,6 +25,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
 app.UseMiddleware<ExceptionHandlerMiddleWare>();
 app.UseHttpsRedirection();
 app.UseAuthorization();
