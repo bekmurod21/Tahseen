@@ -20,4 +20,6 @@ public class BookForUpdateDto
     public long GenreId { get; set; }
     public long LibraryId { get; set; }
     public long PublisherId { get; set; }
+    public string PrintedIn { get; set; }
+    public long TotalPages { get; set; }
 }
