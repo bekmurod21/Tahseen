@@ -33,7 +33,7 @@ namespace Tahseen.Api.Controllers.UsersControllers
             });
 
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetByIdAsync([FromRoute]long id)
+        public async Task<IActionResult> GetByIdAsync([FromRoute(Name = "id")]long id)
             => Ok(new Response()
             {
                 StatusCode = 200,

@@ -22,7 +22,7 @@ namespace Tahseen.Api.Controllers.BooksControllers
                 Data = await this.service.AddAsync(dto)
             });
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutAsync([FromRoute] long id, [FromBody] AuthorForUpdateDto dto) =>
+        public async Task<IActionResult> PutAsync([FromRoute(Name = "id")] long id, [FromBody] AuthorForUpdateDto dto) =>
             Ok(new Response
             {
                 StatusCode = 200,
@@ -30,7 +30,7 @@ namespace Tahseen.Api.Controllers.BooksControllers
                 Data = await this.service.ModifyAsync(id,dto)
             });
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteAsync([FromRoute] long id) =>
+        public async Task<IActionResult> DeleteAsync([FromRoute(Name = "id")] long id) =>
             Ok(new Response
             {
                 StatusCode = 200,
@@ -38,7 +38,7 @@ namespace Tahseen.Api.Controllers.BooksControllers
                 Data = await this.service.RemoveAsync(id)
             });
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetByIdAsync([FromRoute] long id) =>
+        public async Task<IActionResult> GetByIdAsync([FromRoute(Name = "id")] long id) =>
             Ok(new Response
             {
                 StatusCode = 200,

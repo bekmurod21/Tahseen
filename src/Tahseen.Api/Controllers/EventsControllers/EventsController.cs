@@ -24,7 +24,7 @@ namespace Tahseen.Api.Controllers.EventsControllers
             });
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutAsync([FromRoute]long id,[FromBody]EventForUpdateDto dto) =>
+        public async Task<IActionResult> PutAsync([FromRoute(Name = "id")]long id,[FromBody]EventForUpdateDto dto) =>
             Ok(new Response
             {
                 StatusCode = 200,
@@ -33,7 +33,7 @@ namespace Tahseen.Api.Controllers.EventsControllers
             });
 
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteAsync([FromRoute]long id) =>
+        public async Task<IActionResult> DeleteAsync([FromRoute(Name = "id")]long id) =>
             Ok(new Response
             {
                 StatusCode = 200,
@@ -42,7 +42,7 @@ namespace Tahseen.Api.Controllers.EventsControllers
             });
 
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetByIdAsync([FromRoute]long id) =>
+        public async Task<IActionResult> GetByIdAsync([FromRoute(Name = "id")]long id) =>
             Ok(new Response
             {
                 StatusCode = 200,
