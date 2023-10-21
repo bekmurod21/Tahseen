@@ -5,9 +5,7 @@ using Tahseen.Service.Interfaces.IRewardsService;
 
 namespace Tahseen.Api.Controllers.RewardControllers;
 
-[ApiController]
-[Route("api[controller]")]
-public class BadgeController : ControllerBase
+public class BadgeController : BaseController
 {
     private readonly IBadgeService _badgeService;
 
@@ -52,7 +50,7 @@ public class BadgeController : ControllerBase
         return Ok(response);
     }
 
-    [HttpDelete]
+    [HttpDelete("{id}")]
     public async Task<IActionResult> DeleteAsync(long Id)
     {
         var response = new Response()
@@ -64,7 +62,7 @@ public class BadgeController : ControllerBase
         return Ok(response);
     }
 
-    [HttpPut]
+    [HttpPut("{id}")]
     public async Task<IActionResult> PutAsync(long Id, BadgeForUpdateDto dto)
     {
         var response = new Response()

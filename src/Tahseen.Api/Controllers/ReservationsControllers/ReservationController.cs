@@ -5,9 +5,7 @@ using Tahseen.Service.Interfaces.IReservationsServices;
 
 namespace Tahseen.Api.Controllers.ReservationsControllers;
 
-[ApiController]
-[Route("api[controller]")]
-public class ReservationController:ControllerBase
+public class ReservationController:BaseController
 {
     private readonly IReservationsService _reservationService;
     public ReservationController(IReservationsService reservationService)
@@ -39,7 +37,7 @@ public class ReservationController:ControllerBase
               return Ok(response);
           }
           
-          [HttpDelete]
+          [HttpDelete("{id}")]
           public async Task<IActionResult> DeleteAsync(long Id)
           {
               var response = new Response()
@@ -51,7 +49,7 @@ public class ReservationController:ControllerBase
               return Ok(response);
           }
   
-          [HttpPut]
+          [HttpPut("{id}")]
           public async Task<IActionResult> PutAsync(long Id, ReservationForUpdateDto data)
           {
               var response = new Response()

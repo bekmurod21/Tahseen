@@ -5,9 +5,7 @@ using Tahseen.Service.Interfaces.IUsersService;
 
 namespace Tahseen.Api.Controllers.UsersControllers
 {
-    [ApiController]
-    [Route("api[controller]")]
-    public class UsersController : ControllerBase
+    public class UsersController : BaseController
     {
         private readonly IUserService _userService;
 
@@ -56,7 +54,7 @@ namespace Tahseen.Api.Controllers.UsersControllers
             return Ok(response);
         }
 
-        [HttpDelete]
+        [HttpDelete("{id}")]
 
         public async Task<IActionResult> DeleteAsync(long Id)
         {
@@ -69,7 +67,7 @@ namespace Tahseen.Api.Controllers.UsersControllers
             return Ok(response);
         }
 
-        [HttpPut]
+        [HttpPut("{id}")]
 
         public async Task<IActionResult> PutAsync(long Id, UserForUpdateDto dto)
         {

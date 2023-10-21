@@ -5,10 +5,7 @@ using Tahseen.Service.Interfaces.ISchoolAndEducation;
 
 namespace Tahseen.Api.Controllers.SchoolAndEducationsControllers;
 
-
-[ApiController]
-[Route("api/[controller]/[action]")]
-public class PupilBookConnectionController : ControllerBase
+public class PupilBookConnectionController : BaseController
 {
     private readonly IPupilBookConnectionService _pupilBookConnectionService;
 
@@ -57,7 +54,7 @@ public class PupilBookConnectionController : ControllerBase
     }
 
 
-    [HttpDelete]
+    [HttpDelete("{id}")]
     public async Task<IActionResult> DeleteAsync(long id)
     {
         var response = new Response()
@@ -69,7 +66,7 @@ public class PupilBookConnectionController : ControllerBase
         return Ok(response);
     }
 
-    [HttpPut]
+    [HttpPut("{id}")]
     public async Task<IActionResult> PutAsync(long id, PupilBookConnectionForUpdateDto dto)
     {
         var response = new Response()

@@ -6,7 +6,7 @@ using Tahseen.Service.Services.SchoolAndEducations;
 
 namespace Tahseen.Api.Controllers.SchoolAndEducationsControllers;
 
-public class SchoolBookController : ControllerBase
+public class SchoolBookController : BaseController
 {
     private readonly ISchoolBookService _schoolBookService;
 
@@ -54,7 +54,7 @@ public class SchoolBookController : ControllerBase
     }
 
 
-    [HttpDelete]
+    [HttpDelete("{id}")]
     public async Task<IActionResult> DeleteAsync(long id)
     {
         var response = new Response()
@@ -66,7 +66,7 @@ public class SchoolBookController : ControllerBase
         return Ok(response);
     }
 
-    [HttpPut]
+    [HttpPut("{id}")]
     public async Task<IActionResult> PutAsync(long id, SchoolBookForUpdateDto dto)
     {
         var response = new Response()

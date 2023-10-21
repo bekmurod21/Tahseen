@@ -5,9 +5,7 @@ using Tahseen.Service.Interfaces.IUsersService;
 
 namespace Tahseen.Api.Controllers.UsersControllers
 {
-    [ApiController]
-    [Route("api/[controller]")]
-    public class WishlistsController : ControllerBase
+    public class WishlistsController : BaseController
     {
       
         private readonly IWishlistService _wishlistService;
@@ -46,7 +44,7 @@ namespace Tahseen.Api.Controllers.UsersControllers
             });
 
 
-        [HttpDelete]
+        [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteAsync(long id)
             => Ok(new Response
             {
@@ -55,7 +53,7 @@ namespace Tahseen.Api.Controllers.UsersControllers
                 Data = await this._wishlistService.RemoveAsync(id)
             });
 
-        [HttpPut]
+        [HttpPut("{id}")]
         public async Task<IActionResult> PutAsync(long id, WishlistForUpdateDto dto)
             => Ok(new Response
             {
