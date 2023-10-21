@@ -25,7 +25,7 @@ namespace Tahseen.Api.Controllers.UsersControllers
 
 
         [HttpGet("{id}")]
-        public async Task<IActionResult> Get(long id)
+        public async Task<IActionResult> Get([FromRoute]long id)
             => Ok(new Response
             {
                 StatusCode = 200,
@@ -35,7 +35,7 @@ namespace Tahseen.Api.Controllers.UsersControllers
 
 
         [HttpPost]
-        public async Task<IActionResult> PostAsync(WishlistForCreationDto dto)
+        public async Task<IActionResult> PostAsync([FromBody]WishlistForCreationDto dto)
             => Ok(new Response
             {
                 StatusCode = 200,
@@ -45,7 +45,7 @@ namespace Tahseen.Api.Controllers.UsersControllers
 
 
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteAsync(long id)
+        public async Task<IActionResult> DeleteAsync([FromRoute]long id)
             => Ok(new Response
             {
                 StatusCode = 200,
@@ -54,7 +54,7 @@ namespace Tahseen.Api.Controllers.UsersControllers
             });
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutAsync(long id, WishlistForUpdateDto dto)
+        public async Task<IActionResult> PutAsync([FromRoute]long id, [FromBody]WishlistForUpdateDto dto)
             => Ok(new Response
             {
                 StatusCode = 200,

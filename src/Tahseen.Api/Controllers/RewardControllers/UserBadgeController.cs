@@ -27,7 +27,7 @@ public class UserBadgeController : BaseController
     }
 
     [HttpGet("{id}")]
-    public async Task<IActionResult> GetAsync(long Id)
+    public async Task<IActionResult> GetAsync([FromRoute]long Id)
     {
         var response = new Response()
         {
@@ -39,7 +39,7 @@ public class UserBadgeController : BaseController
     }
 
     [HttpPost]
-    public async Task<IActionResult> PostAsync(UserBadgesForCreationDto dto)
+    public async Task<IActionResult> PostAsync([FromBody]UserBadgesForCreationDto dto)
     {
         var response = new Response()
         {
@@ -51,7 +51,7 @@ public class UserBadgeController : BaseController
     }
 
     [HttpDelete("{id}")]
-    public async Task<IActionResult> DeleteAsync(long Id)
+    public async Task<IActionResult> DeleteAsync([FromRoute]long Id)
     {
         var response = new Response()
         {
@@ -63,7 +63,7 @@ public class UserBadgeController : BaseController
     }
 
     [HttpPut("{id}")]
-    public async Task<IActionResult> PutAsync(long Id, UserBadgesForUpdateDto dto)
+    public async Task<IActionResult> PutAsync([FromRoute]long Id, [FromBody]UserBadgesForUpdateDto dto)
     {
         var response = new Response()
         {

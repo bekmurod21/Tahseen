@@ -28,7 +28,7 @@ public class PupilBookConnectionController : BaseController
 
 
     [HttpGet("{id}")]
-    public async Task<IActionResult> GetAsync(long Id)
+    public async Task<IActionResult> GetAsync([FromRoute]long Id)
     {
         var response = new Response()
         {
@@ -42,7 +42,7 @@ public class PupilBookConnectionController : BaseController
 
 
     [HttpPost]
-    public async Task<IActionResult> PostAsync(PupilBookConnectionForCreationDto dto)
+    public async Task<IActionResult> PostAsync([FromBody]PupilBookConnectionForCreationDto dto)
     {
         var response = new Response()
         {
@@ -55,7 +55,7 @@ public class PupilBookConnectionController : BaseController
 
 
     [HttpDelete("{id}")]
-    public async Task<IActionResult> DeleteAsync(long id)
+    public async Task<IActionResult> DeleteAsync([FromRoute]long id)
     {
         var response = new Response()
         {
@@ -67,7 +67,7 @@ public class PupilBookConnectionController : BaseController
     }
 
     [HttpPut("{id}")]
-    public async Task<IActionResult> PutAsync(long id, PupilBookConnectionForUpdateDto dto)
+    public async Task<IActionResult> PutAsync([FromRoute]long id, [FromBody]PupilBookConnectionForUpdateDto dto)
     {
         var response = new Response()
         {

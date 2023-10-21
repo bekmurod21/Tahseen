@@ -14,7 +14,7 @@ public class ReservationController:BaseController
     }
     
           [HttpPost]
-          public async Task<IActionResult> PostAsync(ReservationForCreationDto data)
+          public async Task<IActionResult> PostAsync([FromBody]ReservationForCreationDto data)
           {
               var response = new Response()
               {
@@ -26,7 +26,7 @@ public class ReservationController:BaseController
           }
           
           [HttpGet("{id}")]
-          public async Task<IActionResult> GetAsync(long Id)
+          public async Task<IActionResult> GetAsync([FromRoute]long Id)
           {
               var response = new Response()
               {
@@ -38,7 +38,7 @@ public class ReservationController:BaseController
           }
           
           [HttpDelete("{id}")]
-          public async Task<IActionResult> DeleteAsync(long Id)
+          public async Task<IActionResult> DeleteAsync([FromRoute]long Id)
           {
               var response = new Response()
               {
@@ -50,7 +50,7 @@ public class ReservationController:BaseController
           }
   
           [HttpPut("{id}")]
-          public async Task<IActionResult> PutAsync(long Id, ReservationForUpdateDto data)
+          public async Task<IActionResult> PutAsync([FromRoute]long Id, [FromBody]ReservationForUpdateDto data)
           {
               var response = new Response()
               {

@@ -29,7 +29,7 @@ public class PupilsControllers : BaseController
 
 
     [HttpGet("{id}")]
-    public async Task<IActionResult> GetAsync(long Id)
+    public async Task<IActionResult> GetAsync([FromRoute]long Id)
     {
         var response = new Response()
         {
@@ -42,7 +42,7 @@ public class PupilsControllers : BaseController
 
 
     [HttpPost]
-    public async Task<IActionResult> PostAsync(PupilForCreationDto dto)
+    public async Task<IActionResult> PostAsync([FromBody]PupilForCreationDto dto)
     {
         var response = new Response()
         {
@@ -55,7 +55,7 @@ public class PupilsControllers : BaseController
 
 
     [HttpDelete("{id}")]
-    public async Task<IActionResult> DeleteAsync(long id)
+    public async Task<IActionResult> DeleteAsync([FromRoute]long id)
     {
         var response = new Response()
         {
@@ -67,7 +67,7 @@ public class PupilsControllers : BaseController
     }
 
     [HttpPut("{id}")]
-    public async Task<IActionResult> PutAsync(long id, PupilForUpdateDto dto)
+    public async Task<IActionResult> PutAsync([FromRoute]long id, [FromBody]PupilForUpdateDto dto)
     {
         var response = new Response()
         {

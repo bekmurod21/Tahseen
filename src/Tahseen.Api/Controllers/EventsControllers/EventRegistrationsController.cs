@@ -15,7 +15,7 @@ namespace Tahseen.Api.Controllers.EventsControllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> PostAsync(EventRegistrationForCreationDto dto) =>
+        public async Task<IActionResult> PostAsync([FromBody]EventRegistrationForCreationDto dto) =>
             Ok(new Response
             {
                 StatusCode = 200,
@@ -24,7 +24,7 @@ namespace Tahseen.Api.Controllers.EventsControllers
             });
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutAsync(long id,EventRegistrationForUpdateDto dto) =>
+        public async Task<IActionResult> PutAsync([FromRoute]long id,[FromBody]EventRegistrationForUpdateDto dto) =>
             Ok(new Response
             {
                 StatusCode = 200,
@@ -33,7 +33,7 @@ namespace Tahseen.Api.Controllers.EventsControllers
             });
 
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteAsync(long id) =>
+        public async Task<IActionResult> DeleteAsync([FromRoute]long id) =>
             Ok(new Response
             {
                 StatusCode = 200,
@@ -42,7 +42,7 @@ namespace Tahseen.Api.Controllers.EventsControllers
             });
 
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetByIdAsync(long id) =>
+        public async Task<IActionResult> GetByIdAsync([FromRoute]long id) =>
             Ok(new Response
             {
                 StatusCode = 200,

@@ -28,7 +28,7 @@ namespace Tahseen.Api.Controllers.UsersControllers
 
         [HttpGet("{id}")]
 
-        public async Task<IActionResult> GetAsync(long Id)
+        public async Task<IActionResult> GetAsync([FromRoute]long Id)
         {
             var response = new Response()
             {
@@ -40,7 +40,7 @@ namespace Tahseen.Api.Controllers.UsersControllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> PostAsync(BorrowedBookForCreationDto dto)
+        public async Task<IActionResult> PostAsync([FromBody]BorrowedBookForCreationDto dto)
         {
             var response = new Response()
             {
@@ -53,7 +53,7 @@ namespace Tahseen.Api.Controllers.UsersControllers
 
         [HttpDelete("{id}")]
 
-        public async Task<IActionResult> DeleteAsync(long Id)
+        public async Task<IActionResult> DeleteAsync([FromRoute]long Id)
         {
             var response = new Response()
             {
@@ -66,7 +66,7 @@ namespace Tahseen.Api.Controllers.UsersControllers
 
         [HttpPut("{id}")]
 
-        public async Task<IActionResult> PutAsync(long Id, BorrowedBookForUpdateDto dto)
+        public async Task<IActionResult> PutAsync([FromRoute]long Id, [FromBody]BorrowedBookForUpdateDto dto)
         {
             var response = new Response()
             {

@@ -23,7 +23,7 @@ public class BookReviewsController : BaseController
         });
 
     [HttpPut("{id}")]
-    public async Task<IActionResult> PutAsync([FromRoute(Name = "id")] long id, [FromBody] BookReviewForUpdateDto dto) =>
+    public async Task<IActionResult> PutAsync([FromRoute] long id, [FromBody] BookReviewForUpdateDto dto) =>
         Ok(new Response
         {
             StatusCode = 200,
@@ -32,7 +32,7 @@ public class BookReviewsController : BaseController
         });
 
     [HttpDelete("{id}")]
-    public async Task<IActionResult> DeleteAsync([FromRoute(Name = "id")] long id) =>
+    public async Task<IActionResult> DeleteAsync([FromRoute] long id) =>
         Ok(new Response
         {
             StatusCode = 200,
@@ -41,7 +41,7 @@ public class BookReviewsController : BaseController
         });
 
     [HttpGet("{id}")]
-    public async Task<IActionResult> GetByIdAsync([FromRoute(Name = "id")] long id) =>
+    public async Task<IActionResult> GetByIdAsync([FromRoute] long id) =>
         Ok(new Response
         {
             StatusCode = 200,

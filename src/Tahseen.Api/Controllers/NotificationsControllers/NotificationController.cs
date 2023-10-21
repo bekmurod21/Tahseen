@@ -25,7 +25,7 @@ public class NotificationController : BaseController
           }
           
           [HttpGet("{id}")]
-          public async Task<IActionResult> GetAsync([FromRoute(Name = "id")]long Id)
+          public async Task<IActionResult> GetAsync([FromRoute]long Id)
           {
               var response = new Response()
               {
@@ -38,7 +38,7 @@ public class NotificationController : BaseController
           
           [HttpDelete("{id}")]
 
-          public async Task<IActionResult> DeleteAsync([FromRoute(Name = "id")] long Id)
+          public async Task<IActionResult> DeleteAsync([FromRoute] long Id)
           {
               var response = new Response()
               {
@@ -50,7 +50,7 @@ public class NotificationController : BaseController
           }
   
           [HttpPut("{id")]
-          public async Task<IActionResult> PutAsync([FromRoute(Name = "id")] long Id, [FromBody] NotificationForUpdateDto data)
+          public async Task<IActionResult> PutAsync([FromRoute] long Id, [FromBody] NotificationForUpdateDto data)
           {
               var response = new Response()
               {
