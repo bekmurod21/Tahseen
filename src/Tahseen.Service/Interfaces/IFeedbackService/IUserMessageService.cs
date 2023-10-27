@@ -8,5 +8,5 @@ public interface IUserMessageService
     public Task<UserMessageForResultDto> ModifyAsync(long id,UserMessageForUpdateDto dto);
     public Task<bool> RemoveAsync(long id);
     public Task<UserMessageForResultDto> RetrieveByIdAsync(long id);
-    public Task<IQueryable<UserMessageForResultDto>> RetrieveAllAsync();
+    public Task<IEnumerable<UserMessageForResultDto>> RetrieveAllAsync();
 }

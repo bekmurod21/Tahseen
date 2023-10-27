@@ -53,10 +53,10 @@ public class LibraryBranchService : ILibraryBranchService
         return await this.repository.DeleteAsync(libraryBranch.Id);
     }
 
-    public async Task<IQueryable<LibraryBranchForResultDto>> RetrieveAllAsync()
+    public async Task<IEnumerable<LibraryBranchForResultDto>> RetrieveAllAsync()
     {
         var results = this.repository.SelectAll().Where(l => !l.IsDeleted);
-        return mapper.Map<IQueryable<LibraryBranchForResultDto>>(results);
+        return mapper.Map<IEnumerable<LibraryBranchForResultDto>>(results);
     }
 
     public async Task<LibraryBranchForResultDto> RetrieveByIdAsync(long id)

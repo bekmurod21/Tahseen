@@ -8,5 +8,5 @@ public class Publisher:Auditable
     public string Address { get; set; }
     public string ContactInformation { get; set; }
 
-    public IQueryable<Book> Books { get; set;}
+    public IEnumerable<Book> Books { get; set;}
 }

@@ -8,5 +8,5 @@ public interface IAuthorService
     public Task<AuthorForResultDto> ModifyAsync(long id, AuthorForUpdateDto dto);
     public Task<bool> RemoveAsync(long id);
     public Task<AuthorForResultDto> RetrieveByIdAsync(long id);
-    public Task<IQueryable<AuthorForResultDto>> RetrieveAllAsync();
+    public Task<IEnumerable<AuthorForResultDto>> RetrieveAllAsync();
 }

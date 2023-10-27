@@ -9,5 +9,5 @@ public interface IFeedbackService
     public Task<FeedbackForResultDto> ModifyAsync(long id, FeedbackForUpdateDto dto);
     public Task<bool> RemoveAsync(long id);
     public Task<FeedbackForResultDto?> RetrieveByIdAsync(long id);
-    public Task<IQueryable<FeedbackForResultDto>> RetrieveAllAsync();
+    public Task<IEnumerable<FeedbackForResultDto>> RetrieveAllAsync();
 }

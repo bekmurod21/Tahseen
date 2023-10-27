@@ -15,8 +15,8 @@ namespace Tahseen.Api.Controllers.UsersControllers
         }
 
         [HttpGet]
-        public IQueryable<IActionResult> GetAll()
-            => (IQueryable<IActionResult>)Ok(new Response
+        public IEnumerable<IActionResult> GetAll()
+            => (IEnumerable<IActionResult>)Ok(new Response
             {
                 StatusCode = 200,
                 Message = "Successful",

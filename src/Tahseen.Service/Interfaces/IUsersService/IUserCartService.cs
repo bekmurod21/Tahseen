@@ -7,6 +7,6 @@ namespace Tahseen.Service.Interfaces.IUsersService
         public Task<UserCartForResultDto> AddAsync(UserCartForCreationDto dto);
         public Task<bool> RemoveAsync(long Id);
         public Task<UserCartForResultDto> RetrieveByIdAsync(long Id);
-        public Task<IQueryable<UserCartForResultDto>> RetrieveAllAsync();
+        public Task<IEnumerable<UserCartForResultDto>> RetrieveAllAsync();
     }
 }

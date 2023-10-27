@@ -25,10 +25,10 @@ public class BookService : IBookService
         return _mapper.Map<BookForResultDto>(result);
     }
 
-    public async Task<IQueryable<BookForResultDto>> RetrieveAllAsync()
+    public async Task<IEnumerable<BookForResultDto>> RetrieveAllAsync()
     {
         var ALlData = this._repository.SelectAll().Where(e => e.IsDeleted == false);
-        return this._mapper.Map<IQueryable<BookForResultDto>>(ALlData);
+        return this._mapper.Map<IEnumerable<BookForResultDto>>(ALlData);
     }
 
     public async Task<BookForResultDto> ModifyAsync(long id, BookForUpdateDto dto)

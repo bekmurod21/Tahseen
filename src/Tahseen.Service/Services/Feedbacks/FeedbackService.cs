@@ -49,10 +49,10 @@ public class FeedbackService:IFeedbackService
         return _mapper.Map<FeedbackForResultDto>(bookReview);
     }
 
-    public async Task<IQueryable<FeedbackForResultDto>> RetrieveAllAsync()
+    public async Task<IEnumerable<FeedbackForResultDto>> RetrieveAllAsync()
     {
         var booksReview =  _repository.SelectAll().Where(x=>!x.IsDeleted);
         
-        return _mapper.Map<IQueryable<FeedbackForResultDto>>(booksReview);
+        return _mapper.Map<IEnumerable<FeedbackForResultDto>>(booksReview);
     }
 }

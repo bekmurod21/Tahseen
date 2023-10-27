@@ -6,7 +6,7 @@ namespace Tahseen.Service.Interfaces.IUsersService
     {
         public Task<BorrowedBookCartForResultDto> AddAsync(BorrowedBookCartForCreationDto dto);
         public Task<bool> RemoveAsync(long Id);
-        public Task<IQueryable<BorrowedBookCartForResultDto>> RetrieveAllAsync();
+        public Task<IEnumerable<BorrowedBookCartForResultDto>> RetrieveAllAsync();
         public Task<BorrowedBookCartForResultDto> RetrieveByIdAsync(long Id); 
     }
 }

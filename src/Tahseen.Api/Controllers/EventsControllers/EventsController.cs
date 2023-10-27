@@ -8,12 +8,10 @@ namespace Tahseen.Api.Controllers.EventsControllers
     public class EventsController : BaseController
     {
         private readonly IEventsService service;
-
         public EventsController(IEventsService service)
         {
             this.service = service;
         }
-
         [HttpPost]
         public async Task<IActionResult> PostAsync([FromBody]EventForCreationDto dto) =>
             Ok(new Response

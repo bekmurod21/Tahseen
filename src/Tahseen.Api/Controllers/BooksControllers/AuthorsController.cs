@@ -14,13 +14,14 @@ namespace Tahseen.Api.Controllers.BooksControllers
             this.service = service;
         }
         [HttpPost]
-        public async Task<IActionResult> PostAsync([FromBody] AuthorForCreationDto dto)=>
+        public async Task<IActionResult> PostAsync([FromForm] AuthorForCreationDto dto)=>
             Ok(new Response
             {
                 StatusCode = 200,
                 Message = "Success",
                 Data = await this.service.AddAsync(dto)
             });
+
         [HttpPut("{id}")]
         public async Task<IActionResult> PutAsync([FromRoute(Name = "id")] long id, [FromBody] AuthorForUpdateDto dto) =>
             Ok(new Response

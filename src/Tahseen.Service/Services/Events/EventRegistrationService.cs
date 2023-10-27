@@ -50,10 +50,10 @@ public class EventRegistrationService : IEventRegistrationService
         return await _repository.DeleteAsync(id);
     }
 
-    public async Task<IQueryable<EventRegistrationForResultDto>> RetrieveAllAsync()
+    public async Task<IEnumerable<EventRegistrationForResultDto>> RetrieveAllAsync()
     {
         var AllData = this._repository.SelectAll().Where(e => e.IsDeleted == false);
-        return this._mapper.Map<IQueryable<EventRegistrationForResultDto>>(AllData);
+        return this._mapper.Map<IEnumerable<EventRegistrationForResultDto>>(AllData);
     }
 
     public async Task<EventRegistrationForResultDto> RetrieveByIdAsync(long id)

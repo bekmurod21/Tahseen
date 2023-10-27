@@ -56,9 +56,9 @@ public class SchoolBookService:ISchoolBookService
         return _mapper.Map<SchoolBookForResultDto>(book);
     }
 
-    public async Task<IQueryable<SchoolBookForResultDto>> RetrieveAllAsync()
+    public async Task<IEnumerable<SchoolBookForResultDto>> RetrieveAllAsync()
     {
         var books = _repository.SelectAll().Where(x => !x.IsDeleted);
-        return _mapper.Map<IQueryable<SchoolBookForResultDto>>(books);
+        return _mapper.Map<IEnumerable<SchoolBookForResultDto>>(books);
     }
 }

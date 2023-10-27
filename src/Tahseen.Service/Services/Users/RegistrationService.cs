@@ -35,10 +35,10 @@ namespace Tahseen.Service.Services.Users
             return await this._regisRepo.DeleteAsync(Id);
         }
 
-        public async Task<IQueryable<RegistrationForResultDto>> RetrieveAllAsync()
+        public async Task<IEnumerable<RegistrationForResultDto>> RetrieveAllAsync()
         {
             var AllData = this._regisRepo.SelectAll();
-            return this._mapper.Map<IQueryable<RegistrationForResultDto>>(AllData);
+            return this._mapper.Map<IEnumerable<RegistrationForResultDto>>(AllData);
         }
 
         public async Task<RegistrationForResultDto> RetrieveByIdAsync(long Id)

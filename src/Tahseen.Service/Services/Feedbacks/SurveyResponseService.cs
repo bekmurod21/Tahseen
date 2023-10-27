@@ -52,9 +52,9 @@ public class SurveyResponseService:ISurveyResponseService
         return _mapper.Map<SurveyResponseForResultDto>(surveyResponse);
     }
 
-    public async Task<IQueryable<SurveyResponseForResultDto>> RetrieveAllAsync()
+    public async Task<IEnumerable<SurveyResponseForResultDto>> RetrieveAllAsync()
     {
         var surveyResponses = _repository.SelectAll().Where(x => !x.IsDeleted);
-        return _mapper.Map<IQueryable<SurveyResponseForResultDto>>(surveyResponses);
+        return _mapper.Map<IEnumerable<SurveyResponseForResultDto>>(surveyResponses);
     }
 }

@@ -40,10 +40,10 @@ public class CompletedBookService : ICompletedBookService
     public Task<bool> RemoveAsync(long id)
     => this.repository.DeleteAsync(id);
 
-    public async Task<IQueryable<CompletedBookForResultDto>> RetrieveAllAsync()
+    public async Task<IEnumerable<CompletedBookForResultDto>> RetrieveAllAsync()
     {
         var bookCompleted = this.repository.SelectAll().Where(t=>!t.IsDeleted);
-        return this.mapper.Map<IQueryable<CompletedBookForResultDto>>(bookCompleted);
+        return this.mapper.Map<IEnumerable<CompletedBookForResultDto>>(bookCompleted);
     }
 
     public async Task<CompletedBookForResultDto> RetrieveByIdAsync(long id)

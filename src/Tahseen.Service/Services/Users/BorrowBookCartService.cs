@@ -39,10 +39,10 @@ namespace Tahseen.Service.Services.Users
             return await this._repository.DeleteAsync(Id);
         }
 
-        public async Task<IQueryable<BorrowedBookCartForResultDto>> RetrieveAllAsync()
+        public async Task<IEnumerable<BorrowedBookCartForResultDto>> RetrieveAllAsync()
         {
             var AllData = this._repository.SelectAll().Where(t => t.IsDeleted == false); ;
-            return this._mapper.Map<IQueryable<BorrowedBookCartForResultDto>>(AllData);
+            return this._mapper.Map<IEnumerable<BorrowedBookCartForResultDto>>(AllData);
         }
 
         public async Task<BorrowedBookCartForResultDto> RetrieveByIdAsync(long Id)

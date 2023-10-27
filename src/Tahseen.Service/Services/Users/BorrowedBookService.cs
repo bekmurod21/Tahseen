@@ -22,9 +22,9 @@ namespace Tahseen.Service.Services.Users
         public async Task<BorrowedBookForResultDto> AddAsync(BorrowedBookForCreationDto dto)
         {
             //var Check = this.BorrowedBook.SelectAll().Where(b => b.UserId == dto.UserId && b.UserId == dto.UserId && b.BookId == dto.BookId && b.IsDeleted == false);
-            var UserBorrowedBookCart = (await this._bookCartService.RetrieveAllAsync()).Where(e => e.UserId == dto.UserId).FirstOrDefaultAsync();
+            var UserBorrowedBookCart = (await this._bookCartService.RetrieveAllAsync()).Where(e => e.UserId == dto.UserId).FirstOrDefault();
             var data = this._mapper.Map<BorrowedBook>(dto);
-            data.BorrowedBookCartId = UserBorrowedBookCart.Id;
+            data.BorrowedBookCartId = UserBorrowedBookCart.BorrowedBookCartId;
             var result = await this.BorrowedBook.CreateAsync(data);
             return this._mapper.Map<BorrowedBookForResultDto>(result);
         }
@@ -47,10 +47,10 @@ namespace Tahseen.Service.Services.Users
             return await this.BorrowedBook.DeleteAsync(Id);
         }
 
-        public async Task<IQueryable<BorrowedBookForResultDto>> RetrieveAllAsync()
+        public async Task<IEnumerable<BorrowedBookForResultDto>> RetrieveAllAsync()
         {
             var result = this.BorrowedBook.SelectAll().Where(t => t.IsDeleted == false);
-            return this._mapper.Map<IQueryable<BorrowedBookForResultDto>>(result);
+            return this._mapper.Map<IEnumerable<BorrowedBookForResultDto>>(result);
         }
 
         public async Task<BorrowedBookForResultDto> RetrieveByIdAsync(long Id)

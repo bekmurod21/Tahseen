@@ -19,7 +19,9 @@ namespace Tahseen.Service.Services.Users
         }
         public async Task<UserCartForResultDto> AddAsync(UserCartForCreationDto dto)
         {
-            var result = _repository.SelectAll().Where(e => e.UserId == dto.UserId && e.IsDeleted == false).FirstOrDefaultAsync();
+            var result = await this._repository.SelectAll()
+                .Where(e => e.UserId == dto.UserId && e.IsDeleted == false)
+                .FirstOrDefaultAsync();
             if (result != null)
             {
                 throw new TahseenException(400, "User is exist");
@@ -35,10 +37,10 @@ namespace Tahseen.Service.Services.Users
             return await this._repository.DeleteAsync(Id);
         }
 
-        public async Task<IQueryable<UserCartForResultDto>> RetrieveAllAsync()
+        public async Task<IEnumerable<UserCartForResultDto>> RetrieveAllAsync()
         {
             var AllData = this._repository.SelectAll().Where(t => t.IsDeleted == false);
-            return this._mapper.Map<IQueryable<UserCartForResultDto>>(AllData);
+            return this._mapper.Map<IEnumerable<UserCartForResultDto>>(AllData);
             
         }
 

@@ -53,10 +53,10 @@ public class BadgeService : IBadgeService
         return await _repository.DeleteAsync(id);
     }
 
-    public async Task<IQueryable<BadgeForResultDto>> RetrieveAllAsync()
+    public async Task<IEnumerable<BadgeForResultDto>> RetrieveAllAsync()
     {
         var AllData = this._repository.SelectAll().Where(t => t.IsDeleted == false);
-        return _mapper.Map<IQueryable<BadgeForResultDto>>(AllData);
+        return _mapper.Map<IEnumerable<BadgeForResultDto>>(AllData);
     }
 
     public async Task<BadgeForResultDto> RetrieveByIdAsync(long id)

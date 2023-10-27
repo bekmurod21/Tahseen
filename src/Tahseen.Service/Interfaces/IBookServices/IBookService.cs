@@ -9,6 +9,6 @@ public interface IBookService
     public Task<BookForResultDto> ModifyAsync(long id, BookForUpdateDto dto);
     public Task<bool> RemoveAsync(long id);
     public Task<BookForResultDto> RetrieveByIdAsync(long id);
-    public Task<IQueryable<BookForResultDto>> RetrieveAllAsync();
+    public Task<IEnumerable<BookForResultDto>> RetrieveAllAsync();
 
 }

@@ -50,18 +50,7 @@ namespace Tahseen.Service.Services.Users
             var data = this._mapper.Map<User>(dto);
             var CreatedData = await this._userRepository.CreateAsync(data);
 
-            var UserSettingCreation = new UserSettingsForCreationDto()
-            {
-                LanguagePreference = Domain.Enums.LanguagePreference.Uzbek,
-                NotificationPreference = Domain.Enums.NotificationStatus.Read,
-                ThemePreference = Domain.Enums.ThemePreference.Light,
-                UserId = CreatedData.Id,
-                
-
-            };
-
-            await this._userSettingService.AddAsync(UserSettingCreation);
-            
+               
             var UserRatingForCreation = new UserRatingForCreationDto()
             {
                 BooksCompleted = 0,
@@ -80,11 +69,23 @@ namespace Tahseen.Service.Services.Users
             };
             await this._userCartService.AddAsync(UserCartCreation);
 
-            var borrowBookCartCreationDto = new BorrowedBookCartForCreationDto { UserId = CreatedData.Id };
+            var borrowBookCartCreationDto = new BorrowedBookCartForCreationDto 
+            { 
+                UserId = CreatedData.Id 
+            };
             await _borrowBookCartService.AddAsync(borrowBookCartCreationDto);
 
-            return _mapper.Map<UserForResultDto>(CreatedData);
+            var UserSettingCreation = new UserSettingsForCreationDto()
+            {
+                UserId = CreatedData.Id,
+                LanguagePreference = Domain.Enums.LanguagePreference.Uzbek,
+                NotificationPreference = Domain.Enums.NotificationStatus.Read,
+                ThemePreference = Domain.Enums.ThemePreference.Light,
+            };
 
+            await this._userSettingService.AddAsync(UserSettingCreation);
+
+            return _mapper.Map<UserForResultDto>(CreatedData);
         }
 
         public async Task<UserForResultDto> ModifyAsync(long Id, UserForUpdateDto dto)
@@ -105,10 +106,10 @@ namespace Tahseen.Service.Services.Users
             return await _userRepository.DeleteAsync(Id);
         }
 
-        public async Task<IQueryable<UserForResultDto>> RetrieveAllAsync()
+        public async Task<IEnumerable<UserForResultDto>> RetrieveAllAsync()
         {
-            var AllData = _userRepository.SelectAll().Where(t => t.IsDeleted == false);
-            return _mapper.Map<IQueryable<UserForResultDto>>(AllData);
+            var AllData =  _userRepository.SelectAll().Where(t => t.IsDeleted == false);
+            return _mapper.Map<IEnumerable<UserForResultDto>>(AllData);
         }
 
         public async Task<UserForResultDto> RetrieveByIdAsync(long Id)

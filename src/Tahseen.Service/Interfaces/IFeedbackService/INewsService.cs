@@ -9,5 +9,5 @@ public interface INewsService
     public Task<NewsForResultDto> ModifyAsync(long id, NewsForUpdateDto dto);
     public Task<bool> RemoveAsync(long id);
     public Task<NewsForResultDto?> RetrieveByIdAsync(long id);
-    public Task<IQueryable<NewsForResultDto>> RetrieveAllAsync();
+    public Task<IEnumerable<NewsForResultDto>> RetrieveAllAsync();
 }

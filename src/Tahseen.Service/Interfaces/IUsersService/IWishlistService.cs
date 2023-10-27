@@ -8,5 +8,5 @@ public interface IWishlistService
     public Task<WishlistForResultDto> ModifyAsync(long id, WishlistForUpdateDto dto);
     public Task<bool> RemoveAsync(long id);
     public Task<WishlistForResultDto> RetrieveByIdAsync(long id);
-    public Task<IQueryable<WishlistForResultDto>> RetrieveAllAsync();
+    public Task<IEnumerable<WishlistForResultDto>> RetrieveAllAsync();
 }

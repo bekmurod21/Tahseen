@@ -2,6 +2,8 @@ using Tahseen.Api.Extensions;
 using Tahseen.Api.Middlewares;
 using Tahseen.Data.DbContexts;
 using Microsoft.EntityFrameworkCore;
+using Serilog;
+using Tahseen.Service.Helpers;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -18,7 +20,18 @@ builder.Services.AddDbContext<AppDbContext>(option
 builder.Services.AddCustomService();
 // MiddleWares
 
+
+// Logger
+var logger = new LoggerConfiguration()
+  .ReadFrom.Configuration(builder.Configuration)
+  .Enrich.FromLogContext()
+  .CreateLogger();
+builder.Logging.ClearProviders();
+builder.Logging.AddSerilog(logger);
+
+
 var app = builder.Build();
+WebEnvironmentHost.WebRootPath = Path.GetFullPath("wwwroot");
 
 if (app.Environment.IsDevelopment())
 {
@@ -27,6 +40,7 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseMiddleware<ExceptionHandlerMiddleWare>();
+app.UseStaticFiles();
 app.UseHttpsRedirection();
 app.UseAuthorization();
 app.MapControllers();

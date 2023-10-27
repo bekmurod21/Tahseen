@@ -8,5 +8,5 @@ public interface ISurveyService
     public Task<SurveyForResultDto> ModifyAsync(long id, SurveyForUpdateDto dto);
     public Task<bool> RemoveAsync(long id);
     public Task<SurveyForResultDto?> RetrieveByIdAsync(long id);
-    public Task<IQueryable<SurveyForResultDto>> RetrieveAllAsync();
+    public Task<IEnumerable<SurveyForResultDto>> RetrieveAllAsync();
 }

@@ -8,5 +8,5 @@ public interface IPupilService
     public Task<PupilForResultDto> ModifyAsync(long id, PupilForUpdateDto dto);
     public Task<bool> RemoveAsync(long id);
     public Task<PupilForResultDto> RetrieveByIdAsync(long id);
-    public Task<IQueryable<PupilForResultDto>> RetrieveAllAsync();
+    public Task<IEnumerable<PupilForResultDto>> RetrieveAllAsync();
 }

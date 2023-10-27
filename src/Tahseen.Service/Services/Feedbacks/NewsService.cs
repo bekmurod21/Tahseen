@@ -51,9 +51,9 @@ public class NewsService:INewsService
         return _mapper.Map<NewsForResultDto>(news);
     }
 
-    public async Task<IQueryable<NewsForResultDto>> RetrieveAllAsync()
+    public async Task<IEnumerable<NewsForResultDto>> RetrieveAllAsync()
     {
         var news = _repository.SelectAll().Where(x => !x.IsDeleted);
-        return _mapper.Map<IQueryable<NewsForResultDto>>(news);
+        return _mapper.Map<IEnumerable<NewsForResultDto>>(news);
     }
 }

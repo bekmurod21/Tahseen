@@ -8,5 +8,5 @@ public interface IPublisherService
     public Task<PublisherForResultDto> ModifyAsync(long id, PublisherForUpdateDto dto);
     public Task<bool> RemoveAsync(long id);
     public Task<PublisherForResultDto?> RetrieveByIdAsync(long id);
-    public Task<IQueryable<PublisherForResultDto>> RetrieveAllAsync();
+    public Task<IEnumerable<PublisherForResultDto>> RetrieveAllAsync();
 }

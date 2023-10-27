@@ -37,10 +37,10 @@ namespace Tahseen.Service.Services.Users
             return await this._repository.DeleteAsync(Id);
         }
 
-        public async Task<IQueryable<UserProgressTrackingForResultDto>> RetrieveAllAsync()
+        public async Task<IEnumerable<UserProgressTrackingForResultDto>> RetrieveAllAsync()
         {
             var AllData = this._repository.SelectAll();
-            return this._mapper.Map<IQueryable<UserProgressTrackingForResultDto>>(AllData);
+            return this._mapper.Map<IEnumerable<UserProgressTrackingForResultDto>>(AllData);
         }
 
         public async Task<UserProgressTrackingForResultDto> RetrieveByIdAsync(long Id)

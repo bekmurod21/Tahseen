@@ -8,5 +8,5 @@ public interface ILibrarianService
     public Task<LibrarianForResultDto> ModifyAsync(long id, LibrarianForUpdateDto dto);
     public Task<bool> RemoveAsync(long id);
     public Task<LibrarianForResultDto> RetrieveByIdAsync(long id);
-    public Task<IQueryable<LibrarianForResultDto>> RetrieveAllAsync();
+    public Task<IEnumerable<LibrarianForResultDto>> RetrieveAllAsync();
 }

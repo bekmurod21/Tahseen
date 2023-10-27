@@ -9,5 +9,5 @@ public interface IPupilBookConnectionService
     public Task<PupilBookConnectionForResultDto> ModifyAsync(long id, PupilBookConnectionForUpdateDto dto);
     public Task<bool> RemoveAsync(long id);
     public Task<PupilBookConnectionForResultDto> RetrieveByIdAsync(long id);
-    public Task<IQueryable<PupilBookConnectionForResultDto>> RetrieveAllAsync();
+    public Task<IEnumerable<PupilBookConnectionForResultDto>> RetrieveAllAsync();
 }

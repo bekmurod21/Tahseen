@@ -6,6 +6,6 @@ namespace Tahseen.Service.DTOs.Users.BorrowedBookCart
     {
         public long UserId { get; set; }
         public long BorrowedBookCartId { get; set; }
-        public IQueryable<BorrowedBookForResultDto> BorrowedBook { get; set; }
+        public IEnumerable<BorrowedBookForResultDto> BorrowedBook { get; set; }
     }
 }

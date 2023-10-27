@@ -50,10 +50,10 @@ public class GenreService : IGenreService
         return await _repository.DeleteAsync(id);
     }
 
-    public async Task<IQueryable<GenreForResultDto>> RetrieveAllAsync()
+    public async Task<IEnumerable<GenreForResultDto>> RetrieveAllAsync()
     {
         var result = _repository.SelectAll().Where(e => e.IsDeleted != true);
-        return _mapper.Map<IQueryable<GenreForResultDto>>(result);
+        return _mapper.Map<IEnumerable<GenreForResultDto>>(result);
     }
 
     public async Task<GenreForResultDto> RetrieveByIdAsync(long id)

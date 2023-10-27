@@ -5,6 +5,7 @@ namespace Tahseen.Service.DTOs.Users.User
 {
     public class UserForResultDto
     {
+        public long Id { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string EmailAddress { get; set; }
@@ -13,7 +14,7 @@ namespace Tahseen.Service.DTOs.Users.User
         public string Address { get; set; }
         public MembershipStatus MembershipStatus { get; set; }
         public DateTime DateOfBirth { get; set; }
-        //public IQueryable<BorrowedBookForResultDto> BorrowedBooks { get; set; }
+        //public IEnumerable<BorrowedBookForResultDto> BorrowedBooks { get; set; }
         public decimal FineAmount { get; set; }
         public string UserImage { get; set; }
     }

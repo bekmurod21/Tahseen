@@ -6,6 +6,6 @@ namespace Tahseen.Service.DTOs.Users.UserCart
     public class UserCartForCreationDto
     {
         public long UserId { get; set; }
-        public IQueryable<WishlistForResultDto> WishList { get; set; }
+        public IEnumerable<WishlistForResultDto> WishList { get; set; }
     }
 }

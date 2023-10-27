@@ -77,10 +77,10 @@ public class WishlistService : IWishlistService
         return await repository.DeleteAsync(wishlist.Id);
     }
 
-    public async Task<IQueryable<WishlistForResultDto>> RetrieveAllAsync()
+    public async Task<IEnumerable<WishlistForResultDto>> RetrieveAllAsync()
     {
         var wishlists = repository.SelectAll().Where(w => !w.IsDeleted);
-        return mapper.Map<IQueryable<WishlistForResultDto>>(wishlists);
+        return mapper.Map<IEnumerable<WishlistForResultDto>>(wishlists);
     }
 
     public async Task<WishlistForResultDto> RetrieveByIdAsync(long id)

@@ -8,5 +8,5 @@ public interface ILibraryBranchService
     public Task<LibraryBranchForResultDto> ModifyAsync(long id, LibraryBranchForUpdateDto dto);
     public Task<bool> RemoveAsync(long id);
     public Task<LibraryBranchForResultDto> RetrieveByIdAsync(long id);
-    public Task<IQueryable<LibraryBranchForResultDto>> RetrieveAllAsync();
+    public Task<IEnumerable<LibraryBranchForResultDto>> RetrieveAllAsync();
 }

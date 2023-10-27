@@ -2,10 +2,10 @@
 
 namespace Tahseen.Api.Controllers
 {
-    [Route("api/[controller]")]
     [ApiController]
+    [Route("api/[controller]")]
     public class BaseController : ControllerBase
     {
-
     }
+
 }

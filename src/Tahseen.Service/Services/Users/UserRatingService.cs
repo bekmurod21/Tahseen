@@ -21,15 +21,20 @@ public class UserRatingService : IUserRatingService
     }
     public async Task<UserRatingForResultDto> AddAsync(UserRatingForCreationDto dto)
     {
-        var Check = this.repository.SelectAll().Where(u => u.UserId == dto.UserId && u.IsDeleted == false).FirstOrDefaultAsync();
-        if(Check != null)
+        var existingRating = await this.repository.SelectAll()
+            .Where(u => u.UserId == dto.UserId && u.IsDeleted == false)
+            .FirstOrDefaultAsync();
+
+        if (existingRating != null)
         {
-            throw new TahseenException(409, "This User Rating is exist");
+            throw new TahseenException(409, "This User Rating already exists");
         }
+
         var mappedUserRating = mapper.Map<UserRatings>(dto);
         var userRating = await repository.CreateAsync(mappedUserRating);
         return mapper.Map<UserRatingForResultDto>(userRating);
     }
+
     // o'zgartiriladi
     public async Task<UserRatingForResultDto> ModifyAsync(long Id, UserRatingForUpdateDto dto)
     {
@@ -48,10 +53,10 @@ public class UserRatingService : IUserRatingService
     public async Task<bool> RemoveAsync(long Id) => await repository.DeleteAsync(Id);
 
 
-    public async Task<IQueryable<UserRatingForResultDto>> RetrieveAllAsync()
+    public async Task<IEnumerable<UserRatingForResultDto>> RetrieveAllAsync()
     {
         var results = repository.SelectAll().Where(t => !t.IsDeleted);
-        return mapper.Map<IQueryable<UserRatingForResultDto>>(results);
+        return mapper.Map<IEnumerable<UserRatingForResultDto>>(results);
     }
 
     public async Task<UserRatingForResultDto> RetrieveByIdAsync(long id)

@@ -8,5 +8,5 @@ public interface IGenreService
     public Task<GenreForResultDto> ModifyAsync(long id, GenreForUpdateDto dto);
     public Task<bool> RemoveAsync(long id);
     public Task<GenreForResultDto> RetrieveByIdAsync(long id);
-    public Task<IQueryable<GenreForResultDto>> RetrieveAllAsync();    
+    public Task<IEnumerable<GenreForResultDto>> RetrieveAllAsync();    
 }

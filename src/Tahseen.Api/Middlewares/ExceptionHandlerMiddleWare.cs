@@ -6,8 +6,7 @@ namespace Tahseen.Api.Middlewares
     public class ExceptionHandlerMiddleWare
     {
         private readonly RequestDelegate _next;
-        private readonly ILogger<ExceptionHandlerMiddleWare> _logger;
-
+        private readonly ILogger _logger;
 
         public ExceptionHandlerMiddleWare(RequestDelegate next, ILogger<ExceptionHandlerMiddleWare> logger)
         {
@@ -32,8 +31,7 @@ namespace Tahseen.Api.Middlewares
             }
             catch (Exception ex)
             {
-                _logger.LogError($"{ex.Message} \n\n\n");
-                
+                this._logger.LogError($"{ex}\n\n");
                 context.Response.StatusCode = 500;
                 await context.Response.WriteAsJsonAsync(new Response
                 {
@@ -41,6 +39,6 @@ namespace Tahseen.Api.Middlewares
                     Message = ex.Message,
                 });
             }
-        }
+            }
     }
 }

@@ -19,15 +19,21 @@ namespace Tahseen.Service.Services.Users
         }
         public async Task<UserSettingsForResultDto> AddAsync(UserSettingsForCreationDto dto)
         {
-            var Checking = await this._repository.SelectAll().Where(u => u.UserId == dto.UserId && u.IsDeleted == false).FirstOrDefaultAsync();
-            if (Checking == null)
+            var existingUser = await this._repository.SelectAll()
+                .Where(u => u.UserId == dto.UserId && u.IsDeleted == false)
+                .FirstOrDefaultAsync();
+
+            if (existingUser == null)
             {
-                throw new TahseenException(404, "NotFound");
+                var data = this._mapper.Map<UserSettings>(dto);
+                var result = await this._repository.CreateAsync(data);
+                return this._mapper.Map<UserSettingsForResultDto>(result);
             }
-            var Data = this._mapper.Map<UserSettings>(dto);
-            var result = await this._repository.CreateAsync(Data);
-            return this._mapper.Map<UserSettingsForResultDto>(result);
+            // If no user with the specified UserId is found, you can throw a more descriptive exception.
+            throw new TahseenException(404, "User not found for the provided UserId.");
+
         }
+
 
         public async Task<UserSettingsForResultDto> ModifyAsync(long Id, UserSettingsForUpdateDto dto)
         {
@@ -47,10 +53,10 @@ namespace Tahseen.Service.Services.Users
             return await this._repository.DeleteAsync(Id);
         }
 
-        public async Task<IQueryable<UserSettingsForResultDto>> RetrieveAllAsync()
+        public async Task<IEnumerable<UserSettingsForResultDto>> RetrieveAllAsync()
         {
             var AllData = this._repository.SelectAll();
-            return this._mapper.Map<IQueryable<UserSettingsForResultDto>>(AllData);    
+            return this._mapper.Map<IEnumerable<UserSettingsForResultDto>>(AllData);    
         }
 
         public async Task<UserSettingsForResultDto> RetrieveByIdAsync(long Id)

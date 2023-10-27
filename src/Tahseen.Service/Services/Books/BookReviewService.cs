@@ -49,10 +49,10 @@ public class BookReviewService : IBookReviewService
     public async Task<bool> RemoveAsync(long id)
     => await this.repository.DeleteAsync(id);
 
-    public async Task<IQueryable<BookReviewForResultDto>> RetrieveAllAsync()
+    public async Task<IEnumerable<BookReviewForResultDto>> RetrieveAllAsync()
     {
         var booksReview =  this.repository.SelectAll().Where(t=>!t.IsDeleted);
         
-        return this.mapper.Map<IQueryable<BookReviewForResultDto>>(booksReview);
+        return this.mapper.Map<IEnumerable<BookReviewForResultDto>>(booksReview);
     }
 }

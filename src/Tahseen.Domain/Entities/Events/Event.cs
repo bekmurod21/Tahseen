@@ -13,6 +13,6 @@ namespace Tahseen.Domain.Entities.Events
         public DateTime EndDate { get; set; }
         public EventStatus Status { get; set; }
 
-        public IQueryable<EventRegistration> EventRegistration { get; set; }
+        public IEnumerable<EventRegistration> EventRegistration { get; set; }
     }
 }

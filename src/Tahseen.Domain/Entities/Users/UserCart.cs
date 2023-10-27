@@ -6,5 +6,5 @@ public class UserCart : Auditable
 {
     public long UserId { get; set; }
     public User User { get; set; }
-    public IQueryable<WishList> WishList { get; set; }
+    public IEnumerable<WishList> WishList { get; set; }
 }

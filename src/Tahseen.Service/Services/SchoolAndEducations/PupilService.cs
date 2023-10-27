@@ -58,9 +58,9 @@ public class PupilService:IPupilService
         return _mapper.Map<PupilForResultDto>(searched);
     }
 
-    public async Task<IQueryable<PupilForResultDto>> RetrieveAllAsync()
+    public async Task<IEnumerable<PupilForResultDto>> RetrieveAllAsync()
     {
         var pupils = _repository.SelectAll().Where(x => !x.IsDeleted);
-        return _mapper.Map<IQueryable<PupilForResultDto>>(pupils);
+        return _mapper.Map<IEnumerable<PupilForResultDto>>(pupils);
     }
 }

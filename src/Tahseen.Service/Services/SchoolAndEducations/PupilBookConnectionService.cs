@@ -57,9 +57,9 @@ public class PupilBookConnectionService:IPupilBookConnectionService
         return _mapper.Map<PupilBookConnectionForResultDto>(mapped);
     }
 
-    public async Task<IQueryable<PupilBookConnectionForResultDto>> RetrieveAllAsync()
+    public async Task<IEnumerable<PupilBookConnectionForResultDto>> RetrieveAllAsync()
     {
         var mapped = _repository.SelectAll().Where(x => !x.IsDeleted);
-        return _mapper.Map<IQueryable<PupilBookConnectionForResultDto>>(mapped);
+        return _mapper.Map<IEnumerable<PupilBookConnectionForResultDto>>(mapped);
     }
 }

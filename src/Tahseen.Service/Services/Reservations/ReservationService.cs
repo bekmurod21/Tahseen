@@ -52,10 +52,10 @@ public class ReservationService : IReservationsService
         return await _repository.DeleteAsync(id);
     }
 
-    public async Task<IQueryable<ReservationForResultDto>> RetrieveAllAsync()
+    public async Task<IEnumerable<ReservationForResultDto>> RetrieveAllAsync()
     {
         var AllData = this._repository.SelectAll().Where(t => t.IsDeleted == false);
-        return _mapper.Map<IQueryable<ReservationForResultDto>>(AllData);
+        return _mapper.Map<IEnumerable<ReservationForResultDto>>(AllData);
     }
 
     public async Task<ReservationForResultDto> RetrieveByIdAsync(long id)

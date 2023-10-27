@@ -8,5 +8,5 @@ public interface ISchoolBookService
     public Task<SchoolBookForResultDto> ModifyAsync(long id, SchoolBookForUpdateDto dto);
     public Task<bool> RemoveAsync(long id);
     public Task<SchoolBookForResultDto> RetrieveByIdAsync(long id);
-    public Task<IQueryable<SchoolBookForResultDto>> RetrieveAllAsync();
+    public Task<IEnumerable<SchoolBookForResultDto>> RetrieveAllAsync();
 }
