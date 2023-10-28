@@ -40,7 +40,7 @@ public class BadgeService : IBadgeService
         var badge = await _repository.SelectAll().Where(e => e.Id == id && e.IsDeleted == false).FirstOrDefaultAsync();
         if (badge is not null)
         {
-            var mappedBadge = _mapper.Map<Badge>(dto);
+            var mappedBadge = _mapper.Map(dto, badge);
             mappedBadge.UpdatedAt = DateTime.UtcNow;
             var result = await _repository.UpdateAsync(mappedBadge);
             return _mapper.Map<BadgeForResultDto>(result);

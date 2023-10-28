@@ -76,114 +76,14 @@ public class AppDbContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        modelBuilder.Entity<Reservation>()
-            .HasOne(r => r.Book)
-            .WithMany()
-            .HasForeignKey(r => r.BookId)
-            .OnDelete(DeleteBehavior.NoAction);
-        modelBuilder.Entity<Reservation>()
-            .HasOne(r => r.User)
-            .WithMany()
-            .HasForeignKey(r => r.UserId)
-            .OnDelete(DeleteBehavior.NoAction);
-
         modelBuilder.Entity<Book>()
             .HasOne(b => b.Author)
-            .WithOne()
-            .HasForeignKey<Book>(b => b.AuthorId)
-            .OnDelete(DeleteBehavior.NoAction);
-        modelBuilder.Entity<Book>()
-            .HasOne(b => b.Genre)
-            .WithMany()
-            .HasForeignKey(b=>b.GenreId)
-            .OnDelete(DeleteBehavior.NoAction);
+            .WithMany(a => a.Books)
+            .HasForeignKey(b => b.AuthorId);
+
         modelBuilder.Entity<Book>()
             .HasOne(b => b.Publisher)
-            .WithMany()
-            .HasForeignKey(b => b.PublisherId)
-            .OnDelete(DeleteBehavior.NoAction);
-
-        modelBuilder.Entity<BookReviews>()
-            .HasOne(b => b.Book)
-            .WithOne()
-            .HasForeignKey<BookReviews>(b => b.BookId)
-            .OnDelete(DeleteBehavior.NoAction);
-        modelBuilder.Entity<BookReviews>()
-            .HasOne(b => b.User)
-            .WithMany()
-            .HasForeignKey(b => b.UserId)
-            .OnDelete(DeleteBehavior.NoAction);
-
-        modelBuilder.Entity<CompletedBooks>()
-            .HasOne(c => c.Book)
-            .WithMany()
-            .HasForeignKey(c => c.BookId)
-            .OnDelete(DeleteBehavior.NoAction);
-        modelBuilder.Entity<CompletedBooks>()
-            .HasOne(c => c.User)
-            .WithMany()
-            .HasForeignKey(c => c.UserId)
-            .OnDelete(DeleteBehavior.NoAction);
-
-        modelBuilder.Entity<EventRegistration>()
-            .HasOne(e => e.User)
-            .WithMany()
-            .HasForeignKey(e => e.UserId)
-            .OnDelete(DeleteBehavior.NoAction);
-        modelBuilder.Entity<EventRegistration>()
-            .HasOne(e => e.Event)
-            .WithMany()
-            .HasForeignKey(e => e.EventId)
-            .OnDelete(DeleteBehavior.NoAction);
-
-
-
-        modelBuilder.Entity<SurveyResponses>()
-            .HasOne(s => s.User)
-            .WithMany()
-            .HasForeignKey(s => s.UserId)
-            .OnDelete(DeleteBehavior.NoAction);
-        modelBuilder.Entity<SurveyResponses>()
-            .HasOne(s => s.Surveys)
-            .WithMany()
-            .HasForeignKey(s => s.SurveyId)
-            .OnDelete(DeleteBehavior.NoAction);
-
-        modelBuilder.Entity<UserMessage>()
-            .HasOne(u => u.User)
-            .WithMany()
-            .HasForeignKey(u => u.UserId)
-            .OnDelete(DeleteBehavior.NoAction);
-
-        modelBuilder.Entity<UserRatings>()
-            .HasOne(u => u.User)
-            .WithMany()
-            .HasForeignKey(u => u.UserId)
-            .OnDelete(DeleteBehavior.NoAction);
-
-        modelBuilder.Entity<Librarian>()
-            .HasOne(l => l.LibraryBranch)
-            .WithMany(l => l.Librarians)
-            .HasForeignKey(l => l.LibraryBranchId)
-            .OnDelete(DeleteBehavior.NoAction);
-
-        modelBuilder.Entity<Notification>()
-            .HasOne(n => n.User)
-            .WithMany()
-            .HasForeignKey(n => n.UserId)
-            .OnDelete(DeleteBehavior.NoAction);
-
-        modelBuilder.Entity<UserBadges>()
-            .HasOne(u => u.User)
-            .WithMany()
-            .HasForeignKey(u => u.UserId)
-            .OnDelete(DeleteBehavior.NoAction);
-        modelBuilder.Entity<UserBadges>()
-            .HasOne(u => u.Badge)
-            .WithMany()
-            .HasForeignKey(u => u.BadgeId)
-            .OnDelete(DeleteBehavior.NoAction);
-
-        
+            .WithMany(p => p.Books)
+            .HasForeignKey(b => b.PublisherId);
     }
 }

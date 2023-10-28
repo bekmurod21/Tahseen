@@ -4,6 +4,7 @@ using Tahseen.Data.DbContexts;
 using Microsoft.EntityFrameworkCore;
 using Serilog;
 using Tahseen.Service.Helpers;
+using Microsoft.AspNetCore.Http.Features;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -19,8 +20,17 @@ builder.Services.AddDbContext<AppDbContext>(option
     );
 builder.Services.AddCustomService();
 // MiddleWares
-
-
+/*builder.Services.Configure<FormOptions>(options =>
+{
+    options.ValueLengthLimit = int.MaxValue;
+    options.MultipartBodyLengthLimit = long.MaxValue; // In case of multipart
+    options.MultipartHeadersLengthLimit = int.MaxValue; // Set the multipart headers length limit
+});
+builder.WebHost.ConfigureKestrel(options =>
+{
+    options.Limits.MaxRequestBodySize = null; // Unlimited request body size
+});
+*/
 // Logger
 var logger = new LoggerConfiguration()
   .ReadFrom.Configuration(builder.Configuration)
