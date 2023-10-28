@@ -17,7 +17,6 @@ namespace Tahseen.Service.DTOs.Users.User
         public MembershipStatus MembershipStatus { get; set; }
         public DateTime DateOfBirth { get; set; }
         public Roles Role { get; set; }
-        public IEnumerable<BorrowedBookForResultDto> BorrowedBooks { get; set; }
         public decimal FineAmount { get; set; }
         public string UserImage { get; set; }
     }
