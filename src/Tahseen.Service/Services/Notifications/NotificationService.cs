@@ -33,7 +33,7 @@ public class NotificationService : INotificationService
         var notification = await _repository.SelectAll().Where(a => a.Id == id && a.IsDeleted == false).FirstOrDefaultAsync();
         if (notification is not null)
         {
-            var mappedNotification = _mapper.Map<Notification>(dto);
+            var mappedNotification = _mapper.Map(dto, notification);
             var result = await _repository.UpdateAsync(mappedNotification);
             result.UpdatedAt = DateTime.UtcNow;
             return _mapper.Map<NotificationForResultDto>(result);

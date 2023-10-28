@@ -39,7 +39,7 @@ public class ReservationService : IReservationsService
         var reservation = await _repository.SelectAll().Where(r => r.Id == id && r.IsDeleted == false).FirstOrDefaultAsync();
         if (reservation is not null)
         {
-            var mappedReservation = _mapper.Map<Reservation>(dto);
+            var mappedReservation = _mapper.Map(dto, reservation);
             mappedReservation.UpdatedAt = DateTime.UtcNow;
             var result = await _repository.UpdateAsync(mappedReservation);
             return _mapper.Map<ReservationForResultDto>(result);

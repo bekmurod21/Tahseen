@@ -37,7 +37,7 @@ public class UserBadgesService : IUserBadgesService
         var userBadges = await _repository.SelectAll().Where(e => e.Id == id && e.IsDeleted == false).FirstOrDefaultAsync();
         if (userBadges is not null)
         {
-            var mappedUserBadges = _mapper.Map<UserBadges>(dto);
+            var mappedUserBadges = _mapper.Map(dto, userBadges);
             mappedUserBadges.UpdatedAt = DateTime.UtcNow;
             var result = await _repository.UpdateAsync(mappedUserBadges);
             return _mapper.Map<UserBadgesForResultDto>(result);

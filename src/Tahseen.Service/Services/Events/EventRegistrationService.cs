@@ -37,7 +37,7 @@ public class EventRegistrationService : IEventRegistrationService
         var eventRegistration = await _repository.SelectAll().Where(a => a.Id == id && a.IsDeleted == false).FirstOrDefaultAsync();
         if (eventRegistration is not null)
         {
-            var mappedEventRegistration = _mapper.Map<EventRegistration>(dto);
+            var mappedEventRegistration = _mapper.Map(dto, eventRegistration);
             var result = await _repository.UpdateAsync(mappedEventRegistration);
             result.UpdatedAt = DateTime.UtcNow;
             return _mapper.Map<EventRegistrationForResultDto>(result);

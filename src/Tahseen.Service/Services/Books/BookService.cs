@@ -36,7 +36,7 @@ public class BookService : IBookService
         var book = await _repository.SelectAll().Where(a => a.Id == id && a.IsDeleted == false).FirstOrDefaultAsync();
         if (book is not null)
         {
-            var mappedBook = _mapper.Map<Book>(dto);
+            var mappedBook = _mapper.Map(dto, book);
             mappedBook.UpdatedAt = DateTime.UtcNow;
             var result = await _repository.UpdateAsync(mappedBook);
             return _mapper.Map<BookForResultDto>(result);

@@ -36,7 +36,7 @@ public class EventService : IEventsService
         var @event = await _repository.SelectAll().Where(a => a.Id == id && a.IsDeleted == false).FirstOrDefaultAsync();
         if (@event is not null)
         {
-            var mappedEvent = _mapper.Map<Event>(dto);
+            var mappedEvent = _mapper.Map(dto, @event);
             var result = await _repository.UpdateAsync(mappedEvent);
             result.UpdatedAt = DateTime.UtcNow;
             return _mapper.Map<EventForResultDto>(result);
