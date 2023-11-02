@@ -13,7 +13,7 @@ namespace Tahseen.Api.Controllers.EventsControllers
             this.service = service;
         }
         [HttpPost]
-        public async Task<IActionResult> PostAsync([FromBody]EventForCreationDto dto) =>
+        public async Task<IActionResult> PostAsync([FromForm]EventForCreationDto dto) =>
             Ok(new Response
             {
                 StatusCode = 200,
@@ -22,7 +22,7 @@ namespace Tahseen.Api.Controllers.EventsControllers
             });
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutAsync([FromRoute(Name = "id")]long id,[FromBody]EventForUpdateDto dto) =>
+        public async Task<IActionResult> PutAsync([FromRoute(Name = "id")]long id,[FromForm]EventForUpdateDto dto) =>
             Ok(new Response
             {
                 StatusCode = 200,

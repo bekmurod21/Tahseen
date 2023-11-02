@@ -42,16 +42,10 @@ public class AuthorService : IAuthorService
         };
         var FileResult = await _fileUploadService.FileUploadAsync(FileUploadForCreation);
 
-        var author = new Author()
-        {
-            FirstName = dto.FirstName,
-            LastName = dto.LastName,
-            Biography = dto.Biography,
-            Nationality = dto.Nationality,
-            AuthorImage = Path.Combine("Assets", $"{FileResult.FolderPath}", FileResult.FileName),
+        var MappedData = this._mapper.Map<Author>(dto);
+        MappedData.AuthorImage = Path.Combine("Assets", $"{FileResult.FolderPath}", FileResult.FileName);
+        var result = await _repository.CreateAsync(MappedData);
 
-        };
-        var result = await _repository.CreateAsync(author);
         return _mapper.Map<AuthorForResultDto>(result);
     }
 
@@ -87,6 +81,8 @@ public class AuthorService : IAuthorService
     public async Task<bool> RemoveAsync(long id)
     {
         var results = await this._repository.SelectAll().Where(a => a.Id == id && !a.IsDeleted).FirstOrDefaultAsync();
+        if (results is null)
+            throw new TahseenException(404, "Author is not Found");
         await _fileUploadService.FileDeleteAsync(results.AuthorImage);
         return await _repository.DeleteAsync(id);
     }

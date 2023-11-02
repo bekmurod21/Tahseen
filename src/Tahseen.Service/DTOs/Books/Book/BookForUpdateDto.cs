@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Http;
 using Tahseen.Domain.Entities.Books;
 using Tahseen.Domain.Entities.Library;
 using Tahseen.Domain.Enums;
@@ -15,7 +16,7 @@ public class BookForUpdateDto
     public BookFormat BookFormat { get; set; }
     public string ShelfLocation { get; set; }
     public BookCondition Condition { get; set; }
-    public string BookImage { get; set; }
+    public IFormFile BookImage { get; set; }
     public long AuthorId { get; set; }
     public long GenreId { get; set; }
     public long LibraryId { get; set; }

@@ -15,7 +15,7 @@ public class LibrarianController:BaseController
     }
     
     [HttpPost]
-    public async Task<IActionResult> PostAsync([FromBody]LibrarianForCreationDto data)
+    public async Task<IActionResult> PostAsync([FromForm]LibrarianForCreationDto data)
     {
         var response = new Response()
         {
@@ -51,7 +51,7 @@ public class LibrarianController:BaseController
     }
   
     [HttpPut("{id}")]
-    public async Task<IActionResult> PutAsync([FromRoute(Name = "id")]long Id, [FromBody]LibrarianForUpdateDto data)
+    public async Task<IActionResult> PutAsync([FromRoute(Name = "id")]long Id, [FromForm]LibrarianForUpdateDto data)
     {
         var response = new Response()
         {

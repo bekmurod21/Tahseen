@@ -23,6 +23,9 @@ builder.Services.AddDbContext<AppDbContext>(option
     => option.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection"))
     );
 builder.Services.AddCustomService();
+var jsonFormatter = builder.Configuration.GetSection("Formatters:JsonFormatter");
+jsonFormatter["SerializerSettings:DateFormatString"] = "dd-MM-yyyy HH:mm";
+
 // MiddleWares
 /*builder.Services.Configure<FormOptions>(options =>
 {
