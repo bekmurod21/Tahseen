@@ -20,6 +20,15 @@ using Tahseen.Service.Interfaces.ILibrariansService;
 using Tahseen.Service.Interfaces.ISchoolAndEducation;
 using Tahseen.Service.Interfaces.INotificationServices;
 using Tahseen.Service.Interfaces.IReservationsServices;
+using Tahseen.Service.Interfaces.IAuthService;
+using Tahseen.Service.Services.AuthService;
+using Microsoft.OpenApi.Models;
+using System.Reflection;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
+using Tahseen.Service.Interfaces.IFileUploadService;
+using Tahseen.Service.Services.FileUploadService;
 
 namespace Tahseen.Api.Extensions;
 
@@ -32,28 +41,28 @@ public static class ServiceExtension
         services.AddAutoMapper(typeof(MappingProfile));
 
         //Folder Name: IUSerService
+        services.AddScoped<IUserService, UserService>();
         services.AddScoped<IFineService, FineService>();
         services.AddScoped<IUserCartService, UserCartService>();
         services.AddScoped<IWishlistService, WishlistService>();
-        services.AddScoped<IRegistrationService,RegistrationService>();
+        services.AddScoped<IRegistrationService, RegistrationService>();
         services.AddScoped<IUserSettingService, UserSettingsService>();
-        services.AddScoped<IUserProgressTrackingService,UserProgressTrackingService>();
-        services.AddScoped<IUserService, UserService>();
         services.AddScoped<IBorrowedBookService, BorrowedBookService>();
         services.AddScoped<IBorrowBookCartService, BorrowBookCartService>();
+        services.AddScoped<IUserProgressTrackingService, UserProgressTrackingService>();
 
 
         //Folder Name: IBookService
         services.AddScoped<IBookService, BookService>();
-        services.AddScoped<IGenreService,GenreService>();
-        services.AddScoped<IAuthorService,AuthorService>();
+        services.AddScoped<IGenreService, GenreService>();
+        services.AddScoped<IAuthorService, AuthorService>();
         services.AddScoped<IPublisherService, PublisherService>();
         services.AddScoped<IBookReviewService, BookReviewService>();
         services.AddScoped<ICompletedBookService, CompletedBookService>();
 
         //Folder Name:IEventService
         services.AddScoped<IEventsService, EventService>();
-        services.AddScoped<IEventRegistrationService,EventRegistrationService>();
+        services.AddScoped<IEventRegistrationService, EventRegistrationService>();
 
         //Folder Name:IFeedBackService
         services.AddScoped<INewsService, NewsService>();
@@ -62,9 +71,9 @@ public static class ServiceExtension
         services.AddScoped<IUserRatingService, UserRatingService>();
         services.AddScoped<IUserMessageService, UserMessageService>();
         services.AddScoped<ISurveyResponseService, SurveyResponseService>();
-        
+
         //Folder Name:ILibrariansService
-        services.AddScoped<ILibrarianService,LibrarianService>();
+        services.AddScoped<ILibrarianService, LibrarianService>();
 
         //Folder Name: ILibrariesService
         services.AddScoped<ILibraryBranchService, LibraryBranchService>();
@@ -73,7 +82,7 @@ public static class ServiceExtension
         services.AddScoped<INotificationService, NotificationService>();
 
         //Folder Name: IReservationService
-        services.AddScoped<IReservationsService,ReservationService>();
+        services.AddScoped<IReservationsService, ReservationService>();
 
         //Folder Name: IRewardsService
         services.AddScoped<IBadgeService, BadgeService>();
@@ -83,5 +92,68 @@ public static class ServiceExtension
         services.AddScoped<IPupilService, PupilService>();
         services.AddScoped<ISchoolBookService, SchoolBookService>();
         services.AddScoped<IPupilBookConnectionService, PupilBookConnectionService>();
+
+        //Folder Name: Authentication
+        services.AddScoped<IAuthService, AuthService>();
+
+        //Folder Name: FileUploadService
+        services.AddScoped<IFileUploadService, FileUploadService>();
     }
-}
+
+
+    public static void AddJwtService(this IServiceCollection services, IConfiguration configuration)
+    {
+        services.AddAuthentication(options =>
+        {
+            options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+            options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+            options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+        }).AddJwtBearer(options =>
+        {
+            options.TokenValidationParameters = new TokenValidationParameters
+            {
+                ValidateIssuer = true,
+                ValidateAudience = false,
+                ValidateLifetime = true,
+                ValidateIssuerSigningKey = true,
+                ValidIssuer = configuration["Jwt:Issuer"],
+                ValidAudience = configuration["JWT:Audience"],
+                IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["Jwt:Key"])),
+                ClockSkew = TimeSpan.Zero
+            };
+        });
+    }
+
+    public static void AddSwaggerService(this IServiceCollection services)
+    {
+        services.AddSwaggerGen(c =>
+        {
+            c.SwaggerDoc("v1", new OpenApiInfo { Title = "Shamsheer.Api", Version = "v1" });
+            var xmlFilename = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+
+            c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+            {
+                Name = "Authorization",
+                Description =
+                    "JWT Authorization header using the Bearer scheme. Example: \"Authorization: Bearer {token}\"",
+                In = ParameterLocation.Header,
+                Type = SecuritySchemeType.ApiKey
+            });
+
+            c.AddSecurityRequirement(new OpenApiSecurityRequirement
+        {
+            {
+                new OpenApiSecurityScheme
+                {
+                    Reference = new OpenApiReference
+                    {
+                        Type = ReferenceType.SecurityScheme,
+                        Id = "Bearer"
+                    }
+                },
+                new string[]{ }
+            }
+        });
+        });
+    }
+};

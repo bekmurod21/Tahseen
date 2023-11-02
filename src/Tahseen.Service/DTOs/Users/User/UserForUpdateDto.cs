@@ -12,5 +12,6 @@ namespace Tahseen.Service.DTOs.Users.User
         public MembershipStatus MembershipStatus { get; set; }
         public DateTime DateOfBirth { get; set; }
         public string UserImage { get; set; }
+        public Roles Role { get; set; }
     }
 }

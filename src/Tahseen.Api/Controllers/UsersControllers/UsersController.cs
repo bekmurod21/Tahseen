@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Tahseen.Api.Models;
 using Tahseen.Service.DTOs.Users.User;
 using Tahseen.Service.Interfaces.IUsersService;
@@ -16,7 +17,7 @@ namespace Tahseen.Api.Controllers.UsersControllers
 
         ///
         ///
-
+        [Authorize]
         [HttpGet]
         public async Task<IActionResult> GetAllAsync()
         {

@@ -3,9 +3,11 @@ using Microsoft.EntityFrameworkCore;
 using Tahseen.Data.IRepositories;
 using Tahseen.Domain.Entities.Books;
 using Tahseen.Service.DTOs.Books.Author;
+using Tahseen.Service.DTOs.FileUpload;
 using Tahseen.Service.Exceptions;
 using Tahseen.Service.Helpers;
 using Tahseen.Service.Interfaces.IBookServices;
+using Tahseen.Service.Interfaces.IFileUploadService;
 using File = System.IO.File;
 
 namespace Tahseen.Service.Services.Books;
@@ -14,11 +16,13 @@ public class AuthorService : IAuthorService
 {
     private readonly IMapper _mapper;
     private readonly IRepository<Author> _repository;
+    private readonly IFileUploadService _fileUploadService;
 
-    public AuthorService(IMapper mapper, IRepository<Author> repository)
+    public AuthorService(IMapper mapper, IRepository<Author> repository, IFileUploadService fileUploadService)
     {
         this._mapper = mapper;
         this._repository = repository;
+        _fileUploadService = fileUploadService;
     }
 
     public async Task<AuthorForResultDto> AddAsync(AuthorForCreationDto dto)
@@ -30,31 +34,13 @@ public class AuthorService : IAuthorService
         if (check != null)
             throw new TahseenException(409, "This Author already exists.");
 
-        var WwwRootPath = Path.Combine(WebEnvironmentHost.WebRootPath, "Assets", "AuthorImages");
-
-        var assetsFolderPath = Path.Combine(WwwRootPath, "Assets");
-        var authorImagesFolderPath = Path.Combine(assetsFolderPath, "AuthorImages");
-
-        if (!Directory.Exists(assetsFolderPath))
+        //Uploading Image
+        var FileUploadForCreation = new FileUploadForCreationDto()
         {
-            Directory.CreateDirectory(assetsFolderPath);
-        }
-
-        if (!Directory.Exists(authorImagesFolderPath))
-        {
-            Directory.CreateDirectory(authorImagesFolderPath);
-        }
-
-        var imageFolderPath = Path.GetDirectoryName(WwwRootPath);
-
-        var fileName = Guid.NewGuid().ToString("N") + Path.GetExtension(dto.AuthorImage.FileName);
-        var fullPath = Path.Combine(WwwRootPath, fileName);
-
-        // Asynchronous file write using threading
-        using (var streamFile = File.OpenWrite(fullPath))
-        {
-            await dto.AuthorImage.CopyToAsync(streamFile);
-        }
+            FolderPath = "AuthorImages",
+            FormFile = dto.AuthorImage,
+        };
+        var FileResult = await _fileUploadService.FileUploadAsync(FileUploadForCreation);
 
         var author = new Author()
         {
@@ -62,12 +48,14 @@ public class AuthorService : IAuthorService
             LastName = dto.LastName,
             Biography = dto.Biography,
             Nationality = dto.Nationality,
-            AuthorImage = Path.Combine("Assets", "AuthorImages", fileName),
+            AuthorImage = Path.Combine("Assets", $"{FileResult.FolderPath}", FileResult.FileName),
 
         };
         var result = await _repository.CreateAsync(author);
         return _mapper.Map<AuthorForResultDto>(result);
     }
+
+
 
     public async Task<AuthorForResultDto> ModifyAsync(long id, AuthorForUpdateDto dto)
     {
@@ -75,25 +63,22 @@ public class AuthorService : IAuthorService
         if (author is not null)
         {
 
-            var DeletePath = Path.Combine(WebEnvironmentHost.WebRootPath, author.AuthorImage);
-            File.Delete(DeletePath);
-            var WwwRootPath = Path.Combine(WebEnvironmentHost.WebRootPath, "Assets", "AuthorImages");
-            var FileName = Guid.NewGuid().ToString("N") + Path.GetExtension(dto.AuthorImage.FileName);
-
-            var FullPath = Path.Combine(WwwRootPath, FileName);
-
-            using (var streamFile = File.OpenWrite(FullPath))
+            //Deleting Image
+            await _fileUploadService.FileDeleteAsync(author.AuthorImage);
+            
+            //Uploading Image
+            var FileUploadForCreation = new FileUploadForCreationDto()
             {
-                await dto.AuthorImage.CopyToAsync(streamFile);
-            }
-            author.FirstName = dto.FirstName;
-            author.LastName = dto.LastName;
-            author.Nationality = dto.Nationality;
-            author.Biography = dto.Biography;
-            author.AuthorImage = Path.Combine("Assets", "AuthorImages", FileName);
-            author.UpdatedAt = DateTime.UtcNow;
+                FolderPath = "AuthorImages",
+                FormFile = dto.AuthorImage,
+            };
+            var FileResult = await _fileUploadService.FileUploadAsync(FileUploadForCreation);
 
-            var result = await _repository.UpdateAsync(author);
+            var MappedData = this._mapper.Map(dto, author);
+            MappedData.AuthorImage = Path.Combine("Assets", $"{FileResult.FolderPath}", FileResult.FileName);
+            MappedData.UpdatedAt = DateTime.UtcNow;
+
+            var result = await _repository.UpdateAsync(MappedData);
             return _mapper.Map<AuthorForResultDto>(result);
         }
         throw new Exception("Author not found");
@@ -102,8 +87,7 @@ public class AuthorService : IAuthorService
     public async Task<bool> RemoveAsync(long id)
     {
         var results = await this._repository.SelectAll().Where(a => a.Id == id && !a.IsDeleted).FirstOrDefaultAsync();
-        var FullPath = Path.Combine(WebEnvironmentHost.WebRootPath, results.AuthorImage);
-        File.Delete(FullPath);
+        await _fileUploadService.FileDeleteAsync(results.AuthorImage);
         return await _repository.DeleteAsync(id);
     }
 
