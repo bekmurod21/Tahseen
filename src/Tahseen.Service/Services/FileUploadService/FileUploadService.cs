@@ -36,8 +36,6 @@ namespace Tahseen.Service.Services.FileUploadService
                 Directory.CreateDirectory(authorImagesFolderPath);
             }
 
-            var imageFolderPath = Path.GetDirectoryName(WwwRootPath);
-
             var fileName = Guid.NewGuid().ToString("N") + Path.GetExtension(dto.FormFile.FileName);
             var fullPath = Path.Combine(WwwRootPath, fileName);
 
