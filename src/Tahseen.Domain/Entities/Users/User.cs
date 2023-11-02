@@ -1,7 +1,9 @@
+using System.ComponentModel.DataAnnotations.Schema;
 using Tahseen.Domain.Commons;
 using Tahseen.Domain.Entities.Books;
 using Tahseen.Domain.Entities.Events;
 using Tahseen.Domain.Entities.Feedbacks;
+using Tahseen.Domain.Entities.Library;
 using Tahseen.Domain.Entities.Notifications;
 using Tahseen.Domain.Entities.Reservations;
 using Tahseen.Domain.Enums;
@@ -23,7 +25,8 @@ public class User:Auditable
     public Roles Role { get; set; }
     public decimal FineAmount { get; set; }
     public string UserImage { get; set; }
-    
+    public long? LibraryId { get; set; }
+    public LibraryBranch LibraryBranch { get; set; }
     public IEnumerable<Reservation> Reservations { get; set; }
     public IEnumerable<BookReviews> BookReviews { get; set; }
     public IEnumerable<BorrowedBook> BorrowedBooks { get; set; }

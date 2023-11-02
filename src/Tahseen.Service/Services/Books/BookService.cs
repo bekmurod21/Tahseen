@@ -7,6 +7,8 @@ using Microsoft.EntityFrameworkCore;
 using Tahseen.Service.Interfaces.IFileUploadService;
 using Tahseen.Service.Exceptions;
 using Tahseen.Service.DTOs.FileUpload;
+using Tahseen.Domain.Entities.Library;
+using Tahseen.Service.Exceptions;
 
 namespace Tahseen.Service.Services.Books;
 
@@ -21,6 +23,13 @@ public class BookService : IBookService
         this._mapper = mapper;
         this._repository = repository;
         this._fileUploadService = fileUploadService;
+    private readonly IRepository<LibraryBranch> _libraryRepository;
+
+    public BookService(IMapper mapper, IRepository<Book> repository, IRepository<LibraryBranch> libraryRepository)
+    {
+        this._mapper = mapper;
+        this._repository = repository;
+        _libraryRepository = libraryRepository;
     }
 
     public async Task<BookForResultDto> AddAsync(BookForCreationDto dto)
@@ -57,7 +66,40 @@ public class BookService : IBookService
             book.BookImage = $"https://localhost:7020/{book.BookImage.Replace('\\', '/').TrimStart('/')}";
         }
         return this._mapper.Map<IEnumerable<BookForResultDto>>(books);
+    public async Task<IEnumerable<BookForResultDto>> RetrieveAllAsync(long? libraryBranchId)
+    {
+        var allLibraries = this._libraryRepository.SelectAll().Where(l => l.IsDeleted == false);
+
+        if (libraryBranchId == null)
+        {
+            // User belongs to a public library - retrieve all public library books
+            var publicLibraryIds = allLibraries.Where(l => l.LibraryType == Domain.Enums.LibraryType.Public)
+                                              .Select(l => l.Id)
+                                              .ToList();
+
+            var publicLibraryBooks = this._repository.SelectAll()
+                .Where(e => e.IsDeleted == false && publicLibraryIds.Contains(e.LibraryId));
+
+            return this._mapper.Map<IEnumerable<BookForResultDto>>(publicLibraryBooks);
+        }
+        else
+        {
+            var library = await this._libraryRepository.SelectByIdAsync(libraryBranchId.Value);
+
+            if (library == null || library.IsDeleted)
+            {
+                // Handle the case where the specified library branch does not exist or is deleted
+                throw new TahseenException(404, "Library branch not found");
+            }
+
+            var books = this._repository.SelectAll()
+                .Where(e => e.IsDeleted == false && e.LibraryId == libraryBranchId);
+
+            return this._mapper.Map<IEnumerable<BookForResultDto>>(books);
+        }
     }
+
+
 
     public async Task<BookForResultDto> ModifyAsync(long id, BookForUpdateDto dto)
     {
