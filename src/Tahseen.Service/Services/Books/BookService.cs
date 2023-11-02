@@ -56,6 +56,7 @@ public class BookService : IBookService
     /// Do logic for user Student Pupil
     /// </summary>
     /// <returns></returns>
+
     public async Task<IEnumerable<BookForResultDto>> RetrieveAllAsync(long? libraryBranchId)
     {
         var allLibraries = this._libraryRepository.SelectAll().Where(l => l.IsDeleted == false);
