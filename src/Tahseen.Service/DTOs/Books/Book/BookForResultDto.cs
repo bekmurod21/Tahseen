@@ -10,6 +10,7 @@ namespace Tahseen.Service.DTOs.Books.Book;
 
 public class BookForResultDto
 {
+    public long Id { get; set; }
     public string Title { get; set; }
     public Language Language { get; set; }
     public long TotalCopies { get; set; }

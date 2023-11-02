@@ -44,7 +44,7 @@ namespace Tahseen.Api.Controllers.UsersControllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> PostAsync([FromBody]UserForCreationDto dto)
+        public async Task<IActionResult> PostAsync([FromForm]UserForCreationDto dto)
         {
             var response = new Response()
             {
@@ -70,7 +70,7 @@ namespace Tahseen.Api.Controllers.UsersControllers
 
         [HttpPut("{id}")]
 
-        public async Task<IActionResult> PutAsync([FromRoute(Name = "id")]long Id, [FromBody]UserForUpdateDto dto)
+        public async Task<IActionResult> PutAsync([FromRoute(Name = "id")]long Id, [FromForm]UserForUpdateDto dto)
         {
             var response = new Response()
             {

@@ -41,11 +41,11 @@ namespace Tahseen.Api.Controllers.BooksControllers
                 Data = await this.service.RemoveAsync(id)
             });
         [HttpGet]
-        public async Task<IActionResult> GetAllAsync() => Ok(new Response
+        public async Task<IActionResult> GetAllAsync([FromRoute(Name = "id")] long? id) => Ok(new Response
         {
             StatusCode = 200,
             Message = "Success",
-            Data = await this.service.RetrieveAllAsync()
+            Data = await this.service.RetrieveAllAsync(id)
         });
 
         [HttpGet("{id}")]

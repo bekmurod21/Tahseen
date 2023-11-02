@@ -4,7 +4,6 @@ namespace Tahseen.Service.DTOs.Feedbacks.UserRatings;
 
 public class UserRatingForUpdateDto
 {
-    public long Id { get; set; }
     public long UserId { get; set; }
     public long BooksCompleted { get; set; }
     public decimal Rating { get; set; }

@@ -9,6 +9,7 @@ using Tahseen.Service.Exceptions;
 using Tahseen.Service.DTOs.FileUpload;
 using Tahseen.Domain.Entities.Library;
 using Tahseen.Service.Exceptions;
+using static System.Reflection.Metadata.BlobBuilder;
 
 namespace Tahseen.Service.Services.Books;
 
@@ -16,20 +17,17 @@ public class BookService : IBookService
 {
     private readonly IMapper _mapper;
     private readonly IRepository<Book> _repository;
+    private readonly IRepository<LibraryBranch> _libraryRepository;
     private readonly IFileUploadService _fileUploadService;
 
-    public BookService(IMapper mapper, IRepository<Book> repository, IFileUploadService fileUploadService)
+
+    public BookService(IMapper mapper, IRepository<Book> repository, IFileUploadService fileUploadService, IRepository<LibraryBranch> libraryRepository)
     {
         this._mapper = mapper;
         this._repository = repository;
         this._fileUploadService = fileUploadService;
-    private readonly IRepository<LibraryBranch> _libraryRepository;
+        this._libraryRepository = libraryRepository;
 
-    public BookService(IMapper mapper, IRepository<Book> repository, IRepository<LibraryBranch> libraryRepository)
-    {
-        this._mapper = mapper;
-        this._repository = repository;
-        _libraryRepository = libraryRepository;
     }
 
     public async Task<BookForResultDto> AddAsync(BookForCreationDto dto)
@@ -38,7 +36,7 @@ public class BookService : IBookService
             .Where(b => b.Title.ToLower() == dto.Title.ToLower() && b.IsDeleted == false)
             .FirstOrDefaultAsync();
         if (book is not null)
-            throw new TahseenException(404, "Book is not found");
+            throw new TahseenException(400, "Book is already exist");
 
         var FileUploadForCreation = new FileUploadForCreationDto
         {
@@ -58,14 +56,6 @@ public class BookService : IBookService
     /// Do logic for user Student Pupil
     /// </summary>
     /// <returns></returns>
-    public async Task<IEnumerable<BookForResultDto>> RetrieveAllAsync()
-    {
-        var books = this._repository.SelectAll().Where(e => e.IsDeleted == false);
-        foreach (var book in books)
-        {
-            book.BookImage = $"https://localhost:7020/{book.BookImage.Replace('\\', '/').TrimStart('/')}";
-        }
-        return this._mapper.Map<IEnumerable<BookForResultDto>>(books);
     public async Task<IEnumerable<BookForResultDto>> RetrieveAllAsync(long? libraryBranchId)
     {
         var allLibraries = this._libraryRepository.SelectAll().Where(l => l.IsDeleted == false);
@@ -80,6 +70,11 @@ public class BookService : IBookService
             var publicLibraryBooks = this._repository.SelectAll()
                 .Where(e => e.IsDeleted == false && publicLibraryIds.Contains(e.LibraryId));
 
+
+            foreach (var book in publicLibraryBooks)
+            {
+                book.BookImage = $"https://localhost:7020/{book.BookImage.Replace('\\', '/').TrimStart('/')}";
+            }
             return this._mapper.Map<IEnumerable<BookForResultDto>>(publicLibraryBooks);
         }
         else
@@ -95,6 +90,11 @@ public class BookService : IBookService
             var books = this._repository.SelectAll()
                 .Where(e => e.IsDeleted == false && e.LibraryId == libraryBranchId);
 
+
+            foreach (var book in books)
+            {
+                book.BookImage = $"https://localhost:7020/{book.BookImage.Replace('\\', '/').TrimStart('/')}";
+            }
             return this._mapper.Map<IEnumerable<BookForResultDto>>(books);
         }
     }
