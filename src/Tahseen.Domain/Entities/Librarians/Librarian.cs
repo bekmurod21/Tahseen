@@ -14,7 +14,7 @@ public class Librarian:Auditable
     public string UserName { get; set; }
     public string Password { get; set; }
     public string DateOfBirth { get; set; }
-    public string Photo { get; set; }
+    public string Image { get; set; }
     public long LibraryBranchId { get; set; }
     public LibraryBranch LibraryBranch { get; set; }
     public Roles Roles { get; set; }

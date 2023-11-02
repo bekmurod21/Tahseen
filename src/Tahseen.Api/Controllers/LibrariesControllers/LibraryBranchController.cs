@@ -16,7 +16,7 @@ public class LibraryBranchController : BaseController
     }
     
     [HttpPost]
-    public async Task<IActionResult> PostAsync([FromBody]LibraryBranchForCreationDto data)
+    public async Task<IActionResult> PostAsync([FromForm]LibraryBranchForCreationDto data)
     {
         var response = new Response()
         {   
@@ -52,7 +52,7 @@ public class LibraryBranchController : BaseController
     }
   
     [HttpPut("{id}")]
-    public async Task<IActionResult> PutAsync([FromRoute(Name = "id")]long Id, [FromBody]LibraryBranchForUpdateDto data)
+    public async Task<IActionResult> PutAsync([FromRoute(Name = "id")]long Id, [FromForm]LibraryBranchForUpdateDto data)
     {
         var response = new Response()
         {

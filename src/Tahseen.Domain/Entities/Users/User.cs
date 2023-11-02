@@ -23,7 +23,7 @@ public class User:Auditable
     public Roles Role { get; set; }
     public decimal FineAmount { get; set; }
     public string UserImage { get; set; }
-
+    
     public IEnumerable<Reservation> Reservations { get; set; }
     public IEnumerable<BookReviews> BookReviews { get; set; }
     public IEnumerable<BorrowedBook> BorrowedBooks { get; set; }

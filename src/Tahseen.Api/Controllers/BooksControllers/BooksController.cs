@@ -15,7 +15,7 @@ namespace Tahseen.Api.Controllers.BooksControllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> PostAsync([FromBody]BookForCreationDto dto) =>
+        public async Task<IActionResult> PostAsync([FromForm]BookForCreationDto dto) =>
             Ok(new Response
             {
                 StatusCode = 200,
@@ -24,7 +24,7 @@ namespace Tahseen.Api.Controllers.BooksControllers
             });
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutAsync([FromRoute(Name = "id")]long id,[FromBody]BookForUpdateDto dto) =>
+        public async Task<IActionResult> PutAsync([FromRoute(Name = "id")]long id,[FromForm]BookForUpdateDto dto) =>
             Ok(new Response
             {
                 StatusCode = 200,

@@ -11,7 +11,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tahseen.Domain", "src\Tahse
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tahseen.Service", "src\Tahseen.Service\Tahseen.Service.csproj", "{E726765A-20C2-467A-82E9-9BEC1D5A2D06}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tahseen.Data", "src\Tahseen.Data\Tahseen.Data.csproj", "{F3CB94DE-DF1F-4B37-895D-3794AC0B3C20}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tahseen.Data", "src\Tahseen.Data\Tahseen.Data.csproj", "{F3CB94DE-DF1F-4B37-895D-3794AC0B3C20}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
