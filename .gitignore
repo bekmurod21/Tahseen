@@ -472,7 +472,7 @@ $RECYCLE.BIN/
 *.msix
 *.msm
 *.msp
-
+wwwroot
 # Windows shortcuts
 *.lnk
 /src/Tahseen.Api/obj/
