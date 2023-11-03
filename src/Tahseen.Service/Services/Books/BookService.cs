@@ -57,48 +57,51 @@ public class BookService : IBookService
     /// </summary>
     /// <returns></returns>
 
-    public async Task<IEnumerable<BookForResultDto>> RetrieveAllAsync(long? libraryBranchId)
-    {
-        var allLibraries = this._libraryRepository.SelectAll().Where(l => l.IsDeleted == false);
 
-        if (libraryBranchId == null)
+    public async Task<IEnumerable<BookForResultDto>> RetrieveAllAsync(long? id)
+    {
+        if (id > 0)
         {
-            // User belongs to a public library - retrieve all public library books
-            var publicLibraryIds = allLibraries.Where(l => l.LibraryType == Domain.Enums.LibraryType.Public)
-                                              .Select(l => l.Id)
-                                              .ToList();
+            var library = await this._libraryRepository.SelectAll().Where(l => l.Id == id).FirstOrDefaultAsync();
+            if (library == null || library.IsDeleted == true)
+            {
+                // Handle the case where the specified library branch does not exist or is deleted
+                throw new TahseenException(404, "Library branch not found");
+            }
+            var books = this._repository.SelectAll()
+                .Where(e => e.IsDeleted == false && e.LibraryId == id);
+
+            // Update BookImage URLs
+            foreach (var book in books)
+            {
+                book.BookImage = $"https://localhost:7020/{book.BookImage.Replace('\\', '/').TrimStart('/')}";
+            }
+
+            return this._mapper.Map<IEnumerable<BookForResultDto>>(books);
+        }
+        else if (id == null)
+        {
+            var allLibraries = this._libraryRepository.SelectAll().Where(e => e.IsDeleted == false && e.LibraryType == Domain.Enums.LibraryType.Public);
+            var publicLibraryIds = allLibraries.Select(l => l.Id).ToList();
 
             var publicLibraryBooks = this._repository.SelectAll()
                 .Where(e => e.IsDeleted == false && publicLibraryIds.Contains(e.LibraryId));
-
 
             foreach (var book in publicLibraryBooks)
             {
                 book.BookImage = $"https://localhost:7020/{book.BookImage.Replace('\\', '/').TrimStart('/')}";
             }
+
             return this._mapper.Map<IEnumerable<BookForResultDto>>(publicLibraryBooks);
         }
         else
         {
-            var library = await this._libraryRepository.SelectByIdAsync(libraryBranchId.Value);
-
-            if (library == null || library.IsDeleted)
-            {
-                // Handle the case where the specified library branch does not exist or is deleted
-                throw new TahseenException(404, "Library branch not found");
-            }
-
-            var books = this._repository.SelectAll()
-                .Where(e => e.IsDeleted == false && e.LibraryId == libraryBranchId);
-
-
-            foreach (var book in books)
-            {
-                book.BookImage = $"https://localhost:7020/{book.BookImage.Replace('\\', '/').TrimStart('/')}";
-            }
-            return this._mapper.Map<IEnumerable<BookForResultDto>>(books);
+            // Handle invalid input for libraryBranchId (less than 0)
+            throw new TahseenException(400, "Invalid library branch ID");
         }
     }
+
+
 
 
 
