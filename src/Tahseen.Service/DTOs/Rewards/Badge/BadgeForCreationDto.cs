@@ -1,7 +1,9 @@
+using Microsoft.AspNetCore.Http;
+
 namespace Tahseen.Service.DTOs.Rewards.Badge;
 
 public class BadgeForCreationDto
 {
     public string Name { get; set; }
-    public string ImageUrl { get; set; }
+    public IFormFile ImageUrl { get; set; }
 }

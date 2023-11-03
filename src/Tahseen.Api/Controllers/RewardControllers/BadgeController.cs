@@ -39,7 +39,7 @@ public class BadgeController : BaseController
     }
 
     [HttpPost]
-    public async Task<IActionResult> PostAsync([FromBody]BadgeForCreationDto dto)
+    public async Task<IActionResult> PostAsync([FromForm]BadgeForCreationDto dto)
     {
         var response = new Response()
         {
@@ -63,7 +63,7 @@ public class BadgeController : BaseController
     }
 
     [HttpPut("{id}")]
-    public async Task<IActionResult> PutAsync([FromRoute(Name = "id")]long Id, [FromBody]BadgeForUpdateDto dto)
+    public async Task<IActionResult> PutAsync([FromRoute(Name = "id")]long Id, [FromForm]BadgeForUpdateDto dto)
     {
         var response = new Response()
         {

@@ -36,7 +36,7 @@ public class BookService : IBookService
             .Where(b => b.Title.ToLower() == dto.Title.ToLower() && b.IsDeleted == false)
             .FirstOrDefaultAsync();
         if (book is not null)
-            throw new TahseenException(404, "Book is not found");
+            throw new TahseenException(400, "Book is already exist");
 
         var FileUploadForCreation = new FileUploadForCreationDto
         {
@@ -57,6 +57,7 @@ public class BookService : IBookService
     /// </summary>
     /// <returns></returns>
 
+
     public async Task<IEnumerable<BookForResultDto>> RetrieveAllAsync(long? id)
     {
         if (id > 0)
@@ -67,7 +68,6 @@ public class BookService : IBookService
                 // Handle the case where the specified library branch does not exist or is deleted
                 throw new TahseenException(404, "Library branch not found");
             }
-
             var books = this._repository.SelectAll()
                 .Where(e => e.IsDeleted == false && e.LibraryId == id);
 
