@@ -39,7 +39,7 @@ public class NewsController : BaseController
     }
 
     [HttpPost]
-    public async Task<IActionResult> PostAsync([FromBody]NewsForCreationDto dto)
+    public async Task<IActionResult> PostAsync([FromForm]NewsForCreationDto dto)
     {
         var response = new Response()
         {
@@ -63,7 +63,7 @@ public class NewsController : BaseController
     }
 
     [HttpPut("{id}")]
-    public async Task<IActionResult> PutAsync([FromRoute(Name = "id")]long Id, [FromBody]NewsForUpdateDto dto)
+    public async Task<IActionResult> PutAsync([FromRoute(Name = "id")]long Id, [FromForm]NewsForUpdateDto dto)
     {
         var response = new Response()
         {
