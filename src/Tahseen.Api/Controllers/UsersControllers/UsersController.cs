@@ -17,7 +17,7 @@ namespace Tahseen.Api.Controllers.UsersControllers
 
         ///
         ///
-        [Authorize]
+        [Authorize(Policy = "Admins")]
         [HttpGet]
         public async Task<IActionResult> GetAllAsync()
         {
