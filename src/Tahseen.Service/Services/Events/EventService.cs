@@ -42,12 +42,7 @@ public class EventService : IEventsService
         var FileResult = await _fileUploadService.FileUploadAsync(FileUploadForCreation);
 
         var MappedData = this._mapper.Map<Event>(dto);
-/*        string StartDate = dto.StartDate; // Example user-entered date
-        string EndDate = dto.EndDate; // Example user-entered date
-        DateTime StartingDate = DateTime.ParseExact(StartDate, "dd-MM-yyyy HH:mm", CultureInfo.InvariantCulture);
-        DateTime EndingDate = DateTime.ParseExact(EndDate, "dd-MM-yyyy HH:mm", CultureInfo.InvariantCulture);
-        MappedData.StartDate = StartingDate;
-        MappedData.EndDate = EndingDate;*/
+
         MappedData.Image = Path.Combine("Assets", $"{FileResult.FolderPath}", FileResult.FileName);
         var result = await _repository.CreateAsync(MappedData);
 
