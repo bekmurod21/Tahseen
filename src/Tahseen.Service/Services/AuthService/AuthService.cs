@@ -9,6 +9,7 @@ using Tahseen.Domain.Entities;
 using Tahseen.Service.DTOs.Login;
 using Tahseen.Service.DTOs.Users.User;
 using Tahseen.Service.Exceptions;
+using Tahseen.Service.Helpers;
 using Tahseen.Service.Interfaces.IAuthService;
 using Tahseen.Service.Interfaces.IUsersService;
 
@@ -28,12 +29,19 @@ namespace Tahseen.Service.Services.AuthService
         public async Task<LoginForResultDto> AuthenticateAsync(LoginDto dto)
         {
             var user = await _userRepository.SelectAll()
-                .Where(u => u.UserName == dto.UserName && u.Password == dto.Password && u.IsDeleted == false)
+                .Where(u => u.PhoneNumber == dto.PhoneNumber && u.IsDeleted == false)
                 .FirstOrDefaultAsync();
             if(user == null)
             {
                 throw new TahseenException(400, "UserName or Password is Incorrect");
             }
+            var HashedPassword = PasswordHelper.Verify(dto.Password, user.Salt, user.Password);
+            if(HashedPassword == false)
+            {
+                throw new TahseenException(400, "UserName or Password is Incorrect");
+            }
+
+
 
             return new LoginForResultDto
             {

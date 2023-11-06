@@ -15,10 +15,8 @@ namespace Tahseen.Service.DTOs.Users.User
         public string Password { get; set; }
         public string PhoneNumber { get; set; }
         public string Address { get; set; }
-        public MembershipStatus MembershipStatus { get; set; }
         public DateTime DateOfBirth { get; set; }
-        public Roles Role { get; set; }
-        public decimal FineAmount { get; set; }
         public IFormFile UserImage { get; set; }
+        public long? LibraryId { get; set; }
     }
 }

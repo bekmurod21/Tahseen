@@ -189,6 +189,7 @@ public class MappingProfile:Profile
         CreateMap<WishList, WishlistForUpdateDto>().ReverseMap();
 
 
-
+        //Registration
+        CreateMap<User, RegistrationForResultDto>().ReverseMap();
     }
 }

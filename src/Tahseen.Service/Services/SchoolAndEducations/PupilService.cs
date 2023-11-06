@@ -20,12 +20,16 @@ public class PupilService:IPupilService
     }
     public async Task<PupilForResultDto> AddAsync(PupilForCreationDto dto)
     {
-        var Check = this._repository.SelectAll().Where(p => p.FirstName == dto.FirstName && p.LastName == dto.LastName && p.LibraryBranchId == dto.LibraryBranchId && p.Grade == dto.Grade && p.IsDeleted == false);
-        if(Check != null)
+        var existingPupil = await this._repository.SelectAll()
+        .Where(p => p.FirstName == dto.FirstName && p.LastName == dto.LastName && p.LibraryBranchId == dto.LibraryBranchId && p.Grade == dto.Grade && p.IsDeleted == false)
+        .FirstOrDefaultAsync();
+
+        if (existingPupil != null)
         {
-            throw new TahseenException(409, "This pupil is exist");
+            throw new TahseenException(409, "This pupil already exists.");
         }
-        var mapped = _mapper.Map<Pupil> (dto);
+
+        var mapped = _mapper.Map<Pupil>(dto);
         var result = await _repository.CreateAsync(mapped);
         return _mapper.Map<PupilForResultDto>(result);
     }

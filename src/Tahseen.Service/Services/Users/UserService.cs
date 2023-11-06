@@ -1,17 +1,16 @@
 ﻿using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using Tahseen.Data.IRepositories;
-using Tahseen.Data.Repositories;
 using Tahseen.Domain.Entities;
 using Tahseen.Service.DTOs.Feedbacks.UserRatings;
 using Tahseen.Service.DTOs.FileUpload;
 using Tahseen.Service.DTOs.Users.BorrowedBookCart;
-using Tahseen.Service.DTOs.Users.Fine;
+using Tahseen.Service.DTOs.Users.ChangePassword;
 using Tahseen.Service.DTOs.Users.User;
 using Tahseen.Service.DTOs.Users.UserCart;
-using Tahseen.Service.DTOs.Users.UserProgressTracking;
 using Tahseen.Service.DTOs.Users.UserSettings;
 using Tahseen.Service.Exceptions;
+using Tahseen.Service.Helpers;
 using Tahseen.Service.Interfaces.IFeedbackService;
 using Tahseen.Service.Interfaces.IFileUploadService;
 using Tahseen.Service.Interfaces.IUsersService;
@@ -52,7 +51,7 @@ namespace Tahseen.Service.Services.Users
         }
         public async Task<UserForResultDto> AddAsync(UserForCreationDto dto)
         {
-            var result = await _userRepository.SelectAll().Where(e => e.EmailAddress == dto.EmailAddress && e.Password == e.Password && e.IsDeleted == false).FirstOrDefaultAsync();
+            var result = await _userRepository.SelectAll().Where(e => e.PhoneNumber == dto.PhoneNumber && e.IsDeleted == false).FirstOrDefaultAsync();
             if (result != null)
             {
                 throw new TahseenException(400, "User is exist");
@@ -67,6 +66,11 @@ namespace Tahseen.Service.Services.Users
 
             var data = this._mapper.Map<User>(dto);
             data.UserImage = Path.Combine("Assets", $"{FileResult.FolderPath}", FileResult.FileName);
+            var HashedPassword = PasswordHelper.Hash(dto.Password);
+            data.Password = HashedPassword.Hash;
+            data.Salt = HashedPassword.Salt;
+            data.MembershipStatus = Domain.Enums.MembershipStatus.Regular;
+            data.FineAmount = 0;
             var CreatedData = await this._userRepository.CreateAsync(data);
                
             var UserRatingForCreation = new UserRatingForCreationDto()
@@ -107,6 +111,23 @@ namespace Tahseen.Service.Services.Users
             return _mapper.Map<UserForResultDto>(CreatedData);
         }
 
+        public async Task<bool> ChangePasswordAsync(long Id, UserForChangePasswordDto dto)
+        {
+            var data = await _userRepository.SelectAll().Where(e => e.Id == Id && e.IsDeleted == false).FirstOrDefaultAsync();
+            if(data == null || PasswordHelper.Verify(dto.OldPassword, data.Salt, data.Password) == false){
+                throw new TahseenException(400, "User or Password is Incorrect");
+            }
+            else if(dto.NewPassword != dto.ConfirmPassword)
+            {
+                throw new TahseenException(400, "New Password and Confirm Password does not Match");
+            }
+            var HashedPassword = PasswordHelper.Hash(dto.ConfirmPassword);
+            data.Salt = HashedPassword.Salt;
+            data.Password = HashedPassword.Hash;
+            await _userRepository.UpdateAsync(data);
+            return true;
+        }
+
         public async Task<UserForResultDto> ModifyAsync(long Id, UserForUpdateDto dto)
         {
             var data = await _userRepository.SelectAll().Where(e => e.Id == Id && e.IsDeleted == false).FirstOrDefaultAsync();
@@ -124,10 +145,20 @@ namespace Tahseen.Service.Services.Users
                 };
                 var FileResult = await this._fileUploadService.FileUploadAsync(FileUloadForCreation);
 
-                var MappedData = this._mapper.Map(dto, data);
-                MappedData.UserImage = Path.Combine("Assets", $"{FileResult.FolderPath}", FileResult.FileName);
-                MappedData.UpdatedAt = DateTime.UtcNow;
-                var result = await _userRepository.UpdateAsync(MappedData);
+                if (dto != null)
+                {
+                    // Check and update properties if the corresponding DTO properties are not null or empty
+
+                    data.FirstName = !string.IsNullOrEmpty(dto.FirstName) ? dto.FirstName : data.FirstName;
+                    data.LastName = !string.IsNullOrEmpty(dto.LastName) ? dto.LastName : data.LastName;
+                    data.Address = !string.IsNullOrEmpty(dto.Address) ? dto.Address : data.Address;
+                    data.DateOfBirth = dto.DateOfBirth != null ? dto.DateOfBirth : data.DateOfBirth;
+                    data.UserImage = Path.Combine("Assets", $"{FileResult.FolderPath}", FileResult.FileName);
+                }
+
+
+                data.UpdatedAt = DateTime.UtcNow;
+                var result = await _userRepository.UpdateAsync(data);
                 return _mapper.Map<UserForResultDto>(result);
             }
             throw new TahseenException(404, "User is not found");
@@ -148,18 +179,21 @@ namespace Tahseen.Service.Services.Users
 
         public async Task<IEnumerable<UserForResultDto>> RetrieveAllAsync()
         {
-            var users =  _userRepository.SelectAll().Where(t => t.IsDeleted == false);
+            var users = _userRepository.SelectAll().Where(t => t.IsDeleted == false);
             foreach (var user in users)
             {
-                user.UserImage = $"https://localhost:7020/{user.UserImage.Replace('\\', '/').TrimStart('/')}";
-            }
+                if(user.UserImage != null)
+                {
+                    user.UserImage = $"https://localhost:7020/{user.UserImage.Replace('\\', '/').TrimStart('/')}";
+                };
+            };
             return _mapper.Map<IEnumerable<UserForResultDto>>(users);
         }
 
         public async Task<UserForResultDto> RetrieveByIdAsync(long Id)
         {
             var data = await _userRepository.SelectByIdAsync(Id);
-            if(data != null && data.IsDeleted == false)
+            if (data != null && data.IsDeleted == false)
             {
                 data.UserImage = $"https://localhost:7020/{data.UserImage.Replace('\\', '/').TrimStart('/')}";
                 return this._mapper.Map<UserForResultDto>(data);
