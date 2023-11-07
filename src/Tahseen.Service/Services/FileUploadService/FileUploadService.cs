@@ -24,16 +24,16 @@ namespace Tahseen.Service.Services.FileUploadService
         {
             var WwwRootPath = Path.Combine(WebEnvironmentHost.WebRootPath, "Assets", $"{dto.FolderPath}");
             var assetsFolderPath = Path.Combine(WwwRootPath, "Assets");
-            var authorImagesFolderPath = Path.Combine(assetsFolderPath, $"{dto.FolderPath}");
+            var ImagesFolderPath = Path.Combine(assetsFolderPath, $"{dto.FolderPath}");
 
             if (!Directory.Exists(assetsFolderPath))
             {
                 Directory.CreateDirectory(assetsFolderPath);
             }
 
-            if (!Directory.Exists(authorImagesFolderPath))
+            if (!Directory.Exists(ImagesFolderPath))
             {
-                Directory.CreateDirectory(authorImagesFolderPath);
+                Directory.CreateDirectory(ImagesFolderPath);
             }
 
             var fileName = Guid.NewGuid().ToString("N") + Path.GetExtension(dto.FormFile.FileName);
