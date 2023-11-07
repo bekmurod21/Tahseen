@@ -22,6 +22,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\Tahseen.Shared\Tahseen.Shared.csproj" />
     <ProjectReference Include="..\Tahseen.Data\Tahseen.Data.csproj" />
     <ProjectReference Include="..\Tahseen.Service\Tahseen.Service.csproj" />
   </ItemGroup>

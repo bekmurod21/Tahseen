@@ -179,7 +179,10 @@ namespace Tahseen.Service.Services.Users
 
         public async Task<IEnumerable<UserForResultDto>> RetrieveAllAsync()
         {
-            var users = _userRepository.SelectAll().Where(t => t.IsDeleted == false);
+            var users = await _userRepository.SelectAll().
+                Where(t => t.IsDeleted == false)
+                .AsNoTracking().
+                ToListAsync();
             foreach (var user in users)
             {
                 if(user.UserImage != null)
@@ -195,7 +198,10 @@ namespace Tahseen.Service.Services.Users
             var data = await _userRepository.SelectByIdAsync(Id);
             if (data != null && data.IsDeleted == false)
             {
-                data.UserImage = $"https://localhost:7020/{data.UserImage.Replace('\\', '/').TrimStart('/')}";
+                if (data.UserImage != null)
+                {
+                    data.UserImage = $"https://localhost:7020/{data.UserImage.Replace('\\', '/').TrimStart('/')}";
+                };
                 return this._mapper.Map<UserForResultDto>(data);
             }
             throw new TahseenException(404, "User is not found");

@@ -29,12 +29,5 @@ public class User:Auditable
     public string UserImage { get; set; }
     public long? LibraryId { get; set; }
     public LibraryBranch LibraryBranch { get; set; }
-    /*public IEnumerable<BookReviews> BookReviews { get; set; }
-    public IEnumerable<BorrowedBook> BorrowedBooks { get; set; }
-    public IEnumerable<CompletedBooks> CompletedBooks { get; set; }
-    public IEnumerable<EventRegistration> EventRegistrations { get; set; }
-  //  public IEnumerable<SurveyResponses> SurveyResponses { get; set; }
-    public IEnumerable<UserMessage> UserMessages { get; set; }
-    public IEnumerable<UserRatings> UserRatings { get; set; }
-    public IEnumerable<Notification> Notifications { get; set; }*/
+
 }

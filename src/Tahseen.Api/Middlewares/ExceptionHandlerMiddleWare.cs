@@ -1,4 +1,4 @@
-﻿    using Tahseen.Api.Models;
+﻿using Tahseen.Api.Models;
 using Tahseen.Service.Exceptions;
 
 namespace Tahseen.Api.Middlewares

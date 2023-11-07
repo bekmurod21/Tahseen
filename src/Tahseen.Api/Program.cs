@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using Serilog;
 using Tahseen.Service.Helpers;
 using Microsoft.AspNetCore.Http.Features;
+using Tahseen.Shared.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -23,9 +24,6 @@ builder.Services.AddDbContext<AppDbContext>(option
     => option.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection"))
     );
 builder.Services.AddCustomService();
-var jsonFormatter = builder.Configuration.GetSection("Formatters:JsonFormatter");
-jsonFormatter["SerializerSettings:DateFormatString"] = "dd-MM-yyyy HH:mm";
-
 // MiddleWares
 /*builder.Services.Configure<FormOptions>(options =>
 {
@@ -61,7 +59,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
-
+// Init accessor
+app.InitAccessor();
 app.UseMiddleware<ExceptionHandlerMiddleWare>();
 app.UseStaticFiles();
 app.UseHttpsRedirection();
