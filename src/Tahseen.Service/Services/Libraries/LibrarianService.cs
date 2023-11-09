@@ -4,10 +4,12 @@ using Tahseen.Data.IRepositories;
 using Tahseen.Data.Repositories;
 using Tahseen.Domain.Entities.Books;
 using Tahseen.Domain.Entities.Librarians;
+using Tahseen.Service.Configurations;
 using Tahseen.Service.DTOs.Books.Author;
 using Tahseen.Service.DTOs.FileUpload;
 using Tahseen.Service.DTOs.Librarians;
 using Tahseen.Service.Exceptions;
+using Tahseen.Service.Extensions;
 using Tahseen.Service.Interfaces.IFileUploadService;
 using Tahseen.Service.Interfaces.ILibrariansService;
 
@@ -84,9 +86,14 @@ public class LibrarianService : ILibrarianService
         return await this.repository.DeleteAsync(librarian.Id);
     }
 
-    public async Task<IEnumerable<LibrarianForResultDto>> RetrieveAllAsync()
+    public async Task<IEnumerable<LibrarianForResultDto>> RetrieveAllAsync(PaginationParams @params)
     {
-        var librarians = this.repository.SelectAll().Where(l => !l.IsDeleted);
+        var librarians = await this.repository.SelectAll().
+            Where(l => !l.IsDeleted)
+            .ToPagedList(@params)
+            .AsNoTracking()
+            .ToListAsync();
+
         foreach (var librarian in librarians)
         {
             librarian.Image = $"https://localhost:7020/{librarian.Image.Replace('\\', '/').TrimStart('/')}";

@@ -2,9 +2,11 @@
 using Microsoft.EntityFrameworkCore;
 using Tahseen.Data.IRepositories;
 using Tahseen.Domain.Entities.Library;
+using Tahseen.Service.Configurations;
 using Tahseen.Service.DTOs.FileUpload;
 using Tahseen.Service.DTOs.Libraries.LibraryBranch;
 using Tahseen.Service.Exceptions;
+using Tahseen.Service.Extensions;
 using Tahseen.Service.Interfaces.IFileUploadService;
 using Tahseen.Service.Interfaces.ILibrariesService;
 
@@ -81,9 +83,14 @@ public class LibraryBranchService : ILibraryBranchService
         return await this.repository.DeleteAsync(libraryBranch.Id);
     }
 
-    public async Task<IEnumerable<LibraryBranchForResultDto>> RetrieveAllAsync()
+    public async Task<IEnumerable<LibraryBranchForResultDto>> RetrieveAllAsync(PaginationParams @params)
     {
-        var result = this.repository.SelectAll().Where(l => !l.IsDeleted);
+        var result = await this.repository.SelectAll()
+            .Where(l => !l.IsDeleted)
+            .ToPagedList(@params)
+            .AsNoTracking()
+            .ToListAsync();
+
         foreach (var res in result)
         {
             res.Image = $"https://localhost:7020/{res.Image.Replace('\\', '/').TrimStart('/')}";

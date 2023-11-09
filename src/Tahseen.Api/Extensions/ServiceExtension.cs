@@ -23,12 +23,15 @@ using Tahseen.Service.Interfaces.IReservationsServices;
 using Tahseen.Service.Interfaces.IAuthService;
 using Tahseen.Service.Services.AuthService;
 using Microsoft.OpenApi.Models;
+using Tahseen.Service.Helpers;
+
 using System.Reflection;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using Tahseen.Service.Interfaces.IFileUploadService;
 using Tahseen.Service.Services.FileUploadService;
+using Tahseen.Service.Helpers;
 
 namespace Tahseen.Api.Extensions;
 
@@ -50,6 +53,8 @@ public static class ServiceExtension
         services.AddScoped<IBorrowedBookService, BorrowedBookService>();
         services.AddScoped<IBorrowBookCartService, BorrowBookCartService>();
         services.AddScoped<IUserProgressTrackingService, UserProgressTrackingService>();
+        services.AddScoped<WebEnvironmentHost, WebEnvironmentHost>();
+
 
 
         //Folder Name: IBookService
@@ -128,7 +133,7 @@ public static class ServiceExtension
     {
         services.AddSwaggerGen(c =>
         {
-            c.SwaggerDoc("v1", new OpenApiInfo { Title = "Shamsheer.Api", Version = "v1" });
+            c.SwaggerDoc("v1", new OpenApiInfo { Title = "Tahseen.Api", Version = "v1" });
             var xmlFilename = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
 
             c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme

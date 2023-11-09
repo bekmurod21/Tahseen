@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Tahseen.Service.DTOs.Books.Book;
 using Tahseen.Service.Interfaces.IBookServices;
+using Tahseen.Service.Configurations;
 
 namespace Tahseen.Api.Controllers.BooksControllers
 {
@@ -41,12 +42,12 @@ namespace Tahseen.Api.Controllers.BooksControllers
                 Data = await this.service.RemoveAsync(id)
             });
         [HttpGet]
-        public async Task<IActionResult> GetAllAsync([FromQuery] long? id) => // librarybranchID
+        public async Task<IActionResult> GetAllAsync([FromQuery] long? id, [FromQuery]PaginationParams @params) => // librarybranchID
             Ok(new Response
             {
                 StatusCode = 200,
                 Message = "Success",
-                Data = await this.service.RetrieveAllAsync(id)
+                Data = await this.service.RetrieveAllAsync(id,@params)
             });
 
 
