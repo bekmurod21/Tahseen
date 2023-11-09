@@ -2,9 +2,11 @@ using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using Tahseen.Data.IRepositories;
 using Tahseen.Domain.Entities.Books;
+using Tahseen.Service.Configurations;
 using Tahseen.Service.DTOs.Books.Author;
 using Tahseen.Service.DTOs.FileUpload;
 using Tahseen.Service.Exceptions;
+using Tahseen.Service.Extensions;
 using Tahseen.Service.Helpers;
 using Tahseen.Service.Interfaces.IBookServices;
 using Tahseen.Service.Interfaces.IFileUploadService;
@@ -87,9 +89,14 @@ public class AuthorService : IAuthorService
         return await _repository.DeleteAsync(id);
     }
 
-    public async Task<IEnumerable<AuthorForResultDto>> RetrieveAllAsync()
+    public async Task<IEnumerable<AuthorForResultDto>> RetrieveAllAsync(PaginationParams @params)
     {
-        var results = this._repository.SelectAll().Where(a => !a.IsDeleted);
+        var results = await this._repository.SelectAll()
+            .Where(a => !a.IsDeleted)
+            .ToPagedList(@params)
+            .AsNoTracking()
+            .ToListAsync();
+
         foreach (var result in results)
         {
             result.AuthorImage = $"https://localhost:7020/{result.AuthorImage.Replace('\\', '/').TrimStart('/')}";

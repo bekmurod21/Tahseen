@@ -10,6 +10,8 @@ using Tahseen.Service.DTOs.FileUpload;
 using Tahseen.Domain.Entities.Library;
 using Tahseen.Service.Exceptions;
 using static System.Reflection.Metadata.BlobBuilder;
+using Tahseen.Service.Configurations;
+using Tahseen.Service.Extensions;
 
 namespace Tahseen.Service.Services.Books;
 
@@ -58,7 +60,7 @@ public class BookService : IBookService
     /// <returns></returns>
 
 
-    public async Task<IEnumerable<BookForResultDto>> RetrieveAllAsync(long? id)
+    public async Task<IEnumerable<BookForResultDto>> RetrieveAllAsync(long? id, PaginationParams @params)
     {
         if (id > 0)
         {
@@ -68,8 +70,11 @@ public class BookService : IBookService
                 // Handle the case where the specified library branch does not exist or is deleted
                 throw new TahseenException(404, "Library branch not found");
             }
-            var books = this._repository.SelectAll()
-                .Where(e => e.IsDeleted == false && e.LibraryId == id);
+            var books = await this._repository.SelectAll()
+                .Where(e => e.IsDeleted == false && e.LibraryId == id)
+                .ToPagedList(@params)
+                .AsNoTracking()
+                .ToListAsync();
 
             // Update BookImage URLs
             foreach (var book in books)
@@ -84,8 +89,11 @@ public class BookService : IBookService
             var allLibraries = this._libraryRepository.SelectAll().Where(e => e.IsDeleted == false && e.LibraryType == Domain.Enums.LibraryType.Public);
             var publicLibraryIds = allLibraries.Select(l => l.Id).ToList();
 
-            var publicLibraryBooks = this._repository.SelectAll()
-                .Where(e => e.IsDeleted == false && publicLibraryIds.Contains(e.LibraryId));
+            var publicLibraryBooks = await this._repository.SelectAll()
+                .Where(e => e.IsDeleted == false && publicLibraryIds.Contains(e.LibraryId))
+                .ToPagedList(@params)
+                .AsNoTracking()
+                .ToListAsync();
 
             foreach (var book in publicLibraryBooks)
             {

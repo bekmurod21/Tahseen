@@ -7,6 +7,8 @@ using Tahseen.Service.Interfaces.IBookServices;
 using Microsoft.EntityFrameworkCore;
 using Tahseen.Service.Interfaces.IFileUploadService;
 using Tahseen.Service.DTOs.FileUpload;
+using Tahseen.Service.Configurations;
+using Tahseen.Service.Extensions;
 
 namespace Tahseen.Service.Services.Books;
 
@@ -91,9 +93,12 @@ public class PublisherService : IPublisherService
         return await repository.DeleteAsync(id);
     }
    
-    public async Task<IEnumerable<PublisherForResultDto>> RetrieveAllAsync()
+    public async Task<IEnumerable<PublisherForResultDto>> RetrieveAllAsync(PaginationParams @params)
     {
-        var results = this.repository.SelectAll().Where(t => !t.IsDeleted);
+        var results = await this.repository.SelectAll()
+            .Where(t => !t.IsDeleted)
+            .ToPagedList(@params)
+            .ToListAsync();
         foreach (var result in results)
         {
             result.Image = $"https://localhost:7020/{result.Image.Replace('\\', '/').TrimStart('/')}";

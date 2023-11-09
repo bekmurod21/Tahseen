@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Tahseen.Api.Models;
+using Tahseen.Service.Configurations;
 using Tahseen.Service.DTOs.Librarians;
 using Tahseen.Service.Interfaces.ILibrariansService;
 
@@ -63,13 +64,13 @@ public class LibrarianController:BaseController
     }
           
     [HttpGet]
-    public async Task<IActionResult> GetAllAsync()
+    public async Task<IActionResult> GetAllAsync([FromQuery] PaginationParams @params)
     {
         var response = new Response()
         {
             StatusCode = 200,
             Message = "Success",
-            Data = _librarianService.RetrieveAllAsync()
+            Data = await _librarianService.RetrieveAllAsync(@params)
         };
         return Ok(response);
     }

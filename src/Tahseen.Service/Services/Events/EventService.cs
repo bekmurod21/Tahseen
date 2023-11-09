@@ -4,10 +4,12 @@ using System.Globalization;
 using Tahseen.Data.IRepositories;
 using Tahseen.Domain.Entities.Books;
 using Tahseen.Domain.Entities.Events;
+using Tahseen.Service.Configurations;
 using Tahseen.Service.DTOs.Books.Author;
 using Tahseen.Service.DTOs.Events.Events;
 using Tahseen.Service.DTOs.FileUpload;
 using Tahseen.Service.Exceptions;
+using Tahseen.Service.Extensions;
 using Tahseen.Service.Interfaces.IEventsServices;
 using Tahseen.Service.Interfaces.IFileUploadService;
 
@@ -87,9 +89,13 @@ public class EventService : IEventsService
         return await _repository.DeleteAsync(id);
     }
 
-    public async Task<IEnumerable<EventForResultDto>> RetrieveAllAsync()
+    public async Task<IEnumerable<EventForResultDto>> RetrieveAllAsync(PaginationParams @params)
     {
-        var results = this._repository.SelectAll().Where(a => !a.IsDeleted);
+        var results = await this._repository.SelectAll()
+            .Where(a => !a.IsDeleted)
+            .ToPagedList(@params)
+            .AsNoTracking()
+            .ToListAsync();
         foreach (var result in results)
         {
             result.Image = $"https://localhost:7020/{result.Image.Replace('\\', '/').TrimStart('/')}";

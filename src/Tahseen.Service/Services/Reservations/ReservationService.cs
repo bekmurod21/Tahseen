@@ -3,10 +3,12 @@ using Microsoft.EntityFrameworkCore;
 using Tahseen.Data.IRepositories;
 using Tahseen.Domain.Entities.Books;
 using Tahseen.Domain.Entities.Reservations;
+using Tahseen.Service.Configurations;
 using Tahseen.Service.DTOs.Books.Author;
 using Tahseen.Service.DTOs.Reservations;
 using Tahseen.Service.DTOs.Users.User;
 using Tahseen.Service.Exceptions;
+using Tahseen.Service.Extensions;
 using Tahseen.Service.Interfaces.IReservationsServices;
 
 namespace Tahseen.Service.Services.Reservations;
@@ -52,9 +54,14 @@ public class ReservationService : IReservationsService
         return await _repository.DeleteAsync(id);
     }
 
-    public async Task<IEnumerable<ReservationForResultDto>> RetrieveAllAsync()
+    public async Task<IEnumerable<ReservationForResultDto>> RetrieveAllAsync(PaginationParams @params)
     {
-        var AllData = this._repository.SelectAll().Where(t => t.IsDeleted == false);
+        var AllData = await this._repository.SelectAll()
+            .Where(t => t.IsDeleted == false)
+            .ToPagedList(@params)
+            .AsNoTracking()
+            .ToListAsync();
+
         return _mapper.Map<IEnumerable<ReservationForResultDto>>(AllData);
     }
 

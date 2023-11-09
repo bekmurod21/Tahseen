@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Tahseen.Data.IRepositories;
 using Tahseen.Domain.Entities;
+using Tahseen.Service.Configurations;
 using Tahseen.Service.DTOs.Feedbacks.UserRatings;
 using Tahseen.Service.DTOs.FileUpload;
 using Tahseen.Service.DTOs.Users.BorrowedBookCart;
@@ -10,6 +11,7 @@ using Tahseen.Service.DTOs.Users.User;
 using Tahseen.Service.DTOs.Users.UserCart;
 using Tahseen.Service.DTOs.Users.UserSettings;
 using Tahseen.Service.Exceptions;
+using Tahseen.Service.Extensions;
 using Tahseen.Service.Helpers;
 using Tahseen.Service.Interfaces.IFeedbackService;
 using Tahseen.Service.Interfaces.IFileUploadService;
@@ -177,12 +179,14 @@ namespace Tahseen.Service.Services.Users
             return await _userRepository.DeleteAsync(Id);
         }
 
-        public async Task<IEnumerable<UserForResultDto>> RetrieveAllAsync()
+        public async Task<IEnumerable<UserForResultDto>> RetrieveAllAsync(PaginationParams @params)
         {
-            var users = await _userRepository.SelectAll().
-                Where(t => t.IsDeleted == false)
-                .AsNoTracking().
-                ToListAsync();
+            var users = await _userRepository.SelectAll()
+                .Where(t => t.IsDeleted == false)
+                .ToPagedList(@params)
+                .AsNoTracking()
+                .ToListAsync();
+                
             foreach (var user in users)
             {
                 if(user.UserImage != null)

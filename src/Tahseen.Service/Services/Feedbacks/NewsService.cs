@@ -3,9 +3,11 @@ using Microsoft.EntityFrameworkCore;
 using Tahseen.Data.IRepositories;
 using Tahseen.Domain.Entities.Books;
 using Tahseen.Domain.Entities.Feedbacks;
+using Tahseen.Service.Configurations;
 using Tahseen.Service.DTOs.Feedbacks.News;
 using Tahseen.Service.DTOs.FileUpload;
 using Tahseen.Service.Exceptions;
+using Tahseen.Service.Extensions;
 using Tahseen.Service.Interfaces.IFeedbackService;
 using Tahseen.Service.Interfaces.IFileUploadService;
 
@@ -94,9 +96,13 @@ public class NewsService:INewsService
         return _mapper.Map<NewsForResultDto>(news);
     }
 
-    public async Task<IEnumerable<NewsForResultDto>> RetrieveAllAsync()
+    public async Task<IEnumerable<NewsForResultDto>> RetrieveAllAsync(PaginationParams @params)
     {
-        var news = _repository.SelectAll().Where(x => !x.IsDeleted);
+        var news = await _repository.SelectAll()
+            .Where(x => !x.IsDeleted)
+            .ToPagedList(@params)
+            .AsNoTracking()
+            .ToListAsync();
         foreach (var result in news)
         {
             result.Media = $"https://localhost:7020/{result.Media.Replace('\\', '/').TrimStart('/')}";
