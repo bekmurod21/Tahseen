@@ -11,5 +11,6 @@ namespace Tahseen.Domain.Entities.EBooks
         public string Description { get; set; }
         public long GenreId { get; set; }
         public Genre Genre { get; set; }
+        public string Image {  get; set; }
     }
 }

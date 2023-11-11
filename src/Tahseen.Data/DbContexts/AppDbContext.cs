@@ -10,6 +10,8 @@ using Tahseen.Domain.Entities.Reservations;
 using Tahseen.Domain.Entities.Notifications;
 using Tahseen.Domain.Entities.SchoolAndEducations;
 using Tahseen.Domain.Entities.Feedbacks;
+using Tahseen.Domain.Entities.AudioBooks;
+using Tahseen.Domain.Entities.EBooks;
 
 namespace Tahseen.Data.DbContexts;
 
@@ -74,6 +76,13 @@ public class AppDbContext : DbContext
     public DbSet<UserSettings> UserSettings { get; set; }
     public DbSet<WishList> WishLists { get; set; }
 
+    //FolderName : AudioBook
+    public DbSet<AudioBook> AudioBooks { get; set; }
+    public DbSet<AudioFile> AudioFiles { get; set; }
+
+    // Foleder name : EBook
+    public DbSet<EBook> EBooks { get; set; }
+    public DbSet<EBookFile> EBooksFiles { get; set; }
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<Book>()

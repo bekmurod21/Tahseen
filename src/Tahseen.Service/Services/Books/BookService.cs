@@ -50,7 +50,7 @@ public class BookService : IBookService
         var mapped = this._mapper.Map<Book>(dto);
         mapped.BookImage = Path.Combine("Assets", $"{FileResult.FolderPath}", FileResult.FileName);
         var result = await _repository.CreateAsync(mapped);
-        return _mapper.Map<BookForResultDto>(result);
+        return _mapper.Map<BookForResultDto>(result);   
     }
 
 

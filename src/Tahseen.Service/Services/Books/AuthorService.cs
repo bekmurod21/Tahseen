@@ -65,7 +65,7 @@ public class AuthorService : IAuthorService
             //Uploading Image
             var FileUploadForCreation = new FileUploadForCreationDto()
             {
-                FolderPath = "AuthorImages",
+                FolderPath = "AuthorImages",        
                 FormFile = dto.AuthorImage,
             };
             var FileResult = await _fileUploadService.FileUploadAsync(FileUploadForCreation);
