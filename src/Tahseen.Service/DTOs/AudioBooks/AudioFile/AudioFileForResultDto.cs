@@ -1,4 +1,5 @@
-﻿using Tahseen.Service.DTOs.AudioBooks.AudioBook;
+﻿using Tahseen.Domain.Entities.AudioBooks;
+using Tahseen.Service.DTOs.AudioBooks.AudioBook;
 
 namespace Tahseen.Service.DTOs.AudioBooks.AudioFile;
 
@@ -8,5 +9,5 @@ public class AudioFileForResultDto
     public string FilePath { get; set; }
     public decimal FileSize { get; set; }
     public string Duration { get; set; }
-    public AudioBookForResultDto AudioBook { get; set; }
+    public long AudioBookId { get; set; }
 }

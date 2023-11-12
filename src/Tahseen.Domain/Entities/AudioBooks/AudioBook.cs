@@ -14,6 +14,7 @@ namespace Tahseen.Domain.Entities.AudioBooks
         public long GenreId { get; set; }
         public Genre Genre { get; set; }
         public string Image { get; set; }
+        public IEnumerable<AudioFile> AudioFiles { get; set; }
 
     }
 }

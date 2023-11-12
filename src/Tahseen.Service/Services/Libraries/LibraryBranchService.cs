@@ -87,6 +87,7 @@ public class LibraryBranchService : ILibraryBranchService
     {
         var result = await this.repository.SelectAll()
             .Where(l => !l.IsDeleted)
+            .Include(l => l.Librarians)
             .ToPagedList(@params)
             .AsNoTracking()
             .ToListAsync();

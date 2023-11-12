@@ -37,15 +37,6 @@ public class EBookFileService : IEBookFileService
         if (eBook is null)
             throw new TahseenException(404, "EBook is not found");
 
-        var eBookFile = await _repository.SelectAll()
-            .Where(e => e.EBookId == dto.EBookId &&
-            e.FileSize == dto.FileSize &&
-            e.IsDeleted == false)
-            .FirstOrDefaultAsync();
-
-        if (eBookFile is not null)
-            throw new TahseenException(409, "EBookFile is already exsist");
-
         var FileUploadForCreation = new FileUploadForCreationDto
         {
             FolderPath = "EBookFiles",

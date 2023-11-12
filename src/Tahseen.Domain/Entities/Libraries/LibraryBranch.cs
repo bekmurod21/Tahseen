@@ -12,8 +12,8 @@ public class LibraryBranch:Auditable
     public string PhoneNumber { get; set; }
     public string OpeningHours { get; set; }
     public LibraryType LibraryType { get; set; }
-/*
-    public IEnumerable<Librarian> Librarians { get; set; } 
-    public List<Pupil> Pupils { get; set; }
-*/
+
+    public IEnumerable<Librarian> Librarians { get; set; }
+    //public List<Pupil> Pupils { get; set; }
+
 }

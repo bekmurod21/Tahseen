@@ -32,21 +32,14 @@ public class AudioFileService : IAudioFileService
     }
     public async Task<AudioFileForResultDto> AddAsync(AudioFileForCreationDto dto)
     {
-        var audioBook = await _audioBookRepository.SelectAll()
+       /* var audioBook = await _audioBookRepository.SelectAll()
             .Where(a => a.Id == dto.AudioBookId && a.IsDeleted == false)
             .FirstOrDefaultAsync();
 
         if (audioBook is null)
             throw new TahseenException(404, "AudioBook is not found");
-
-        var audioFile = await _repository.SelectAll()
-            .Where(a => a.Duration.ToLower() == dto.Duration.ToLower() &&
-            a.AudioBookId == dto.AudioBookId && a.IsDeleted == false)
-            .FirstOrDefaultAsync();
-
-        if (audioFile is not null)
-            throw new TahseenException(409, "AudioFile is already exist");
-
+*/
+        
         var FileUploadForCreation = new FileUploadForCreationDto
         {
             FolderPath = "AudioFiles",

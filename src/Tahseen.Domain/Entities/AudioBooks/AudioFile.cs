@@ -1,4 +1,5 @@
-﻿using Tahseen.Domain.Commons;
+﻿using System.ComponentModel.DataAnnotations.Schema;
+using Tahseen.Domain.Commons;
 
 namespace Tahseen.Domain.Entities.AudioBooks
 {
@@ -7,7 +8,9 @@ namespace Tahseen.Domain.Entities.AudioBooks
         public string FilePath { get; set; }
         public decimal FileSize { get; set; }
         public string Duration { get; set; }
-        public int AudioBookId { get; set; }
+
+        [ForeignKey(nameof(AudioBook))]
+        public long AudioBookId { get; set; }
         public AudioBook AudioBook { get; set; }
     }
 }
