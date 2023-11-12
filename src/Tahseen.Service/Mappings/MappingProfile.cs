@@ -1,6 +1,8 @@
 ﻿using AutoMapper;
 using Tahseen.Domain.Entities;
+using Tahseen.Domain.Entities.AudioBooks;
 using Tahseen.Domain.Entities.Books;
+using Tahseen.Domain.Entities.EBooks;
 using Tahseen.Domain.Entities.Events;
 using Tahseen.Domain.Entities.Feedbacks;
 using Tahseen.Domain.Entities.Librarians;
@@ -10,12 +12,16 @@ using Tahseen.Domain.Entities.Reservations;
 using Tahseen.Domain.Entities.Rewards;
 using Tahseen.Domain.Entities.SchoolAndEducations;
 using Tahseen.Domain.Entities.Users;
+using Tahseen.Service.DTOs.AudioBooks.AudioBook;
+using Tahseen.Service.DTOs.AudioBooks.AudioFile;
 using Tahseen.Service.DTOs.Books.Author;
 using Tahseen.Service.DTOs.Books.Book;
 using Tahseen.Service.DTOs.Books.BookReviews;
 using Tahseen.Service.DTOs.Books.CompletedBooks;
 using Tahseen.Service.DTOs.Books.Genre;
 using Tahseen.Service.DTOs.Books.Publishers;
+using Tahseen.Service.DTOs.EBooks.EBook;
+using Tahseen.Service.DTOs.EBooks.EBookFile;
 using Tahseen.Service.DTOs.Events.EventRegistration;
 using Tahseen.Service.DTOs.Events.Events;
 using Tahseen.Service.DTOs.Feedbacks.Feedback;
@@ -187,6 +193,26 @@ public class MappingProfile:Profile
         CreateMap<WishList, WishlistForCreationDto>().ReverseMap();
         CreateMap<WishList, WishlistForResultDto>().ReverseMap();
         CreateMap<WishList, WishlistForUpdateDto>().ReverseMap();
+
+        //Folder Name: EBook
+        CreateMap<EBook, EBookForResultDto>().ReverseMap();
+        CreateMap<EBook, EBookForUpdateDto>().ReverseMap();
+        CreateMap<EBook, EBookForCreationDto>().ReverseMap();
+
+        CreateMap<EBookFile, EBookFileForResultDto>().ReverseMap();
+        CreateMap<EBookFile, EBookFileForUpdateDto>().ReverseMap();
+        CreateMap<EBookFile, EBookFileForCreationDto>().ReverseMap();
+
+        // Folder Name : AudiBook
+
+        CreateMap<AudioBook, AudioBookForResultDto>().ReverseMap();
+        CreateMap<AudioBook, AudioBookForUpdateDto>().ReverseMap();
+        CreateMap<AudioBook, AudioBookForCreationDto>().ReverseMap();
+
+        CreateMap<AudioFile, AudioFileForResultDto>().ReverseMap();
+        CreateMap<AudioFile, AudioFileForUpdateDto>().ReverseMap();
+        CreateMap<AudioFile, AudioFileForCreationDto>().ReverseMap();
+
 
 
         //Registration

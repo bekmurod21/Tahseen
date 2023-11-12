@@ -1,5 +1,6 @@
 ﻿using Tahseen.Domain.Entities.Librarians;
 using Tahseen.Domain.Enums;
+using Tahseen.Service.DTOs.Librarians;
 
 namespace Tahseen.Service.DTOs.Libraries.LibraryBranch;
 
@@ -12,5 +13,5 @@ public class LibraryBranchForResultDto
     public string PhoneNumber { get; set; }
     public string OpeningHours { get; set; }
     public LibraryType LibraryType { get; set; }
-    public IEnumerable<Librarian> Librarians { get; set; }
+    public IEnumerable<LibrarianForResultDto> Librarians { get; set; }
 }

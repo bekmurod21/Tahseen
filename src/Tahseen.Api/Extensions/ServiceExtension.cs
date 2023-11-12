@@ -32,6 +32,11 @@ using System.Text;
 using Tahseen.Service.Interfaces.IFileUploadService;
 using Tahseen.Service.Services.FileUploadService;
 using Tahseen.Service.Helpers;
+using Tahseen.Service.Interfaces.IEBookServices;
+using Tahseen.Domain.Entities.EBooks;
+using Tahseen.Service.Services.EBooks;
+using Tahseen.Service.Interfaces.IAudioBookServices;
+using Tahseen.Service.Services.AudiBooks;
 
 namespace Tahseen.Api.Extensions;
 
@@ -76,6 +81,14 @@ public static class ServiceExtension
         services.AddScoped<IUserRatingService, UserRatingService>();
         services.AddScoped<IUserMessageService, UserMessageService>();
         services.AddScoped<ISurveyResponseService, SurveyResponseService>();
+
+        // Folder Name: EBookService
+        services.AddScoped<IEBookService, EBookService>();
+        services.AddScoped<IEBookFileService, EBookFileService>();
+
+        // Folder Name : AudioBook
+        services.AddScoped<IAudioBookService,AudioBookService>();
+        services.AddScoped<IAudioFileService, AudioFileService>();
 
         //Folder Name:ILibrariansService
         services.AddScoped<ILibrarianService, LibrarianService>();
