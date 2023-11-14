@@ -94,7 +94,8 @@ public class AppDbContext : DbContext
             .HasOne(b => b.Publisher)
             .WithMany(p => p.Books)
             .HasForeignKey(b => b.PublisherId);
-        
 
+
+    
     }
 }
