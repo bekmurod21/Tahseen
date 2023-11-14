@@ -2,6 +2,7 @@ using Tahseen.Domain.Entities.Books;
 using Tahseen.Domain.Entities.Library;
 using Tahseen.Domain.Enums;
 using Tahseen.Service.DTOs.Books.Author;
+using Tahseen.Service.DTOs.Books.CompletedBooks;
 using Tahseen.Service.DTOs.Books.Genre;
 using Tahseen.Service.DTOs.Books.Publishers;
 using Tahseen.Service.DTOs.Librarians;
@@ -27,4 +28,9 @@ public class BookForResultDto
     public long PublisherId { get; set; }
     public string PrintedIn { get; set; }
     public long TotalPages { get; set; }
+
+    public IEnumerable<CompletedBookForResultDto> CompletedBooks { get; set; }
+    public IEnumerable<AuthorForResultDto> BookAuthor { get; set; }
+    public IEnumerable<GenreForResultDto> BookGenre { get; set; }
+    public IEnumerable<PublisherForResultDto> BookPublisher { get; set; }
 }

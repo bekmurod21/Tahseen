@@ -72,6 +72,10 @@ public class BookService : IBookService
             }
             var books = await this._repository.SelectAll()
                 .Where(e => e.IsDeleted == false && e.LibraryId == id)
+                .Include(l => l.BookAuthor)
+                .Include(l => l.BookPublisher)
+                .Include(l => l.CompletedBooks)
+                .Include(l => l.BookGenre)
                 .ToPagedList(@params)
                 .AsNoTracking()
                 .ToListAsync();
@@ -91,6 +95,11 @@ public class BookService : IBookService
 
             var publicLibraryBooks = await this._repository.SelectAll()
                 .Where(e => e.IsDeleted == false && publicLibraryIds.Contains(e.LibraryId))
+                .Include(l => l.BookAuthor)
+                .Include(l => l.BookPublisher)
+                .Include(l => l.CompletedBooks)
+                .Include(l => l.BookGenre)
+                .ToPagedList(@params)
                 .ToPagedList(@params)
                 .AsNoTracking()
                 .ToListAsync();
@@ -153,8 +162,14 @@ public class BookService : IBookService
 
     public async Task<BookForResultDto> RetrieveByIdAsync(long id)
     {
-        var book = await _repository.SelectByIdAsync(id);
-        if (book is not null && !book.IsDeleted)
+        var book = await this._repository.SelectAll()
+                       .Where(e => e.IsDeleted == false && e.Id == id)
+                       .Include(l => l.BookAuthor)
+                       .Include(l => l.BookPublisher)
+                       .Include(l => l.CompletedBooks)
+                       .Include(l => l.BookGenre)
+                       .FirstOrDefaultAsync();
+        if (book is not null)
         {
             book.BookImage = $"https://localhost:7020/{book.BookImage.Replace('\\', '/').TrimStart('/')}";
             return _mapper.Map<BookForResultDto>(book);

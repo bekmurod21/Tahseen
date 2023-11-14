@@ -34,6 +34,9 @@ public class Book : Auditable
     public Publisher Publisher { get; set; }
     public BookReviews BookReviews { get; set; } 
     [JsonIgnore]
-    public IEnumerable<Reservation> Reservations { get; set; }
     public IEnumerable<CompletedBooks> CompletedBooks { get; set;}
+    public IEnumerable<Author> BookAuthor { get; set; }
+    public IEnumerable<Genre> BookGenre { get; set; }   
+    public IEnumerable<Publisher> BookPublisher { get; set; }
+
 }
