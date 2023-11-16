@@ -93,10 +93,12 @@ public class BookService : IBookService
             }
 
             var result = this._mapper.Map<IEnumerable<BookForResultDto>>(books);
-            /*foreach (var item in result)
+            foreach (var item in result)
             {
-                item.BookFormat = Enum.Parse(item.BookFormat);
-            }*/
+                item.BookFormat = item.BookFormat.ToString();
+                item.Condition = item.Condition.ToString();
+                item.Language = item.Language.ToString();
+            }
             return result;
         }
         else if (id == null)

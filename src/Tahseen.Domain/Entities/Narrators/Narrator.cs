@@ -8,7 +8,6 @@ namespace Tahseen.Domain.Entities.Narrators
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string Image { get; set; }
-
         public IEnumerable<AudioBook> AudioBooks { get; set; }
     }
 }

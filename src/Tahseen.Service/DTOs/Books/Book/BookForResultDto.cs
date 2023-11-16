@@ -16,14 +16,14 @@ public class BookForResultDto
 {
     public long Id { get; set; }
     public string Title { get; set; }
-    public Language Language { get; set; }
+    public string Language { get; set; }
     public long TotalCopies { get; set; }
     public long AvailableCopies { get; set; }
     public decimal Rating { get; set; }
     public long Reviews { get; set; }
-    public BookFormat BookFormat { get; set; }
+    public string BookFormat { get; set; }
     public string ShelfLocation { get; set; }
-    public BookCondition Condition { get; set; }
+    public string Condition { get; set; }
     public string BookImage { get; set; }
     public AuthorForResultDto Author { get; set; }
     public GenreForResultDto Genre { get; set; }
