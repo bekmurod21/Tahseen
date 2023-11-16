@@ -12,6 +12,8 @@ using Tahseen.Service.Exceptions;
 using static System.Reflection.Metadata.BlobBuilder;
 using Tahseen.Service.Configurations;
 using Tahseen.Service.Extensions;
+using Tahseen.Domain.Enums;
+using Tahseen.Domain.Entities.EBooks;
 
 namespace Tahseen.Service.Services.Books;
 
@@ -72,10 +74,10 @@ public class BookService : IBookService
             }
             var books = await this._repository.SelectAll()
                 .Where(e => e.IsDeleted == false && e.LibraryId == id)
-                .Include(l => l.BookAuthor)
-                .Include(l => l.BookPublisher)
-                .Include(l => l.CompletedBooks)
-                .Include(l => l.BookGenre)
+                .Include(l => l.Author)
+                .Include(l => l.LibraryBranch)
+                .Include(l => l.Publisher)
+                .Include(l => l.Genre)
                 .ToPagedList(@params)
                 .AsNoTracking()
                 .ToListAsync();
@@ -84,9 +86,18 @@ public class BookService : IBookService
             foreach (var book in books)
             {
                 book.BookImage = $"https://localhost:7020/{book.BookImage.Replace('\\', '/').TrimStart('/')}";
+                book.Author.AuthorImage = $"https://localhost:7020/{book.Author.AuthorImage.Replace('\\', '/').TrimStart('/')}";
+                book.LibraryBranch.Image = $"https://localhost:7020/{book.LibraryBranch.Image.Replace('\\', '/').TrimStart('/')}";
+                book.Publisher.Image = $"https://localhost:7020/{book.Publisher.Image.Replace('\\', '/').TrimStart('/')}";
+
             }
 
-            return this._mapper.Map<IEnumerable<BookForResultDto>>(books);
+            var result = this._mapper.Map<IEnumerable<BookForResultDto>>(books);
+            /*foreach (var item in result)
+            {
+                item.BookFormat = Enum.Parse(item.BookFormat);
+            }*/
+            return result;
         }
         else if (id == null)
         {
@@ -95,10 +106,10 @@ public class BookService : IBookService
 
             var publicLibraryBooks = await this._repository.SelectAll()
                 .Where(e => e.IsDeleted == false && publicLibraryIds.Contains(e.LibraryId))
-                .Include(l => l.BookAuthor)
-                .Include(l => l.BookPublisher)
-                .Include(l => l.CompletedBooks)
-                .Include(l => l.BookGenre)
+                .Include(l => l.Author)
+                .Include(l => l.LibraryBranch)
+                .Include(l => l.Publisher)
+                .Include(l => l.Genre)
                 .ToPagedList(@params)
                 .ToPagedList(@params)
                 .AsNoTracking()
@@ -164,12 +175,12 @@ public class BookService : IBookService
     {
         var book = await this._repository.SelectAll()
                        .Where(e => e.IsDeleted == false && e.Id == id)
-                       .Include(l => l.BookAuthor)
-                       .Include(l => l.BookPublisher)
-                       .Include(l => l.CompletedBooks)
-                       .Include(l => l.BookGenre)
+                              .Include(l => l.Author)
+                              .Include(l => l.Publisher)
+                              .Include(l => l.LibraryBranch)
+                              .Include(l => l.Genre)
                        .FirstOrDefaultAsync();
-        if (book is not null)
+        if (book is not null )
         {
             book.BookImage = $"https://localhost:7020/{book.BookImage.Replace('\\', '/').TrimStart('/')}";
             return _mapper.Map<BookForResultDto>(book);

@@ -24,6 +24,16 @@ builder.Services.AddDbContext<AppDbContext>(option
     => option.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection"))
     );
 builder.Services.AddCustomService();
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowSpecificOrigin",
+        builder =>
+        {
+            builder.WithOrigins("http://localhost:3000") // Update with your React app's origin
+                   .AllowAnyHeader()
+                   .AllowAnyMethod();
+        });
+});
 // MiddleWares
 /*builder.Services.Configure<FormOptions>(options =>
 {
@@ -60,6 +70,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 // Init accessor
+app.UseCors("AllowSpecificOrigin");
+app.UseRouting();
 app.InitAccessor();
 app.UseMiddleware<ExceptionHandlerMiddleWare>();
 app.UseStaticFiles();

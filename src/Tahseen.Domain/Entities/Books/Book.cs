@@ -32,11 +32,12 @@ public class Book : Auditable
     public long PublisherId { get; set; }
     [ForeignKey("PublisherId")]
     public Publisher Publisher { get; set; }
-    public BookReviews BookReviews { get; set; } 
-    [JsonIgnore]
-    public IEnumerable<CompletedBooks> CompletedBooks { get; set;}
+    public BookReviews BookReviews { get; set; }
+/*    [JsonIgnore]
     public IEnumerable<Author> BookAuthor { get; set; }
-    public IEnumerable<Genre> BookGenre { get; set; }   
-    public IEnumerable<Publisher> BookPublisher { get; set; }
+    [JsonIgnore]
+    public ICollection<Genre> BookGenres { get; set; }
+    [JsonIgnore]
+    public IEnumerable<Publisher> BookPublisher { get; set; }*/
 
 }

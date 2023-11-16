@@ -1,11 +1,14 @@
+using System.ComponentModel.DataAnnotations.Schema;
 using Tahseen.Domain.Entities.Books;
 using Tahseen.Domain.Entities.Library;
 using Tahseen.Domain.Enums;
 using Tahseen.Service.DTOs.Books.Author;
+using Tahseen.Service.DTOs.Books.BookReviews;
 using Tahseen.Service.DTOs.Books.CompletedBooks;
 using Tahseen.Service.DTOs.Books.Genre;
 using Tahseen.Service.DTOs.Books.Publishers;
 using Tahseen.Service.DTOs.Librarians;
+using Tahseen.Service.DTOs.Libraries.LibraryBranch;
 
 namespace Tahseen.Service.DTOs.Books.Book;
 
@@ -22,15 +25,15 @@ public class BookForResultDto
     public string ShelfLocation { get; set; }
     public BookCondition Condition { get; set; }
     public string BookImage { get; set; }
-    public long AuthorId { get; set; }
-    public long GenreId { get; set; }
-    public long LibraryId { get; set; }
-    public long PublisherId { get; set; }
+    public AuthorForResultDto Author { get; set; }
+    public GenreForResultDto Genre { get; set; }
+    public LibraryBranchForResultDto LibraryBranch { get; set; }
+    public PublisherForResultDto Publisher { get; set; }
+    public BookReviewForResultDto BookReviews { get; set; }
     public string PrintedIn { get; set; }
     public long TotalPages { get; set; }
 
-    public IEnumerable<CompletedBookForResultDto> CompletedBooks { get; set; }
-    public IEnumerable<AuthorForResultDto> BookAuthor { get; set; }
+   /* public IEnumerable<AuthorForResultDto> BookAuthor { get; set; }
     public IEnumerable<GenreForResultDto> BookGenre { get; set; }
-    public IEnumerable<PublisherForResultDto> BookPublisher { get; set; }
+    public IEnumerable<PublisherForResultDto> BookPublisher { get; set; }*/
 }
