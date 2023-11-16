@@ -1,5 +1,6 @@
 ﻿using Tahseen.Domain.Commons;
 using Tahseen.Domain.Entities.Books;
+using Tahseen.Domain.Entities.Narrators;
 
 namespace Tahseen.Domain.Entities.AudioBooks
 {
@@ -8,7 +9,8 @@ namespace Tahseen.Domain.Entities.AudioBooks
         public string Title { get; set; }
         public long AuthorId { get; set; }
         public Author Author { get; set; }
-        public string Narrator { get; set; }
+        public long NarratorId { get; set; }
+        public Narrator Narrator { get; set; }
         public string Content { get; set; }
         public string Duration { get; set; }
         public long GenreId { get; set; }
