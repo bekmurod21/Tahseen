@@ -100,7 +100,6 @@ public class NarratorService : INarratorService
     {
         var narrators = await _repository.SelectAll()   
             .Where(n => n.IsDeleted == false)
-            .Include(a => a.AudioBooks)
             .AsNoTracking()
             .ToListAsync();
         foreach (var narrator in narrators)
@@ -114,7 +113,6 @@ public class NarratorService : INarratorService
     {
         var narrator = await _repository.SelectAll()
             .Where(n => n.Id == id && n.IsDeleted == false)
-            .Include(a => a.AudioBooks)
             .AsNoTracking()
             .FirstOrDefaultAsync();
 
