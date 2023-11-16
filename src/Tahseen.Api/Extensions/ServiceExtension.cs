@@ -37,6 +37,8 @@ using Tahseen.Domain.Entities.EBooks;
 using Tahseen.Service.Services.EBooks;
 using Tahseen.Service.Interfaces.IAudioBookServices;
 using Tahseen.Service.Services.AudiBooks;
+using Tahseen.Service.Interfaces.INurratorServices;
+using Tahseen.Service.Services.Narrators;
 
 namespace Tahseen.Api.Extensions;
 
@@ -82,13 +84,16 @@ public static class ServiceExtension
         services.AddScoped<IUserMessageService, UserMessageService>();
         services.AddScoped<ISurveyResponseService, SurveyResponseService>();
 
-        // Folder Name: EBookService
+        // Folder Name: IEBookService
         services.AddScoped<IEBookService, EBookService>();
         services.AddScoped<IEBookFileService, EBookFileService>();
 
-        // Folder Name : AudioBook
+        // Folder Name : IAudioBook
         services.AddScoped<IAudioBookService,AudioBookService>();
         services.AddScoped<IAudioFileService, AudioFileService>();
+
+        // Folder Name : INarrator
+        services.AddScoped<INarratorService, NarratorService>();
 
         //Folder Name:ILibrariansService
         services.AddScoped<ILibrarianService, LibrarianService>();

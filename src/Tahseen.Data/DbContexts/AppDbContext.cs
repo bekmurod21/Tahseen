@@ -12,6 +12,7 @@ using Tahseen.Domain.Entities.SchoolAndEducations;
 using Tahseen.Domain.Entities.Feedbacks;
 using Tahseen.Domain.Entities.AudioBooks;
 using Tahseen.Domain.Entities.EBooks;
+using Tahseen.Domain.Entities.Narrators;
 
 namespace Tahseen.Data.DbContexts;
 
@@ -83,6 +84,10 @@ public class AppDbContext : DbContext
     // Foleder name : EBook
     public DbSet<EBook> EBooks { get; set; }
     public DbSet<EBookFile> EBooksFiles { get; set; }
+
+    // Folder Name : Narrator
+
+    public DbSet<Narrator> Narrators { get; set; }
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<Book>()

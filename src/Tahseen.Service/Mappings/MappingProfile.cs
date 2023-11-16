@@ -7,6 +7,7 @@ using Tahseen.Domain.Entities.Events;
 using Tahseen.Domain.Entities.Feedbacks;
 using Tahseen.Domain.Entities.Librarians;
 using Tahseen.Domain.Entities.Library;
+using Tahseen.Domain.Entities.Narrators;
 using Tahseen.Domain.Entities.Notifications;
 using Tahseen.Domain.Entities.Reservations;
 using Tahseen.Domain.Entities.Rewards;
@@ -33,6 +34,7 @@ using Tahseen.Service.DTOs.Feedbacks.UserRatings;
 using Tahseen.Service.DTOs.Librarians;
 using Tahseen.Service.DTOs.Libraries.LibraryBranch;
 using Tahseen.Service.DTOs.Notifications;
+using Tahseen.Service.DTOs.Narrators;
 using Tahseen.Service.DTOs.Reservations;
 using Tahseen.Service.DTOs.Rewards.Badge;
 using Tahseen.Service.DTOs.Rewards.UserBadges;
@@ -213,7 +215,11 @@ public class MappingProfile:Profile
         CreateMap<AudioFile, AudioFileForUpdateDto>().ReverseMap();
         CreateMap<AudioFile, AudioFileForCreationDto>().ReverseMap();
 
+        // Folder Name: Narrator
 
+        CreateMap<Narrator, NarratorForResultDto>().ReverseMap();
+        CreateMap<Narrator, NarratorForUpdateDto>().ReverseMap();
+        CreateMap<Narrator, NarratorForCreationDto>().ReverseMap();
 
         //Registration
         CreateMap<User, RegistrationForResultDto>().ReverseMap();
