@@ -17,6 +17,7 @@ public class BookForCreationDto
     public long AvailableCopies { get; set; }
     public decimal Rating { get; set; }
     public long Reviews { get; set; }
+    public string Content { get; set; }
     public BookFormat BookFormat { get; set; }
     public string ShelfLocation { get; set; }
     public BookCondition Condition { get; set; }

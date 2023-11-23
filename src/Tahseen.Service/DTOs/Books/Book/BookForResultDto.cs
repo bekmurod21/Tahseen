@@ -21,6 +21,7 @@ public class BookForResultDto
     public long AvailableCopies { get; set; }
     public decimal Rating { get; set; }
     public long Reviews { get; set; }
+    public string Content { get; set; }
     public string BookFormat { get; set; }
     public string ShelfLocation { get; set; }
     public string Condition { get; set; }
