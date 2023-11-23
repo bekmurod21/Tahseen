@@ -94,10 +94,7 @@ public class LibrarianService : ILibrarianService
             .AsNoTracking()
             .ToListAsync();
 
-        foreach (var librarian in librarians)
-        {
-            librarian.Image = $"https://localhost:7020/{librarian.Image.Replace('\\', '/').TrimStart('/')}";
-        }
+       
         return this.mapper.Map<IEnumerable<LibrarianForResultDto>>(librarians);
     }
 
@@ -107,7 +104,6 @@ public class LibrarianService : ILibrarianService
         if (librarian is null || librarian.IsDeleted)
             throw new TahseenException(404, "Librarian not found");
 
-        librarian.Image = $"https://localhost:7020/{librarian.Image.Replace('\\', '/').TrimStart('/')}";
         return this.mapper.Map<LibrarianForResultDto>(librarian);
     }
 }

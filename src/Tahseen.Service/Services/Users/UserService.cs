@@ -189,10 +189,6 @@ namespace Tahseen.Service.Services.Users
                 
             foreach (var user in users)
             {
-                if(user.UserImage != null)
-                {
-                    user.UserImage = $"https://localhost:7020/{user.UserImage.Replace('\\', '/').TrimStart('/')}";
-                };
             };
             return _mapper.Map<IEnumerable<UserForResultDto>>(users);
         }
@@ -202,10 +198,6 @@ namespace Tahseen.Service.Services.Users
             var data = await _userRepository.SelectByIdAsync(Id);
             if (data != null && data.IsDeleted == false)
             {
-                if (data.UserImage != null)
-                {
-                    data.UserImage = $"https://localhost:7020/{data.UserImage.Replace('\\', '/').TrimStart('/')}";
-                };
                 return this._mapper.Map<UserForResultDto>(data);
             }
             throw new TahseenException(404, "User is not found");

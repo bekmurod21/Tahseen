@@ -138,10 +138,7 @@ public class EBookService : IEBookService
             .AsNoTracking()
             .ToListAsync();
 
-        foreach (var result in results)
-        {
-            result.Image = $"https://localhost:7020/{result.Image.Replace('\\', '/').TrimStart('/')}";
-        }
+  
         return _mapper.Map<IEnumerable<EBookForResultDto>>(results);
     }
 
@@ -156,7 +153,6 @@ public class EBookService : IEBookService
         if (eBook is null)
             throw new TahseenException(404, "EBook is not found");
 
-        eBook.Image = $"https://localhost:7020/{eBook.Image.Replace('\\', '/').TrimStart('/')}";
 
         return _mapper.Map<EBookForResultDto>(eBook);
     }

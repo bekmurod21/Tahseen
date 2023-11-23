@@ -110,10 +110,7 @@ public class AudioFileService : IAudioFileService
                     .AsNoTracking()
                     .ToListAsync();
 
-        foreach (var result in results)
-        {
-            result.FilePath = $"https://localhost:7020/{result.FilePath.Replace('\\', '/').TrimStart('/')}";
-        }
+    
         return _mapper.Map<IEnumerable<AudioFileForResultDto>>(results);
     }
 
@@ -126,7 +123,6 @@ public class AudioFileService : IAudioFileService
         if (audioFile is null)
             throw new TahseenException(404, "AudioBook is not found");
 
-        audioFile.FilePath = $"https://localhost:7020/{audioFile.FilePath.Replace('\\', '/').TrimStart('/')}";
 
         return _mapper.Map<AudioFileForResultDto>(audioFile);
     }

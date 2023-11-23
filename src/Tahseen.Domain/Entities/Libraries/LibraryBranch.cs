@@ -1,4 +1,6 @@
-﻿using Tahseen.Domain.Commons;
+﻿using System.Text.Json.Serialization;
+using Tahseen.Domain.Commons;
+using Tahseen.Domain.Entities.Books;
 using Tahseen.Domain.Entities.Librarians;
 using Tahseen.Domain.Entities.SchoolAndEducations;
 using Tahseen.Domain.Enums;
@@ -13,7 +15,10 @@ public class LibraryBranch:Auditable
     public string OpeningHours { get; set; }
     public LibraryType LibraryType { get; set; }
 
+    [JsonIgnore]
     public IEnumerable<Librarian> Librarians { get; set; }
-    //public List<Pupil> Pupils { get; set; }
+
+    [JsonIgnore]
+    public IEnumerable<Book> TotalBooks { get; set; }
 
 }

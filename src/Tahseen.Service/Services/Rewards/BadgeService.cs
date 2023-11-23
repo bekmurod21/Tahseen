@@ -86,10 +86,7 @@ public class BadgeService : IBadgeService
     public async Task<IEnumerable<BadgeForResultDto>> RetrieveAllAsync()
     {
         var AllData = this._repository.SelectAll().Where(t => t.IsDeleted == false);
-        foreach (var result in AllData)
-        {
-            result.ImageUrl = $"https://localhost:7020/{result.ImageUrl.Replace('\\', '/').TrimStart('/')}";
-        }
+      
         return _mapper.Map<IEnumerable<BadgeForResultDto>>(AllData);
     }
 
@@ -98,7 +95,6 @@ public class BadgeService : IBadgeService
         var badge = await _repository.SelectByIdAsync(id);
         if (badge is not null && !badge.IsDeleted)
         {
-            badge.ImageUrl = $"https://localhost:7020/{badge.ImageUrl.Replace('\\', '/').TrimStart('/')}";
             return _mapper.Map<BadgeForResultDto>(badge);
         }
         

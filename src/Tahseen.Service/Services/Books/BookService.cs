@@ -83,15 +83,7 @@ public class BookService : IBookService
                 .ToListAsync();
 
             // Update BookImage URLs
-            foreach (var book in books)
-            {
-                book.BookImage = $"https://localhost:7020/{book.BookImage.Replace('\\', '/').TrimStart('/')}";
-                book.Author.AuthorImage = $"https://localhost:7020/{book.Author.AuthorImage.Replace('\\', '/').TrimStart('/')}";
-                book.LibraryBranch.Image = $"https://localhost:7020/{book.LibraryBranch.Image.Replace('\\', '/').TrimStart('/')}";
-                book.Publisher.Image = $"https://localhost:7020/{book.Publisher.Image.Replace('\\', '/').TrimStart('/')}";
-
-            }
-
+           
             var result = this._mapper.Map<IEnumerable<BookForResultDto>>(books);
             foreach (var item in result)
             {
@@ -117,10 +109,7 @@ public class BookService : IBookService
                 .AsNoTracking()
                 .ToListAsync();
 
-            foreach (var book in publicLibraryBooks)
-            {
-                book.BookImage = $"https://localhost:7020/{book.BookImage.Replace('\\', '/').TrimStart('/')}";
-            }
+         
 
             return this._mapper.Map<IEnumerable<BookForResultDto>>(publicLibraryBooks);
         }
@@ -184,7 +173,6 @@ public class BookService : IBookService
                        .FirstOrDefaultAsync();
         if (book is not null )
         {
-            book.BookImage = $"https://localhost:7020/{book.BookImage.Replace('\\', '/').TrimStart('/')}";
             return _mapper.Map<BookForResultDto>(book);
         }
         

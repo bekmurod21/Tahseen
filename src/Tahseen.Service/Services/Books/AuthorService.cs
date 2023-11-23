@@ -2,6 +2,7 @@ using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using Tahseen.Data.IRepositories;
 using Tahseen.Domain.Entities.Books;
+using Tahseen.Domain.Enums;
 using Tahseen.Service.Configurations;
 using Tahseen.Service.DTOs.Books.Author;
 using Tahseen.Service.DTOs.FileUpload;
@@ -97,11 +98,13 @@ public class AuthorService : IAuthorService
             .AsNoTracking()
             .ToListAsync();
 
-        foreach (var result in results)
+       
+        var mappedData = _mapper.Map<IEnumerable<AuthorForResultDto>>(results);
+        foreach (var item in mappedData)
         {
-            result.AuthorImage = $"https://localhost:7020/{result.AuthorImage.Replace('\\', '/').TrimStart('/')}";
+            item.Nationality = item.Nationality.ToString();
         }
-        return _mapper.Map<IEnumerable<AuthorForResultDto>>(results);
+        return mappedData;
     }
 
     public async Task<AuthorForResultDto> RetrieveByIdAsync(long id)
@@ -109,7 +112,6 @@ public class AuthorService : IAuthorService
         var author = await _repository.SelectByIdAsync(id);
         if (author is not null && !author.IsDeleted)
         {
-            author.AuthorImage = $"https://localhost:7020/{author.AuthorImage.Replace('\\', '/').TrimStart('/')}";
             return _mapper.Map<AuthorForResultDto>(author);
         }
 

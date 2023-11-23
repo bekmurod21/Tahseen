@@ -96,10 +96,7 @@ public class EventService : IEventsService
             .ToPagedList(@params)
             .AsNoTracking()
             .ToListAsync();
-        foreach (var result in results)
-        {
-            result.Image = $"https://localhost:7020/{result.Image.Replace('\\', '/').TrimStart('/')}";
-        }
+       
         return _mapper.Map<IEnumerable<EventForResultDto>>(results);
     }
 
@@ -108,7 +105,6 @@ public class EventService : IEventsService
         var result = await _repository.SelectByIdAsync(id);
         if (result is not null && !result.IsDeleted)
         {
-            result.Image = $"https://localhost:7020/{result .Image.Replace('\\', '/').TrimStart('/')}";
             return _mapper.Map<EventForResultDto>(result);
         }
 

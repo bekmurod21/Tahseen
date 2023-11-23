@@ -1,4 +1,5 @@
-﻿using Tahseen.Domain.Commons;
+﻿using System.Text.Json.Serialization;
+using Tahseen.Domain.Commons;
 using Tahseen.Domain.Entities.Books;
 using Tahseen.Domain.Entities.Narrators;
 
@@ -17,6 +18,5 @@ namespace Tahseen.Domain.Entities.AudioBooks
         public Genre Genre { get; set; }
         public string Image { get; set; }
         public IEnumerable<AudioFile> AudioFiles { get; set; }
-
     }
 }

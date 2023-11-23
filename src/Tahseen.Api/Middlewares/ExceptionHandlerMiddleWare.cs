@@ -30,7 +30,7 @@ namespace Tahseen.Api.Middlewares
                 });
             }
             catch (Exception ex)
-            {
+                {
                 this._logger.LogError($"{ex}\n\n");
                 context.Response.StatusCode = 500;
                 await context.Response.WriteAsJsonAsync(new Response

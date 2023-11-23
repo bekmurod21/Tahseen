@@ -98,14 +98,15 @@ public class NarratorService : INarratorService
 
     public async Task<IEnumerable<NarratorForResultDto>> RetrieveAllAsync()
     {
-        var narrators = await _repository.SelectAll()   
+        var narrators = await _repository.SelectAll()
             .Where(n => n.IsDeleted == false)
+            .Include(n => n.AudioBooks) // Include the AudioBooks navigation property
+            .ThenInclude(ab => ab.AudioFiles) // If needed, include additional navigation properties within AudioBooks
             .AsNoTracking()
             .ToListAsync();
-        foreach (var narrator in narrators)
-        {
-            narrator.Image = $"https://localhost:7020/{narrator.Image.Replace('\\', '/').TrimStart('/')}";
-        }
+
+     
+
         return _mapper.Map<IEnumerable<NarratorForResultDto>>(narrators);
     }
 
@@ -113,13 +114,14 @@ public class NarratorService : INarratorService
     {
         var narrator = await _repository.SelectAll()
             .Where(n => n.Id == id && n.IsDeleted == false)
+            .Include(n => n.AudioBooks) // Include the AudioBooks navigation property
+            .ThenInclude(ab => ab.AudioFiles) // If needed, include additional navigation properties within AudioBooks
             .AsNoTracking()
             .FirstOrDefaultAsync();
 
         if (narrator is null)
             throw new TahseenException(404, "Narrator is not found");
 
-        narrator.Image = $"https://localhost:7020/{narrator.Image.Replace('\\', '/').TrimStart('/')}";
 
         return _mapper.Map<NarratorForResultDto>(narrator);
     }

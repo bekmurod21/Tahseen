@@ -92,7 +92,6 @@ public class NewsService:INewsService
         {
             throw new TahseenException(404, "News doesn't found");
         }
-        news.Media = $"https://localhost:7020/{news.Media.Replace('\\', '/').TrimStart('/')}";
         return _mapper.Map<NewsForResultDto>(news);
     }
 
@@ -103,10 +102,7 @@ public class NewsService:INewsService
             .ToPagedList(@params)
             .AsNoTracking()
             .ToListAsync();
-        foreach (var result in news)
-        {
-            result.Media = $"https://localhost:7020/{result.Media.Replace('\\', '/').TrimStart('/')}";
-        }
+
         return _mapper.Map<IEnumerable<NewsForResultDto>>(news);
     }
 }

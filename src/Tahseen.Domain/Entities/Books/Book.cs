@@ -28,6 +28,7 @@ public class Book : Auditable
     public Genre Genre { get; set; }
     public long LibraryId { get; set; }
     [ForeignKey("LibraryId")]
+    [JsonIgnore]
     public LibraryBranch LibraryBranch { get; set; }
     public long PublisherId { get; set; }
     [ForeignKey("PublisherId")]

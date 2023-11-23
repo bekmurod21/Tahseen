@@ -108,10 +108,7 @@ public class EBookFileService : IEBookFileService
                     .AsNoTracking()
                     .ToListAsync();
 
-        foreach (var result in results)
-        {
-            result.FilePath = $"https://localhost:7020/{result.FilePath.Replace('\\', '/').TrimStart('/')}";
-        }
+      
         return _mapper.Map<IEnumerable<EBookFileForResultDto>>(results);
     }
 
@@ -125,7 +122,6 @@ public class EBookFileService : IEBookFileService
         if (eBookFile is null)
             throw new TahseenException(404, "EBookFile is not found");
 
-        eBookFile.FilePath = $"https://localhost:7020/{eBookFile.FilePath.Replace('\\', '/').TrimStart('/')}";
 
         return _mapper.Map<EBookFileForResultDto>(eBookFile);
     }

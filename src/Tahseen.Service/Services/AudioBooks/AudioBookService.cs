@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using Tahseen.Data.IRepositories;
 using Tahseen.Domain.Entities.AudioBooks;
 using Tahseen.Domain.Entities.Books;
+using Tahseen.Domain.Entities.Narrators;
 using Tahseen.Service.Configurations;
 using Tahseen.Service.DTOs.AudioBooks.AudioBook;
 using Tahseen.Service.DTOs.FileUpload;
@@ -20,19 +21,22 @@ public class AudioBookService : IAudioBookService
     private readonly IRepository<Author> _authorRepository;
     private readonly IRepository<Genre> _genreRepository;
     private readonly IFileUploadService _fileUploadService;
+    private readonly IRepository<Narrator> _narratorRepository;
 
     public AudioBookService(
         IMapper mapper,
         IRepository<AudioBook> repository,
         IRepository<Author> authorRepository,
         IRepository<Genre> genreRepository,
-        IFileUploadService fileUploadService)
+        IFileUploadService fileUploadService,
+        IRepository<Narrator> narratorRepository)
     {
         _mapper = mapper;
         _repository = repository;
         _genreRepository = genreRepository;
         _authorRepository = authorRepository;
         _fileUploadService = fileUploadService;
+        _narratorRepository = narratorRepository;
     }
     public async Task<AudioBookForResultDto> AddAsync(AudioBookForCreationDto dto)
     {
@@ -49,6 +53,13 @@ public class AudioBookService : IAudioBookService
 
         if (genre is null)
             throw new TahseenException(404, "Genre is not null");
+
+        var narrator = await _narratorRepository.SelectAll()
+           .Where(n => n.Id == dto.NarratorId && n.IsDeleted == false)
+           .FirstOrDefaultAsync();
+
+        if (narrator is null)
+            throw new TahseenException(404, "Narrator is not null");
 
         var audioBook = await _repository.SelectAll()
             .Where(a => a.GenreId == dto.GenreId &&
@@ -137,13 +148,11 @@ public class AudioBookService : IAudioBookService
             .ToPagedList(@params)
             .Include(a => a.Author)
             .Include(g => g.Genre)
+            .Include(n => n.Narrator)
             .AsNoTracking()
             .ToListAsync();
 
-        foreach (var result in results)
-        {
-            result.Image = $"https://localhost:7020/{result.Image.Replace('\\', '/').TrimStart('/')}";
-        }
+    
         return _mapper.Map<IEnumerable<AudioBookForResultDto>>(results);
     }
 
@@ -153,12 +162,13 @@ public class AudioBookService : IAudioBookService
             .Where(a => a.Id == id && a.IsDeleted == false)
             .Include(a => a.Author)
             .Include(g => g.Genre)
+            .Include(n => n.Narrator)
+
             .FirstOrDefaultAsync();
 
         if (audioBook is null)
             throw new TahseenException(404, "AudioBook is not found");
 
-        audioBook.Image = $"https://localhost:7020/{audioBook.Image.Replace('\\', '/').TrimStart('/')}";
 
         return _mapper.Map<AudioBookForResultDto>(audioBook);
     }

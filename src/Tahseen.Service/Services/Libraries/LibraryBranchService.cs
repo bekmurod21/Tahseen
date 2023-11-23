@@ -88,24 +88,26 @@ public class LibraryBranchService : ILibraryBranchService
         var result = await this.repository.SelectAll()
             .Where(l => !l.IsDeleted)
             .Include(l => l.Librarians)
+            .Include(b => b.TotalBooks)
             .ToPagedList(@params)
             .AsNoTracking()
             .ToListAsync();
 
-        foreach (var res in result)
-        {
-            res.Image = $"https://localhost:7020/{res.Image.Replace('\\', '/').TrimStart('/')}";
-        }
+       
         return this.mapper.Map<IEnumerable<LibraryBranchForResultDto>>(result);
     }
 
     public async Task<LibraryBranchForResultDto> RetrieveByIdAsync(long id)
     {
-        var libraryBranch = await this.repository.SelectByIdAsync(id);
+        var libraryBranch = await this.repository.SelectAll()
+            .Where(l => !l.IsDeleted)
+            .Include(l => l.Librarians)
+            .Include(b => b.TotalBooks)
+            .AsNoTracking()
+            .FirstOrDefaultAsync();
         if (libraryBranch == null || libraryBranch.IsDeleted)
             throw new TahseenException(404, "LibraryBranch not found");
 
-        libraryBranch.Image = $"https://localhost:7020/{libraryBranch.Image.Replace('\\', '/').TrimStart('/')}";
         return mapper.Map<LibraryBranchForResultDto>(libraryBranch);
     }
 }

@@ -52,7 +52,6 @@ public class PublisherService : IPublisherService
         if (publisher == null || publisher.IsDeleted)
             throw new TahseenException(404, "Publisher doesn't found");
 
-        publisher.Image = $"https://localhost:7020/{publisher.Image.Replace('\\', '/').TrimStart('/')}";
         return mapper.Map<PublisherForResultDto>(publisher);
     }
 
@@ -99,10 +98,7 @@ public class PublisherService : IPublisherService
             .Where(t => !t.IsDeleted)
             .ToPagedList(@params)
             .ToListAsync();
-        foreach (var result in results)
-        {
-            result.Image = $"https://localhost:7020/{result.Image.Replace('\\', '/').TrimStart('/')}";
-        }
+
         return mapper.Map<IEnumerable<PublisherForResultDto>>(results);
     }
 }
